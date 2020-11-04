@@ -1,0 +1,14 @@
+# Folder view configuration files
+.DS_Store
+*/.DS_Store
+
+
+# Application specific files
+node_modules
+.sass-cache
+
+# github merge file
+*.orig
+
+#vscode
+.vscode
