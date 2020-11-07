@@ -3,7 +3,7 @@ const seq = require('./seq')
 
 // 创建用户模型 User 自动创建 users 表
 const User = seq.define('user', {
-  // 会自动创建 id 并设为主键且自增
+// 会自动创建 id 并设为主键且自增
 	userName: {
 		type: DataTypes.STRING, // varchar(255)
 		allowNull: false,

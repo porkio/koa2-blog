@@ -4,7 +4,7 @@
  */
 const Sequelize = require('sequelize')
 const { MYSQL_CONF } = require('../conf/db')
-const { isProd } = require('../utils/env')
+const { isProd, isTest } = require('../utils/env')
 
 const { host, user, password, database } = MYSQL_CONF
 
@@ -12,6 +12,8 @@ const conf = {
 	host,
 	dialect: 'mysql'
 }
+
+isTest && (conf.logging = () => { }) // 单元测试的时候不需要打印 sql 语句
 
 isProd && (conf.pool = {
 	// 线上环境 连接池

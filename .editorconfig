@@ -2,14 +2,14 @@ root = true
 
 [*]
 indent_style = tab
-indent_size = 2
+indent_size = 3
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{json,yml,js,ejs,css}]
-indent_size = 2
+[*.{json,yml,html,js,ejs,css,scss}]
+indent_size = 4
 
 [*.md]
 trim_trailing_whitespace = false
