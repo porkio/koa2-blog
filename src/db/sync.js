@@ -3,7 +3,7 @@
  * @author Pork
  */
 const seq = require('./seq')
-// require('./model')
+require('./model/index')
 
 // 测试连接
 seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))

@@ -14,7 +14,7 @@ let MYSQL_CONF = {
 	host: 'localhost',
 	port: 3306,
 	user: 'root',
-	password: '12345678',
+	password: '123456',
 	database: 'koa2_blog',
 	dialect: 'mysql'
 }
