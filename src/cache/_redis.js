@@ -14,9 +14,9 @@ redisClient.on('error', err => {
 
 /**
  * @description redis set
- * @param { String } key 
- * @param { String } value 
- * @param { Number } timeout 
+ * @param { String } key
+ * @param { String } value
+ * @param { Number } timeout
  */
 const set = (key, value, timeout = 3600) => {
     if (typeof value === 'object') {
@@ -28,7 +28,7 @@ const set = (key, value, timeout = 3600) => {
 
 /**
  * @description redis get
- * @param { String } key 
+ * @param { String } key
  */
 const get = key => {
     return new Promise((resolve, reject) => {
