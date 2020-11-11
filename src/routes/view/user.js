@@ -6,9 +6,9 @@
 const router = require('koa-router')()
 
 router.get('/login', async (ctx, next) => {
-    await ctx.render('login', {
-        title: '管理员登陆'
-    })
+	await ctx.render('login', {
+		title: '管理员登陆'
+	})
 })
 
 module.exports = router
