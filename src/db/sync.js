@@ -10,6 +10,6 @@ seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e)
 
 // 执行同步
 seq.sync().then(() => {
-	console.log('Sync Ok.')
-	process.exit()
+    console.log('Sync Ok.')
+    process.exit()
 })
