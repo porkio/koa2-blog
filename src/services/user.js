@@ -23,7 +23,7 @@ const getUserInfo = async (userName, password) => {
         // attributes: ['id', 'userName', 'email', 'nickName', 'avatarUrl']
         where: whereOpt,
     })
-    console.log(result)
+
     if (!result) {
         return result
     }
@@ -34,6 +34,23 @@ const getUserInfo = async (userName, password) => {
     return formatRes
 }
 
+/**
+ * @description 创建/注册 新用户
+ * @param { Object[User] } User 
+ */
+const createUser = async ({ userName, password, email, nickName, gender = 1 }) => {
+    console.log(userName, password, email)
+    const result = await User.create({
+        userName,
+        password,
+        email,
+        nickName: nickName ? nickName : userName,
+        gender
+    })
+    return result.dataValues
+}
+
 module.exports = {
-    getUserInfo
+    getUserInfo,
+    createUser
 }

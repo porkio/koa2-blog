@@ -21,6 +21,7 @@ const User = seq.define('user', {
     email: {
         type: STRING,
         allowNull: false,
+        unique: true,
         comment: '邮箱'
     },
     password: {

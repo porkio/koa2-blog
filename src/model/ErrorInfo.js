@@ -7,11 +7,27 @@
 
 module.exports = {
     paramsError: {
-        errno: 10005,
+        errno: 20005,
         message: '缺少必要的参数'
     },
-    userNameNotExist: {
+    userNameAllReadyExist: {
         errno: 40001,
+        message: '用户名已存在'
+    },
+    userNameNotExist: {
+        errno: 40002,
         message: '用户名不存在'
+    },
+    loginFail: {
+        errno: 40003,
+        message: '用户名或密码错误'
+    },
+    checkLoginFail: {
+        errno: 40004,
+        message: '未登陆'
+    },
+    createUserFail: {
+        errno: 40005,
+        message: '创建用户失败，请重试'
     }
 }
