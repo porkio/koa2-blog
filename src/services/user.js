@@ -3,13 +3,13 @@
  * @description user service
  */
 
-const User = require('../db/model/index')
+const { User } = require('../db/model/index')
 const { formatUser } = require('./_format')
 
 /**
  * @description 获取用户信息
- * @param { String } userName 
- * @param { String } password 
+ * @param { String } userName
+ * @param { String } password
  */
 const getUserInfo = async (userName, password) => {
     // 查询条件
@@ -21,9 +21,9 @@ const getUserInfo = async (userName, password) => {
     // 查询
     const result = await User.findOne({
         // attributes: ['id', 'userName', 'email', 'nickName', 'avatarUrl']
-        where: whereOpt
+        where: whereOpt,
     })
-    
+    console.log(result)
     if (result == null) {
         return result
     }

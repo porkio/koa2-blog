@@ -10,4 +10,11 @@ router.post('/isExist', async (ctx, next) => {
     ctx.body = await isExist(userName)
 })
 
+router.get('/test', async (ctx, next) => {
+    ctx.body = {
+        userName: 'Pork',
+        email: 'porksb@163.com'
+    }
+})
+
 module.exports = router
