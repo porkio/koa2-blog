@@ -18,6 +18,11 @@ const Article = seq.define('article', {
         alowNull: false,
         comment: '文章内容'
     },
+    categoryId: {
+        type: INTEGER,
+        allowNull: false,
+        comment: '所属分类的id'
+    },
     userId: {
         type: INTEGER,
         allowNull: false,
@@ -34,5 +39,10 @@ const Article = seq.define('article', {
         allowNull: false,
         defaultValue: 0,
         comment: '获赞次数'
+    },
+    tags: {
+        type: STRING,
+        allowNull: true,
+        comment: '标签的id集合 1，2，3'
     }
 })
