@@ -5,9 +5,11 @@
 
 const { getUserInfo } = require('../services/user')
 const { SuccessModel, FailModel } = require('../model/ResModel')
+const { userNameAllReadyExist } = require('../model/ErrorInfo')
+
 /**
  * @description 判断用户名是否存在
- * @param { String } userName 
+ * @param { String } userName
  */
 const isExist = async userName => {
     // 调用 services 层获取数据
@@ -17,10 +19,7 @@ const isExist = async userName => {
         return new SuccessModel(userInfo)
     } else {
         // 不存在
-        return new FailModel({
-            errno: 40001,
-            message: '用户名已存在'
-        })
+        return new FailModel(userNameAllReadyExist)
     }
     // 统一返回格式
 }
