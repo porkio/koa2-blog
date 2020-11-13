@@ -18,7 +18,7 @@ const _formatUserAvatarUrl = user => {
  * @param { Array | Object } list 用户数组或单个用户对象
  */
 const formatUser = list => {
-    if (list == null) {
+    if (!list) {
         return list
     }
     if (list instanceof Array) {

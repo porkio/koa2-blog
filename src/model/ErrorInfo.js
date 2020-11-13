@@ -6,8 +6,12 @@
  */
 
 module.exports = {
-    userNameAllReadyExist: {
+    paramsError: {
+        errno: 10005,
+        message: '缺少必要的参数'
+    },
+    userNameNotExist: {
         errno: 40001,
-        message: '用户名已存在'
+        message: '用户名不存在'
     }
 }

@@ -24,7 +24,7 @@ const getUserInfo = async (userName, password) => {
         where: whereOpt,
     })
     console.log(result)
-    if (result == null) {
+    if (!result) {
         return result
     }
 
