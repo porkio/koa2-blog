@@ -41,7 +41,11 @@ const isExist = async userName => {
     // 统一返回格式
 }
 
-// 注册/创建 新用户
+/**
+ * @description  创建/注册新用户
+ * @params { Object[User] }
+ * @return ResModel 成功｜失败
+ */
 const create = async ({ userName, password, email }) => {
     const userInfo = await getUserInfo(userName)
 
@@ -65,7 +69,7 @@ const create = async ({ userName, password, email }) => {
         console.error(ex.message, ex.stack)
         return new FailModel(createUserFail)
     }
-    
+
 }
 
 module.exports = {

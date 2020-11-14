@@ -35,7 +35,7 @@ const User = seq.define('user', {
         comment: '昵称'
     },
     gender: {
-        type: INTEGER,
+        type: DECIMAL,
         allowNull: true,
         defaultValue: 1, // 1: 男，2: 女
         comment: '性别'
