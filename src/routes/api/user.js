@@ -3,6 +3,8 @@ const {
     isExist,
     create
 } = require('../../controller/user')
+const userValidate = require('../../validator/user')
+const { genValidator } = require('../../middleware/validator')
 
 router.prefix('/api/user')
 
@@ -10,21 +12,25 @@ router.prefix('/api/user')
 router.post('/isExist', async (ctx, next) => {
     const { userName } = ctx.request.body
     // controller
-    ctx.body = await isExist(userName)
+    const res = await isExist(userName)
+    console.log(res)
+    ctx.body = res
 })
 
 // 注册/创建 新用户
-router.post('/create', async (ctx, next) => {
-    const { userName, password, email } = ctx.request.body
-    // controller 
-    ctx.body = await create({
+router.post('/create', genValidator(userValidate), async (ctx, next) => {
+    const { userName, password, email, gender } = ctx.request.body
+    // controller
+    const res = await create({
         userName,
         password,
-        email
+        email,
+        gender
     })
+    ctx.body = res
 })
 
-router.get('/test', async (ctx, next) => {
+router.post('/test', genValidator(userValidate), async (ctx, next) => {
     ctx.body = {
         userName: 'Pork',
         email: 'porksb@163.com'

@@ -10,6 +10,7 @@ const validate = require('./_validate')
 // 校验规则
 const USER_SCHEMA = {
     type: 'object',
+    required: ['userName', 'password', 'email'], // 不能为空的字段
     properties: {
         userName: {
             type: 'string',
@@ -31,8 +32,8 @@ const USER_SCHEMA = {
         },
         gender: {
             type: 'number',
-            minnum: 1,
-            maxnum: 2
+            minimum: 1,
+            maximum: 2
         }
     }
 }
@@ -45,3 +46,5 @@ const USER_SCHEMA = {
 const userValidate = (data = {}) => {
     return validate(USER_SCHEMA, data)
 }
+
+module.exports = userValidate

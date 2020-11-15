@@ -49,7 +49,7 @@ const isExist = async userName => {
 const create = async ({ userName, password, email }) => {
     const userInfo = await getUserInfo(userName)
 
-    if (userInfo) {
+    if (userInfo.id) {
         // 用户名已存在
         return new FailModel(userNameAllReadyExist)
     }
