@@ -6,6 +6,7 @@ const {
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
 const { genValidator } = require('../../middleware/validator')
+const { checkLogin } = require('../../middleware/checkLogin')
 
 router.prefix('/api/user')
 
@@ -38,7 +39,7 @@ router.post('/create', genValidator(userValidate), async (ctx, next) => {
     ctx.body = res
 })
 
-router.get('/test', async (ctx, next) => {
+router.get('/test', checkLogin, async (ctx, next) => {
     ctx.body = ctx.session.userInfo
 })
 
