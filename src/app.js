@@ -35,7 +35,7 @@ app.use(views(__dirname + '/views', {
 app.keys = [SESSION_SECRET_KEY]
 app.use(session({
     key: 'i99.work.sid', // cookie name, 默认 koa.sid
-    prefix: 'i99.work.sess', // redis key 前缀 默认 koa.sess
+    prefix: 'i99.work.sess:', // redis key 前缀 默认 koa.sess
     cookie: {
         path: '/',
         httpOnly: true,

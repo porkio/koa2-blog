@@ -14,7 +14,7 @@ class BaseModel {
 
 // 成功的数据模型
 class SuccessModel extends BaseModel {
-    constructor(data = {}, message = 'Successfully') {
+    constructor({ data = {}, message = 'Successfully'}) {
         super({
             errno: 0,
             data,

@@ -6,7 +6,7 @@
  */
 
 const { FailModel } = require('../model/ResModel')
-const { jsonSchemaError } = require('../model/ErrorInfo')
+const { jsonSchemaError } = require('../model/ErrorModel')
 
 /**
  * @description 生成 json schema 数据校验中间件
@@ -20,7 +20,7 @@ const genValidator = validateFn => {
 
         if (err) {
             const resBody = new FailModel(jsonSchemaError)
-            resBody.data = err // 携带 err 返回
+            resBody.message = err.message
             ctx.body = resBody
         } else {
             await next()

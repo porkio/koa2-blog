@@ -1,6 +1,7 @@
 const router = require('koa-router')()
 const {
     isExist,
+    login,
     create
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
@@ -17,6 +18,13 @@ router.post('/isExist', async (ctx, next) => {
     ctx.body = res
 })
 
+// 用户登陆
+router.post('/login', async (ctx, next) => {
+    const { userName, password } = ctx.request.body
+    // controller
+    ctx.body = await login(ctx, userName, password)
+})
+
 // 注册/创建 新用户
 router.post('/create', genValidator(userValidate), async (ctx, next) => {
     const { userName, password, email, gender } = ctx.request.body
@@ -30,11 +38,8 @@ router.post('/create', genValidator(userValidate), async (ctx, next) => {
     ctx.body = res
 })
 
-router.post('/test', genValidator(userValidate), async (ctx, next) => {
-    ctx.body = {
-        userName: 'Pork',
-        email: 'porksb@163.com'
-    }
+router.get('/test', async (ctx, next) => {
+    ctx.body = ctx.session.userInfo
 })
 
 module.exports = router

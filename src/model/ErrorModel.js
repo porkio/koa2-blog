@@ -26,10 +26,6 @@ module.exports = {
         errno: 40004,
         message: '未登陆'
     },
-    createUserFail: {
-        errno: 40005,
-        message: '创建用户失败，请重试'
-    },
     jsonSchemaError: {
         errno: 20001,
         message: '数据校验未通过'
