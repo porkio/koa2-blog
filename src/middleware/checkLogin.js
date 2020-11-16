@@ -5,21 +5,39 @@
 * @updated_at
 */
 
+const { FailModel } = require('../model/ResModel')
+const { checkLoginFail } = require('../model/ErrorModel')
 /**
- * @description 校验是否登录
+ * @description api 校验是否登录
  * @param  {[Object]}   ctx  [description]
  * @param  {Function} next   [description]
  * @return {Promise}         [description]
  */
 const checkLogin = async (ctx, next) => {
-    !ctx.session.userInfo && (ctx.body = {
-        errno: -1,
-        message: '未登录'
-    })
-    
-    await next()
+    if (ctx.session.userInfo) {
+        await next()
+        return
+    }
+    ctx.body = new FailModel(checkLoginFail)
+}
+
+/**
+ * @description 页面登录验证
+ * @param  {[type]}   ctx  [description]
+ * @param  {Function} next [description]
+ * @return {Promise}       [description]
+ */
+const checkLoginRedirect = async (ctx, next) => {
+    if (ctx.session.userInfo) {
+        await next()
+        return
+    }
+    // 记录登录之前访问的url，登录完成后跳转到这个url
+    const currentUrl = ctx.url
+    ctx.redirect('/login?url=' + encodeURIComponent(currentUrl))
 }
 
 module.exports = {
-    checkLogin
+    checkLogin,
+    checkLoginRedirect
 }
