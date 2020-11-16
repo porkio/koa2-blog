@@ -20,7 +20,12 @@ const genValidator = validateFn => {
 
         if (err) {
             const resBody = new FailModel(jsonSchemaError)
-            resBody.message = err.message
+
+            if (err.dataPath) {
+                resBody.message = err.dataPath + ' ' + err.message
+            } else {
+                resBody.message = err.message
+            }
             ctx.body = resBody
         } else {
             await next()

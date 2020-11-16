@@ -14,9 +14,7 @@ router.prefix('/api/user')
 router.post('/isExist', async (ctx, next) => {
     const { userName } = ctx.request.body
     // controller
-    const res = await isExist(userName)
-    console.log(res)
-    ctx.body = res
+    ctx.body = await isExist(userName)
 })
 
 // 用户登陆
