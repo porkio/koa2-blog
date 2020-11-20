@@ -14,7 +14,7 @@ const { jsonSchemaError } = require('../model/ErrorModel')
  * @return Function
  */
 const genValidator = validateFn => {
-    const validator = async (ctx, next) => {
+    return async (ctx, next) => {
         const data = ctx.request.body
         const err = validateFn(data)
 
@@ -31,7 +31,6 @@ const genValidator = validateFn => {
             await next()
         }
     }
-    return validator
 }
 
 module.exports = {

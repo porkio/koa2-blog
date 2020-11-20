@@ -32,7 +32,7 @@ const USER_SCHEMA = {
         },
         gender: {
             type: 'number',
-            minimum: 1,
+            minimum: 0,
             maximum: 2
         }
     }

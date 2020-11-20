@@ -37,7 +37,7 @@ const User = seq.define('user', {
     gender: {
         type: DECIMAL,
         allowNull: true,
-        defaultValue: 1, // 1: 男，2: 女
+        defaultValue: 0, // 0: 保密 1: 男，2: 女
         comment: '性别'
     },
     avatarUrl: {
