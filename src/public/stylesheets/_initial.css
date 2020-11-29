@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 1em/1.5 Microsoft Yahei,Avenir,Segoe UI,Hiragino Sans GB,STHeiti,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
+    color: #2f2f2f;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1.2rem;
+    color: #2f2f2f;
+}
+
+ul, li {
+    list-style: none;
+}
+
+p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #363636;
+}

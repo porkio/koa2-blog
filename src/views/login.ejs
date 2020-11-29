@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./stylesheets/style.css">
+	<title><%= title %></title>
 </head>
+
 <body>
-    <h1>This is the login page.</h1>
-    <form action="/api/user/login" method="POST">
-        <input type="text" name="userName" autocomplete autofocus placeholder="用户名">
-        <input type="password" name="password" placeholder="">
-        <button type="submit">登陆</button>
-    </form>
+	<section id="login" class="wrapper">
+		<div class="container">
+			<h1>登录</h1>
+			<form action="/api/user/login" method="POST">
+				<input type="text" name="userName" autocomplete autofocus placeholder="用户名">
+				<input type="password" name="password" placeholder="">
+				<button type="submit">登陆</button>
+			</form>
+		</div>
+	</section>
+    <script src="./scripts/backgroundGradient.js"></script>
 </body>
+
 </html>
