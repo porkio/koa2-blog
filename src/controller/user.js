@@ -5,7 +5,8 @@
 
 const {
     getUserInfo,
-    createUser
+    createUser,
+    deleteUser
 } = require('../services/user')
 const {
     SuccessModel,
@@ -16,7 +17,8 @@ const {
     userNameAllReadyExist,
     paramsError,
     createUserFail,
-    loginFail
+    loginFail,
+    deleteUserFail
 } = require('../model/ErrorModel')
 const user = require('../services/user')
 
@@ -52,7 +54,7 @@ const isExist = async userName => {
 const login = async (ctx, userName, password) => {
     // 登录成功后 ctx.session.userInfo = { ... }
     password = strCrypto(password)
-    console.log(password)
+
     const userInfo = await getUserInfo(userName, password)
     if (!userInfo) {
         // 登录失败
@@ -61,6 +63,9 @@ const login = async (ctx, userName, password) => {
     // 登录成功
     if (!ctx.session.userInfo) {
         ctx.session.userInfo = userInfo
+    } else {
+        // 更新可能变更的用户信息
+        Object.assign(ctx.session.userInfo, userInfo)
     }
 
     return new SuccessModel({ message: '登录成功' })
@@ -98,8 +103,24 @@ const create = async ({ userName, password, email }) => {
     }
 }
 
+/**
+ * @description 删除用户
+ * @param {String} userName
+ * @return
+ */
+const destroy = async userName => {
+    // services
+    const result = await deleteUser(userName)
+    if (result) {
+        return new SuccessModel({ message: userName + ' 已被成功删除' })
+    }
+
+    return new FailModel(deleteUserFail)
+}
+
 module.exports = {
     isExist,
     login,
-    create
+    create,
+    destroy
 }

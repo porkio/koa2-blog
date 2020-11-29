@@ -20,7 +20,8 @@ test('Pork 已存在', async () => {
     })
 
     expect(res.body).toEqual({
-        errno: 40001,
+        errno: 0,
+        data: {},
         message: '用户名已存在'
     })
 })

@@ -36,21 +36,38 @@ const getUserInfo = async (userName, password) => {
 
 /**
  * @description 创建/注册 新用户
- * @param { Object[User] } User 
+ * @param { Object[User] } User
  */
-const createUser = async ({ userName, password, email, nickName, gender = 1 }) => {
+const createUser = async ({ userName, password, email, authLevel = 4, nickName, gender = 0 }) => {
     console.log(userName, password, email)
     const result = await User.create({
         userName,
         password,
         email,
+        authLevel,
         nickName: nickName ? nickName : userName,
         gender
     })
     return result.dataValues
 }
 
+/**
+ * @description 删除用户
+ * @param {String} userName
+ * @return Boolean
+ */
+const deleteUser = async userName => {
+    const result = await User.destroy({
+        where: {
+            userName
+        }
+    })
+
+    return result > 0
+}
+
 module.exports = {
     getUserInfo,
-    createUser
+    createUser,
+    deleteUser
 }

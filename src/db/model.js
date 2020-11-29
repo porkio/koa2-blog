@@ -21,6 +21,12 @@ const User = seq.define('user', {
         allowNull: false,
         comment: '密码'
     },
+    authLevel: {
+        type: DataTypes.DECIMAL,
+        allowNull: false,
+        defaultValue: 4,
+        comment: '权限等级'
+    },
     nickName: {
         type: DataTypes.STRING,
         allowNull: false,
