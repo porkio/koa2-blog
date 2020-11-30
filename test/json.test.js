@@ -13,15 +13,3 @@ test('json 接口返回数据正确', async () => {
         title: 'koa2 json'
     })
 })
-
-test('Pork 已存在', async () => {
-    const res = await server.post('/api/user/isExist').send({
-        userName: 'Pork'
-    })
-
-    expect(res.body).toEqual({
-        errno: 0,
-        data: {},
-        message: '用户名已存在'
-    })
-})
