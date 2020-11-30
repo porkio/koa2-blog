@@ -2,5 +2,7 @@
     <h1><%= title %></h1>
     <p>EJS Welcome to <%= title %></p>
     <h3>This is a test Home Page.</h3>
-    <a href="#">测试连接</a>
+    <form class="" action="api/user/logout" method="post">
+        <button type="sbumit" name="button">登出</button>
+    </form>
 <%- include('layout/_footer') %>

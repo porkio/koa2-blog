@@ -215,15 +215,15 @@ function debounce(fn, delay){
  * @param  {[type]} data [携带数据（仅post）]
  * @return {[type]}      [description]
  */
-function ajax(url, data) {
-    if (!data) {
+function ajax(url, method, data) {
+    if (!data || !method) {
         return fetch(url).then(response => response.json()).then(data => data)
     } else {
         return fetch(url, {
             headers: {
                 'Content-Type': 'application/json'
             },
-            method: 'POST',
+            method: method,
             body: JSON.stringify(data)
         }).then(response => response.json()).then(data => data)
     }

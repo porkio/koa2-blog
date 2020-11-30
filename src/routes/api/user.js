@@ -20,11 +20,21 @@ router.post('/isExist', async (ctx, next) => {
     ctx.body = await isExist(userName)
 })
 
-// 用户登陆
+// 用户登录
 router.post('/login', async (ctx, next) => {
     const { userName, password } = ctx.request.body
     // controller
     ctx.body = await login(ctx, userName, password)
+})
+
+// 退出登录
+router.post('/logout', async (ctx, next) => {
+    if (ctx.session.userInfo)
+        ctx.session = null
+    ctx.body = {
+        errno: 0,
+        message: 'Bey!'
+    }
 })
 
 // 注册/创建 新用户

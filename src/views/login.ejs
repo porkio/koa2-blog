@@ -24,9 +24,10 @@
                     </div>
                     <div class="form-group">
                         <input type="text" id="password" name="password" placeholder="PASSWORD">
+                        <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     </div>
                     <div class="form-group">
-                        <a href="javaScript: void(0);" class="btn btn-submit">登陆</a>
+                        <a href="javaScript: void(0);" class="btn btn-submit">登录</a>
                     </div>
     			</form>
             </div>
@@ -39,6 +40,8 @@
         document.addEventListener('readystatechange', e => {
             if (document.readyState === 'complete') {
                 // 页面准备完毕
+
+                // 用户登录相关逻辑
                 const userNameEle = document.querySelector('#userName'),
                     passwordEle = document.querySelector('#password'),
                     userAvatar = document.querySelector('#user-avatar')
@@ -50,12 +53,13 @@
                     if (!userName) {
                         userNameEle.parentNode.classList.add('data-error')
                         userNameEle.placeholder = 'PlEASE ENTER USERNAME'
+                        return
                     }
                     passwordEle.type = 'password'
 
                     if (!tempInputUserName && userAvatar.src.match(/default-avatar.jpg/)) {
                         // 临时用户没有值，需要请求一次用户是否存在
-                        utils.ajax('/api/user/isExist', {
+                        utils.ajax('/api/user/isExist', 'POST', {
                             userName
                         }).then(data => {
                             if (data.errno === 0) {
@@ -69,24 +73,64 @@
                         })
                     } else if (tempInputUserName && userName !== tempInputUserName) {
                         // 如果已经输入并且获取到了用户，但是又更改输入的用户名，则重新获取用户
-                        utils.ajax('/api/user/isExist', {
+                        utils.ajax('api/user/isExist', 'POST', {
                             userName
                         }).then(data => {
-                            if (data.data) {
+                            if (data.errno === 0) {
                                 userAvatar.src = data.data.userAvatar
                                 tempInputUserName = userName
+                            } else {
+                                userAvatar.src = './images/default-avatar.jpg'
+                                tempInputUserName = ''
                             }
-
                         })
                     }
                 }, false)
 
-                userNameEle.addEventListener('change', e => {
+                userNameEle.addEventListener('input', e => {
                     if (userNameEle.parentNode.classList.contains('data-error')) {
                         userNameEle.parentNode.classList.remove('data-error')
                     }
                 }, false)
 
+                passwordEle.addEventListener('input', e => {
+                    if (passwordEle.parentNode.classList.contains('data-error')) {
+                        passwordEle.parentNode.classList.remove('data-error')
+                    }
+                }, false)
+
+                document.addEventListener('keydown', e => {
+                    if (e.keyCode === 13) {
+                        // 请求登录
+                        const userName = userNameEle.value
+                        const password = passwordEle.value
+                        if (!userName) {
+                            userNameEle.focus()
+                            userNameEle.parentNode.classList.add('data-error')
+                            return
+                        }
+                        if (!password) {
+                            passwordEle.focus()
+                            passwordEle.parentNode.classList.add('data-error')
+                            return
+                        }
+                        utils.ajax('api/user/login', 'POST', {
+                            userName,
+                            password
+                        }).then(data => {
+                            if (data.errno === 0) {
+                                alert('登录成功')
+                                location.href = '/'
+                            } else {
+                                // 密码错误
+                                passwordEle.parentNode.classList.add('data-error')
+                                passwordEle.value = ''
+                                passwordEle.placeholder = '无效的密码'
+                                passwordEle.focus()
+                            }
+                        })
+                    }
+                }, false)
             }
         }, false)
     </script>

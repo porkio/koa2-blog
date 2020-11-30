@@ -6,6 +6,10 @@
 const router = require('koa-router')()
 
 router.get('/login', async (ctx, next) => {
+    if (ctx.session.userInfo) {
+        // 如果已登陆则直接返回首页
+        ctx.redirect('/')
+    }
     await ctx.render('login', {
         title: '管理员登陆'
     })
