@@ -36,7 +36,12 @@ const isExist = async userName => {
     const userInfo = await getUserInfo(userName)
     if (userInfo) {
         // 已存在
-        return new SuccessModel({ message: '用户名已存在' })
+        return new SuccessModel({
+            data: {
+                userAvatar: userInfo.avatarUrl
+            },
+            message: '用户名已存在'
+        })
     } else {
         // 不存在
         return new FailModel(userNameNotExist)
