@@ -5,4 +5,13 @@
     <form class="" action="api/user/logout" method="post">
         <button type="sbumit" name="button">登出</button>
     </form>
+    <script type="module">
+        import { utils } from './scripts/utils.js'
+
+        utils.showMessage({
+            title: '这是一条测试消息',
+            icon: 'failed',
+            duration: 80000
+        })
+    </script>
 <%- include('layout/_footer') %>

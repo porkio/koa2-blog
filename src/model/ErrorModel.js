@@ -34,6 +34,10 @@ module.exports = {
         errno: 40006,
         message: '删除用户失败'
     },
+    repeatAction: {
+        errno: 10002,
+        message: '重复的操作'
+    },
     jsonSchemaError: {
         errno: 20001,
         message: '数据校验未通过'

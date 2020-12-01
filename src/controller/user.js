@@ -18,7 +18,8 @@ const {
     paramsError,
     createUserFail,
     loginFail,
-    deleteUserFail
+    deleteUserFail,
+    repeatAction
 } = require('../model/ErrorModel')
 const user = require('../services/user')
 
@@ -76,6 +77,19 @@ const login = async (ctx, userName, password) => {
     return new SuccessModel({ message: '登录成功' })
 }
 
+const logout = async ctx => {
+    if (!ctx.session.userInfo) {
+        return new FailModel(repeatAction)
+    }
+    ctx.session = null
+    return new SuccessModel({
+        data: {
+            redirect: '/login'
+        },
+        message: 'Bey!'
+    })
+}
+
 /**
  * @description  创建/注册新用户
  * @params { Object[User] }
@@ -126,6 +140,7 @@ const destroy = async userName => {
 module.exports = {
     isExist,
     login,
+    logout,
     create,
     destroy
 }

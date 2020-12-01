@@ -61,9 +61,9 @@
                         // 临时用户没有值，需要请求一次用户是否存在
                         utils.ajax('/api/user/isExist', 'POST', {
                             userName
-                        }).then(data => {
-                            if (data.errno === 0) {
-                                userAvatar.src = data.data.userAvatar
+                        }).then(res => {
+                            if (res.errno === 0) {
+                                userAvatar.src = res.data.userAvatar
                                 tempInputUserName = userName
                             } else {
                                 userNameEle.parentNode.classList.add('data-error')
@@ -75,9 +75,9 @@
                         // 如果已经输入并且获取到了用户，但是又更改输入的用户名，则重新获取用户
                         utils.ajax('api/user/isExist', 'POST', {
                             userName
-                        }).then(data => {
-                            if (data.errno === 0) {
-                                userAvatar.src = data.data.userAvatar
+                        }).then(res => {
+                            if (res.errno === 0) {
+                                userAvatar.src = res.data.userAvatar
                                 tempInputUserName = userName
                             } else {
                                 userAvatar.src = './images/default-avatar.jpg'
@@ -117,10 +117,15 @@
                         utils.ajax('api/user/login', 'POST', {
                             userName,
                             password
-                        }).then(data => {
-                            if (data.errno === 0) {
-                                alert('登录成功')
-                                location.href = '/'
+                        }).then(res => {
+                            if (res.errno === 0) {
+                                utils.showMessage({
+                                    title: '登录成功',
+                                    icon: 'success'
+                                })
+                                setTimeout(() => {
+                                    location.href = '/'
+                                }, 2500)
                             } else {
                                 // 密码错误
                                 passwordEle.parentNode.classList.add('data-error')

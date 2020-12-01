@@ -2,6 +2,7 @@ const router = require('koa-router')()
 const {
     isExist,
     login,
+    logout,
     create,
     destroy
 } = require('../../controller/user')
@@ -29,12 +30,7 @@ router.post('/login', async (ctx, next) => {
 
 // 退出登录
 router.post('/logout', async (ctx, next) => {
-    if (ctx.session.userInfo)
-        ctx.session = null
-    ctx.body = {
-        errno: 0,
-        message: 'Bey!'
-    }
+    ctx.body = await logout(ctx)
 })
 
 // 注册/创建 新用户
