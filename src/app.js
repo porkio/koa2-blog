@@ -10,10 +10,10 @@ const redisStore = require('koa-redis')
 const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 const { REDIS_CONF } = require('./conf/db')
 
-const index = require('./routes/index')
+const index = require('./routes/view/index/index')
 const userApiRouter = require('./routes/api/user')
-const userViewRouter = require('./routes/view/user')
-const managerViewRouter = require('./routes/view/manager')
+const userViewRouter = require('./routes/view/index/user')
+const managerViewRouter = require('./routes/view/manager/index')
 
 
 
