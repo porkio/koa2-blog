@@ -10,7 +10,7 @@ router.get('/login', async (ctx, next) => {
         // 如果已登陆则直接返回首页
         ctx.redirect('/')
     }
-    await ctx.render('login', {
+    await ctx.render('manager/login', {
         title: '管理员登陆'
     })
 })

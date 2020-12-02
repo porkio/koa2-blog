@@ -16,10 +16,5 @@ router.get('/json', async (ctx, next) => {
     }
 })
 
-router.get('*', async (ctx, next) => {
-    await ctx.render('404', {
-        title: '404 - 你好像迷路了...'
-    })
-})
 
 module.exports = router

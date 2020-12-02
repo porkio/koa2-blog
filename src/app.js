@@ -14,6 +14,7 @@ const index = require('./routes/view/index/index')
 const userApiRouter = require('./routes/api/user')
 const userViewRouter = require('./routes/view/index/user')
 const managerViewRouter = require('./routes/view/manager/index')
+const errorViewRouter = require('./routes/view/error')
 
 
 
@@ -52,6 +53,7 @@ app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(managerViewRouter.routes(), managerViewRouter.allowedMethods())
+app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
