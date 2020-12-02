@@ -167,6 +167,31 @@ function deleteCookie(name, path, domain) {
 }
 
 /**
+ * @description query 解析成 Object
+ * @param  {[String]} qString [query]
+ * @return {[Object]}         [返回对象]
+ */
+function queryString(qString) {
+    if (!qString) {
+        return
+    }
+    let query
+    if (qString.indexOf('?') > -1) {
+        query = qString.split('?')[1]
+    }
+
+    query = query.split('&')
+
+    const obj = {}
+
+    query.length > 0 && query.forEach((item, index) => {
+        let temp = item.split('=')
+        temp.length > 0 && (obj[temp[0]] = temp[1])
+    })
+    return obj
+}
+
+/**
  * toggle Class name
  * if the document element has the class name 'active', and after called this function, the 'active' will be remove.
  * @param { Object } el
@@ -316,6 +341,7 @@ export const utils = {
     cancelBubble,
     getCookie,
     deleteCookie,
+    queryString,
     toggleClassName,
 	insertAfter,
 	debounce,

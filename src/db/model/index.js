@@ -5,8 +5,10 @@
 
 const User = require('./User')
 const Article = require('./Article')
+const SiteConfig = require('./SiteConfig')
 
 module.exports = {
     User,
-    Article
+    Article,
+    SiteConfig
 }

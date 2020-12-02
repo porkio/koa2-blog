@@ -12,7 +12,7 @@ const { REDIS_CONF } = require('./conf/db')
 
 const index = require('./routes/view/index/index')
 const userApiRouter = require('./routes/api/user')
-const userViewRouter = require('./routes/view/index/user')
+const userViewRouter = require('./routes/view/manager/user')
 const managerViewRouter = require('./routes/view/manager/index')
 const errorViewRouter = require('./routes/view/error')
 

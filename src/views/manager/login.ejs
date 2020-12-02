@@ -123,8 +123,14 @@
                                     title: '登录成功',
                                     icon: 'success'
                                 })
+                                let url = '/'
+                                // 记录上一个页面的 url 登录成功则跳转回去
+                                if (utils.queryString(location.href).url) {
+                                    console.log(location.href)
+                                    url = utils.queryString(location.href).url
+                                }
                                 setTimeout(() => {
-                                    location.href = '/'
+                                    location.href = url
                                 }, 2500)
                             } else {
                                 // 密码错误
@@ -138,6 +144,9 @@
                 }, false)
             }
         }, false)
+
+        // 方法区
+
     </script>
 </body>
 

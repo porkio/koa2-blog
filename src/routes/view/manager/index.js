@@ -3,16 +3,21 @@
  * @description 用户视图层相关路由
  */
 
+const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const router = require('koa-router')()
+
 router.prefix('/manager')
+router.get('*', noLoginRedirect)
 
 router.get('/', async (ctx, next) => {
-    if (!ctx.session.userInfo) {
-        ctx.redirect('/login')
-    }
-
     await ctx.render('manager/index', {
         title: '后台首页'
+    })
+})
+
+router.get('/configuration', async (ctx, next) => {
+    await ctx.render('manager/configuration', {
+        title: '应用配置'
     })
 })
 

@@ -3,6 +3,7 @@
  * @description 用户视图层相关路由
  */
 
+const queryString = require('../../../utils/queryString')
 const router = require('koa-router')()
 
 router.get('/login', async (ctx, next) => {
@@ -10,8 +11,9 @@ router.get('/login', async (ctx, next) => {
         // 如果已登陆则直接返回首页
         ctx.redirect('/')
     }
+
     await ctx.render('manager/login', {
-        title: '管理员登陆'
+        title: '管理员登陆',
     })
 })
 
