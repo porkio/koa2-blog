@@ -17,7 +17,7 @@
                 <div class="user-avatar dis-flex justify-content-center">
                     <img id="user-avatar" src="./images/default-avatar.jpg" alt="">
                 </div>
-    			<form action="/api/user/login" method="POST">
+    			<form action="#" method="POST">
                     <div class="form-group">
                         <input type="text" id="userName" name="userName" autocomplete autofocus placeholder="USERNAME">
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
@@ -26,8 +26,8 @@
                         <input type="text" id="password" name="password" placeholder="PASSWORD">
                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     </div>
-                    <div class="form-group">
-                        <a href="javaScript: void(0);" class="btn btn-submit">登录</a>
+                    <div class="form-group dis-flex justify-content-center">
+                        <p id="btn-submit" class="btn-round"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></p>
                     </div>
     			</form>
             </div>
@@ -101,52 +101,55 @@
 
                 document.addEventListener('keydown', e => {
                     if (e.keyCode === 13) {
-                        // 请求登录
-                        const userName = userNameEle.value
-                        const password = passwordEle.value
-                        if (!userName) {
-                            userNameEle.focus()
-                            userNameEle.parentNode.classList.add('data-error')
-                            return
-                        }
-                        if (!password) {
-                            passwordEle.focus()
-                            passwordEle.parentNode.classList.add('data-error')
-                            return
-                        }
-                        utils.ajax('api/user/login', 'POST', {
-                            userName,
-                            password
-                        }).then(res => {
-                            if (res.errno === 0) {
-                                utils.showMessage({
-                                    title: '登录成功',
-                                    icon: 'success'
-                                })
-                                let url = '/'
-                                // 记录上一个页面的 url 登录成功则跳转回去
-                                if (utils.queryString(location.href).url) {
-                                    console.log(location.href)
-                                    url = utils.queryString(location.href).url
-                                }
-                                setTimeout(() => {
-                                    location.href = url
-                                }, 2000)
-                            } else {
-                                // 密码错误
-                                passwordEle.parentNode.classList.add('data-error')
-                                passwordEle.value = ''
-                                passwordEle.placeholder = '无效的密码'
-                                passwordEle.focus()
-                            }
-                        })
+                        doLogin()
                     }
                 }, false)
+                document.querySelector('#btn-submit').addEventListener('click', e => {
+                    doLogin()
+                }, false)
+
+                function doLogin() {
+                    // 请求登录
+                    const userName = userNameEle.value
+                    const password = passwordEle.value
+                    if (!userName) {
+                        userNameEle.focus()
+                        userNameEle.parentNode.classList.add('data-error')
+                        return
+                    }
+                    if (!password) {
+                        passwordEle.focus()
+                        passwordEle.parentNode.classList.add('data-error')
+                        return
+                    }
+                    utils.ajax('api/user/login', 'POST', {
+                        userName,
+                        password
+                    }).then(res => {
+                        if (res.errno === 0) {
+                            utils.showMessage({
+                                title: '登录成功',
+                                icon: 'success'
+                            })
+                            let url = '/'
+                            // 记录上一个页面的 url 登录成功则跳转回去
+                            if (location.href.indexOf('url') > -1) {
+                                url = utils.queryString(location.href).url
+                            }
+                            setTimeout(() => {
+                                location.href = '/'
+                            }, 2500)
+                        } else {
+                            // 密码错误
+                            passwordEle.parentNode.classList.add('data-error')
+                            passwordEle.value = ''
+                            passwordEle.placeholder = '无效的密码'
+                            passwordEle.focus()
+                        }
+                    })
+                }
             }
         }, false)
-
-        // 方法区
-
     </script>
 </body>
 

@@ -172,15 +172,11 @@ function deleteCookie(name, path, domain) {
  * @return {[Object]}         [返回对象]
  */
 function queryString(qString) {
-    if (!qString) {
-        return
-    }
-    let query
-    if (qString.indexOf('?') > -1) {
-        query = qString.split('?')[1]
+    if (!qString || qString.indexOf('?') === -1) {
+        return {}
     }
 
-    query = query.split('&')
+    let query = qString.split('?')[1].split('&')
 
     const obj = {}
 
