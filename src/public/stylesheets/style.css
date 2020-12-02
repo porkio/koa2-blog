@@ -9,7 +9,15 @@
 
 .login-form {
     width: 40%;
-    max-width: 400px;
+    max-width: 420px;
     padding: 3rem;
     background-color: #fff;
+}
+
+@media screen and (max-width: 500px) {
+    .login-form {
+        width: 92%;
+        padding: 2rem;
+        background: none;
+    }
 }

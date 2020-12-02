@@ -32,7 +32,7 @@
 }
 
 .m-title {
-
+    padding: 1rem 0;
 }
 
 
@@ -41,7 +41,7 @@
 
 
 /* Form */
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"] {
     text-align: left;
     border: none;
     outline: none;
@@ -50,13 +50,29 @@ input[type="text"], input[type="password"] {
     padding: .4rem .2rem;
     margin: .8rem 0;
     width: 100%;
-    color: #333;
-    border-bottom: 1px solid #9bb3b2;
+    color: #3b3b3b;
+    border-bottom: 1px solid #cac4cc;
     background: none;
+}
+
+input[type="submit"] {
+    font-size: 1.1rem;
+    padding: .5rem 2rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    background-color: #76469F;
+    color: #fff;
 }
 
 .form-group {
     position: relative;
+    padding: .5rem 0;
+}
+
+.form-group label {
+    padding: 0 .2rem;
+    color: #8b9998;
 }
 
 .form-group .fa-exclamation-circle {

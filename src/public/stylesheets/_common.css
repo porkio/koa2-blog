@@ -5,7 +5,7 @@
 }
 
 .container {
-    max-width: 960px;
+    max-width: 940px;
     margin: 0 auto;
 }
 
@@ -43,9 +43,9 @@
 
 .btn {
     font-size: 1.1rem;
-    line-height: 2;
     text-align: center;
     margin: 1rem 0;
+    padding: .5rem 0;
 }
 
 .btn-submit {
@@ -60,6 +60,7 @@
 }
 
 .btn-submit:hover {
+    color: #fff;
     transform: scale(1.04);
 }
 
@@ -84,8 +85,8 @@
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 100px;
-    left: 80px;
+    top: 44px;
+    left: 44px;
 }
 
 .go-back:hover {
@@ -103,7 +104,7 @@
 
 
 /* Form */
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"] {
     text-align: center;
     border: none;
     outline: none;
@@ -112,8 +113,9 @@ input[type="text"], input[type="password"] {
     padding: .4rem .2rem;
     margin: .8rem 0;
     width: 100%;
-    color: #333;
+    color: #3b3b3b;
     border-bottom: 1px solid #9bb3b2;
+    background: none;
 }
 
 .form-group {
@@ -141,4 +143,25 @@ input[type="text"], input[type="password"] {
 
 input::placeholder {
     color: #8b9998;
+}
+
+@media screen and (max-width: 550px) {
+    input[type="text"], input[type="password"], input[type="number"] {
+        border-bottom: 1px solid #f2f2f0;
+        color: #fff;
+    }
+    input::placeholder {
+        color: #f2f2f0;
+    }
+    .btn-submit {
+        background: #fff;
+        color: #3b3b3b;
+    }
+    .user-avatar {
+        margin-bottom: 4rem;
+    }
+    .go-back {
+        top: 24px;
+        left: 18px;
+    }
 }

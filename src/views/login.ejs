@@ -99,7 +99,9 @@
                     }
                 }, false)
 
-                document.addEventListener('keydown', e => {
+                document.addEventListener('keydown', doLogin, false)
+
+                function doLogin() {
                     if (e.keyCode === 13) {
                         // 请求登录
                         const userName = userNameEle.value
@@ -125,13 +127,13 @@
                                 })
                                 let url = '/'
                                 // 记录上一个页面的 url 登录成功则跳转回去
-                                if (utils.queryString(location.href).url) {
-                                    console.log(location.href)
+                                if (location.href.indexOf('url') > -1) {
+                                    console.log('能进来')
                                     url = utils.queryString(location.href).url
                                 }
                                 setTimeout(() => {
-                                    location.href = url
-                                }, 2000)
+                                    location.href = '/'
+                                }, 2500)
                             } else {
                                 // 密码错误
                                 passwordEle.parentNode.classList.add('data-error')
@@ -141,12 +143,9 @@
                             }
                         })
                     }
-                }, false)
+                }
             }
         }, false)
-
-        // 方法区
-
     </script>
 </body>
 

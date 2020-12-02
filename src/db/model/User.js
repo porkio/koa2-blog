@@ -71,6 +71,11 @@ const User = seq.define('user', {
         allowNull: false,
         defaultValue: 0,
         comment: '文章总量'
+    },
+    github: {
+        type: STRING,
+        allowNull: true,
+        comment: 'github地址'
     }
 })
 

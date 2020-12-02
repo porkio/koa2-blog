@@ -6,14 +6,18 @@
 
 body {
     font: 400 1em/1.5 Microsoft Yahei,Avenir,Segoe UI,Hiragino Sans GB,STHeiti,Microsoft Sans Serif,WenQuanYi Micro Hei,sans-serif;
-    color: #2f2f2f;
+    color: #3b3b3b;
     background-color: #f2f2f6;
 }
 
 a {
     text-decoration: none;
-    font-size: 1.2rem;
-    color: #2f2f2f;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+a:hover {
+    color: #f72d84;
 }
 
 ul, li {
@@ -21,7 +25,7 @@ ul, li {
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.8;
 }
 

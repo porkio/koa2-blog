@@ -7,15 +7,14 @@ const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const router = require('koa-router')()
 
 router.prefix('/manager')
-router.get('*', noLoginRedirect)
 
-router.get('/', async (ctx, next) => {
+router.get('/', noLoginRedirect, async (ctx, next) => {
     await ctx.render('manager/index', {
         title: '后台首页'
     })
 })
 
-router.get('/configuration', async (ctx, next) => {
+router.get('/configuration', noLoginRedirect, async (ctx, next) => {
     await ctx.render('manager/configuration', {
         title: '应用配置'
     })

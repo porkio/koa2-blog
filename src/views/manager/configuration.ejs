@@ -13,28 +13,38 @@
     <section class="wrapper">
         <div class="container">
             <div id="config" class="m-item">
-                <h3 class="m-title">应用配置</h3>
+                <h2 class="m-title">应用设置</h2>
                 <div class="m-form">
                     <div class="form-group">
-                        <input type="text" name="title" id="title" placeholder="应用标题/网站标题">
+                        <label for="title">网站/应用标题</label>
+                        <input type="text" name="title" id="title" placeholder="Pork's Web Site">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="subtitle" id="subtitle" placeholder="副标题">
+                        <label for="subtitle">副标题</label>
+                        <input type="text" name="subtitle" id="subtitle" placeholder="但行好事，莫问前程">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="views" id="views" placeholder="浏览次数">
+                        <label for="views">访问总量</label>
+                        <input type="number" name="views" id="views" placeholder="0">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="copyright" id="copyright" placeholder="版权信息">
+                        <label for="copyright">版权信息</label>
+                        <input type="text" name="copyright" id="copyright" placeholder="© 2020 - 2021 猪肉王子">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="icp" id="icp" placeholder="备案号">
+                        <label for="icp">备案信息</label>
+                        <input type="text" name="icp" id="icp" placeholder="">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="theme" id="theme" placeholder="主题名称" value="default">
+                        <label for="theme">模版</label>
+                        <input type="text" name="theme" id="theme" placeholder="主题名称（非开发人员请保持默认）" value="default">
                     </div>
                     <div class="form-group">
-                        <input type="text" name="friendLinks" id="friendLinks" placeholder="友情链接">
+                        <label for="friendLinks">友情链接</label>
+                        <span class="btn-links">MDN Web Docs</span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="保存">
                     </div>
                 </div>
             </div>
