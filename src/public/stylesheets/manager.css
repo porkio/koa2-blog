@@ -75,7 +75,7 @@ input[type="text"], input[type="password"], input[type="number"] {
 
 input[type="submit"] {
     font-size: 1.1rem;
-    padding: .5rem 2rem;
+    padding: .5rem 3rem;
     border-radius: 5px;
     border: none;
     cursor: pointer;

@@ -167,6 +167,37 @@ function deleteCookie(name, path, domain) {
 }
 
 /**
+ * @description 判断两个对象的值是否相等(递归,支持多层对象)
+ * @param  {[Object]}  origin [源对象]
+ * @param  {[Object]}  target [目标对象]
+ * @return {Boolean}        [description]
+ */
+function isObjectValueEqual(origin, target) {
+    if (typeof origin !== 'object' || typeof target !== 'object') {
+        return false
+    }
+
+    const oProps = Object.getOwnPropertyNames(origin)
+    const tProps = Object.getOwnPropertyNames(target)
+
+    if (oProps.length !== tProps.length) {
+        return false
+    }
+    let result = false
+    for (let prop in origin) {
+        if (typeof origin[prop] !== 'object') {
+            if (origin[prop] !== target[prop]) {
+                return false
+            }
+            result = true
+        } else {
+            result = isObjectValueEqual(origin[prop], target[prop])
+        }
+    }
+    return result
+}
+
+/**
  * @description query 解析成 Object
  * @param  {[String]} qString [query]
  * @return {[Object]}         [返回对象]
@@ -337,6 +368,7 @@ export const utils = {
     cancelBubble,
     getCookie,
     deleteCookie,
+    isObjectValueEqual,
     queryString,
     toggleClassName,
 	insertAfter,

@@ -34,6 +34,10 @@ module.exports = {
         errno: 40006,
         message: '删除用户失败'
     },
+    siteConfigurationFail: {
+        errno: 40007,
+        message: '站点配置更新失败'
+    },
     repeatAction: {
         errno: 10002,
         message: '重复的操作'

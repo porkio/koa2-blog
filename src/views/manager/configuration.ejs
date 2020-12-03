@@ -47,13 +47,21 @@
         </div>
     </section>
 
-
     <script type="module">
         import { utils } from '../scripts/utils.js'
 
         document.addEventListener('readystatechange', e => {
             if (document.readyState === 'complete') {
                 // 就绪
+                let oldConfig = {
+                    siteTitle: '<%= siteTitle %>',
+                    subTitle: '<%= subTitle %>',
+                    views: '<%= views %>',
+                    copyRight: '<%= copyRight %>',
+                    icp: '<%= icp %>',
+                    theme: '<%= theme %>'
+                } // 先保存服务端传回来的数据
+
                 const btnSubmit = document.querySelector('#btn-submit')
                 btnSubmit && btnSubmit.addEventListener('click', e => {
                     e.preventDefault()
@@ -64,24 +72,49 @@
                     const icp = document.querySelector('#icp').value
                     const theme = document.querySelector('#theme').value
 
-                    utils.ajax(location.origin + '/api/manager/setConfig', 'POST', {
+                    const formData = {
                         siteTitle,
                         subTitle,
                         views,
                         copyRight,
                         icp,
                         theme
-                    }).then(res => {
-                        console.log(res)
+                    }
+
+                    if (utils.isObjectValueEqual(oldConfig, formData)) {
+                        utils.showMessage({
+                            title: '未变更内容无需更新',
+                            icon: 'failed'
+                        })
+                        return
+                    }
+
+                    utils.ajax(location.origin + '/api/manager/setConfig', 'POST', formData).then(res => {
+                        if (res.errno === 0) {
+                            utils.showMessage({
+                                title: res.message,
+                                icon: 'success'
+                            })
+
+                            oldConfig = formData
+
+                            const oldBackgroundColor = utils.getStyle(btnSubmit, 'backgroundColor')
+
+                            btnSubmit.style.background = '#898989'
+                            btnSubmit.style.cursor = 'not-allowed'
+                            btnSubmit.disabled = true
+                            setTimeout(() => {
+                                btnSubmit.style.backgroundColor = oldBackgroundColor
+                                btnSubmit.style.cursor = 'pointer'
+                                btnSubmit.disabled = false
+                            }, 3000)
+                        }
                     })
                 }, false)
-
             }
         }, false)
 
     </script>
-
-
 
 </body>
 

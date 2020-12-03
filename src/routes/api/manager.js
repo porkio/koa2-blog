@@ -1,17 +1,10 @@
 const router = require('koa-router')()
-
-const { checkLogin } = require('../../middleware/checkLogin')
-const { isSuperAdmin } = require('../../middleware/isSuperAdmin')
-const { isTest } = require('../../utils/env')
-
+const { updateConfig } = require('../../controller/manager')
 router.prefix('/api/manager')
 
 router.post('/setConfig', async (ctx, next) => {
-    console.log(ctx.request.body)
-    ctx.body = {
-        errno: 0,
-        message: '设置成功'
-    }
+    // controller
+    ctx.body = await updateConfig(ctx.request.body)
 })
 
 
