@@ -13,39 +13,76 @@
     <section class="wrapper">
         <div class="container">
             <div id="config" class="m-item">
-                <h2 class="m-title">应用设置</h2>
-                <div class="m-form">
+                <h2 class="m-title"><%= title %></h2>
+                <form action="#" class="m-form">
                     <div class="form-group">
-                        <label for="title">网站/应用标题</label>
-                        <input type="text" name="title" id="title" placeholder="Pork's Web Site">
+                        <label for="site-title">网站/应用标题</label>
+                        <input type="text" required name="site-title" id="site-title" value="<%= siteTitle %>" placeholder="Pork's Web Site">
                     </div>
                     <div class="form-group">
-                        <label for="subtitle">副标题</label>
-                        <input type="text" name="subtitle" id="subtitle" placeholder="但行好事，莫问前程">
+                        <label for="sub-title">副标题</label>
+                        <input type="text" name="sub-title" id="sub-title" value="<%= subTitle %>" placeholder="但行好事，莫问前程">
                     </div>
                     <div class="form-group">
                         <label for="views">访问总量</label>
-                        <input type="number" name="views" id="views" placeholder="0">
+                        <input type="number" name="views" id="views" value="<%= views %>" placeholder="0">
                     </div>
                     <div class="form-group">
                         <label for="copyright">版权信息</label>
-                        <input type="text" name="copyright" id="copyright" placeholder="© 2020 - 2021 猪肉王子">
+                        <input type="text" name="copyright" id="copyright" value="<%= copyRight %>" placeholder="© 2020 - 2021 猪肉王子">
                     </div>
                     <div class="form-group">
                         <label for="icp">备案信息</label>
-                        <input type="text" name="icp" id="icp" placeholder="">
+                        <input type="text" name="icp" id="icp" value="<%= icp %>" placeholder="">
                     </div>
                     <div class="form-group">
                         <label for="theme">模版</label>
-                        <input type="text" name="theme" id="theme" placeholder="主题名称（非开发人员请保持默认）" value="default">
+                        <input type="text" name="theme" id="theme" value="<%= theme %>" placeholder="主题名称（非开发人员请保持默认）" value="default">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="保存">
+                        <input type="submit" id="btn-submit" value="保存">
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>
+
+
+    <script type="module">
+        import { utils } from '../scripts/utils.js'
+
+        document.addEventListener('readystatechange', e => {
+            if (document.readyState === 'complete') {
+                // 就绪
+                const btnSubmit = document.querySelector('#btn-submit')
+                btnSubmit && btnSubmit.addEventListener('click', e => {
+                    e.preventDefault()
+                    const siteTitle = document.querySelector('#site-title').value
+                    const subTitle = document.querySelector('#sub-title').value
+                    const views = document.querySelector('#views').value
+                    const copyRight = document.querySelector('#copyright').value
+                    const icp = document.querySelector('#icp').value
+                    const theme = document.querySelector('#theme').value
+
+                    utils.ajax(location.origin + '/api/manager/setConfig', 'POST', {
+                        siteTitle,
+                        subTitle,
+                        views,
+                        copyRight,
+                        icp,
+                        theme
+                    }).then(res => {
+                        console.log(res)
+                    })
+                }, false)
+
+            }
+        }, false)
+
+    </script>
+
+
+
 </body>
 
 </html>

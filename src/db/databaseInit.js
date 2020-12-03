@@ -19,10 +19,10 @@ const {
 
 const databaseInit = async () => {
     const siteConfig = await SiteConfig.create({
-        title: `猪肉王子的博客`,
-        subtitle: '但行好事，莫问前程',
+        siteTitle: `猪肉王子的博客`,
+        subTitle: '但行好事，莫问前程',
         views: 20208,
-        copyright: '© 2020 - 2021 猪肉王子'
+        copyRight: '© 2020 - 2021 猪肉王子'
     })
 
     const user = await User.create({

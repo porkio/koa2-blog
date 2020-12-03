@@ -65,7 +65,6 @@ input[type="text"], input[type="password"], input[type="number"] {
     border: none;
     outline: none;
     font-size: 1.1rem;
-    font-weight: 300;
     padding: .4rem .2rem;
     margin: .8rem 0;
     width: 100%;

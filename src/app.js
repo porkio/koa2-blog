@@ -12,6 +12,7 @@ const { REDIS_CONF } = require('./conf/db')
 
 const index = require('./routes/view/index/index')
 const userApiRouter = require('./routes/api/user')
+const managerApiRouter = require('./routes/api/manager')
 const userViewRouter = require('./routes/view/manager/user')
 const managerViewRouter = require('./routes/view/manager/index')
 const errorViewRouter = require('./routes/view/error')
@@ -52,6 +53,7 @@ app.use(session({
 app.use(index.routes(), index.allowedMethods())
 app.use(userViewRouter.routes(), userViewRouter.allowedMethods())
 app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
+app.use(managerApiRouter.routes(), managerApiRouter.allowedMethods())
 app.use(managerViewRouter.routes(), managerViewRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
 

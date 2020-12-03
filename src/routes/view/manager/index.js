@@ -5,6 +5,7 @@
 
 const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const router = require('koa-router')()
+const { getConfig } = require('../../../controller/manager')
 
 router.prefix('/manager')
 
@@ -15,9 +16,13 @@ router.get('/', noLoginRedirect, async (ctx, next) => {
 })
 
 router.get('/configuration', noLoginRedirect, async (ctx, next) => {
-    await ctx.render('manager/configuration', {
-        title: '应用配置'
-    })
+    // controller
+    const config = await getConfig()
+
+    if (config) {
+        config.title = '站点设置'
+        await ctx.render('manager/configuration', config)
+    }
 })
 
 module.exports = router

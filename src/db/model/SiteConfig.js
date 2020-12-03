@@ -13,13 +13,13 @@
  } = require('../dataTypes')
 
 const SiteConfig = seq.define('site_config', {
-    title: {
+    siteTitle: {
         type: STRING,
         allowNull: false,
         defaultValue: '猪肉王子的博客',
         comment: '网站/应用标题'
     },
-    subtitle: {
+    subTitle: {
         type: STRING,
         allowNull: true,
         comment: '副标题'
@@ -35,7 +35,7 @@ const SiteConfig = seq.define('site_config', {
         allowNull: true,
         comment: 'ICP备案信息'
     },
-    copyright: {
+    copyRight: {
         type: STRING,
         allowNull: true,
         comment: '版权信息'
@@ -43,13 +43,9 @@ const SiteConfig = seq.define('site_config', {
     theme: {
         type: STRING,
         allowNull: true,
+        defaultValue: 'default',
         comment: '主题'
-    },
-    friendLinks: {
-        type: TEXT,
-        allowNull: true,
-        comment: '友情链接'
-    },
+    }
 })
 
 module.exports = SiteConfig
