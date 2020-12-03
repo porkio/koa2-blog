@@ -6,9 +6,13 @@
 const User = require('./User')
 const Article = require('./Article')
 const SiteConfig = require('./SiteConfig')
+const CloudTag = require('./CloudTag')
+const Category = require('./Category')
 
 module.exports = {
     User,
     Article,
-    SiteConfig
+    SiteConfig,
+    CloudTag,
+    Category
 }

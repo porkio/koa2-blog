@@ -3,7 +3,34 @@
  * @author Pork
  */
 const seq = require('./seq')
-require('./model/index')
+const {
+    User,
+    Article,
+    SiteConfig,
+    CloudTag,
+    Category
+} = require('./model/index')
+
+Article.belongsTo(User, {
+    foreignKey: 'userId'
+})
+
+User.hasMany(Article)
+
+Article.belongsTo(Category, {
+    foreignKey: 'categoryId'
+})
+
+Category.hasMany(Article)
+
+CloudTag.belongsTo(Category, {
+    foreignKey: 'categoryId'
+})
+
+Category.hasMany(CloudTag)
+
+
+
 
 // 测试连接
 seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))

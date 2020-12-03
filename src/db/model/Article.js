@@ -28,6 +28,12 @@ const Article = seq.define('article', {
         allowNull: false,
         comment: '所属用户的id'
     },
+    order: {
+        type: DECIMAL,
+        allowNull: false,
+        defaultValue: 100,
+        comment: '排序'
+    },
     views: {
         type: INTEGER,
         allowNull: false,
@@ -39,10 +45,7 @@ const Article = seq.define('article', {
         allowNull: false,
         defaultValue: 0,
         comment: '获赞次数'
-    },
-    tags: {
-        type: STRING,
-        allowNull: true,
-        comment: '标签的id集合 1，2，3'
     }
 })
+
+module.exports = Article

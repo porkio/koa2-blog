@@ -12,7 +12,7 @@
      INTEGER
  } = require('../dataTypes')
 
-const SiteConfig = seq.define('siteconfig', {
+const SiteConfig = seq.define('site_config', {
     title: {
         type: STRING,
         allowNull: false,

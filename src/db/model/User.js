@@ -46,6 +46,11 @@ const User = seq.define('user', {
         defaultValue: 0, // 0: 保密 1: 男，2: 女
         comment: '性别'
     },
+    age: {
+        type: DECIMAL,
+        allowNull: true,
+        comment: '年龄'
+    },
     avatarUrl: {
         type: STRING,
         allowNull: true,
