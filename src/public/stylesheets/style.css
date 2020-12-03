@@ -8,13 +8,13 @@
 }
 
 .login-form {
-    width: 40%;
-    max-width: 420px;
+    width: 380px;
+    max-width: 440px;
     padding: 3rem;
     background-color: #fff;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
     .login-form {
         width: 92%;
         padding: 2rem;

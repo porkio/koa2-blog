@@ -83,6 +83,7 @@
     border-radius: 50%;
     cursor: pointer;
 }
+
 .btn-round:hover {
     border: 1px solid #76469F;
 }

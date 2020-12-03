@@ -14,7 +14,9 @@
 .dis-flex {
     display: flex;
 }
-
+.flex-wrap {
+    flex-wrap: wrap;
+}
 .justify-content-center {
     justify-content: center;
 }
@@ -33,6 +35,23 @@
 
 .m-title {
     padding: 1rem 0;
+}
+
+.btn-group {
+    padding: 1rem .2rem;
+}
+
+.btn-links {
+    padding: .4rem 1.2rem;
+    border-radius: 1.5rem;
+    margin: .5rem 1rem;
+    font-size: .9rem;
+    background-color: #0080e2;
+    color: #fff;
+}
+
+.btn-links:first-child {
+    margin-left: 0;
 }
 
 

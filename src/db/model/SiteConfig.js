@@ -30,11 +30,6 @@ const SiteConfig = seq.define('site_config', {
         defaultValue: 0,
         comment: '浏览总量'
     },
-    friendLinks: {
-        type: TEXT,
-        allowNull: true,
-        comment: '友情链接'
-    },
     icp: {
         type: STRING,
         allowNull: true,
@@ -49,7 +44,12 @@ const SiteConfig = seq.define('site_config', {
         type: STRING,
         allowNull: true,
         comment: '主题'
-    }
+    },
+    friendLinks: {
+        type: TEXT,
+        allowNull: true,
+        comment: '友情链接'
+    },
 })
 
 module.exports = SiteConfig
