@@ -99,14 +99,14 @@
                     }
                 }, false)
 
-                document.addEventListener('keydown', e => {
+                document.addEventListener('keydown', enterToLogin, false)
+                document.querySelector('#btn-submit').addEventListener('click', doLogin, false)
+
+                function enterToLogin(e) {
                     if (e.keyCode === 13) {
                         doLogin()
                     }
-                }, false)
-                document.querySelector('#btn-submit').addEventListener('click', e => {
-                    doLogin()
-                }, false)
+                }
 
                 function doLogin() {
                     // 请求登录
@@ -127,6 +127,9 @@
                         password
                     }).then(res => {
                         if (res.errno === 0) {
+                            // 登陆成功 移除键盘监听时间 和 按钮登陆事件
+                            document.removeEventListener('keydown', enterToLogin, false)
+                            document.querySelector('#btn-submit').removeEventListener('click', doLogin, false)
                             utils.showMessage({
                                 title: '登录成功',
                                 icon: 'success'

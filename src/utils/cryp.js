@@ -8,7 +8,7 @@ const { CRYPTO_SECRET_KEY } = require('../conf/secretKeys')
 
 /**
  * @description md5 加密
- * @param { String } content 
+ * @param { String } content
  */
 const _md5 = content => {
     const md5 = crypto.createHash('md5')
@@ -17,13 +17,11 @@ const _md5 = content => {
 
 /**
  * @description 字符串加密
- * @param { String } content 
+ * @param { String } content
  */
 const strCrypto = content => {
     const str = `password=${content}&key=${CRYPTO_SECRET_KEY}`
     return _md5(str)
 }
 
-module.exports = {
-    strCrypto
-}
+module.exports = strCrypto

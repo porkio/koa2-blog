@@ -11,6 +11,8 @@ const {
     Category
 } = require('./model/index')
 
+const databaseInit = require('./databaseInit')
+
 Article.belongsTo(User, {
     foreignKey: 'userId'
 })
@@ -30,13 +32,12 @@ CloudTag.belongsTo(Category, {
 Category.hasMany(CloudTag)
 
 
-
-
 // 测试连接
 seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))
 
 // 执行同步
-seq.sync().then(() => {
+seq.sync({ force: true }).then(async () => {
     console.log('Sync Ok.')
+    await databaseInit()
     process.exit()
 })

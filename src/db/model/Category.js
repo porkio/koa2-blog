@@ -20,7 +20,7 @@ const Category = seq.define('category', {
     },
     order: {
         type: DECIMAL,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 100,
         comment: '排序'
     },

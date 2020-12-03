@@ -23,7 +23,7 @@ const {
 } = require('../model/ErrorModel')
 const user = require('../services/user')
 
-const { strCrypto } = require('../utils/cryp')
+const strCrypto = require('../utils/cryp')
 
 /**
  * @description 判断用户名是否存在

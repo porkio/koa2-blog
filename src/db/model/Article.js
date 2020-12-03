@@ -30,19 +30,19 @@ const Article = seq.define('article', {
     },
     order: {
         type: DECIMAL,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 100,
         comment: '排序'
     },
     views: {
         type: INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
         comment: '浏览次数'
     },
     likes: {
         type: INTEGER,
-        allowNull: false,
+        allowNull: true,
         defaultValue: 0,
         comment: '获赞次数'
     }
