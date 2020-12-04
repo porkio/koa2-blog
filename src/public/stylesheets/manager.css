@@ -55,9 +55,104 @@
 }
 
 
+/* BootStrap */
+.btn:not(disabled) {
+	cursor: pointer;
+}
 
+.btn {
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
+	user-select: none;
+	font-size: 1rem;
+	border-radius: .25rem;
+	padding: .375rem .9rem;
+	background-color: transparent;
+    border: 1px solid transparent;
+}
 
+.btn-small {
+	font-size: .9rem;
+	padding: .2rem .6rem;
+}
 
+button.btn {
+	appearance: none;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #007bff;
+	border-color: #007bff;
+}
+
+.btn-outline-primary {
+	color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-success {
+	color: #fff;
+	background-color: #28a745;
+	border-color: #28a745;
+}
+
+.btn-outline-success {
+	color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-danger {
+	color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger {
+	color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-warning {
+	color: #212529;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning {
+	color: #ffc107;
+    border-color: #ffc107;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #2e2e2f;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table td, .table th {
+    padding: .65rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+th {
+    text-align: inherit;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, .06);
+}
+
+table {
+    border-collapse: collapse;
+}
 
 /* Form */
 input[type="text"], input[type="password"], input[type="number"] {

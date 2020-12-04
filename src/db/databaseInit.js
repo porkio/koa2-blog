@@ -38,10 +38,33 @@ const databaseInit = async () => {
         cateName: 'JavaScript',
         order: 100
     })
-
+	const categoryWeb = await Category.create({
+        cateName: 'Web',
+        order: 100
+    })
+	const category2 = await Category.create({
+        cateName: 'Vue.js',
+        order: 100,
+		parentId: categoryWeb.dataValues.id
+    })
+	const category3 = await Category.create({
+		cateName: 'React.js',
+        order: 100,
+		parentId: categoryWeb.dataValues.id
+    })
+	const categorySuibi = await Category.create({
+        cateName: '随笔',
+        order: 100
+    })
+	const category5 = await Category.create({
+        cateName: '关于生活',
+        order: 100,
+		parentId: categorySuibi.dataValues.id
+    })
     const tag = CloudTag.create({
-        tagName: 'Nodejs',
-        categoryId: category.dataValues.id
+		cateName: '关于阅读',
+        order: 100,
+		parentId: categorySuibi.dataValues.id
     })
 
     const article = await Article.create({

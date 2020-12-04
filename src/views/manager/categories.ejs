@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../stylesheets/manager.css">
+	<link rel="stylesheet" href="../stylesheets/font-awesome.min.css">
+	<title><%= title %></title>
+</head>
+
+<body>
+	<section class="wrapper">
+		<div class="container">
+			<div id="config" class="m-item">
+				<h2 class="m-title" title="这是一个Tips"><%= title %></h2>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">分类名称</th>
+							<th scope="col">文章数量</th>
+							<th scope="col">排序</th>
+							<th scope="col">操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">1</th>
+							<td>JavaScript</td>
+							<td>12</td>
+							<td>100</td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td>Web框架</td>
+							<td>6</td>
+							<td>101</td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td> &nbsp;&nbsp;&nbsp;&nbsp;-- Vue.js</td>
+							<td>6</td>
+							<td>101</td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">2</th>
+							<td> &nbsp;&nbsp;&nbsp;&nbsp;-- React.js</td>
+							<td>6</td>
+							<td>101</td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
+						<tr>
+							<th scope="row">3</th>
+							<td>随笔</td>
+							<td>650</td>
+							<td>1</td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="form-group">
+					<button class="btn btn-success">新增</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script type="module">
+		import {
+			utils
+		} from '../scripts/utils.js'
+
+		document.addEventListener('readystatechange', e => {
+			if (document.readyState === 'complete') {
+				// 页面就绪
+
+			}
+		}, false)
+	</script>
+
+</body>
+
+</html>

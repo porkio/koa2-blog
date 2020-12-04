@@ -18,6 +18,12 @@ const Article = seq.define('article', {
         alowNull: false,
         comment: '文章内容'
     },
+    showImgUrl: {
+        type: STRING,
+        allowNull: true,
+        defaultValue: '/images/default-aticle-img.jpg',
+        comment: '文章展示图地址'
+    },
     categoryId: {
         type: INTEGER,
         allowNull: false,

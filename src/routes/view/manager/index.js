@@ -9,12 +9,14 @@ const { getConfig } = require('../../../controller/manager')
 
 router.prefix('/manager')
 
+// 管理器仪表板
 router.get('/', noLoginRedirect, async (ctx, next) => {
     await ctx.render('manager/index', {
         title: '后台首页'
     })
 })
 
+// 站点配置
 router.get('/configuration', noLoginRedirect, async (ctx, next) => {
     // controller
     const config = await getConfig()
@@ -24,5 +26,15 @@ router.get('/configuration', noLoginRedirect, async (ctx, next) => {
         await ctx.render('manager/configuration', config)
     }
 })
+
+// 分类管理
+router.get('/categories', noLoginRedirect, async (ctx, next) => {
+	// controller
+	const result = await getCategories()
+    await ctx.render('manager/categories', {
+        title: '分类管理'
+    })
+})
+
 
 module.exports = router
