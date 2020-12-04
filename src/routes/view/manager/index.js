@@ -5,7 +5,10 @@
 
 const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const router = require('koa-router')()
-const { getConfig } = require('../../../controller/manager')
+const {
+	getConfig,
+	getCategories
+} = require('../../../controller/manager')
 
 router.prefix('/manager')
 
@@ -31,9 +34,14 @@ router.get('/configuration', noLoginRedirect, async (ctx, next) => {
 router.get('/categories', noLoginRedirect, async (ctx, next) => {
 	// controller
 	const result = await getCategories()
-    await ctx.render('manager/categories', {
-        title: '分类管理'
-    })
+
+	const data = {
+		pageInfo: {
+			title: '分类管理'
+		}
+	}
+	Object.assign(data, { categories: result })
+    await ctx.render('manager/categories', data)
 })
 
 

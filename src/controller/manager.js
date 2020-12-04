@@ -4,8 +4,15 @@
  * @created_at 2020/12/03
  */
 
-const { SiteConfig } = require('../db/model/index')
-const { SuccessModel, FailedModel } = require('../model/ResModel')
+const {
+	SiteConfig,
+	Category
+} = require('../db/model/index')
+const {
+	SuccessModel,
+	FailedModel,
+	getCategoriesFail
+} = require('../model/ResModel')
 const { siteConfigurationFail } = require('../model/ErrorModel')
 
 /**
@@ -36,7 +43,24 @@ const updateConfig = async config => {
     return new FailedModel(siteConfigurationFail)
 }
 
+/**
+ * @description 获取分类
+ * @return {Promise} [description]
+ */
+const getCategories = async () => {
+	const result = await Category.findAll()
+	if (result) {
+		let categoriesList = []
+		result.forEach((item, index) => {
+			categoriesList.push(item.dataValues)
+		})
+		return categoriesList
+	}
+	return new FailedModel(getCategoriesFail)
+}
+
 module.exports = {
     getConfig,
     updateConfig,
+	getCategories,
 }

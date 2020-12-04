@@ -38,6 +38,10 @@ module.exports = {
         errno: 40007,
         message: '站点配置更新失败'
     },
+	getCategoriesFail: {
+		errno: 40008,
+		message: '获取分类失败'
+	},
     repeatAction: {
         errno: 10002,
         message: '重复的操作'

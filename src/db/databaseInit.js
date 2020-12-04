@@ -34,13 +34,15 @@ const databaseInit = async () => {
         avatarUrl: '/uploads/users/Pork/avatar/pork-avatar.jpg'
     })
 
-    const category = await Category.create({
-        cateName: 'JavaScript',
-        order: 100
-    })
+
 	const categoryWeb = await Category.create({
         cateName: 'Web',
         order: 100
+    })
+	const category = await Category.create({
+        cateName: 'JavaScript',
+        order: 100,
+		parentId: categoryWeb.dataValues.id
     })
 	const category2 = await Category.create({
         cateName: 'Vue.js',
