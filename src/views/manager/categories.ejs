@@ -25,20 +25,21 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% for(let i in categories) { %>
-							<tr>
-								<% if (!categories[i].parentId) { %>
-									<% const cateId = categories[i].id %>
-									<th scope="row"><%= categories[i].id %></th>
-									<td><%= categories[i].cateName %></td>
-									<td><%= categories[i].order %></td>
-									<td><%= categories[i].order %></td>
-									<td>
-										<button class="btn btn-outline-primary btn-small">编辑</button>
-										<button class="btn btn-outline-danger btn-small">删除</button>
-									</td>
-								<% } %>
-							</tr>
+						<% for(let i in catesList) { %>
+						<tr>
+							<th scope="row"><%= catesList[i].id %></th>
+							<% if (catesList[i].parentId) { %>
+								<td style="padding-left: 2rem;"> -- <%= catesList[i].cateName %></td>
+							<% } else { %>
+								<td><%= catesList[i].cateName %></td>
+							<% } %>
+							<td><%= catesList[i].order %></td>
+							<td><%= catesList[i].order %></td>
+							<td>
+								<button class="btn btn-outline-primary btn-small">编辑</button>
+								<button class="btn btn-outline-danger btn-small">删除</button>
+							</td>
+						</tr>
 						<% } %>
 					</tbody>
 				</table>

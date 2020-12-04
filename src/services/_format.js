@@ -6,7 +6,7 @@
 const { DEFAULT_AVATAR } = require('../conf/constant')
 /**
  * @description 用户默认头像
- * @param { String } user 
+ * @param { String } user
  */
 const _formatUserAvatarUrl = user => {
     !user.avatarUrl && (user.avatarUrl = DEFAULT_AVATAR)
@@ -30,5 +30,5 @@ const formatUser = list => {
 }
 
 module.exports = {
-    formatUser
+    formatUser,
 }

@@ -33,15 +33,9 @@ router.get('/configuration', noLoginRedirect, async (ctx, next) => {
 // 分类管理
 router.get('/categories', noLoginRedirect, async (ctx, next) => {
 	// controller
-	const result = await getCategories()
-
-	const data = {
-		pageInfo: {
-			title: '分类管理'
-		}
-	}
-	Object.assign(data, { categories: result })
-    await ctx.render('manager/categories', data)
+	const catesData = await getCategories()
+	console.log(catesData)
+    await ctx.render('manager/categories', catesData)
 })
 
 

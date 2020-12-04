@@ -63,10 +63,16 @@ const databaseInit = async () => {
         order: 100,
 		parentId: categorySuibi.dataValues.id
     })
-    const tag = CloudTag.create({
+    const cate6 = Category.create({
 		cateName: '关于阅读',
         order: 100,
 		parentId: categorySuibi.dataValues.id
+    })
+
+    const tag = CloudTag.create({
+        tagName: 'JavaScript',
+        order: 100,
+        categoryId: categoryWeb.dataValues.id
     })
 
     const article = await Article.create({

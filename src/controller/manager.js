@@ -14,6 +14,7 @@ const {
 	getCategoriesFail
 } = require('../model/ResModel')
 const { siteConfigurationFail } = require('../model/ErrorModel')
+const { formatCategories } = require('../services/manager')
 
 /**
  * @description 获取网站配置信息
@@ -54,7 +55,16 @@ const getCategories = async () => {
 		result.forEach((item, index) => {
 			categoriesList.push(item.dataValues)
 		})
-		return categoriesList
+
+		const catesList = await formatCategories(categoriesList)
+
+		const data = {
+			pageInfo: {
+				title: '分类管理'
+			}
+		}
+		Object.assign(data, { catesList: catesList })
+		return data
 	}
 	return new FailedModel(getCategoriesFail)
 }
