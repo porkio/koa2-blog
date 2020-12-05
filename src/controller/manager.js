@@ -14,7 +14,7 @@ const {
 	getCategoriesFail
 } = require('../model/ResModel')
 const { siteConfigurationFail } = require('../model/ErrorModel')
-const { formatCategories } = require('../services/manager')
+const { formatCategories } = require('../service/manager')
 
 /**
  * @description 获取网站配置信息

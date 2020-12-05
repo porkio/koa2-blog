@@ -8,7 +8,7 @@ const {
     getUserInfo,
     createUser,
     deleteUser
-} = require('../services/user')
+} = require('../service/user')
 const {
     SuccessModel,
     FailModel
@@ -22,7 +22,7 @@ const {
     deleteUserFail,
     repeatAction
 } = require('../model/ErrorModel')
-const user = require('../services/user')
+const user = require('../service/user')
 
 const strCrypto = require('../utils/cryp')
 
@@ -34,7 +34,7 @@ const isExist = async userName => {
     if (!userName) {
         return new FailModel(paramsError)
     }
-    // 调用 services 层获取数据
+    // 调用 service 层获取数据
     const userInfo = await getUserInfo(userName)
     if (userInfo) {
         // 已存在
@@ -129,7 +129,7 @@ const create = async ({ userName, password, email }) => {
  * @return
  */
 const destroy = async userName => {
-    // services
+    // service
     const result = await deleteUser(userName)
     if (result) {
         return new SuccessModel({ message: userName + ' 已被成功删除' })
