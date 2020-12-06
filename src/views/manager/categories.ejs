@@ -26,20 +26,24 @@
 					</thead>
 					<tbody>
 						<% for(let i in catesList) { %>
-						<tr>
-							<th scope="row"><%= catesList[i].id %></th>
-							<% if (catesList[i].parentId) { %>
-								<td style="padding-left: 2rem;"> -- <%= catesList[i].cateName %></td>
+							<% if (!catesList[i].parentId) { %>
+							<tr class="cate-main">
 							<% } else { %>
-								<td><%= catesList[i].cateName %></td>
+							<tr>
 							<% } %>
-							<td><%= catesList[i].order %></td>
-							<td><%= catesList[i].order %></td>
-							<td>
-								<button class="btn btn-outline-primary btn-small">编辑</button>
-								<button class="btn btn-outline-danger btn-small">删除</button>
-							</td>
-						</tr>
+								<th scope="row"><%= catesList[i].id %></th>
+								<% if (catesList[i].parentId) { %>
+									<td style="padding-left: 2rem;"> -- <%= catesList[i].cateName %></td>
+								<% } else { %>
+									<td><%= catesList[i].cateName %></td>
+								<% } %>
+								<td><%= catesList[i].order %></td>
+								<td><%= catesList[i].order %></td>
+								<td>
+									<button class="btn btn-outline-primary btn-small">编辑</button>
+									<button class="btn btn-outline-danger btn-small">删除</button>
+								</td>
+							</tr>
 						<% } %>
 					</tbody>
 				</table>
@@ -58,7 +62,16 @@
 		document.addEventListener('readystatechange', e => {
 			if (document.readyState === 'complete') {
 				// 页面就绪
+				(() => {
+					// 编辑分类
+					const editBtns = document.querySelectorAll('button.btn-outline-primary')
+					editBtns.forEach((item, i) => {
+						item.addEventListener('click', e => {
+							console.log(e.target.parentNode.parentNode)
+						}, false)
+					})
 
+				})()
 			}
 		}, false)
 	</script>

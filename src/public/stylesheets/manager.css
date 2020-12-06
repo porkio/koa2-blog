@@ -146,13 +146,21 @@ th {
     text-align: inherit;
 }
 
-.table-striped tbody tr:nth-of-type(odd) {
+/* 隔行灰色背景 */
+/* .table-striped tbody tr:nth-of-type(odd) {
     background-color: rgba(0, 0, 0, .06);
-}
+} */
 
 table {
     border-collapse: collapse;
 }
+
+.cate-main {
+    background-color: rgba(0, 0, 0, .06);
+}
+
+
+
 
 /* Form */
 input[type="text"], input[type="password"], input[type="number"] {
