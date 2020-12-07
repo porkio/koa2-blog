@@ -35,25 +35,53 @@
 								<% if (category.parentId) { %>
 									<td style="padding-left: 2rem;"> -- <%= category.cateName %></td>
 								<% } else { %>
-									<td><%= category.cateName %></td>
+									<td id="cate-top" data-id="<%= category.id %>"><%= category.cateName %></td>
 								<% } %>
 								<td><%= category.order %></td>
 								<td><%= category.order %></td>
 								<td>
-									<button class="btn btn-outline-primary btn-small">编辑</button>
-									<button class="btn btn-outline-danger btn-small">删除</button>
+									<button class="btn btn-outline-primary btn-small" id="btnEdit" data-cateName="<%= category.cateName %>" data-order="<%= category.order %>" data-parent="<%= category.parentId %>">编辑</button>
+									<button class="btn btn-outline-danger btn-small" id="btnDelete" data-cateId="<%= category.id %>">删除</button>
 								</td>
 							</tr>
 						<% } %>
 					</tbody>
 				</table>
 				<div class="form-group">
-					<button class="btn btn-success">新增</button>
+					<button class="btn btn-success" id="btnAddCate">添加分类</button>
+				</div>
+			</div>
+		</div>
+		<div class="layer-default">
+			<div class="add-cate" style="display: none;">
+				<h4 class="title title-success">添加分类</h3>
+				<span class="btn-close">&times;</span>
+				<div class="form-group">
+					<label for="parentCate">选择上级分类</label>
+					<select name="parentId" id="parentId" class="select-primary">
+						<option value="topCate">顶级分类</option>
+						<% for(let cate of catesList) { %>
+							<% if (!cate.parentId) { %>
+								<option value="<%= cate.cateName %>"><%= cate.cateName %></option>
+							<% } %>
+						<% } %>
+					</select>
+				</div>
+				<div class="form-group">
+					<input type="text" name="cateName" id="cateName" value="" placeholder="分类名称">
+				</div>
+				<div class="form-group">
+					<input type="number" name="order" id="order" value="" placeholder="排序">
+				</div>
+				<div class="form-group">
+					<button class="btn btn-success" id="cardBtnSave">确定</button>
+					<button class="btn btn-danger" id="cardBtnCancel">取消</button>
 				</div>
 			</div>
 		</div>
 	</section>
 
+	<script src="../scripts/manager.js"></script>
 	<script type="module">
 		import {
 			utils
@@ -62,15 +90,79 @@
 		document.addEventListener('readystatechange', e => {
 			if (document.readyState === 'complete') {
 				// 页面就绪
-				(() => {
+
+				// 添加分类卡片相关
+				const layerDefault = document.querySelector('.layer-default')
+				const addCateCard = document.querySelector('.add-cate')
+				const cardBtnSave = document.querySelector('#cardBtnSave')
+				const cardBtnCancel = document.querySelector('#cardBtnCancel')
+				const topCateElements = document.querySelectorAll('#cate-top')
+				const topCates = {}
+				// 记录顶级分类名称
+				topCateElements.forEach((item, i) => {
+					topCates[item.getAttribute('data-id')] = item.innerText
+				})
+
+				// 插入分类编辑卡片
+				function apendCard() {
+					addCateCard.style.display = 'block'
+					layerDefault && document.body.appendChild(layerDefault)
+				}
+
+				layerDefault && layerDefault.remove()
+
+				cardBtnSave.addEventListener('click', e => {
+					// 保存按钮被点击
+				}, false)
+
+				cardBtnCancel.addEventListener('click', e => {
+					if (layerDefault) {
+						layerDefault.remove()
+					} else {
+						addCateCard.remove()
+					}
+				}, false)
+
+
+				!(() => {
 					// 编辑分类
-					const editBtns = document.querySelectorAll('button.btn-outline-primary')
-					editBtns.forEach((item, i) => {
+					const editBtns = document.querySelectorAll('#btnEdit'),
+								delBtns = document.querySelectorAll('#btnDelete')
+
+					editBtns.forEach(item => {
 						item.addEventListener('click', e => {
-							console.log(e.target.parentNode.parentNode)
+							const btnEdit = e.target
+							const cateName = btnEdit.getAttribute('data-cateName')
+							const order = btnEdit.getAttribute('data-order')
+							const parentId = btnEdit.getAttribute('data-parent')
+
+							apendCard()
+
+							const cateNameInput = document.querySelector('#cateName')
+							const orderInput = document.querySelector('#order')
+							const selectInput = document.querySelector('#parentId')
+
+							cateNameInput.value = cateName
+							orderInput.value = order
+							selectInput.value = parentId ? topCates[parentId] : 'topCate'
+
+
+
 						}, false)
 					})
 
+					delBtns.forEach(item => {
+						item.addEventListener('click', e => {
+							console.log(e.target.parentNode.parentElement)
+						}, false)
+					})
+
+				})()
+
+				!(() => {
+					// 添加分类按钮
+					const btnAddCate = document.querySelector('#btnAddCate')
+					btnAddCate.addEventListener('click', apendCard, false)
 				})()
 			}
 		}, false)

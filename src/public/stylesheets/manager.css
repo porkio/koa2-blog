@@ -159,8 +159,29 @@ table {
     background-color: rgba(0, 0, 0, .06);
 }
 
+.add-cate {
+	min-width: 380px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #fff;
+	padding: 2rem;
+	border-radius: 10px;
+}
 
-
+.select-primary {
+	padding: .4rem .2rem;
+	color: #444;
+	font-size: 1rem;
+	outline: none;
+	width: 100%;
+	border: none;
+	line-height: 2;
+	border-radius: 5px;
+	background-color: rgba(0, 0, 0, .06);
+	cursor: pointer;
+}
 
 /* Form */
 input[type="text"], input[type="password"], input[type="number"] {
