@@ -25,20 +25,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<% for(let i in catesList) { %>
-							<% if (!catesList[i].parentId) { %>
+						<% for(let category of catesList) { %>
+							<% if (!category.parentId) { %>
 							<tr class="cate-main">
 							<% } else { %>
 							<tr>
 							<% } %>
-								<th scope="row"><%= catesList[i].id %></th>
-								<% if (catesList[i].parentId) { %>
-									<td style="padding-left: 2rem;"> -- <%= catesList[i].cateName %></td>
+								<th scope="row"><%= category.id %></th>
+								<% if (category.parentId) { %>
+									<td style="padding-left: 2rem;"> -- <%= category.cateName %></td>
 								<% } else { %>
-									<td><%= catesList[i].cateName %></td>
+									<td><%= category.cateName %></td>
 								<% } %>
-								<td><%= catesList[i].order %></td>
-								<td><%= catesList[i].order %></td>
+								<td><%= category.order %></td>
+								<td><%= category.order %></td>
 								<td>
 									<button class="btn btn-outline-primary btn-small">编辑</button>
 									<button class="btn btn-outline-danger btn-small">删除</button>
