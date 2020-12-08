@@ -135,7 +135,7 @@ input[type="text"], input[type="password"], input[type="number"] {
     font-size: 1.1rem;
     font-weight: 300;
     padding: .4rem .2rem;
-    margin: .8rem 0;
+    margin: .2rem 0;
     width: 100%;
     color: #3b3b3b;
     border-bottom: 1px solid #9bb3b2;
@@ -144,6 +144,7 @@ input[type="text"], input[type="password"], input[type="number"] {
 
 .form-group {
     position: relative;
+    padding: .8rem 0;
 }
 
 .form-group .fa-exclamation-circle {

@@ -12,7 +12,10 @@ const {
 const {
 	SuccessModel,
 	FailedModel,
-	getCategoriesFail
+	getCategoriesFail,
+	updateCategoryFail,
+	createCategoryFail,
+	destroyCategoryFail
 } = require('../model/ResModel')
 const { siteConfigurationFail } = require('../model/ErrorModel')
 const { formatCategories } = require('../service/manager')
@@ -77,8 +80,66 @@ const getCategories = async () => {
 	return new FailedModel(getCategoriesFail)
 }
 
+/**
+* @description 更新分类
+* @param { Object } category
+* @return  ResModel
+*/
+const updateCategory = async category => {
+	const result = await Category.update({
+		cateName: category.cateName,
+		order: category.order,
+		parentId: category.parentId == 0 ? null : category.parentId
+	}, {
+		where: {
+			id: category.id
+		}
+	})
+	if (result[0] > 0) {
+		return new SuccessModel({ message: '编辑成功' })
+	}
+	return new FailedModel(updateCategoryFail)
+}
+
+/**
+* @description 创建分类
+* @param { Object } category
+* @return
+*/
+const createCategory = async category => {
+	const result = await Category.create({
+		cateName: category.cateName,
+		order: category.order,
+		parentId: category.parentId == 0 ? null : category.parentId
+	})
+	if (result.dataValues.id) {
+		return new SuccessModel({ message: '添加成功' })
+	}
+	return new FailedModel(createCategoryFail)
+}
+
+/**
+* @description 删除分类
+* @param { Integer } id
+* @return  ResModel
+*/
+const destroyCategory = async id => {
+	const result = await Category.destroy({
+		where: {
+			id: id
+		}
+	})
+	if (result === 1) {
+		return new SuccessModel({ message: '删除成功' })
+	}
+	return new FailedModel(destroyCategoryFail)
+}
+
 module.exports = {
     getConfig,
     updateConfig,
 	getCategories,
+	updateCategory,
+	createCategory,
+	destroyCategory
 }

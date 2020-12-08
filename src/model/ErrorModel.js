@@ -42,6 +42,18 @@ module.exports = {
 		errno: 40008,
 		message: '获取分类失败'
 	},
+	updateCategoryFail: {
+		errno: 40009,
+		message: '分类编辑失败'
+	},
+	createCategoryFail: {
+		errno: 40010,
+		message: '分类创建失败'
+	},
+	destroyCategoryFail: {
+		errno: 40011,
+		message: '分类删除失败'
+	},
     repeatAction: {
         errno: 10002,
         message: '重复的操作'
