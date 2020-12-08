@@ -37,35 +37,35 @@ const databaseInit = async () => {
 
 	const categoryWeb = await Category.create({
         cateName: 'Web',
-        order: 100
+        order: 1
     })
 	const category = await Category.create({
         cateName: 'JavaScript',
-        order: 100,
+        order: 1,
 		parentId: categoryWeb.dataValues.id
     })
 	const category2 = await Category.create({
         cateName: 'Vue.js',
-        order: 100,
+        order: 2,
 		parentId: categoryWeb.dataValues.id
     })
 	const category3 = await Category.create({
 		cateName: 'React.js',
-        order: 100,
+        order: 3,
 		parentId: categoryWeb.dataValues.id
     })
 	const categorySuibi = await Category.create({
         cateName: '随笔',
-        order: 100
+        order: 2
     })
 	const category5 = await Category.create({
         cateName: '关于生活',
-        order: 100,
+        order: 2,
 		parentId: categorySuibi.dataValues.id
     })
     const cate6 = Category.create({
 		cateName: '关于阅读',
-        order: 100,
+        order: 1,
 		parentId: categorySuibi.dataValues.id
     })
 

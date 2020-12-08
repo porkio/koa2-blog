@@ -6,7 +6,8 @@
 
 const {
 	SiteConfig,
-	Category
+	Category,
+	Article
 } = require('../db/model/index')
 const {
 	SuccessModel,
@@ -49,7 +50,14 @@ const updateConfig = async config => {
  * @return {Promise} [description]
  */
 const getCategories = async () => {
-	const result = await Category.findAll()
+	const result = await Category.findAll({
+		order: ['order'],
+		include: [
+			{
+				association: Category.hasMany(Article, {})
+			}
+		]
+	})
 	if (result) {
 		let categoriesList = []
 		result.forEach((item, index) => {

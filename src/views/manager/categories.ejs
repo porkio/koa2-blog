@@ -37,7 +37,7 @@
 								<% } else { %>
 									<td id="cate-top" data-id="<%= category.id %>"><%= category.cateName %></td>
 								<% } %>
-								<td><%= category.order %></td>
+								<td><%= category.articlesTotal %></td>
 								<td><%= category.order %></td>
 								<td>
 									<button class="btn btn-outline-primary btn-small" id="btnEdit" data-cateName="<%= category.cateName %>" data-order="<%= category.order %>" data-parent="<%= category.parentId %>">编辑</button>
@@ -104,15 +104,31 @@
 				})
 
 				// 插入分类编辑卡片
-				function apendCard() {
+				function apendCard(title, whois) {
+					const btnId = whois.id
+					cardBtnSave.setAttribute('data-btn', btnId)
 					addCateCard.style.display = 'block'
+					addCateCard.querySelector('.title').innerText = title
 					layerDefault && document.body.appendChild(layerDefault)
 				}
 
 				layerDefault && layerDefault.remove()
 
 				cardBtnSave.addEventListener('click', e => {
+					const whois = e.target.getAttribute('data-btn')
+
 					// 保存按钮被点击
+					whois === 'btnEdit' && utils.ajax('/api/manager/setCategory', 'POST', {
+
+					}).then(res => {
+						console.log(res)
+					})
+
+					whois === 'btnAddCate' && utils.ajax('/api/manager/addCategory', 'POST', {
+
+					}).then(res => {
+						console.log(res)
+					})
 				}, false)
 
 				cardBtnCancel.addEventListener('click', e => {
@@ -136,7 +152,7 @@
 							const order = btnEdit.getAttribute('data-order')
 							const parentId = btnEdit.getAttribute('data-parent')
 
-							apendCard()
+							apendCard('编辑分类', e.target)
 
 							const cateNameInput = document.querySelector('#cateName')
 							const orderInput = document.querySelector('#order')
@@ -162,7 +178,9 @@
 				!(() => {
 					// 添加分类按钮
 					const btnAddCate = document.querySelector('#btnAddCate')
-					btnAddCate.addEventListener('click', apendCard, false)
+					btnAddCate.addEventListener('click', e => {
+						apendCard('添加分类', e.target)
+					}, false)
 				})()
 			}
 		}, false)
