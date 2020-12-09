@@ -138,6 +138,8 @@
 						parentId
 					}).then(res => {
 						if (res.errno === 0) {
+							// 移除编辑框元素
+							layerDefault && layerDefault.remove()
 							utils.showMessage({
 								title: res.message,
 								icon: 'success'
@@ -159,6 +161,8 @@
 						parentId
 					}).then(res => {
 						if (res.errno === 0) {
+							// 移除编辑框元素
+							layerDefault && layerDefault.remove()
 							utils.showMessage({
 								title: res.message,
 								icon: 'success'

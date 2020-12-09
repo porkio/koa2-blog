@@ -20,17 +20,16 @@ const formatCategories = async (catesList) => {
 	const childList = catesList.filter(item => item.parentId)
 
 	parentList.forEach((item, index) => {
-		let article_total = 0
+		item.articlesTotal = 0 // 统计分类下的文章数量
 		list.push(item)
 		childList.forEach(childCate => {
 			if (childCate.parentId == item.id) {
 				if (childCate.articles) {
 					childCate.articlesTotal = childCate.articles.length
-					article_total += childCate.articles.length
+					item.articlesTotal += childCate.articles.length
 				}
 				list.push(childCate)
 			}
-			list[index].articlesTotal = article_total
 		})
 	})
 
