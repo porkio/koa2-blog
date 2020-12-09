@@ -34,7 +34,6 @@ router.get('/configuration', noLoginRedirect, async (ctx, next) => {
 router.get('/categories', noLoginRedirect, async (ctx, next) => {
 	// controller
 	const catesData = await getCategories()
-	console.log(catesData)
     await ctx.render('manager/categories', catesData)
 })
 

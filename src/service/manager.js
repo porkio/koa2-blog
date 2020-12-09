@@ -14,22 +14,24 @@ const formatCategories = async (catesList) => {
 		return
 	}
 
- 	let list = []
-	catesList.forEach((item, index) => {
+ 	const list = []
+
+	const parentList = catesList.filter(item => !item.parentId)
+	const childList = catesList.filter(item => item.parentId)
+
+	parentList.forEach((item, index) => {
 		let article_total = 0
-		if (!item.parentId) {
-			list.push(item)
-			catesList.forEach(cate => {
-				if (item.id == cate.parentId) {
-					if (cate.articles) {
-						cate.articlesTotal = cate.articles.length
-						article_total += cate.articles.length
-					}
-					list.push(cate)
+		list.push(item)
+		childList.forEach(childCate => {
+			if (childCate.parentId == item.id) {
+				if (childCate.articles) {
+					childCate.articlesTotal = childCate.articles.length
+					article_total += childCate.articles.length
 				}
-			})
+				list.push(childCate)
+			}
 			list[index].articlesTotal = article_total
-		}
+		})
 	})
 
 	return list

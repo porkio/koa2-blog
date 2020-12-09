@@ -23,12 +23,12 @@ router.post('/setCategory', noLoginRedirect, async (ctx, next) => {
 // 添加/创建分类
 router.post('/addCategory', noLoginRedirect, async (ctx, next) => {
 	// controller
-
 	ctx.body = await createCategory(ctx.request.body)
 })
 
 // 删除分类
 router.post('/delCategory', async (ctx, next) => {
+	// 待解决： 假设分类下有文章，则禁止删除该分类
 	const { id } = ctx.request.body
 	ctx.body = await destroyCategory(id)
 })

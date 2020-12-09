@@ -18,9 +18,9 @@ function isMobile() {
  */
 function getStyle(el, prop) {
 	if (!el || !prop) {
-		return false;
+		return false
 	}
-	return window.getComputedStyle(el, null).getPropertyValue(prop) || window.getComputedStyle(el, null)[prop];
+	return window.getComputedStyle(el, null).getPropertyValue(prop) || window.getComputedStyle(el, null)[prop]
 }
 
 /**
@@ -28,18 +28,18 @@ function getStyle(el, prop) {
  * @param { Object } element
  */
 function isInViewport(element) {
-	var rect = element.getBoundingClientRect();
-	var html = document.documentElement;
+	var rect = element.getBoundingClientRect()
+	var html = document.documentElement
 	//在IE中，默认坐标从(2,2)开始计算，导致最终距离比其他浏览器多出两个像素，我们需要做个兼容。
-	var top = document.documentElement.clientTop; // 非IE为0，IE为2
-	var left = document.documentElement.clientLeft;
+	var top = document.documentElement.clientTop // 非IE为0，IE为2
+	var left = document.documentElement.clientLeft
 
 	return (
 		rect.top - top >= 0 &&
 		rect.left - left >= 0 &&
 		rect.bottom - top <= (window.innerHeight || html.clientHeight) &&
 		rect.right - left <= (window.innerWidth || html.clientWidth)
-	);
+	)
 }
 
 /**
@@ -50,33 +50,33 @@ function scrollToElement(element) {
 	// window.requestAnimationFrame 实现动画效果
 	window.animationFrame = window.requestAnimationFrame ||
 		window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame ||
-		window.oRequestAnimationFrame || window.msRequestAnimationFrame;
+		window.oRequestAnimationFrame || window.msRequestAnimationFrame
 
-	const scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-	const elePosY = element.offsetTop;
+	const scrollY = document.documentElement.scrollTop || document.body.scrollTop
+	const elePosY = element.offsetTop
 
-	elePosY > scrollY ? scrollToDown() : scrollToUp();
+	elePosY > scrollY ? scrollToDown() : scrollToUp()
 
 	function scrollToDown() {
-		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		const viewPortHeight = window.innerHeight || document.documentElement.clientHeight;
-		const scrollHeight = document.body.offsetHeight || document.documentElement.offsetHeight;
-		const maxHeight = scrollHeight - viewPortHeight;
-		const posY = element.offsetTop;
+		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+		const viewPortHeight = window.innerHeight || document.documentElement.clientHeight
+		const scrollHeight = document.body.offsetHeight || document.documentElement.offsetHeight
+		const maxHeight = scrollHeight - viewPortHeight
+		const posY = element.offsetTop
 
 		if (scrollTop < posY && (maxHeight - scrollTop) > 1) {
-			window.animationFrame(scrollToDown);
-			window.scrollTo(0, scrollTop + ((posY - scrollTop) / 8 + 1));
+			window.animationFrame(scrollToDown)
+			window.scrollTo(0, scrollTop + ((posY - scrollTop) / 8 + 1))
 		}
 	}
 
 	function scrollToUp() {
-		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-		const posY = element.offsetTop;
+		const scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+		const posY = element.offsetTop
 
 		if (scrollTop > posY) {
 			window.animationFrame(scrollToUp);
-			window.scrollTo(0, scrollTop - scrollTop / 8);
+			window.scrollTo(0, scrollTop - scrollTop / 8)
 		}
 	}
 }
@@ -85,34 +85,34 @@ function scrollToElement(element) {
  * @param { String } text
  */
 function copyText(text) {
-	let textarea = document.createElement("textarea"); //创建input对象
+	let textarea = document.createElement("textarea") //创建input对象
 	let currentFocus = document.activeElement; //当前获得焦点的元素
-	let toolBoxwrap = document.getElementById('service'); //将文本框插入到NewsToolBox这个之后
-	let flag = false;
+	let toolBoxwrap = document.getElementById('service') //将文本框插入到NewsToolBox这个之后
+	let flag = false
 	toolBoxwrap.appendChild(textarea); //添加元素
-	textarea.value = text;
-	textarea.focus();
+	textarea.value = text
+	textarea.focus()
 	if (textarea.setSelectionRange) {
-		textarea.setSelectionRange(0, textarea.value.length); //获取光标起始位置到结束位置
+		textarea.setSelectionRange(0, textarea.value.length) //获取光标起始位置到结束位置
 	} else {
-		textarea.select();
+		textarea.select()
 	}
 	try {
-		flag = document.execCommand("copy"); //执行复制
+		flag = document.execCommand("copy") //执行复制
 	} catch (eo) {
-		flag = false;
+		flag = false
 	}
-	toolBoxwrap.removeChild(textarea); //删除元素
-	currentFocus.focus();
-	return flag;
+	toolBoxwrap.removeChild(textarea) //删除元素
+	currentFocus.focus()
+	return flag
 }
 
 /**
  * 获取可视区尺寸数据
  */
 function getViewPortOffset() {
-	const clientWidth = document.body.clientWidth || document.documentElement.clientWidth;
-	const clientHeight = document.body.clientHeight || document.documentElement.clientHeight;
+	const clientWidth = document.body.clientWidth || document.documentElement.clientWidth
+	const clientHeight = document.body.clientHeight || document.documentElement.clientHeight
 	return {
 		clientWidth,
 		clientHeight
@@ -124,26 +124,35 @@ function cancelBubble(e) {
 	//如果提供了事件对象，则是一个非IE浏览器
 	if (e && e.stopPropagation)
 		//因此它支持W3C的stopPropagation()方法
-		e.stopPropagation();
+		e.stopPropagation()
 	else
 		//否则，使用IE的方式来取消事件冒泡
-		window.event.cancelBubble = true;
+		window.event.cancelBubble = true
 }
+
+/**
+ * @description 设置cookie
+ * @param {String, String} name, value
+ * @return
+ */
+function setCookie(name, value){
+	const Days = 30
+	const exp = new Date()
+	exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 30)
+	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()
+}
+
 
 /**
  * 根据键名获取 cookie 值
  * @param { String } name
  */
-function getCookie(name) {
-	let cookies = document.cookie
-	let cookieArr = cookies.split('; ')
-	let tempArr
-	if (cookieArr.length > 0 && cookieArr.indexOf(name) >= 0) {
-		tempArr = cookieArr.filter(s => s.indexOf(name) > -1);
-    } else {
-        return null
-    }
-	return tempArr && tempArr[0].split('=')[1]
+ function getCookie(name){
+	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)")
+	if(arr=document.cookie.match(reg))
+	return unescape(arr[2])
+	else
+	return null
 }
 
 /**
@@ -153,7 +162,7 @@ function getCookie(name) {
  * @param { String } domain
  */
 function deleteCookie(name, path, domain) {
-    if (name == undefined || name == '') return
+    if (!name) return false
 
     if (getCookie(name)) {
         document.cookie = name + '=' +
@@ -337,7 +346,8 @@ function showMessage({title, icon, duration = 2500}) {
 }
 
 /**
- * 使用 $('#id') 来快速获取 dom 元素
+ * @description 使用 $('#id') 来快速获取 dom 元素
+ * @return DOM
  */
 export function $() {
     let elements = []
@@ -366,6 +376,7 @@ export const utils = {
     copyText,
     getViewPortOffset,
     cancelBubble,
+	setCookie,
     getCookie,
     deleteCookie,
     isObjectValueEqual,
