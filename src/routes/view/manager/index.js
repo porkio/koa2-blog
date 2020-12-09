@@ -37,5 +37,16 @@ router.get('/categories', noLoginRedirect, async (ctx, next) => {
     await ctx.render('manager/categories', catesData)
 })
 
+// 新建文章
+router.get('/writing', noLoginRedirect, async (ctx, next) => {
+	// controller
+
+	await ctx.render('manager/writing', {
+		pageInfo: {
+			title: '写作'
+		}
+	})
+})
+
 
 module.exports = router

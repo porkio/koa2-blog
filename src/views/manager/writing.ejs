@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="../stylesheets/manager.css">
+	<link rel="stylesheet" href="../stylesheets/font-awesome.min.css">
+	<title><%= pageInfo.title %></title>
+</head>
+
+<body>
+	<section class="wrapper">
+		<div class="container">
+			<div id="writing" class="m-item">
+				<h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
+
+			</div>
+		</div>
+	</section>
+
+	<script src="../scripts/manager.js"></script>
+	<script type="module">
+		import {
+			utils
+		} from '../scripts/utils.js'
+
+		document.addEventListener('readystatechange', e => {
+			if (document.readyState === 'complete') {
+				// 页面就绪
+
+      }
+		}, false)
+	</script>
+
+</body>
+
+</html>
