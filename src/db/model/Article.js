@@ -7,12 +7,21 @@ const {
     TEXT
 } = require('../dataTypes')
 
+const strGenerator  = require('../../utils/strRandom')
+
 const Article = seq.define('article', {
     title: {
         type: STRING,
         allowNull: false,
         comment: '文章标题'
     },
+	linkUrl: {
+		type: STRING,
+		allowNull: false,
+		defaultValue: strGenerator(8), // 8位随机字符串
+		unique: true,
+		comment: '链接地址'
+	},
     content: {
         type: TEXT,
         alowNull: false,

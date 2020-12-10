@@ -43,7 +43,7 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
 
 	await ctx.render('manager/writing', {
 		pageInfo: {
-			title: '写作'
+			title: '撰写文章'
 		}
 	})
 })

@@ -13,8 +13,37 @@
 	<section class="wrapper">
 		<div class="container">
 			<div id="writing" class="m-item">
-				<h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
+				<h2 class="m-title" title="<%= pageInfo.title %>"><%= pageInfo.title %></h2>
+				<div class="form-writing">
+					<div class="form-group">
+						<label for="title">文章标题</label>
+						<input type="text" name="title" id="title" autocomplete="" required>
+					</div>
+					<div class="dis-flex justify-space-between">
+						<div class="form-group col-6">
+							<label for="linkUrl">固定链接</label>
+							<input type="text" name="linkUrl" id="linkURL" autocomplete="" required>
+							<span class="input-btn btn btn-outline-primary btn-small"><i class="fa fa-link"></i>生成</span>
+						</div>
+						<div class="form-group col-3">
+							<label for="order">排序</label>
+							<input type="number" name="order" id="order" value="100" autocomplete="" required>
+						</div>
+						<div class="form-group col-3">
+							<label for="linkUrl">文章分类</label>
+							<select class="select-primary" name="categoryId">
+								<option value="1">Web</option>
+								<option value="2">JavaScript</option>
+								<option value="3">Vue.js</option>
+							</select>
+						</div>
+					</div>
 
+					<div class="form-group">
+						<label for="content">正文</label>
+						<textarea id="content" name="name" rows="24" cols="100"></textarea>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
