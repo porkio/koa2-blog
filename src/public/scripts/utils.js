@@ -148,11 +148,11 @@ function setCookie(name, value){
  * @param { String } name
  */
  function getCookie(name){
-	var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)")
-	if(arr=document.cookie.match(reg))
-	return unescape(arr[2])
+	var arr,reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)")
+	if(arr = document.cookie.match(reg))
+		return unescape(arr[2])
 	else
-	return null
+		return null
 }
 
 /**
