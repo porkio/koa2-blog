@@ -32,9 +32,9 @@
 						<div class="form-group col-3">
 							<label for="linkUrl">文章分类</label>
 							<select class="select-primary" name="categoryId">
-								<option value="1">Web</option>
-								<option value="2">JavaScript</option>
-								<option value="3">Vue.js</option>
+								<% for (let category of catesList) { %>
+									<option value="<%= category.id %>"><%= category.cateName %></option>
+								<% } %>
 							</select>
 						</div>
 					</div>
@@ -44,24 +44,12 @@
 						<textarea id="content" name="name" rows="28" cols="100"></textarea>
 					</div>
 
-					<div class="dis-flex">
-						<div class="form-group col-4">
-							<label for="likes">文章缩略图</label>
-							<div class="form-image">
-								<img src="../images/default-article-img.jpg" alt="">
-								<span class="btn btn-outline-primary btn-small">更换</span>
-							</div>
-						</div>
-						<div class="form-group col-8">
-							<label for="cloudTag">云标签</label>
-							<div class="dis-flex clodu-tag-group">
-								<span class="btn btn-tag">JavaScript</span>
-								<span class="btn btn-tag">Web</span>
-								<span class="btn btn-tag">Node.js</span>
-								<span class="btn btn-tag">Vue.js</span>
-								<span class="btn btn-tag">成长</span>
-								<span class="btn btn-tag">书法</span>
-							</div>
+					<div class="form-group">
+						<label for="cloudTag">云标签</label>
+						<div class="dis-flex clodu-tag-group">
+							<% for (let tag of cloudTagList) { %>
+								<span class="btn btn-tag"><%= tag.tagName %></span>
+							<% } %>
 						</div>
 					</div>
 
@@ -73,6 +61,14 @@
 						<div class="form-group col-4">
 							<label for="likes">获赞次数</label>
 							<input type="number" name="likes" id="likes" value="0" autocomplete="">
+						</div>
+					</div>
+
+					<div class="form-group col-4">
+						<label for="likes">文章缩略图</label>
+						<div class="form-image">
+							<img src="../images/default-article-img.jpg" alt="">
+							<span class="btn btn-outline-primary btn-small">更换</span>
 						</div>
 					</div>
 

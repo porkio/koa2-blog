@@ -3,12 +3,11 @@
  * @description 用户视图层相关路由
  */
 
-const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const router = require('koa-router')()
-const {
-	getConfig,
-	getCategories
-} = require('../../../controller/manager')
+const noLoginRedirect = require('../../../middleware/noLoginRedirect')
+const { getConfig } = require('../../../controller/SiteConfig')
+const { getCategories } = require('../../../controller/Category.js')
+const { getAllCloudTags } = require('../../../controller/CloudTag')
 
 router.prefix('/manager')
 
@@ -33,19 +32,29 @@ router.get('/configuration', noLoginRedirect, async (ctx, next) => {
 // 分类管理
 router.get('/categories', noLoginRedirect, async (ctx, next) => {
 	// controller
-	const catesData = await getCategories()
-    await ctx.render('manager/categories', catesData)
+	const catesList = await getCategories()
+	const data = {
+		pageInfo: {
+			title: '分类管理'
+		}
+	}
+	Object.assign(data, { catesList })
+    await ctx.render('manager/categories', data)
 })
 
 // 新建文章
 router.get('/writing', noLoginRedirect, async (ctx, next) => {
 	// controller
+	const catesList = await getCategories()
+	let cloudTagList = await getAllCloudTags()
 
-	await ctx.render('manager/writing', {
+	const data = {
 		pageInfo: {
 			title: '撰写文章'
 		}
-	})
+	}
+	Object.assign(data, { catesList, cloudTagList })
+	await ctx.render('manager/writing', data)
 })
 
 
