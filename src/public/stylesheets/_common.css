@@ -147,7 +147,7 @@ input[type="text"], input[type="password"], input[type="number"] {
     padding: .8rem 0;
 }
 
-.form-group .fa-exclamation-circle {
+.form-group .icon-fail {
     display: none;
     color: red;
     font-size: 1.2rem;
@@ -162,7 +162,7 @@ input[type="text"], input[type="password"], input[type="number"] {
     border-bottom: 1px solid red;
 }
 
-.data-error .fa-exclamation-circle {
+.data-error .icon-fail {
     display: block;
 }
 

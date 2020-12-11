@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="../stylesheets/manager.css">
-	<link rel="stylesheet" href="../stylesheets/font-awesome.min.css">
+	<link rel="stylesheet" href="../stylesheets/iconfont.css">
 	<title><%= pageInfo.title %></title>
 </head>
 
@@ -23,7 +23,7 @@
 						<div class="form-group col-6">
 							<label for="linkUrl">固定链接</label>
 							<input type="text" name="linkUrl" id="linkURL" autocomplete="" required>
-							<span class="input-btn btn btn-outline-primary btn-small"><i class="fa fa-link"></i>生成</span>
+							<span class="input-btn"><i class="iconfont icon-shuaxin"></i></span>
 						</div>
 						<div class="form-group col-3">
 							<label for="order">排序</label>
@@ -41,7 +41,43 @@
 
 					<div class="form-group">
 						<label for="content">正文</label>
-						<textarea id="content" name="name" rows="24" cols="100"></textarea>
+						<textarea id="content" name="name" rows="28" cols="100"></textarea>
+					</div>
+
+					<div class="dis-flex">
+						<div class="form-group col-4">
+							<label for="likes">文章缩略图</label>
+							<div class="form-image">
+								<img src="../images/default-article-img.jpg" alt="">
+								<span class="btn btn-outline-primary btn-small">更换</span>
+							</div>
+						</div>
+						<div class="form-group col-8">
+							<label for="cloudTag">云标签</label>
+							<div class="dis-flex clodu-tag-group">
+								<span class="btn btn-tag">JavaScript</span>
+								<span class="btn btn-tag">Web</span>
+								<span class="btn btn-tag">Node.js</span>
+								<span class="btn btn-tag">Vue.js</span>
+								<span class="btn btn-tag">成长</span>
+								<span class="btn btn-tag">书法</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="dis-flex">
+						<div class="form-group col-4">
+							<label for="views">浏览次数</label>
+							<input type="number" name="views" id="views" value="0" autocomplete="">
+						</div>
+						<div class="form-group col-4">
+							<label for="likes">获赞次数</label>
+							<input type="number" name="likes" id="likes" value="0" autocomplete="">
+						</div>
+					</div>
+
+					<div class="form-group">
+						<input type="submit" id="btn-submit" value="发布">
 					</div>
 				</div>
 			</div>

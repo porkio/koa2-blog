@@ -7,7 +7,7 @@ const {
     TEXT
 } = require('../dataTypes')
 
-const strGenerator  = require('../../utils/strRandom')
+const randomStrGenerator  = require('../../utils/strRandom')
 
 const Article = seq.define('article', {
     title: {
@@ -18,7 +18,7 @@ const Article = seq.define('article', {
 	linkUrl: {
 		type: STRING,
 		allowNull: false,
-		defaultValue: strGenerator(8), // 8位随机字符串
+		defaultValue: randomStrGenerator(8), // 8位随机字符串
 		unique: true,
 		comment: '链接地址'
 	},

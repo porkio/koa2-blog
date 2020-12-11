@@ -10,7 +10,7 @@
 * @param { Number } length
 * @return  String
 */
-module.exports = strGenerator = length => {
+module.exports = randomStrGenerator = length => {
 	if (length <= 0) return
 
 	const temp = []

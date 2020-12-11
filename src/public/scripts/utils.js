@@ -142,7 +142,6 @@ function setCookie(name, value){
 	document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString()
 }
 
-
 /**
  * 根据键名获取 cookie 值
  * @param { String } name
@@ -268,6 +267,28 @@ function debounce(fn, delay){
 		fn.apply(context, args)
 		}, delay)
 	}
+}
+
+/**
+ * @description 大小写字符串随机产出
+ * @param { Number } length
+ * @return String
+ */
+function randomStrGenerator(length) {
+	if (length <= 0) return
+	const temp = []
+	for (let i = 65; i <= 122; i++) {
+		if (i > 90 && i < 97) continue
+		temp.push(String.fromCharCode(i))
+	}
+	let str = ''
+	while (length > 0) {
+		const timestamp = Date.now().toString()
+		const seed = parseInt(Math.random() * 43) + new Number(timestamp[parseInt(Math.random() * 12)])
+		str += temp[seed]
+		length--
+	}
+	return str
 }
 
 /**
