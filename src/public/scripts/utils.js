@@ -367,6 +367,15 @@ function showMessage({title, icon, duration = 2500}) {
 }
 
 /**
+ * @description 控制台个性化输出
+ * @param { String } str
+ * @return
+ */
+function printLog(str) {
+	console.log('%c ' + str,'color:#fff; font-size:24px; text-shadow: 0px 2px 1px rgba(41, 41, 41, .6);')
+}
+
+/**
  * @description 使用 $('#id') 来快速获取 dom 元素
  * @return DOM
  */
@@ -382,6 +391,8 @@ export function $() {
     }
     return elements
 }
+
+printLog('何以解忧\n 唯有暴富\n\n 获取本站/部署\n wx: zhaoxu-1')
 
 export const utils = {
 	info: {
@@ -406,5 +417,6 @@ export const utils = {
 	insertAfter,
 	debounce,
     ajax,
-    showMessage
+    showMessage,
+	printLog
 }

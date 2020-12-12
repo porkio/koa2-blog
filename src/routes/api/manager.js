@@ -4,7 +4,7 @@ const {
 	updateCategory,
 	createCategory,
 	destroyCategory
-} = require('../../controller/manager')
+} = require('../../controller/Category')
 const noLoginRedirect = require('../../middleware/noLoginRedirect')
 router.prefix('/api/manager')
 
