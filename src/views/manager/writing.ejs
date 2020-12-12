@@ -89,7 +89,24 @@
 		document.addEventListener('readystatechange', e => {
 			if (document.readyState === 'complete') {
 				// 页面就绪
+				const linkUrlInput = document.querySelector('#linkURL')
+				const btnRefreshLinkString = document.querySelector('.icon-shuaxin')
+				const titleInput = document.querySelector('#title')
+				const orderInput = document.querySelector('#order')
+				const categoryIdSelector = document.querySelector('#categoryId')
+				const contentTextarea = document.querySelector('#content')
+        const cloudTagSelector = document.querySelector('#cloudTag')
+				const viewsInput = document.querySelector('#views')
+				const likesInput = document.querySelector('#likes')
 
+				// 自动随机生成短链接
+				linkUrlInput.value = utils.randomStrGenerator(8)
+
+
+				// 重新随机生成短链接按钮点击监听
+				btnRefreshLinkString.addEventListener('click', e => {
+          linkUrlInput.value = utils.randomStrGenerator(8)
+				}, false)
       }
 		}, false)
 	</script>

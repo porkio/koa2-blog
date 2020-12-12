@@ -418,5 +418,6 @@ export const utils = {
 	debounce,
     ajax,
     showMessage,
+	randomStrGenerator,
 	printLog
 }
