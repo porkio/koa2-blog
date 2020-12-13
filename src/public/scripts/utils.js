@@ -372,7 +372,11 @@ function showMessage({title, icon, duration = 2500}) {
  * @return
  */
 function printLog(str) {
-	console.log('%c ' + str,'color:#fff; font-size:24px; text-shadow: 0px 2px 1px rgba(41, 41, 41, .6);')
+	console.log('%c ' + str, 'color: #fff; font-size: 24px; border-radius: 4px; text-shadow: 0px 2px 1px rgba(41, 41, 41, .6);')
+	const date = '2020-12-12 19:00:00'
+	const a = 'background: #606060; padding: 4px; color: #fff; border-radius: 2px 0 0 2px;'
+	const b = 'background: #1475B2; padding: 4px; color: #fff; border-radius: 0 2px 2px 0;'
+	console.log(`%c Update Time %c ${date} `, a, b)
 }
 
 /**
@@ -392,7 +396,7 @@ export function $() {
     return elements
 }
 
-printLog('何以解忧\n 唯有暴富\n\n 获取本站/部署\n wx: zhaoxu-1')
+printLog('何以解忧\n 唯有暴富 \n\n 获取本站/部署 \n wx: zhaoxu-1 ')
 
 export const utils = {
 	info: {
