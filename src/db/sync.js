@@ -25,11 +25,11 @@ Article.belongsTo(Category, {
 
 Category.hasMany(Article)
 
-CloudTag.belongsTo(Category, {
-    foreignKey: 'categoryId'
+CloudTag.belongsTo(Article, {
+    foreignKey: 'articleId'
 })
 
-Category.hasMany(CloudTag)
+Article.hasMany(CloudTag)
 
 
 // 测试连接

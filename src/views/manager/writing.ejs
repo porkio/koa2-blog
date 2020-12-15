@@ -31,9 +31,13 @@
 						</div>
 						<div class="form-group col-3">
 							<label for="linkUrl">文章分类</label>
-							<select class="select-primary" name="categoryId">
+							<select class="select-primary" name="categoryId" id="categoryId">
 								<% for (let category of catesList) { %>
-									<option value="<%= category.id %>"><%= category.cateName %></option>
+									<% if (!category.parentId) { %>
+										<option value="<%= category.id %>" disabled><%= category.cateName %></option>
+									<% } else { %>
+										<option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
+									<% } %>
 								<% } %>
 							</select>
 						</div>
@@ -48,7 +52,7 @@
 						<label for="cloudTag">云标签</label>
 						<div class="dis-flex clodu-tag-group">
 							<% for (let tag of cloudTagList) { %>
-								<span class="btn btn-tag"><%= tag.tagName %></span>
+								<span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
 							<% } %>
 						</div>
 					</div>
@@ -95,9 +99,11 @@
 				const orderInput = document.querySelector('#order')
 				const categoryIdSelector = document.querySelector('#categoryId')
 				const contentTextarea = document.querySelector('#content')
-        const cloudTagSelector = document.querySelector('#cloudTag')
+        const cloudTags = document.querySelectorAll('#cloudTag')
 				const viewsInput = document.querySelector('#views')
 				const likesInput = document.querySelector('#likes')
+
+				const formData = { tagIds: [] }
 
 				// 自动随机生成短链接
 				linkUrlInput.value = utils.randomStrGenerator(8)
@@ -107,6 +113,29 @@
 				btnRefreshLinkString.addEventListener('click', e => {
           linkUrlInput.value = utils.randomStrGenerator(8)
 				}, false)
+
+				// 分类选择监听
+				categoryIdSelector.addEventListener('change', e => {
+					Object.assign(formData, { categoryId: categoryIdSelector.value })
+					console.log(formData)
+				}, false)
+
+				// 云标签点击监听
+				cloudTags.forEach(tag => tag.addEventListener('click', e => {
+					const tagId = e.target.getAttribute('data-id')
+					console.log(tagId in formData.tagIds)
+					if (formData.tagIds.indexOf(tagId) < 0) {
+						formData.tagIds.push(tagId)
+						// console.log(formData)
+						// 添加标签激活样式
+					} else {
+						// 从标签id列表中移除选中标签的id
+						formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
+						console.log(formData)
+					}
+				}, false))
+
+
       }
 		}, false)
 	</script>
