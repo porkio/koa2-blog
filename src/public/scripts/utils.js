@@ -373,7 +373,7 @@ function showMessage({title, icon, duration = 2500}) {
  */
 function printLog(str) {
 	console.log('%c ' + str, 'color: #fff; font-size: 24px; border-radius: 4px; text-shadow: 0px 2px 1px rgba(41, 41, 41, .6);')
-	const date = '2020-12-12 19:00:00'
+	const date = '2020/12/12'
 	const a = 'background: #606060; padding: 4px; color: #fff; border-radius: 2px 0 0 2px;'
 	const b = 'background: #1475B2; padding: 4px; color: #fff; border-radius: 0 2px 2px 0;'
 	console.log(`%c Update Time %c ${date} `, a, b)
@@ -384,12 +384,12 @@ function printLog(str) {
  * @return DOM
  */
 export function $() {
-    let elements = []
+    const elements = []
     for (let i = 0; i < arguments.length; i++) {
         let element = arguments[i]
         if (typeof element == 'string')
             element = document.querySelector(element)
-        if (arguments.length == 1)
+        if (arguments.length === 1)
             return element
         elements.push(element)
     }
