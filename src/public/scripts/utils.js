@@ -292,6 +292,16 @@ function randomStrGenerator(length) {
 }
 
 /**
+ * @description 获取随机深色
+ * @params {}
+ * @return { String } color
+ */
+function getRandomDeepColor() {
+	const colors = ['#76469F', '#007bff', '#28a745', '#dc3545', '#17a2b8', '#343a40', '#952222', '#748E1D', '#1D3C8E', '#F58616', '#DB0470', '#DB2E04']
+	return colors[parseInt(Math.random() * colors.length)]
+}
+
+/**
  * [ajax description]
  * @param  {[type]} url  [请求地址]
  * @param  {[type]} data [携带数据（仅post）]
@@ -420,8 +430,9 @@ export const utils = {
     toggleClassName,
 	insertAfter,
 	debounce,
+	randomStrGenerator,
+	getRandomDeepColor,
     ajax,
     showMessage,
-	randomStrGenerator,
 	printLog
 }

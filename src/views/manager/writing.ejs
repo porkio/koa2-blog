@@ -122,15 +122,22 @@
 
 				// 云标签点击监听
 				cloudTags.forEach(tag => tag.addEventListener('click', e => {
-					const tagId = e.target.getAttribute('data-id')
-					console.log(tagId in formData.tagIds)
+					const tagElem = e.target
+					const tagId = tagElem.getAttribute('data-id')
 					if (formData.tagIds.indexOf(tagId) < 0) {
 						formData.tagIds.push(tagId)
-						// console.log(formData)
+						console.log(formData)
 						// 添加标签激活样式
+						const bgColor = utils.getRandomDeepColor()
+						tagElem.style.backgroundColor = bgColor
+						tagElem.style.color = '#ffffff'
+						tagElem.style.border = '1px solid ' + bgColor
 					} else {
 						// 从标签id列表中移除选中标签的id
 						formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
+						tagElem.style.background = 'none'
+						tagElem.style.color = '#888888'
+						tagElem.style.border = '1px solid #888888'
 						console.log(formData)
 					}
 				}, false))
