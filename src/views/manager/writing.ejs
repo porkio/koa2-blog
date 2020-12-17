@@ -33,11 +33,11 @@
 							<label for="categoryId">文章分类</label>
 							<select class="select-primary" name="categoryId" id="categoryId">
 								<% for (let category of catesList) { %>
-									<% if (!category.parentId) { %>
-										<option value="<%= category.id %>" disabled><%= category.cateName %></option>
-									<% } else { %>
-										<option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
-									<% } %>
+								<% if (!category.parentId) { %>
+								<option value="<%= category.id %>" disabled><%= category.cateName %></option>
+								<% } else { %>
+								<option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
+								<% } %>
 								<% } %>
 							</select>
 						</div>
@@ -52,7 +52,7 @@
 						<label for="cloudTag">云标签</label>
 						<div class="dis-flex clodu-tag-group">
 							<% for (let tag of cloudTagList) { %>
-								<span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
+							<span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
 							<% } %>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 				const orderInput = document.querySelector('#order')
 				const categoryIdSelector = document.querySelector('#categoryId')
 				const contentTextarea = document.querySelector('#content')
-        const cloudTags = document.querySelectorAll('#cloudTag')
+				const cloudTags = document.querySelectorAll('#cloudTag')
 				const viewsInput = document.querySelector('#views')
 				const likesInput = document.querySelector('#likes')
 
@@ -111,7 +111,7 @@
 
 				// 重新随机生成短链接按钮点击监听
 				btnRefreshLinkString.addEventListener('click', e => {
-          linkUrlInput.value = utils.randomStrGenerator(8)
+                    linkUrlInput.value = utils.randomStrGenerator(8)
 				}, false)
 
 				// 分类选择监听
@@ -141,7 +141,6 @@
 						console.log(formData)
 					}
 				}, false))
-
 
       }
 		}, false)

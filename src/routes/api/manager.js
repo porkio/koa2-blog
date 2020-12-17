@@ -6,6 +6,7 @@ const {
 	destroyCategory
 } = require('../../controller/Category')
 const noLoginRedirect = require('../../middleware/noLoginRedirect')
+const upload = require('../../middleware/upload')
 router.prefix('/api/manager')
 
 // 设置站点配置信息
@@ -31,6 +32,15 @@ router.post('/delCategory', async (ctx, next) => {
 	// 待解决： 假设分类下有文章，则禁止删除该分类
 	const { id } = ctx.request.body
 	ctx.body = await destroyCategory(id)
+})
+
+router.post('/upload', noLoginRedirect, upload.single('avatar'), async (ctx, next) => {
+	const path = ctx.req.file.path
+	const fileName = '/' + path.slice(path.indexOf('upload'))
+	ctx.body = {
+		errno: 0,
+		fileName // 文件名
+	}
 })
 
 module.exports = router

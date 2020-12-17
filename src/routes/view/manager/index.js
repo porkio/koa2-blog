@@ -57,5 +57,11 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
 	await ctx.render('manager/writing', data)
 })
 
+router.get('/upload', noLoginRedirect, async (ctx, next) => {
+	await ctx.render('manager/upload', {
+		title: '测试上传'
+	})
+})
+
 
 module.exports = router
