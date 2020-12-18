@@ -306,8 +306,8 @@ input[type="submit"] {
 	left: 4px;
 }
 
-.form-group .form-image img:hover .form-group .form-image{
-	display: block;
+.form-group .form-image:hover span {
+	display: inline-block;
 }
 
 .form-group .icon-fail {
