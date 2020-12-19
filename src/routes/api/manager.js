@@ -1,12 +1,13 @@
 const router = require('koa-router')()
 const {
-	updateConfig,
 	updateCategory,
 	createCategory,
 	destroyCategory
 } = require('../../controller/Category')
+const { updateConfig } = require('../../controller/SiteConfig')
 const noLoginRedirect = require('../../middleware/noLoginRedirect')
 const upload = require('../../middleware/upload')
+const { updateArticleImg } = require('../../controller/manager')
 router.prefix('/api/manager')
 
 // 设置站点配置信息
@@ -34,13 +35,9 @@ router.post('/delCategory', async (ctx, next) => {
 	ctx.body = await destroyCategory(id)
 })
 
-router.post('/upload', noLoginRedirect, upload.single('avatar'), async (ctx, next) => {
-	const path = ctx.req.file.path
-	const fileName = '/' + path.slice(path.indexOf('upload'))
-	ctx.body = {
-		errno: 0,
-		fileName // 文件名
-	}
+router.post('/changeArticleImg', noLoginRedirect, upload.single('avatar'), async (ctx, next) => {
+    // controller
+    ctx.body = await updateArticleImg(ctx.req.file)
 })
 
 module.exports = router

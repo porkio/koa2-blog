@@ -59,8 +59,9 @@
 
                     if (!tempInputUserName && userAvatar.src.match(/default-avatar.jpg/)) {
                         // 临时用户没有值，需要请求一次用户是否存在
-                        utils.ajax('/api/user/isExist', 'POST', {
-                            userName
+                        utils.ajax('/api/user/isExist', {
+                            method: 'POST',
+                            body: { userName }
                         }).then(res => {
                             if (res.errno === 0) {
                                 userAvatar.src = res.data.userAvatar
@@ -73,8 +74,9 @@
                         })
                     } else if (tempInputUserName && userName !== tempInputUserName) {
                         // 如果已经输入并且获取到了用户，但是又更改输入的用户名，则重新获取用户
-                        utils.ajax('api/user/isExist', 'POST', {
-                            userName
+                        utils.ajax('api/user/isExist', {
+                            method: 'POST',
+                            body: { userName }
                         }).then(res => {
                             if (res.errno === 0) {
                                 userAvatar.src = res.data.userAvatar
@@ -122,9 +124,12 @@
                         passwordEle.parentNode.classList.add('data-error')
                         return
                     }
-                    utils.ajax('api/user/login', 'POST', {
-                        userName,
-                        password
+                    utils.ajax('api/user/login', {
+                        method: 'POST',
+                        body: {
+                            userName,
+                            password
+                        }
                     }).then(res => {
                         if (res.errno === 0) {
                             // 登陆成功 移除键盘监听时间 和 按钮登陆事件

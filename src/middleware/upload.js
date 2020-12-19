@@ -9,15 +9,13 @@ const randomStrGenerator = require('../utils/strRandom')
 const storage = multer.diskStorage({
 	// 图片存放路径
 	destination: (req, file, cb) => {
-		console.log(req.body)
-		let fullPath = path.join(__dirname, '../public/uploads/users/')
-		const userName = 'Pork'
-		cb(null, fullPath + userName + '/avatar')
+		let fullPath = path.join(__dirname, '../public/uploads/')
+		cb(null, fullPath)
 	},
 	// 修改文件名
 	filename: (req, file, cb) => {
 		const fileNameArr = file.originalname.split('.')
-		cb(null, randomStrGenerator(12) + '.' + fileNameArr[fileNameArr.length - 1])
+		cb(null, new Date().toISOString().split('T')[0] + '@' + randomStrGenerator(8) + '.' + fileNameArr[fileNameArr.length - 1])
 	}
 })
 

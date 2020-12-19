@@ -11,7 +11,7 @@ const {
 } = require('../service/user')
 const {
     SuccessModel,
-    FailModel
+    FailedModel
 } = require('../model/ResModel')
 const {
     userNameNotExist,
@@ -32,7 +32,7 @@ const strCrypto = require('../utils/cryp')
  */
 const isExist = async userName => {
     if (!userName) {
-        return new FailModel(paramsError)
+        return new FailedModel(paramsError)
     }
     // 调用 service 层获取数据
     const userInfo = await getUserInfo(userName)
@@ -46,7 +46,7 @@ const isExist = async userName => {
         })
     } else {
         // 不存在
-        return new FailModel(userNameNotExist)
+        return new FailedModel(userNameNotExist)
     }
     // 统一返回格式
 }
@@ -65,7 +65,7 @@ const login = async (ctx, userName, password) => {
     const userInfo = await getUserInfo(userName, password)
     if (!userInfo) {
         // 登录失败
-        return new FailModel(loginFail)
+        return new FailedModel(loginFail)
     }
     // 登录成功
     if (!ctx.session.userInfo) {
@@ -80,7 +80,7 @@ const login = async (ctx, userName, password) => {
 
 const logout = async ctx => {
     if (!ctx.session.userInfo) {
-        return new FailModel(repeatAction)
+        return new FailedModel(repeatAction)
     }
     ctx.session = null
     return new SuccessModel({
@@ -101,7 +101,7 @@ const create = async ({ userName, password, email }) => {
 
     if (userInfo) {
         // 用户名已存在
-        return new FailModel(userNameAllReadyExist)
+        return new FailedModel(userNameAllReadyExist)
     }
 
     // 注册 service 层
@@ -112,11 +112,11 @@ const create = async ({ userName, password, email }) => {
             email
         })
         if (!user) {
-            return new FailModel(createUserFail)
+            return new FailedModel(createUserFail)
         }
         return new SuccessModel({ message: '创建用户成功' })
     } catch (ex) {
- 		return new FailModel({
+ 		return new FailedModel({
             errno: ex.parent.errno,
             message: ex.errors[0].message
         })
@@ -135,7 +135,7 @@ const destroy = async userName => {
         return new SuccessModel({ message: userName + ' 已被成功删除' })
     }
 
-    return new FailModel(deleteUserFail)
+    return new FailedModel(deleteUserFail)
 }
 
 module.exports = {

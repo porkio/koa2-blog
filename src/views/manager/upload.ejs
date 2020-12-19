@@ -6,10 +6,32 @@
 	<title><%= title %></title>
 </head>
 <body>
-	<form action="/api/manager/upload" method="POST" enctype="multipart/form-data">
-		<input type="text" name="filePath" id="filePath">
+    <form id="avatarForm" action="/api/manager/upload" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="userName" value="Pork">
 		<input type="file" name="avatar" id="avatar">
-		<input type="submit" value="上传">
-	</form>
+    </form>
+    
+
+    <script type="module">
+        import { utils } from '../scripts/utils.js'
+
+        const fileInput = document.querySelector('#avatar')
+        const avatarForm = document.querySelector('#avatarForm')
+        
+        fileInput.addEventListener('change', e => {
+            const file = fileInput.files[0]
+            const formData = new FormData()
+            formData.append('avatar', file)
+            formData.append('userName', 'Pork')
+
+            utils.ajax('/api/manager/changeArticleImg', {
+                method: 'POST', 
+                body: formData
+            }).then(res => console.log(res))
+            
+        }, false)
+
+    </script>
+
 </body>
 </html>

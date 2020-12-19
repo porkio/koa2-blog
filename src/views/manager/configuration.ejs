@@ -90,7 +90,10 @@
 						return
 					}
 
-					utils.ajax(location.origin + '/api/manager/setConfig', 'POST', formData).then(res => {
+					utils.ajax(location.origin + '/api/manager/setConfig', {
+                        method: 'POST',
+                        body: formData
+                    }).then(res => {
 						if (res.errno === 0) {
 							utils.showMessage({
 								title: res.message,

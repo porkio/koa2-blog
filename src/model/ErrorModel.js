@@ -53,7 +53,11 @@ module.exports = {
 	destroyCategoryFail: {
 		errno: 40011,
 		message: '分类删除失败'
-	},
+    },
+    uploadFilesFail: {
+        errno: 40012,
+        message: '上传失败了'
+    },
     repeatAction: {
         errno: 10002,
         message: '重复的操作'

@@ -5,7 +5,7 @@
  * @updated_at
  */
 
-const { FailModel } = require('../model/ResModel')
+const { FailedModel } = require('../model/ResModel')
 const { authLevelFail } = require('../model/ErrorModel')
 
 /**
@@ -19,7 +19,7 @@ const isSuperAdmin = async (ctx, next) => {
         return
     }
 
-    ctx.body = new FailModel(authLevelFail)
+    ctx.body = new FailedModel(authLevelFail)
 }
 
 module.exports = {

@@ -5,7 +5,7 @@
  * @updated_at
  */
 
-const { FailModel } = require('../model/ResModel')
+const { FailedModel } = require('../model/ResModel')
 const { jsonSchemaError } = require('../model/ErrorModel')
 
 /**
@@ -19,7 +19,7 @@ const genValidator = validateFn => {
         const err = validateFn(data)
 
         if (err) {
-            const resBody = new FailModel(jsonSchemaError)
+            const resBody = new FailedModel(jsonSchemaError)
 
             if (err.dataPath) {
                 resBody.message = err.dataPath + ' ' + err.message

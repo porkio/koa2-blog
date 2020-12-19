@@ -30,9 +30,8 @@ const databaseInit = async () => {
         password: strCrypto('zhaoxu666'),
         gender: 1,
         authLevel: 0,
-        avatarUrl: '/uploads/users/Pork/avatar/pork-avatar.jpg'
+        avatarUrl: '/uploads/pork-avatar.jpg'
     })
-
 
 	const categoryWeb = await Category.create({
         cateName: 'Web',

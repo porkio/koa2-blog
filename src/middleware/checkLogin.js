@@ -5,7 +5,7 @@
 * @updated_at
 */
 
-const { FailModel } = require('../model/ResModel')
+const { FailedModel } = require('../model/ResModel')
 const { checkLoginFail } = require('../model/ErrorModel')
 /**
  * @description api 校验是否登录
@@ -18,7 +18,7 @@ const checkLogin = async (ctx, next) => {
         await next()
         return
     }
-    ctx.body = new FailModel(checkLoginFail)
+    ctx.body = new FailedModel(checkLoginFail)
 }
 
 /**
