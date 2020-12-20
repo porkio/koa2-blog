@@ -23,12 +23,6 @@ const CloudTag = seq.define('cloud_tags', {
         allowNull: true,
         defaultValue: 100,
         comment: '排序'
-    },
-    articleId: {
-        type: INTEGER,
-        allowNull: false,
-        defaultValue: 0,
-        commnet: '所属文章'
     }
 })
 

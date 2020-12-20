@@ -2,263 +2,263 @@
 <html lang="zh">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../stylesheets/manager.css">
-	<title><%= pageInfo.title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../stylesheets/manager.css">
+  <title><%= pageInfo.title %></title>
 </head>
 
 <body>
-	<section class="wrapper">
-		<div class="container">
-			<div id="category" class="m-item">
-				<h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">分类名称</th>
-							<th scope="col">文章数量</th>
-							<th scope="col">排序</th>
-							<th scope="col">操作</th>
-						</tr>
-					</thead>
-					<tbody>
-						<% for(let category of catesList) { %>
-						<% if (!category.parentId) { %>
-						<tr class="cate-main">
-							<% } else { %>
-						<tr>
-							<% } %>
-							<th scope="row"><%= category.id %></th>
-							<% if (category.parentId) { %>
-							<td style="padding-left: 2rem;"> -- <%= category.cateName %></td>
-							<% } else { %>
-							<td id="cate-top" data-id="<%= category.id %>"><%= category.cateName %></td>
-							<% } %>
-							<td><%= category.articlesTotal %></td>
-							<td><%= category.order %></td>
-							<td>
-								<button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= category.id %>"
-									data-cateName="<%= category.cateName %>" data-order="<%= category.order %>"
-									data-parent="<%= category.parentId %>">编辑</button>
-								<button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= category.id %>">删除</button>
-							</td>
-						</tr>
-						<% } %>
-					</tbody>
-				</table>
-				<div class="form-group">
-					<button class="btn btn-success" id="btnAddCate">添加分类</button>
-				</div>
-			</div>
-		</div>
-		<div class="layer-default">
-			<div class="add-cate" style="display: none;">
-				<h4 class="title title-success">添加分类</h4>
-				<span class="btn-close">&times;</span>
-				<div class="form-group">
-					<label for="parentCate">选择上级分类</label>
-					<select name="parentId" id="parentId" class="select-primary">
-						<option value="0">顶级分类</option>
-						<% for(let cate of catesList) { %>
-						<% if (!cate.parentId) { %>
-						<option value="<%= cate.id %>"><%= cate.cateName %></option>
-						<% } %>
-						<% } %>
-					</select>
-				</div>
-				<div class="form-group">
-					<label for="cateName">分类名称</label>
-					<input type="text" name="cateName" id="cateName" value="" placeholder="分类名称">
-				</div>
-				<div class="form-group">
-					<label for="order">排序</label>
-					<input type="number" name="order" id="order" value="" placeholder="排序">
-				</div>
-				<div class="form-group">
-					<button class="btn btn-success" id="cardBtnSave">确定</button>
-					<button class="btn btn-danger" id="cardBtnCancel">取消</button>
-				</div>
-			</div>
-		</div>
-	</section>
+  <section class="wrapper">
+    <div class="container">
+      <div id="category" class="m-item">
+        <h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">分类名称</th>
+              <th scope="col">文章数量</th>
+              <th scope="col">排序</th>
+              <th scope="col">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let category of catesList) { %>
+            <% if (!category.parentId) { %>
+            <tr class="cate-main">
+              <% } else { %>
+            <tr>
+              <% } %>
+              <th scope="row"><%= category.id %></th>
+              <% if (category.parentId) { %>
+              <td style="padding-left: 2rem;"> -- <%= category.cateName %></td>
+              <% } else { %>
+              <td id="cate-top" data-id="<%= category.id %>"><%= category.cateName %></td>
+              <% } %>
+              <td><%= category.articlesTotal %></td>
+              <td><%= category.order %></td>
+              <td>
+                <button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= category.id %>"
+                  data-cateName="<%= category.cateName %>" data-order="<%= category.order %>"
+                  data-parent="<%= category.parentId %>">编辑</button>
+                <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= category.id %>">删除</button>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <button class="btn btn-success" id="btnAddCate">添加分类</button>
+        </div>
+      </div>
+    </div>
+    <div class="layer-default">
+      <div class="add-cate" style="display: none;">
+        <h4 class="title title-success">添加分类</h4>
+        <span class="btn-close">&times;</span>
+        <div class="form-group">
+          <label for="parentCate">选择上级分类</label>
+          <select name="parentId" id="parentId" class="select-primary">
+            <option value="0">顶级分类</option>
+            <% for(let cate of catesList) { %>
+            <% if (!cate.parentId) { %>
+            <option value="<%= cate.id %>"><%= cate.cateName %></option>
+            <% } %>
+            <% } %>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="cateName">分类名称</label>
+          <input type="text" name="cateName" id="cateName" value="" placeholder="分类名称">
+        </div>
+        <div class="form-group">
+          <label for="order">排序</label>
+          <input type="number" name="order" id="order" value="" placeholder="排序">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success" id="cardBtnSave">确定</button>
+          <button class="btn btn-danger" id="cardBtnCancel">取消</button>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<script src="../scripts/manager.js"></script>
-	<script type="module">
-		import {
-			utils
-		} from '../scripts/utils.js'
+  <script src="../scripts/manager.js"></script>
+  <script type="module">
+    import {
+      utils
+    } from '../scripts/utils.js'
 
-		document.addEventListener('readystatechange', e => {
-			if (document.readyState === 'complete') {
-				// 页面就绪
+    document.addEventListener('readystatechange', e => {
+      if (document.readyState === 'complete') {
+        // 页面就绪
 
-				// 添加分类卡片相关
-				const layerDefault = document.querySelector('.layer-default')
-				const addCateCard = document.querySelector('.add-cate')
-				const cardBtnSave = document.querySelector('#cardBtnSave')
-				const cardBtnCancel = document.querySelector('#cardBtnCancel')
-				const topCateElements = document.querySelectorAll('#cate-top')
-				const cateNameInput = document.querySelector('#cateName')
-				const orderInput = document.querySelector('#order')
-				const selectInput = document.querySelector('#parentId')
+        // 添加分类卡片相关
+        const layerDefault = document.querySelector('.layer-default')
+        const addCateCard = document.querySelector('.add-cate')
+        const cardBtnSave = document.querySelector('#cardBtnSave')
+        const cardBtnCancel = document.querySelector('#cardBtnCancel')
+        const topCateElements = document.querySelectorAll('#cate-top')
+        const cateNameInput = document.querySelector('#cateName')
+        const orderInput = document.querySelector('#order')
+        const selectInput = document.querySelector('#parentId')
 
-				// 插入分类编辑卡片
-				function apendCard(title, whois) {
-					const btnId = whois.id
-					const id = whois.getAttribute('data-id')
+        // 插入分类编辑卡片
+        function apendCard(title, whois) {
+          const btnId = whois.id
+          const id = whois.getAttribute('data-id')
 
-					cardBtnSave.setAttribute('data-btn', btnId)
-					cardBtnSave.setAttribute('data-id', id)
-					if (btnId === 'btnAddCate') {
-						cateNameInput.value = ''
-						selectInput.value = '0'
-						orderInput.value = 100
-					}
-					addCateCard.style.display = 'block'
-					addCateCard.querySelector('.title').innerText = title
-					layerDefault && document.body.appendChild(layerDefault)
-				}
+          cardBtnSave.setAttribute('data-btn', btnId)
+          cardBtnSave.setAttribute('data-id', id)
+          if (btnId === 'btnAddCate') {
+            cateNameInput.value = ''
+            selectInput.value = '0'
+            orderInput.value = 100
+          }
+          addCateCard.style.display = 'block'
+          addCateCard.querySelector('.title').innerText = title
+          layerDefault && document.body.appendChild(layerDefault)
+        }
 
-				layerDefault && layerDefault.remove()
+        layerDefault && layerDefault.remove()
 
-				cardBtnSave.addEventListener('click', e => {
+        cardBtnSave.addEventListener('click', e => {
 
-					const whois = e.target.getAttribute('data-btn')
-					const cateName = cateNameInput.value
-					const order = orderInput.value
-					const parentId = selectInput.value
-					const id = e.target.getAttribute('data-id')
+          const whois = e.target.getAttribute('data-btn')
+          const cateName = cateNameInput.value
+          const order = orderInput.value
+          const parentId = selectInput.value
+          const id = e.target.getAttribute('data-id')
 
-					// 保存按钮被点击
-					whois === 'btnEdit' && utils.ajax('/api/manager/setCategory', {
-						method: 'POST',
-						body: {
-							id,
-							cateName,
-							order,
-							parentId
-						}
-					}).then(res => {
-						if (res.errno === 0) {
-							// 移除编辑框元素
-							layerDefault && layerDefault.remove()
-							utils.showMessage({
-								title: res.message,
-								icon: 'success'
-							})
-							setTimeout(() => {
-								location.reload()
-							}, 2500)
-						} else {
-							utils.showMessage({
-								title: res.message,
-								icon: 'failed'
-							})
-						}
-					})
+          // 保存按钮被点击
+          whois === 'btnEdit' && utils.ajax('/api/manager/setCategory', {
+            method: 'POST',
+            body: {
+              id,
+              cateName,
+              order,
+              parentId
+            }
+          }).then(res => {
+            if (res.errno === 0) {
+              // 移除编辑框元素
+              layerDefault && layerDefault.remove()
+              utils.showMessage({
+                title: res.message,
+                icon: 'success'
+              })
+              setTimeout(() => {
+                location.reload()
+              }, 2500)
+            } else {
+              utils.showMessage({
+                title: res.message,
+                icon: 'failed'
+              })
+            }
+          })
 
-					whois === 'btnAddCate' && utils.ajax('/api/manager/addCategory', {
-						method: 'POST',
-						body: {
-							cateName,
-							order,
-							parentId
-						}
-					}).then(res => {
-						if (res.errno === 0) {
-							// 移除编辑框元素
-							layerDefault && layerDefault.remove()
-							utils.showMessage({
-								title: res.message,
-								icon: 'success'
-							})
-							setTimeout(() => {
-								location.reload()
-							}, 2500)
-						} else {
-							utils.showMessage({
-								title: res.message,
-								icon: 'failed'
-							})
-						}
-					})
-				}, false)
+          whois === 'btnAddCate' && utils.ajax('/api/manager/addCategory', {
+            method: 'POST',
+            body: {
+              cateName,
+              order,
+              parentId
+            }
+          }).then(res => {
+            if (res.errno === 0) {
+              // 移除编辑框元素
+              layerDefault && layerDefault.remove()
+              utils.showMessage({
+                title: res.message,
+                icon: 'success'
+              })
+              setTimeout(() => {
+                location.reload()
+              }, 2500)
+            } else {
+              utils.showMessage({
+                title: res.message,
+                icon: 'failed'
+              })
+            }
+          })
+        }, false)
 
-				cardBtnCancel.addEventListener('click', e => {
-						if (layerDefault) {
-							layerDefault.remove()
-						} else {
-							addCateCard.remove()
-						}
-					}, false)
+        cardBtnCancel.addEventListener('click', e => {
+            if (layerDefault) {
+              layerDefault.remove()
+            } else {
+              addCateCard.remove()
+            }
+          }, false)
 
 
-					!(() => {
-						// 编辑分类
-						const editBtns = document.querySelectorAll('#btnEdit'),
-							delBtns = document.querySelectorAll('#btnDelete')
+          !(() => {
+            // 编辑分类
+            const editBtns = document.querySelectorAll('#btnEdit'),
+              delBtns = document.querySelectorAll('#btnDelete')
 
-						editBtns.forEach(item => {
-							item.addEventListener('click', e => {
-								const btnEdit = e.target
-								const cateName = btnEdit.getAttribute('data-cateName')
-								const order = btnEdit.getAttribute('data-order')
-								const parentId = btnEdit.getAttribute('data-parent')
-								const id = btnEdit.getAttribute('data-id')
+            editBtns.forEach(item => {
+              item.addEventListener('click', e => {
+                const btnEdit = e.target
+                const cateName = btnEdit.getAttribute('data-cateName')
+                const order = btnEdit.getAttribute('data-order')
+                const parentId = btnEdit.getAttribute('data-parent')
+                const id = btnEdit.getAttribute('data-id')
 
-								apendCard('编辑分类', e.target)
+                apendCard('编辑分类', e.target)
 
-								cateNameInput.value = cateName
-								orderInput.value = order
-								selectInput.value = parentId ? parentId : '0'
-							}, false)
-						})
+                cateNameInput.value = cateName
+                orderInput.value = order
+                selectInput.value = parentId ? parentId : '0'
+              }, false)
+            })
 
-						delBtns.forEach(item => {
-							item.addEventListener('click', e => {
-								if (!confirm('删除后将无法恢复，确定要删除吗？')) {
-									return
-								}
-								const id = e.target.getAttribute('data-id')
-								utils.ajax('/api/manager/delCategory', {
-                                    method: 'POST',
-                                    body: {
-                                        id
-                                    }
-								}).then(res => {
-									if (res.errno === 0) {
-										utils.showMessage({
-											title: res.message,
-											icon: 'success'
-										})
-										setTimeout(() => {
-											location.reload()
-										}, 2500)
-									} else {
-										utils.showMessage({
-											title: res.message,
-											icon: 'failed'
-										})
-									}
-								})
-							}, false)
-						})
+            delBtns.forEach(item => {
+              item.addEventListener('click', e => {
+                if (!confirm('删除后将无法恢复，确定要删除吗？')) {
+                  return
+                }
+                const id = e.target.getAttribute('data-id')
+                utils.ajax('/api/manager/delCategory', {
+                  method: 'POST',
+                  body: {
+                    id
+                  }
+                }).then(res => {
+                  if (res.errno === 0) {
+                    utils.showMessage({
+                      title: res.message,
+                      icon: 'success'
+                    })
+                    setTimeout(() => {
+                      location.reload()
+                    }, 2500)
+                  } else {
+                    utils.showMessage({
+                      title: res.message,
+                      icon: 'failed'
+                    })
+                  }
+                })
+              }, false)
+            })
 
-					})()
+          })()
 
-					!(() => {
-						// 添加分类按钮
-						const btnAddCate = document.querySelector('#btnAddCate')
-						btnAddCate.addEventListener('click', e => {
-							apendCard('添加分类', e.target)
-						}, false)
-					})()
-			}
-		}, false)
+          !(() => {
+            // 添加分类按钮
+            const btnAddCate = document.querySelector('#btnAddCate')
+            btnAddCate.addEventListener('click', e => {
+              apendCard('添加分类', e.target)
+            }, false)
+          })()
+      }
+    }, false)
 
-	</script>
+  </script>
 
 </body>
 

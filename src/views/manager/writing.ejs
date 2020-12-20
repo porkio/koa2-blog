@@ -2,149 +2,183 @@
 <html lang="zh">
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../stylesheets/manager.css">
-	<link rel="stylesheet" href="../stylesheets/iconfont.css">
-	<title><%= pageInfo.title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../stylesheets/manager.css">
+  <link rel="stylesheet" href="../stylesheets/iconfont.css">
+  <title><%= pageInfo.title %></title>
 </head>
 
 <body>
-	<section class="wrapper">
-		<div class="container">
-			<div id="writing" class="m-item">
-				<h2 class="m-title" title="<%= pageInfo.title %>"><%= pageInfo.title %></h2>
-				<div class="form-writing">
-					<div class="form-group">
-						<label for="title">文章标题</label>
-						<input type="text" name="title" id="title" autocomplete="" required>
-					</div>
-					<div class="dis-flex justify-space-between">
-						<div class="form-group col-6">
-							<label for="linkUrl">固定链接</label>
-							<input type="text" name="linkUrl" id="linkURL" autocomplete="" required>
-							<span class="input-btn"><i class="iconfont icon-shuaxin"></i></span>
-						</div>
-						<div class="form-group col-3">
-							<label for="order">排序</label>
-							<input type="number" name="order" id="order" value="100" autocomplete="" required>
-						</div>
-						<div class="form-group col-3">
-							<label for="categoryId">文章分类</label>
-							<select class="select-primary" name="categoryId" id="categoryId">
-								<% for (let category of catesList) { %>
-								<% if (!category.parentId) { %>
-								<option value="<%= category.id %>" disabled><%= category.cateName %></option>
-								<% } else { %>
-								<option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
-								<% } %>
-								<% } %>
-							</select>
-						</div>
-					</div>
+  <section class="wrapper">
+    <div class="container">
+      <div id="writing" class="m-item">
+        <h2 class="m-title" title="<%= pageInfo.title %>"><%= pageInfo.title %></h2>
+        <div class="form-writing">
+          <div class="form-group">
+            <label for="title">文章标题</label>
+            <input type="text" name="title" id="title" autocomplete="" required>
+          </div>
+          <div class="dis-flex justify-space-between">
+            <div class="form-group col-6">
+              <label for="linkUrl">固定链接</label>
+              <input type="text" name="linkUrl" id="linkURL" autocomplete="" required>
+              <span class="input-btn"><i class="iconfont icon-shuaxin"></i></span>
+            </div>
+            <div class="form-group col-3">
+              <label for="order">排序</label>
+              <input type="number" name="order" id="order" value="100" autocomplete="" required>
+            </div>
+            <div class="form-group col-3">
+              <label for="categoryId">文章分类</label>
+              <select class="select-primary" name="categoryId" id="categoryId">
+                <% for (let category of catesList) { %>
+                <% if (!category.parentId) { %>
+                <option value="<%= category.id %>" disabled><%= category.cateName %></option>
+                <% } else { %>
+                <option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
+                <% } %>
+                <% } %>
+              </select>
+            </div>
+          </div>
 
-					<div class="form-group">
-						<label for="content">正文</label>
-						<textarea id="content" name="name" rows="28" cols="100"></textarea>
-					</div>
+          <div class="form-group">
+            <label for="content">正文</label>
+            <textarea id="content" name="name" rows="28" cols="100"></textarea>
+          </div>
 
-					<div class="form-group">
-						<label for="cloudTag">云标签</label>
-						<div class="dis-flex clodu-tag-group">
-							<% for (let tag of cloudTagList) { %>
-							<span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
-							<% } %>
-						</div>
-					</div>
+          <div class="form-group">
+            <label for="cloudTag">云标签</label>
+            <div class="dis-flex clodu-tag-group">
+              <% for (let tag of cloudTagList) { %>
+              <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
+              <% } %>
+            </div>
+          </div>
 
-					<div class="dis-flex">
-						<div class="form-group col-4">
-							<label for="views">浏览次数</label>
-							<input type="number" name="views" id="views" value="0" autocomplete="">
-						</div>
-						<div class="form-group col-4">
-							<label for="likes">获赞次数</label>
-							<input type="number" name="likes" id="likes" value="0" autocomplete="">
-						</div>
-					</div>
+          <div class="dis-flex">
+            <div class="form-group col-4">
+              <label for="views">浏览次数</label>
+              <input type="number" name="views" id="views" value="0" autocomplete="">
+            </div>
+            <div class="form-group col-4">
+              <label for="likes">获赞次数</label>
+              <input type="number" name="likes" id="likes" value="0" autocomplete="">
+            </div>
+          </div>
 
-					<div class="form-group col-4">
-						<label for="likes">文章缩略图</label>
-						<div class="form-image">
-							<img src="../images/default-article-img.jpg" alt="">
-							<span class="btn btn-outline-primary btn-small">更换</span>
-						</div>
-					</div>
+          <div class="form-group col-4">
+            <label for="likes">文章缩略图</label>
+            <div class="form-image">
+              <img src="../images/default-article-img.jpg" id="showImgUrl" alt="">
+              <span class="btn btn-outline-primary btn-small" id="btnChangeImg">更换</span>
+              <input type="file" name="articleImg" id="articleImg" style="display: none;">
+            </div>
+          </div>
 
-					<div class="form-group">
-						<input type="submit" id="btn-submit" value="发布">
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+          <div class="form-group">
+            <input type="submit" id="btn-submit" value="发布">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-	<script src="../scripts/manager.js"></script>
-	<script type="module">
-		import {
-			utils
-		} from '../scripts/utils.js'
+  <script src="../scripts/manager.js"></script>
+  <script type="module">
+    import {
+      utils
+    } from '../scripts/utils.js'
 
-		document.addEventListener('readystatechange', e => {
-			if (document.readyState === 'complete') {
-				// 页面就绪
-				const linkUrlInput = document.querySelector('#linkURL')
-				const btnRefreshLinkString = document.querySelector('.icon-shuaxin')
-				const titleInput = document.querySelector('#title')
-				const orderInput = document.querySelector('#order')
-				const categoryIdSelector = document.querySelector('#categoryId')
-				const contentTextarea = document.querySelector('#content')
-				const cloudTags = document.querySelectorAll('#cloudTag')
-				const viewsInput = document.querySelector('#views')
-				const likesInput = document.querySelector('#likes')
+    document.addEventListener('readystatechange', e => {
+      if (document.readyState === 'complete') {
+        // 页面就绪
+        const linkUrlInput = document.querySelector('#linkURL')
+        const btnRefreshLinkString = document.querySelector('.icon-shuaxin')
+        const titleInput = document.querySelector('#title')
+        const orderInput = document.querySelector('#order')
+        const categoryIdSelector = document.querySelector('#categoryId')
+        const contentTextarea = document.querySelector('#content')
+        const cloudTags = document.querySelectorAll('#cloudTag')
+        const viewsInput = document.querySelector('#views')
+        const likesInput = document.querySelector('#likes')
+        const btnChangeImg = document.querySelector('#btnChangeImg')
+        const imgInput = document.querySelector('#articleImg')
+        const showImg = document.querySelector('#showImgUrl')
 
-				const formData = { tagIds: [] }
+        const formData = {
+          tagIds: []
+        }
 
-				// 自动随机生成短链接
-				linkUrlInput.value = utils.randomStrGenerator(8)
+        // 自动随机生成短链接
+        linkUrlInput.value = utils.randomStrGenerator(8)
 
 
-				// 重新随机生成短链接按钮点击监听
-				btnRefreshLinkString.addEventListener('click', e => {
-                    linkUrlInput.value = utils.randomStrGenerator(8)
-				}, false)
+        // 重新随机生成短链接按钮点击监听
+        btnRefreshLinkString.addEventListener('click', e => {
+          linkUrlInput.value = utils.randomStrGenerator(8)
+        }, false)
 
-				// 分类选择监听
-				categoryIdSelector.addEventListener('change', e => {
-					Object.assign(formData, { categoryId: categoryIdSelector.value })
-					console.log(formData)
-				}, false)
+        // 分类选择监听
+        categoryIdSelector.addEventListener('change', e => {
+          Object.assign(formData, {
+            categoryId: categoryIdSelector.value
+          })
+          console.log(formData)
+        }, false)
 
-				// 云标签点击监听
-				cloudTags.forEach(tag => tag.addEventListener('click', e => {
-					const tagElem = e.target
-					const tagId = tagElem.getAttribute('data-id')
-					if (formData.tagIds.indexOf(tagId) < 0) {
-						formData.tagIds.push(tagId)
-						console.log(formData)
-						// 添加标签激活样式
-						const bgColor = utils.getRandomDeepColor()
-						tagElem.style.backgroundColor = bgColor
-						tagElem.style.color = '#ffffff'
-						tagElem.style.border = '1px solid ' + bgColor
-					} else {
-						// 从标签id列表中移除选中标签的id
-						formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
-						tagElem.style.background = 'none'
-						tagElem.style.color = '#888888'
-						tagElem.style.border = '1px solid #888888'
-						console.log(formData)
-					}
-				}, false))
+        // 云标签点击监听
+        cloudTags.forEach(tag => tag.addEventListener('click', e => {
+          const tagElem = e.target
+          const tagId = tagElem.getAttribute('data-id')
+          if (formData.tagIds.indexOf(tagId) < 0) {
+            formData.tagIds.push(tagId)
+            console.log(formData)
+            // 添加标签激活样式
+            const bgColor = utils.getRandomDeepColor()
+            tagElem.style.backgroundColor = bgColor
+            tagElem.style.color = '#ffffff'
+            tagElem.style.border = '1px solid ' + bgColor
+          } else {
+            // 从标签id列表中移除选中标签的id
+            formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
+            tagElem.style.background = 'none'
+            tagElem.style.color = '#888888'
+            tagElem.style.border = '1px solid #888888'
+            console.log(formData)
+          }
+        }, false))
+
+        // 更换文章缩略图
+        btnChangeImg.addEventListener('click', e => {
+            imgInput.click()
+        }, false)
+
+        // 监听是否选择了文件/图片
+        imgInput.addEventListener('change', e => {
+            const file = imgInput.files[0]
+            const fd = new FormData()
+            fd.append('article_img', file)
+
+            utils.ajax('/api/manager/changeArticleImg', {
+                method: 'POST',
+                body: fd
+            }).then(res => {
+                if (res.errno === 0) {
+                    showImg.src = res.data.path
+                    utils.showMessage({
+                        title: '文章缩略图更换成功',
+                        icon: 'success'
+                    })
+                }
+            })
+        }, false)
 
       }
-		}, false)
-	</script>
+    }, false)
+
+  </script>
 
 </body>
 

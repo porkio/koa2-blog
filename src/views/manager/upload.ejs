@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title><%= title %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= title %></title>
 </head>
+
 <body>
-    <form id="avatarForm" action="/api/manager/upload" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="userName" value="Pork">
-		<input type="file" name="avatar" id="avatar">
-    </form>
-    
+  <form id="avatarForm" action="/api/manager/upload" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="userName" value="Pork">
+    <input type="file" name="avatar" id="avatar">
+  </form>
 
-    <script type="module">
-        import { utils } from '../scripts/utils.js'
 
-        const fileInput = document.querySelector('#avatar')
-        const avatarForm = document.querySelector('#avatarForm')
-        
-        fileInput.addEventListener('change', e => {
-            const file = fileInput.files[0]
-            const formData = new FormData()
-            formData.append('avatar', file)
-            formData.append('userName', 'Pork')
+  <script type="module">
+    import {
+      utils
+    } from '../scripts/utils.js'
 
-            utils.ajax('/api/manager/changeArticleImg', {
-                method: 'POST', 
-                body: formData
-            }).then(res => console.log(res))
-            
-        }, false)
+    const fileInput = document.querySelector('#avatar')
+    const avatarForm = document.querySelector('#avatarForm')
 
-    </script>
+    fileInput.addEventListener('change', e => {
+      const file = fileInput.files[0]
+      const formData = new FormData()
+      formData.append('avatar', file)
+      formData.append('userName', 'Pork')
+
+      utils.ajax('/api/manager/changeArticleImg', {
+        method: 'POST',
+        body: formData
+      }).then(res => console.log(res))
+
+    }, false)
+
+  </script>
 
 </body>
+
 </html>
