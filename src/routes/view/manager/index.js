@@ -5,9 +5,9 @@
 
 const router = require('koa-router')()
 const noLoginRedirect = require('../../../middleware/noLoginRedirect')
-const { getConfig } = require('../../../controller/SiteConfig')
-const { getCategories } = require('../../../controller/Category.js')
-const { getAllCloudTags } = require('../../../controller/CloudTag')
+const { getConfig } = require('../../../controller/SiteConfigController')
+const { getCategories } = require('../../../controller/CategoryController')
+const { getAllCloudTags } = require('../../../controller/CloudTagController')
 
 router.prefix('/manager')
 

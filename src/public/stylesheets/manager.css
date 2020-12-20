@@ -267,7 +267,7 @@ textarea {
 	font-size: 1.1rem;
 }
 
-input[type="submit"] {
+input[type="submit"], input[type="button"] {
     font-size: 1.1rem;
     padding: .5rem 3rem;
     border-radius: 5px;

@@ -78,7 +78,7 @@
           </div>
 
           <div class="form-group">
-            <input type="submit" id="btn-submit" value="发布">
+            <input type="button" id="btn-submit" value="发布">
           </div>
         </div>
       </div>
@@ -106,6 +106,7 @@
         const btnChangeImg = document.querySelector('#btnChangeImg')
         const imgInput = document.querySelector('#articleImg')
         const showImg = document.querySelector('#showImgUrl')
+        const btnSubmit = document.querySelector('#btn-submit')
 
         const formData = {
           tagIds: []
@@ -161,7 +162,7 @@
             const fd = new FormData()
             fd.append('article_img', file)
 
-            utils.ajax('/api/manager/changeArticleImg', {
+            utils.ajax('/api/manager/uploadArticleImg', {
                 method: 'POST',
                 body: fd
             }).then(res => {
@@ -174,6 +175,37 @@
                 }
             })
         }, false)
+
+        // 发布文章
+        btnSubmit.addEventListener('click', e => {
+          const title = titleInput.value
+          const linkUrl = linkUrlInput.value
+          const categoryId = categoryIdSelector.value
+          const content = contentTextarea.value
+          const views = viewsInput.value
+          const likes = likesInput.value
+          const showImgUrl = showImg.src
+
+          Object.assign(formData, {
+            title,
+            linkUrl,
+            categoryId,
+            content,
+            views,
+            likes,
+            showImgUrl
+          })
+          console.log(formData)
+
+          utils.ajax('/api/manager/publish', {
+            method: 'POST',
+            body: formData
+          }).then(res => console.log(res))
+
+        }, false)
+
+
+
 
       }
     }, false)

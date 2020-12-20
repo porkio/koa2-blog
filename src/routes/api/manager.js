@@ -1,48 +1,61 @@
-const router = require("koa-router")();
+const router = require('koa-router')()
 const {
     updateCategory,
     createCategory,
     destroyCategory,
-} = require("../../controller/Category");
-const { updateConfig } = require("../../controller/SiteConfig");
-const noLoginRedirect = require("../../middleware/noLoginRedirect");
-const upload = require("../../middleware/upload");
-const { updateArticleImg } = require("../../controller/manager");
-router.prefix("/api/manager");
+} = require('../../controller/CategoryController')
+const { updateArticleImg } = require('../../controller/manager');
+const { updateConfig } = require('../../controller/SiteConfigController');
+const { createArticle } = require('../../controller/ArticleController')
+const noLoginRedirect = require('../../middleware/noLoginRedirect');
+const upload = require('../../middleware/upload')
+router.prefix('/api/manager')
+
 
 // 设置站点配置信息
-router.post("/setConfig", noLoginRedirect, async (ctx, next) => {
+router.post('/setConfig', noLoginRedirect, async (ctx, next) => {
     // controller
-    ctx.body = await updateConfig(ctx.request.body);
-});
+    ctx.body = await updateConfig(ctx.request.body)
+})
 
 // 更新/编辑分类
-router.post("/setCategory", noLoginRedirect, async (ctx, next) => {
+router.post('/setCategory', noLoginRedirect, async (ctx, next) => {
     // controller
-    ctx.body = await updateCategory(ctx.request.body);
-});
+    ctx.body = await updateCategory(ctx.request.body)
+})
 
 // 添加/创建分类
-router.post("/addCategory", noLoginRedirect, async (ctx, next) => {
+router.post('/addCategory', noLoginRedirect, async (ctx, next) => {
     // controller
-    ctx.body = await createCategory(ctx.request.body);
-});
+    ctx.body = await createCategory(ctx.request.body)
+})
 
 // 删除分类
-router.post("/delCategory", async (ctx, next) => {
+router.post('/delCategory', async (ctx, next) => {
     // 待解决： 假设分类下有文章，则禁止删除该分类
     const { id } = ctx.request.body;
-    ctx.body = await destroyCategory(id);
-});
+    ctx.body = await destroyCategory(id)
+})
 
+// 上传文章缩略图
 router.post(
-    "/changeArticleImg",
+    '/uploadArticleImg',
     noLoginRedirect,
-    upload.single("article_img"),
+    upload.single('article_img'),
     async (ctx, next) => {
         // controller
-        ctx.body = await updateArticleImg(ctx.req.file);
+        ctx.body = await updateArticleImg(ctx.req.file)
     }
-);
+)
 
-module.exports = router;
+// 发布文章
+router.post('/publish', noLoginRedirect, async (ctx, next) => {
+    const data = ctx.request.body
+    const userId = ctx.session.userInfo.id
+    Object.assign(data, { userId })
+
+    // controller
+    ctx.body = await createArticle(data)
+})
+
+module.exports = router

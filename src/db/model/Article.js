@@ -13,6 +13,7 @@ const Article = seq.define('article', {
     title: {
         type: STRING,
         allowNull: false,
+        unique: true,
         comment: '文章标题'
     },
 	linkUrl: {
