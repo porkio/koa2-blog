@@ -214,7 +214,7 @@ table {
     background-color: rgba(0, 0, 0, .06);
 }
 
-.add-cate {
+.layer-item {
 	min-width: 380px;
 	position: absolute;
 	top: 50%;
@@ -308,6 +308,13 @@ input[type="submit"], input[type="button"] {
 
 .form-group .form-image:hover span {
 	display: inline-block;
+}
+
+.icon-Addnewcompose {
+    font-size: 1.2rem !important;
+    font-weight: 500;
+    margin-left: 8px;
+    cursor: pointer;
 }
 
 .form-group .icon-fail {

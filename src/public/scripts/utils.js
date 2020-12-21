@@ -324,7 +324,7 @@ function ajax(url, options) {
 
         return fetch(url).then(response => response.json()).then(res => res)
     }
-    
+
     if (/^(POST|PUT)$/i.test(options.method)) {
         // 文件上传 这里(仅我个人)认定只要是特意构造的 new FormData 都是为了文件上传准备的
         if (options.body.toString() === '[object FormData]') {
@@ -339,7 +339,7 @@ function ajax(url, options) {
                 body: JSON.stringify(options.body)
             })
         }
-        
+
         return fetch(url, options).then(response => response.json()).then(res => res)
     }
 }

@@ -49,7 +49,7 @@
           </div>
 
           <div class="form-group">
-            <label for="cloudTag">云标签</label>
+            <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
             <div class="dis-flex clodu-tag-group">
               <% for (let tag of cloudTagList) { %>
               <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
@@ -83,6 +83,23 @@
         </div>
       </div>
     </div>
+
+    <div class="layer-default">
+      <div class="layer-item" id="layerItem" style="display: none;">
+        <h4 class="title title-success">添加云标签</h4>
+        <span class="btn-close">&times;</span>
+        <div class="form-group">
+          <label for="tagName">标签名称</label>
+          <input type="text" name="tagName" id="tagName" value="" placeholder="标签名称">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success" id="cardBtnSave">确定</button>
+          <button class="btn btn-danger" id="cardBtnCancel">取消</button>
+        </div>
+      </div>
+    </div>
+
+
   </section>
 
   <script src="../scripts/manager.js"></script>
@@ -94,12 +111,21 @@
     document.addEventListener('readystatechange', e => {
       if (document.readyState === 'complete') {
         // 页面就绪
+
+        // 浮动层元素
+        const layerDefault = document.querySelector('.layer-default')
+        const layerItem = document.querySelector('#layerItem')
+        const cardBtnSave = document.querySelector('#cardBtnSave')
+        const cardBtnCancel = document.querySelector('#cardBtnCancel')
+
+        // 表单控件
         const linkUrlInput = document.querySelector('#linkURL')
         const btnRefreshLinkString = document.querySelector('.icon-shuaxin')
         const titleInput = document.querySelector('#title')
         const orderInput = document.querySelector('#order')
         const categoryIdSelector = document.querySelector('#categoryId')
         const contentTextarea = document.querySelector('#content')
+        const btnAddCloudTag = document.querySelector('#btnAddCloudTag')
         const cloudTags = document.querySelectorAll('#cloudTag')
         const viewsInput = document.querySelector('#views')
         const likesInput = document.querySelector('#likes')
@@ -127,6 +153,11 @@
             categoryId: categoryIdSelector.value
           })
           console.log(formData)
+        }, false)
+
+        // 添加云标签
+        btnAddCloudTag.addEventListener('click', e => {
+
         }, false)
 
         // 云标签点击监听
