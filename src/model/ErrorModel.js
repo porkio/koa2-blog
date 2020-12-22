@@ -62,6 +62,10 @@ module.exports = {
         errno: 40013,
         message: '文章发布失败了'
     },
+    createCloudTagFail: {
+        errno: 40014,
+        message: '云标签创建失败'
+    },
     repeatAction: {
         errno: 10002,
         message: '重复的操作'

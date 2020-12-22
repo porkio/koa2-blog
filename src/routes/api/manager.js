@@ -7,6 +7,7 @@ const {
 const { updateArticleImg } = require('../../controller/manager');
 const { updateConfig } = require('../../controller/SiteConfigController');
 const { createArticle } = require('../../controller/ArticleController')
+const { createCloudTag } = require('../../controller/CloudTagController')
 const noLoginRedirect = require('../../middleware/noLoginRedirect');
 const upload = require('../../middleware/upload')
 router.prefix('/api/manager')
@@ -56,6 +57,13 @@ router.post('/publish', noLoginRedirect, async (ctx, next) => {
 
     // controller
     ctx.body = await createArticle(data)
+})
+
+// 新增云标签
+router.post('/addCloudTag', noLoginRedirect, async (ctx, next) => {
+    const { tagName, order } = ctx.request.body
+    // controller
+    ctx.body = await createCloudTag(tagName, order)
 })
 
 module.exports = router

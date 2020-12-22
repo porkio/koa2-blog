@@ -50,7 +50,7 @@
 
           <div class="form-group">
             <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
-            <div class="dis-flex clodu-tag-group">
+            <div class="dis-flex clodu-tag-group flex-wrap">
               <% for (let tag of cloudTagList) { %>
               <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
               <% } %>
@@ -90,7 +90,11 @@
         <span class="btn-close">&times;</span>
         <div class="form-group">
           <label for="tagName">标签名称</label>
-          <input type="text" name="tagName" id="tagName" value="" placeholder="标签名称">
+          <input type="text" name="tagName" id="tagName" value="" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="tagOrder">排序</label>
+          <input type="number" name="tagOrder" id="tagOrder" value="100" placeholder="">
         </div>
         <div class="form-group">
           <button class="btn btn-success" id="cardBtnSave">确定</button>
@@ -125,14 +129,16 @@
         const orderInput = document.querySelector('#order')
         const categoryIdSelector = document.querySelector('#categoryId')
         const contentTextarea = document.querySelector('#content')
-        const btnAddCloudTag = document.querySelector('#btnAddCloudTag')
         const cloudTags = document.querySelectorAll('#cloudTag')
+        const btnAddCloudTag = document.querySelector('#btnAddCloudTag')
         const viewsInput = document.querySelector('#views')
         const likesInput = document.querySelector('#likes')
         const btnChangeImg = document.querySelector('#btnChangeImg')
         const imgInput = document.querySelector('#articleImg')
         const showImg = document.querySelector('#showImgUrl')
         const btnSubmit = document.querySelector('#btn-submit')
+
+        layerDefault && layerDefault.remove()
 
         const formData = {
           tagIds: []
@@ -157,30 +163,35 @@
 
         // 添加云标签
         btnAddCloudTag.addEventListener('click', e => {
-
+          layerDefault && document.body.appendChild(layerDefault)
+          layerItem.style.display = 'block'
         }, false)
 
         // 云标签点击监听
-        cloudTags.forEach(tag => tag.addEventListener('click', e => {
+        cloudTags.forEach(tag => tag.addEventListener('click', cloudTagEvent, false))
+
+        // 注册云标签被点击事件（函数）
+        function cloudTagEvent(e) {
           const tagElem = e.target
-          const tagId = tagElem.getAttribute('data-id')
-          if (formData.tagIds.indexOf(tagId) < 0) {
-            formData.tagIds.push(tagId)
-            console.log(formData)
-            // 添加标签激活样式
-            const bgColor = utils.getRandomDeepColor()
-            tagElem.style.backgroundColor = bgColor
-            tagElem.style.color = '#ffffff'
-            tagElem.style.border = '1px solid ' + bgColor
-          } else {
-            // 从标签id列表中移除选中标签的id
-            formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
-            tagElem.style.background = 'none'
-            tagElem.style.color = '#888888'
-            tagElem.style.border = '1px solid #888888'
-            console.log(formData)
-          }
-        }, false))
+            const tagId = tagElem.getAttribute('data-id')
+            if (formData.tagIds.indexOf(tagId) < 0) {
+              formData.tagIds.push(tagId)
+              console.log(formData)
+              // 添加标签激活样式
+              const bgColor = utils.getRandomDeepColor()
+              tagElem.style.backgroundColor = bgColor
+              tagElem.style.color = '#ffffff'
+              tagElem.style.border = '1px solid ' + bgColor
+            } else {
+              // 从标签id列表中移除选中标签的id
+              formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
+              tagElem.style.background = 'none'
+              tagElem.style.color = '#888888'
+              tagElem.style.border = '1px solid #888888'
+              console.log(formData)
+            }
+        }
+
 
         // 更换文章缩略图
         btnChangeImg.addEventListener('click', e => {
@@ -235,6 +246,53 @@
 
         }, false)
 
+        // 浮动层取消按钮点击事件
+        cardBtnCancel.addEventListener('click', e => {
+          if (layerDefault) {
+            layerDefault.remove()
+          } else {
+            layerItem.remove()
+          }
+        }, false)
+
+        // 浮动层确定按钮点击事件
+        cardBtnSave.addEventListener('click', e => {
+          const tagName = document.querySelector('#tagName').value
+          const order = document.querySelector('#tagOrder').value
+          if (!tagName || !order) {
+            utils.showMessage({
+              title: '标签名和排序均可能为空',
+              icon: 'failed'
+            })
+            return
+          }
+          utils.ajax('/api/manager/addCloudTag', {
+            method: 'POST',
+            body: { tagName, order }
+          }).then(res => {
+            if (res.errno === 0) {
+              utils.showMessage({
+                title: res.message,
+                icon: 'success'
+              })
+              layerDefault && layerDefault.remove()
+              const cloudTagGroup = document.querySelector('.clodu-tag-group')
+              const newCloudTag = document.createElement('span')
+              newCloudTag.className = 'btn btn-tag'
+              newCloudTag.id = 'cloudTag'
+              newCloudTag.setAttribute('data-id', res.data.id)
+              newCloudTag.innerText = res.data.tagName
+              cloudTagGroup.appendChild(newCloudTag)
+
+              newCloudTag.addEventListener('click', cloudTagEvent, false)
+            } else {
+              utils.showMessage({
+                title: '添加失败了，请重试',
+                icon: 'failed'
+              })
+            }
+          })
+        }, false)
 
 
 

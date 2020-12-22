@@ -14,6 +14,9 @@ const { createArticleFail } = require('../model/ErrorModel')
  * @return { Object } ResModel
  */
 const createArticle = async articleData => {
+    if (!articleData.title || !articleData.content) {
+        return new FailedModel(createArticleFail)
+    }
     try {
         const result = await Article.create(articleData)
         if (result.dataValues.id) {
