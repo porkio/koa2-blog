@@ -384,7 +384,6 @@ function showMessage({title, icon, duration = 2500}) {
         overflow: hidden;
     `
 
-    let HTMLContent
     if (iconsMap.get(icon)) {
         msgBox.innerHTML = iconsMap.get(icon)
         msgBox.appendChild(msgTitle)
@@ -410,6 +409,18 @@ function printLog(str) {
 	const a = 'background: #606060; padding: 4px; color: #fff; border-radius: 2px 0 0 2px;'
 	const b = 'background: #1475B2; padding: 4px; color: #fff; border-radius: 0 2px 2px 0;'
 	console.log(`%c Update Time %c ${date} `, a, b)
+}
+
+/**
+ * @description Promise 化
+ * @param { Object } api 
+ */
+function promisify(api) {
+    return (options, ...params) => {
+        return new Promise((resolve, reject) => {
+            api(Object.assign({}, options, { success: resolve, fail: reject }), ...params)
+        })
+    }
 }
 
 /**
@@ -457,5 +468,6 @@ export const utils = {
 	getRandomDeepColor,
     ajax,
     showMessage,
+    promisify,
 	printLog
 }
