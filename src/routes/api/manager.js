@@ -9,7 +9,9 @@ const { updateConfig } = require('../../controller/SiteConfigController');
 const { createArticle } = require('../../controller/ArticleController')
 const { createCloudTag } = require('../../controller/CloudTagController')
 const noLoginRedirect = require('../../middleware/noLoginRedirect');
-const upload = require('../../middleware/upload')
+const upload = require('../../middleware/upload');
+const genValidator = require('../../middleware/validator');
+const articleValidate = require('../../validator/article');
 router.prefix('/api/manager')
 
 
@@ -50,7 +52,7 @@ router.post(
 )
 
 // 发布文章
-router.post('/publish', noLoginRedirect, async (ctx, next) => {
+router.post('/publish', noLoginRedirect, genValidator(articleValidate), async (ctx, next) => {
     const data = ctx.request.body
     const userId = ctx.session.userInfo.id
     Object.assign(data, { userId })

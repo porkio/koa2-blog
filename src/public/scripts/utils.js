@@ -87,7 +87,7 @@ function scrollToElement(element) {
 function copyText(text) {
 	let textarea = document.createElement("textarea") //创建input对象
 	let currentFocus = document.activeElement; //当前获得焦点的元素
-	let toolBoxwrap = document.getElementById('service') //将文本框插入到NewsToolBox这个之后
+	let toolBoxwrap = document.body //将文本框插入到body这个之后
 	let flag = false
 	toolBoxwrap.appendChild(textarea); //添加元素
 	textarea.value = text
@@ -354,6 +354,8 @@ function showMessage({title, icon, duration = 2500}) {
         return
     }
 
+    icon = icon.toLowerCase()
+
     const msgBox = document.createElement('div')
     const msgTitle = document.createElement('span')
     msgTitle.innerText = title
@@ -413,7 +415,7 @@ function printLog(str) {
 
 /**
  * @description Promise 化
- * @param { Object } api 
+ * @param { Object } api
  */
 function promisify(api) {
     return (options, ...params) => {

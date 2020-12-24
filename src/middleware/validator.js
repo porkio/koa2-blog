@@ -33,6 +33,4 @@ const genValidator = validateFn => {
     }
 }
 
-module.exports = {
-    genValidator
-}
+module.exports = genValidator

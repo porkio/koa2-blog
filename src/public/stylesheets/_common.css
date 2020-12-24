@@ -155,7 +155,7 @@ input[type="text"], input[type="password"], input[type="number"] {
     position: absolute;
     top: 50%;
     right: 4px;
-    transform: translateY(-50%);
+    transform: translateY(-58%);
 }
 
 .data-error input {

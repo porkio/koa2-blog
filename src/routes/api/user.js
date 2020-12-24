@@ -7,7 +7,7 @@ const {
     destroy
 } = require('../../controller/user')
 const userValidate = require('../../validator/user')
-const { genValidator } = require('../../middleware/validator')
+const genValidator = require('../../middleware/validator')
 const { checkLogin } = require('../../middleware/checkLogin')
 const { isSuperAdmin } = require('../../middleware/isSuperAdmin')
 const { isTest } = require('../../utils/env')

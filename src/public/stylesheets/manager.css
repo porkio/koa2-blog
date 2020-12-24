@@ -323,9 +323,8 @@ input[type="submit"], input[type="button"] {
     font-size: 1.2rem;
     border-radius: 50%;
     position: absolute;
-    top: 50%;
+    bottom: 1.2rem;
     right: 4px;
-    transform: translateY(-50%);
 }
 
 .data-error input {

@@ -18,6 +18,7 @@
           <div class="form-group">
             <label for="title">文章标题</label>
             <input type="text" name="title" id="title" autocomplete="" required>
+            <i class="iconfont icon-fail" aria-hidden="true"></i>
           </div>
           <div class="dis-flex justify-space-between">
             <div class="form-group col-6">
@@ -144,6 +145,12 @@
           tagIds: []
         }
 
+        titleInput.addEventListener('input', e => {
+          if (titleInput.parentElement.classList.contains('data-error')) {
+            titleInput.parentElement.classList.remove('data-error')
+          }
+        }, false)
+
         // 自动随机生成短链接
         linkUrlInput.value = utils.randomStrGenerator(8)
 
@@ -222,27 +229,54 @@
         btnSubmit.addEventListener('click', e => {
           const title = titleInput.value
           const linkUrl = linkUrlInput.value
-          const categoryId = categoryIdSelector.value
+          const order = Number(orderInput.value) || 100
+          const categoryId = Number(categoryIdSelector.value)
           const content = contentTextarea.value
-          const views = viewsInput.value
-          const likes = likesInput.value
+          const views = Number(viewsInput.value)
+          const likes = Number(likesInput.value)
           const showImgUrl = showImg.src
 
           Object.assign(formData, {
             title,
             linkUrl,
+            order,
             categoryId,
             content,
             views,
             likes,
             showImgUrl
           })
-          console.log(formData)
+
+          !(() => {
+            // 数据校验
+            if (!formData.title) {
+              // 如果标题为空
+              titleInput.focus()
+              titleInput.parentElement.classList.add('data-error')
+            }
+            if (!formData.linkUrl) {
+              const linkString = utils.randomStrGenerator(8)
+              formData.linkUrl = linkString
+              linkUrlInput.value = linkString
+            }
+          })()
 
           utils.ajax('/api/manager/publish', {
             method: 'POST',
             body: formData
-          }).then(res => console.log(res))
+          }).then(res => {
+            if (res.errno === 0) {
+              utils.showMessage({
+                title: res.message,
+                icon: 'success'
+              })
+            } else {
+              utils.showMessage({
+                title: res.message,
+                icon: 'failed'
+              })
+            }
+          })
 
         }, false)
 
