@@ -11,7 +11,7 @@ const ARTICLE_SCHEMA = {
     properties: {
         title: {
             type: 'string',
-            maxLength: 32,
+            maxLength: 128,
             minLength: 2
         },
         linkUrl: {

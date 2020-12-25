@@ -26,6 +26,7 @@ Article.belongsTo(Category, {
 
 Category.hasMany(Article)
 
+
 Article.belongsToMany(CloudTag, {
     through: {
         model: ArticleTag,

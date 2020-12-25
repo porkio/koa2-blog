@@ -180,49 +180,49 @@
         // 注册云标签被点击事件（函数）
         function cloudTagEvent(e) {
           const tagElem = e.target
-            const tagId = tagElem.getAttribute('data-id')
-            if (formData.tagIds.indexOf(tagId) < 0) {
-              formData.tagIds.push(tagId)
-              console.log(formData)
-              // 添加标签激活样式
-              const bgColor = utils.getRandomDeepColor()
-              tagElem.style.backgroundColor = bgColor
-              tagElem.style.color = '#ffffff'
-              tagElem.style.border = '1px solid ' + bgColor
-            } else {
-              // 从标签id列表中移除选中标签的id
-              formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
-              tagElem.style.background = 'none'
-              tagElem.style.color = '#888888'
-              tagElem.style.border = '1px solid #888888'
-              console.log(formData)
-            }
+          const tagId = tagElem.getAttribute('data-id')
+          if (formData.tagIds.indexOf(tagId) < 0) {
+            formData.tagIds.push(tagId)
+
+            // 添加标签激活样式
+            const bgColor = utils.getRandomDeepColor()
+            tagElem.style.backgroundColor = bgColor
+            tagElem.style.color = '#ffffff'
+            tagElem.style.border = '1px solid ' + bgColor
+          } else {
+            // 从标签id列表中移除选中标签的id
+            formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
+            tagElem.style.background = 'none'
+            tagElem.style.color = '#888888'
+            tagElem.style.border = '1px solid #888888'
+            console.log(formData)
+          }
         }
 
 
         // 更换文章缩略图
         btnChangeImg.addEventListener('click', e => {
-            imgInput.click()
+          imgInput.click()
         }, false)
 
         // 监听是否选择了文件/图片
         imgInput.addEventListener('change', e => {
-            const file = imgInput.files[0]
-            const fd = new FormData()
-            fd.append('article_img', file)
+          const file = imgInput.files[0]
+          const fd = new FormData()
+          fd.append('article_img', file)
 
-            utils.ajax('/api/manager/uploadArticleImg', {
-                method: 'POST',
-                body: fd
-            }).then(res => {
-                if (res.errno === 0) {
-                    showImg.src = res.data.path
-                    utils.showMessage({
-                        title: '文章缩略图更换成功',
-                        icon: 'success'
-                    })
-                }
-            })
+          utils.ajax('/api/manager/uploadArticleImg', {
+            method: 'POST',
+            body: fd
+          }).then(res => {
+            if (res.errno === 0) {
+              showImg.src = res.data.path
+              utils.showMessage({
+                title: '文章缩略图更换成功',
+                icon: 'success'
+              })
+            }
+          })
         }, false)
 
         // 发布文章
@@ -237,29 +237,29 @@
           const showImgUrl = showImg.src
 
           Object.assign(formData, {
-            title,
-            linkUrl,
-            order,
-            categoryId,
-            content,
-            views,
-            likes,
-            showImgUrl
-          })
+              title,
+              linkUrl,
+              order,
+              categoryId,
+              content,
+              views,
+              likes,
+              showImgUrl
+            })
 
-          !(() => {
-            // 数据校验
-            if (!formData.title) {
-              // 如果标题为空
-              titleInput.focus()
-              titleInput.parentElement.classList.add('data-error')
-            }
-            if (!formData.linkUrl) {
-              const linkString = utils.randomStrGenerator(8)
-              formData.linkUrl = linkString
-              linkUrlInput.value = linkString
-            }
-          })()
+            !(() => {
+              // 数据校验
+              if (!formData.title) {
+                // 如果标题为空
+                titleInput.focus()
+                titleInput.parentElement.classList.add('data-error')
+              }
+              if (!formData.linkUrl) {
+                const linkString = utils.randomStrGenerator(8)
+                formData.linkUrl = linkString
+                linkUrlInput.value = linkString
+              }
+            })()
 
           utils.ajax('/api/manager/publish', {
             method: 'POST',
@@ -302,7 +302,10 @@
           }
           utils.ajax('/api/manager/addCloudTag', {
             method: 'POST',
-            body: { tagName, order }
+            body: {
+              tagName,
+              order
+            }
           }).then(res => {
             if (res.errno === 0) {
               utils.showMessage({
