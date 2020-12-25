@@ -38,21 +38,21 @@ module.exports = {
         errno: 40007,
         message: '站点配置更新失败'
     },
-	getCategoriesFail: {
-		errno: 40008,
-		message: '获取分类失败'
-	},
-	updateCategoryFail: {
-		errno: 40009,
-		message: '分类编辑失败'
-	},
-	createCategoryFail: {
-		errno: 40010,
-		message: '分类创建失败'
-	},
-	destroyCategoryFail: {
-		errno: 40011,
-		message: '分类删除失败'
+    getCategoriesFail: {
+        errno: 40008,
+        message: '获取分类失败'
+    },
+    updateCategoryFail: {
+        errno: 40009,
+        message: '分类编辑失败'
+    },
+    createCategoryFail: {
+        errno: 40010,
+        message: '分类创建失败'
+    },
+    destroyCategoryFail: {
+        errno: 40011,
+        message: '分类删除失败'
     },
     uploadFilesFail: {
         errno: 40012,
@@ -65,6 +65,10 @@ module.exports = {
     createCloudTagFail: {
         errno: 40014,
         message: '云标签创建失败'
+    },
+    getArticleListFail: {
+        errno: 40015,
+        message: '获取文章列表失败'
     },
     repeatAction: {
         errno: 10002,

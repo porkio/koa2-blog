@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../stylesheets/manager.css" />
+  <title><%= pageInfo.title %></title>
+</head>
+
+<body>
+  <section class="wrapper">
+    <div class="container">
+      <div id="article" class="m-item">
+        <h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">分类名称</th>
+              <th scope="col">排序</th>
+              <th scope="col">浏览次数</th>
+              <th scope="col">操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let article of articleList) { %>
+            <tr>
+              <th scope="row"><%= article.id %></th>
+              <td id="cate-top" data-id="<%= article.id %>">
+                <%= article.title %>
+              </td>
+              <td><%= article.order %></td>
+              <td><%= article.views %></td>
+              <td>
+                <button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= article.id %>">编辑</button>
+                <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= article.id %>">
+                  删除
+                </button>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+        <div class="form-group">
+          <button class="btn btn-success" id="btnAddCate">撰写文章</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src='../../scripts/manager.js'></script>
+  <script type='module'>
+    import {
+      utils
+    } from '../../scripts/utils.js'
+
+  </script>
+</body>
+
+</html>

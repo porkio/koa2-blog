@@ -41,15 +41,10 @@ router.post('/delCategory', async (ctx, next) => {
 })
 
 // 上传文章缩略图
-router.post(
-    '/uploadArticleImg',
-    noLoginRedirect,
-    upload.single('article_img'),
-    async (ctx, next) => {
-        // controller
-        ctx.body = await updateArticleImg(ctx.req.file)
-    }
-)
+router.post('/uploadArticleImg', noLoginRedirect, upload.single('article_img'), async (ctx, next) => {
+    // controller
+    ctx.body = await updateArticleImg(ctx.req.file)
+})
 
 // 发布文章
 router.post('/publish', noLoginRedirect, genValidator(articleValidate), async (ctx, next) => {
