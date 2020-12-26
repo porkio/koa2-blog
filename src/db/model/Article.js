@@ -7,7 +7,7 @@ const {
     TEXT
 } = require('../dataTypes')
 
-const randomStrGenerator  = require('../../utils/strRandom')
+const randomStrGenerator = require('../../utils/strRandom')
 
 const Article = seq.define('article', {
     title: {
@@ -16,13 +16,13 @@ const Article = seq.define('article', {
         unique: true,
         comment: '文章标题'
     },
-	linkUrl: {
-		type: STRING,
-		allowNull: false,
-		defaultValue: randomStrGenerator(8), // 8位随机字符串
-		unique: true,
-		comment: '链接地址'
-	},
+    linkUrl: {
+        type: STRING,
+        allowNull: false,
+        defaultValue: randomStrGenerator(8), // 8位随机字符串
+        unique: true,
+        comment: '链接地址'
+    },
     content: {
         type: TEXT,
         alowNull: false,
@@ -31,7 +31,7 @@ const Article = seq.define('article', {
     showImgUrl: {
         type: STRING,
         allowNull: true,
-        defaultValue: '/images/default-aticle-img.jpg',
+        defaultValue: '/images/default-article-img.jpg',
         comment: '文章展示图地址'
     },
     categoryId: {
@@ -61,6 +61,12 @@ const Article = seq.define('article', {
         allowNull: true,
         defaultValue: 0,
         comment: '获赞次数'
+    },
+    hidden: {
+        type: BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+        comment: '是否隐藏'
     }
 })
 

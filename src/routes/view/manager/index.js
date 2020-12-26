@@ -64,10 +64,9 @@ router.get('/upload', noLoginRedirect, async (ctx, next) => {
     })
 })
 
-router.get('/articles/:pageIndex', noLoginRedirect, async (ctx, next) => {
+router.get('/articles', noLoginRedirect, async (ctx, next) => {
     // controller
-    const { pageIndex } = ctx.params
-    const { orderby, limit } = ctx.query
+    const { pageIndex, orderby, limit } = ctx.query
 
     const articleList = await getArticles(pageIndex, orderby, limit)
 
