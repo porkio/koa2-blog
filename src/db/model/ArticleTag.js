@@ -3,7 +3,6 @@ const {
     INTEGER,
     STRING,
     DECIMAL,
-    BOOLEAN,
     TEXT
 } = require('../dataTypes')
 const Article = require('./Article')

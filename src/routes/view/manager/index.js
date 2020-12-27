@@ -64,6 +64,7 @@ router.get('/upload', noLoginRedirect, async (ctx, next) => {
     })
 })
 
+// 后台管理文章
 router.get('/articles', noLoginRedirect, async (ctx, next) => {
     // controller
     const { pageIndex, orderby, limit } = ctx.query
@@ -79,6 +80,5 @@ router.get('/articles', noLoginRedirect, async (ctx, next) => {
     Object.assign(data, { articleList })
     await ctx.render('manager/articles', data)
 })
-
 
 module.exports = router

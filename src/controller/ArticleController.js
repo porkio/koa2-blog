@@ -39,34 +39,35 @@ const createArticle = async articleData => {
  */
 const getArticles = async (pageIndex, orderby, limit) => {
     !pageIndex && (pageIndex = 1)
-    !limit && (limit = 10)
+    !limit && (limit = 6)
 
     let order
     switch (orderby) {
         case undefined:
             order = [['order']]
             break
-        case 'createdAt':
-            order = [[orderby, 'desc']]
+        case 'order':
+            order = [['order']]
             break
         default:
-            order = [[orderby]]
+            order = [[orderby, 'desc']]
     }
 
     let offset = 0 + (pageIndex - 1) * limit
     try {
         const result = await Article.findAndCountAll({
             where: {},
-            attributes: ['id', 'title', 'linkUrl', 'showImgUrl', 'categoryId', 'order', 'views', 'likes', 'createdAt'],
+            attributes: ['id', 'title', 'linkUrl', 'showImgUrl', 'categoryId', 'order', 'views', 'likes', 'hidden', 'createdAt'],
             order: order,
-            limit: limit ? Number(limit) : 10,
+            limit: limit,
             offset: offset
         })
 
         if (result.count > 0) {
-            console.log('查询到数据了', result.count)
+            const pageTotal = Math.ceil(result.count / limit)
             const articleList = []
             result.rows.forEach(item => articleList.push(item.dataValues))
+            articleList.pageTotal = pageTotal
 
             return articleList
         }

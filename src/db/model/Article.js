@@ -3,7 +3,6 @@ const {
     INTEGER,
     STRING,
     DECIMAL,
-    BOOLEAN,
     TEXT
 } = require('../dataTypes')
 
@@ -63,9 +62,9 @@ const Article = seq.define('article', {
         comment: '获赞次数'
     },
     hidden: {
-        type: BOOLEAN,
+        type: DECIMAL,
         allowNull: false,
-        defaultValue: false,
+        defaultValue: 0,
         comment: '是否隐藏'
     }
 })

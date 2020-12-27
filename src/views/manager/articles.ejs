@@ -15,10 +15,10 @@
       <div id="article" class="m-item">
         <h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
         <ul class="form-group dis-flex">
-          <li class="btn btn-lightgray active">默认</li>
-          <li class="btn btn-lightgray">发布时间</li>
-          <li class="btn btn-lightgray">人气</li>
-          <li class="btn btn-lightgray">点赞</li>
+          <li id="btnOrder" class="btn btn-lightgray" data-type="order">默认</li>
+          <li id="btnOrder" class="btn btn-lightgray" data-type="createdAt">发布时间</li>
+          <li id="btnOrder" class="btn btn-lightgray" data-type="views">人气</li>
+          <li id="btnOrder" class="btn btn-lightgray" data-type="likes">点赞</li>
         </ul>
         <table class="table table-striped">
           <thead>
@@ -27,8 +27,9 @@
               <th scope="col">文章标题</th>
               <th scope="col">缩略图</th>
               <th scope="col">排序</th>
-              <th scope="col">浏览次数</th>
-              <th scope="col">点赞次数</th>
+              <th scope="col">浏览</th>
+              <th scope="col">点赞</th>
+              <th scope="col">展示/隐藏</th>
               <th scope="col">操作</th>
             </tr>
           </thead>
@@ -44,6 +45,13 @@
               <td><%= article.views %></td>
               <td><%= article.likes %></td>
               <td>
+                <% if (article.hidden == 1) { %>
+                <i class="iconfont icon-toggleoff" id="btnHidden" data-id="<%= article.id %>"></i>
+                <% } else { %>
+                <i class="iconfont icon-toggle-on" id="btnHidden" data-id="<%= article.id %>"></i>
+                <% } %>
+              </td>
+              <td>
                 <button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= article.id %>">编辑</button>
                 <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= article.id %>">
                   删除
@@ -53,9 +61,23 @@
             <% } %>
           </tbody>
         </table>
-        <div class="form-group">
-          <a href="writing" class="btn btn-primary">撰写文章</a>
+        <% if (articleList.pageTotal) { %>
+        <div class="form-group paginator">
+          <ul class="page-list dis-flex justify-content-center">
+            <li title="上一页" id="btnPrev">
+              <a href="javascript:;"><i class="iconfont icon-left"></i></a>
+            </li>
+            <% for (let i = 1; i <= articleList.pageTotal; i++) { %>
+            <li title="<%= i %>" class="" id="pageSelector">
+              <a href="javascript:;"><%= i %></a>
+            </li>
+            <% } %>
+            <li title="下一页" id="btnNext">
+              <a href="javascript:;"><i class="iconfont icon-right"></i></a>
+            </li>
+          </ul>
         </div>
+        <% } %>
       </div>
     </div>
   </section>
@@ -65,6 +87,98 @@
     import {
       utils
     } from '../../scripts/utils.js'
+
+    document.addEventListener('readystatechange', e => {
+      if (document.readyState === 'complete') {
+        console.log('Page is ready...')
+        // 当前页面 url 的 params
+        const currentParams = utils.queryString(location.href)
+        const pageSelectors = document.querySelectorAll('#pageSelector') // 分页按钮（选择器）
+        const btnPrev = document.querySelector('#btnPrev') // 上一页
+        const btnNext = document.querySelector('#btnNext') // 下一页
+        const orderButtons = document.querySelectorAll('#btnOrder') // 排序按钮组
+        const btnToggleList = document.querySelectorAll('#btnHidden') // 展示/隐藏 开关组
+
+        // 明天继续实现每条文章 展示/隐藏 开关功能
+
+
+        if (!currentParams.pageIndex) {
+          currentParams.pageIndex = 1 // 如果 url 参数中没有 pageIndex 则默认为 1 第一页
+        }
+        // 分页按钮/选择器 激活逻辑
+        pageSelectors.forEach(item => {
+          item.addEventListener('click', e => {
+            let url = location.href
+            const params = utils.queryString(location.href)
+            const currentPage = params.pageIndex
+            if (currentPage) {
+
+              url = url.replace(`=${currentPage}`, `=${item.title}`)
+            } else {
+              if (url.indexOf('?') > -1) {
+                url += '&pageIndex=' + item.title
+              } else {
+                url += '?pageIndex=' + item.title
+              }
+            }
+            location.href = url
+          }, false)
+          // 激活页面选择器中的第 n 页
+          if (item.title == currentParams.pageIndex) {
+            utils.toggleClassName(item, 'active')
+          }
+        })
+
+        // 上一页点击事件
+        btnPrev.addEventListener('click', e => {
+          if (currentParams.pageIndex == 1) return
+          location.href = 'articles?pageIndex=' + --currentParams.pageIndex
+        }, false)
+
+        // 下一页点击事件
+        btnNext.addEventListener('click', e => {
+          if (currentParams.pageIndex == pageSelectors.length) return
+          let url = location.href
+
+          if (url.indexOf('pageIndex') > -1) {
+            url = url.replace(`=${currentParams.pageIndex}`, `=${++currentParams.pageIndex}`)
+          } else {
+            url += '&pageIndex=' + ++currentParams.pageIndex
+          }
+          location.href = url
+        }, false)
+
+        // 排序按钮组
+        orderButtons.forEach(button => {
+          let url = location.href
+          const orderType = button.getAttribute('data-type')
+          const params = utils.queryString(url)
+          const currentOrder = params.orderby
+          if (!currentOrder && button.getAttribute('data-type') === 'order') {
+            utils.toggleClassName(button, 'active')
+          }
+          if (button.getAttribute('data-type') == currentOrder) {
+            utils.toggleClassName(button, 'active')
+          }
+
+          button.addEventListener('click', e => {
+
+            if (url.match('orderby')) {
+              url = url.replace(`=${currentOrder}`, `=${orderType}`)
+            } else {
+              if (url.indexOf('?') > -1) {
+                url += '&orderby=' + orderType
+              } else {
+                url += '?orderby=' + orderType
+              }
+            }
+
+            location.href = url
+          }, false)
+        })
+
+      }
+    }, false)
 
   </script>
 </body>
