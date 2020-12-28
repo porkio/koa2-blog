@@ -28,11 +28,11 @@ module.exports = {
     },
     createUserFail: {
         errno: 40005,
-        message: '创建用户失败'
+        message: '创建用户失败了'
     },
     deleteUserFail: {
         errno: 40006,
-        message: '删除用户失败'
+        message: '删除用户失败了'
     },
     siteConfigurationFail: {
         errno: 40007,
@@ -40,19 +40,19 @@ module.exports = {
     },
     getCategoriesFail: {
         errno: 40008,
-        message: '获取分类失败'
+        message: '获取分类失败了'
     },
     updateCategoryFail: {
         errno: 40009,
-        message: '分类编辑失败'
+        message: '分类编辑失败了'
     },
     createCategoryFail: {
         errno: 40010,
-        message: '分类创建失败'
+        message: '分类创建失败了'
     },
     destroyCategoryFail: {
         errno: 40011,
-        message: '分类删除失败'
+        message: '分类删除失败了'
     },
     uploadFilesFail: {
         errno: 40012,
@@ -68,7 +68,15 @@ module.exports = {
     },
     getArticleListFail: {
         errno: 40015,
-        message: '获取文章列表失败'
+        message: '获取文章列表失败了'
+    },
+    updatePropOfArticleFail: {
+        errno: 40016,
+        message: '更新文章属性失败了'
+    },
+    destroyArticleFail: {
+        errno: 40017,
+        message: '删除文章失败了'
     },
     repeatAction: {
         errno: 10002,

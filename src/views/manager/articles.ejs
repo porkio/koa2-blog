@@ -40,7 +40,7 @@
               <td class="td-title" id="article-title" data-id="<%= article.id %>">
                 <a href="../<%= article.linkUrl %>"><%= article.title %></a>
               </td>
-              <td class="td-img"><img src="<%= article.showImgUrl %>" alt=""></td>
+              <td class="td-img"><img title="文章缩略图" src="<%= article.showImgUrl %>" alt="文章缩略图"></td>
               <td><%= article.order %></td>
               <td><%= article.views %></td>
               <td><%= article.likes %></td>
@@ -55,9 +55,7 @@
               </td>
               <td>
                 <button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= article.id %>">编辑</button>
-                <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= article.id %>">
-                  删除
-                </button>
+                <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= article.id %>">删除</button>
               </td>
             </tr>
             <% } %>
@@ -89,10 +87,12 @@
     import {
       utils
     } from '../../scripts/utils.js'
+    utils.showInfo()
+    utils.imgLightBoxInit() // 图片灯箱初始化
 
     document.addEventListener('readystatechange', e => {
       if (document.readyState === 'complete') {
-        console.log('Page is ready...')
+
         // 当前页面 url 的 params
         const currentParams = utils.queryString(location.href)
         const pageSelectors = document.querySelectorAll('#pageSelector') // 分页按钮（选择器）
@@ -100,9 +100,8 @@
         const btnNext = document.querySelector('#btnNext') // 下一页
         const orderButtons = document.querySelectorAll('#btnOrder') // 排序按钮组
         const btnToggleList = document.querySelectorAll('#btnHidden') // 展示/隐藏 开关组
-
-        // 明天继续实现每条文章 展示/隐藏 开关功能
-
+        const editButtons = document.querySelectorAll('#btnEdit') // 编辑文章按钮组
+        const delButtons = document.querySelectorAll('#btnDelete') // 删除文章按钮组
 
         if (!currentParams.pageIndex) {
           currentParams.pageIndex = 1 // 如果 url 参数中没有 pageIndex 则默认为 1 第一页
@@ -165,7 +164,7 @@
 
           button.addEventListener('click', e => {
 
-            if (url.match('orderby')) {
+            if (/orderby/.test(url)) {
               url = url.replace(`=${currentOrder}`, `=${orderType}`)
             } else {
               if (url.indexOf('?') > -1) {
@@ -185,12 +184,91 @@
             const id = item.getAttribute('data-id')
             const value = item.getAttribute('data-v')
             if (value == 0) {
-              item.className = 'iconfont icon-toggleoff'
+              utils.ajax('/api/manager/setPropOfArticle', {
+                method: 'POST',
+                body: {
+                  id,
+                  prop: 'hidden',
+                  value: 1
+                }
+              }).then(res => {
+                if (res.errno === 0) {
+                  utils.showMessage({
+                    title: 'Ok. 该文章将不会出现在前端文章列表中',
+                    icon: 'Success'
+                  })
+                  item.className = 'iconfont icon-toggleoff'
+                  item.setAttribute('data-v', 1)
+                } else {
+                  utils.showMessage({
+                    title: res.message,
+                    icon: 'Failed'
+                  })
+                }
+              })
             } else {
-              item.className = 'iconfont icon-toggle-on'
+              utils.ajax('/api/manager/setPropOfArticle', {
+                method: 'POST',
+                body: {
+                  id,
+                  prop: 'hidden',
+                  value: 0
+                }
+              }).then(res => {
+                if (res.errno === 0) {
+                  utils.showMessage({
+                    title: 'Ok. 该文章将会正常展示在前端文章列表中',
+                    icon: 'Success'
+                  })
+                  item.className = 'iconfont icon-toggle-on'
+                  item.setAttribute('data-v', 0)
+                } else {
+                  utils.showMessage({
+                    title: res.message,
+                    icon: 'Failed'
+                  })
+                }
+              })
             }
           }, false)
         })
+
+        // 编辑文章
+        editButtons.forEach(button => {
+          button.addEventListener('click', e => {
+            const id = button.getAttribute('data-id')
+            if (!id) return
+            location.href = 'writing?id=' + id
+          }, false)
+        })
+
+        // 删除文章
+        delButtons.forEach(button => {
+          button.addEventListener('click', e => {
+            if (confirm('删除后将无法恢复，确定要删除吗？')) {
+              const id = button.getAttribute('data-id')
+              if (!id) return
+              utils.ajax('/api/manager/delArticle', {
+                method: 'POST',
+                body: {
+                  id
+                }
+              }).then(res => {
+                if (res.errno === 0) {
+                  utils.showMessage({
+                    title: res.message,
+                    icon: 'Success'
+                  })
+                  setTimeout(() => {
+                    location.reload()
+                  }, 2500)
+                }
+              })
+            }
+          }, false)
+        })
+
+
       }
     }, false)
 

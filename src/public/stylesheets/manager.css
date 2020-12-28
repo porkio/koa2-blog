@@ -126,10 +126,6 @@
     border: 1px solid transparent;
 }
 
-a.btn:hover {
-    color: #fff;
-}
-
 .btn-small {
     font-size: .9rem;
     padding: .2rem .6rem;
@@ -219,6 +215,7 @@ button.btn {
     text-align: center;
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
+    color: #444;
 }
 
 th {
@@ -237,12 +234,14 @@ table {
 .td-img img {
     width: 80px;
     height: 50px;
+    display: block;
+    border-radius: 4px;
 }
 
 .td-title {
     overflow: hidden;
     text-align: left !important;
-    max-width: 300px;
+    max-width: 320px;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
@@ -294,7 +293,7 @@ input[type="number"] {
 }
 
 textarea {
-    padding: .5rem .4rem;
+    padding: 1rem;
     margin: 1rem 0;
     border: 1px solid rgba(41, 41, 41, .2);
     outline: none;
@@ -303,7 +302,7 @@ textarea {
     max-width: 100%;
     min-width: 100%;
     min-height: 480px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
 }
 
 input[type="submit"],

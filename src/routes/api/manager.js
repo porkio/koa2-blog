@@ -4,16 +4,19 @@ const {
     createCategory,
     destroyCategory,
 } = require('../../controller/CategoryController')
-const { updateArticleImg } = require('../../controller/manager');
-const { updateConfig } = require('../../controller/SiteConfigController');
-const { createArticle } = require('../../controller/ArticleController')
+const { updateArticleImg } = require('../../controller/manager')
+const { updateConfig } = require('../../controller/SiteConfigController')
+const {
+    createArticle,
+    setPorpOfArticleById,
+    destroyArticleById
+} = require('../../controller/ArticleController')
 const { createCloudTag } = require('../../controller/CloudTagController')
-const noLoginRedirect = require('../../middleware/noLoginRedirect');
-const upload = require('../../middleware/upload');
-const genValidator = require('../../middleware/validator');
-const articleValidate = require('../../validator/article');
+const noLoginRedirect = require('../../middleware/noLoginRedirect')
+const upload = require('../../middleware/upload')
+const genValidator = require('../../middleware/validator')
+const articleValidate = require('../../validator/article')
 router.prefix('/api/manager')
-
 
 // 设置站点配置信息
 router.post('/setConfig', noLoginRedirect, async (ctx, next) => {
@@ -61,6 +64,20 @@ router.post('/addCloudTag', noLoginRedirect, async (ctx, next) => {
     const { tagName, order } = ctx.request.body
     // controller
     ctx.body = await createCloudTag(tagName, order)
+})
+
+// 通过文章 ID 更新文章属性
+router.post('/setPropOfArticle', noLoginRedirect, async (ctx, next) => {
+    const { id, prop, value } = ctx.request.body
+    // controller
+    ctx.body = await setPorpOfArticleById(id, prop, value)
+})
+
+// 通过 ID 删除文章
+router.post('/delArticle', noLoginRedirect, async (ctx, next) => {
+    const { id } = ctx.request.body
+    // controller
+    ctx.body = await destroyArticleById(id)
 })
 
 module.exports = router
