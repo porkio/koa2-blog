@@ -7,8 +7,11 @@ const router = require('koa-router')()
 const noLoginRedirect = require('../../../middleware/noLoginRedirect')
 const { getConfig } = require('../../../controller/SiteConfigController')
 const { getCategories } = require('../../../controller/CategoryController')
-const { getAllCloudTags } = require('../../../controller/CloudTagController')
-const { getArticles } = require('../../../controller/ArticleController')
+const { getAllTags } = require('../../../controller/TagController')
+const {
+    getArticleList,
+    getArticleById
+} = require('../../../controller/ArticleController')
 
 router.prefix('/manager')
 
@@ -45,16 +48,37 @@ router.get('/categories', noLoginRedirect, async (ctx, next) => {
 
 // 新建文章
 router.get('/writing', noLoginRedirect, async (ctx, next) => {
+    const { id } = ctx.query
     // controller
+    let article = {}
+    if (id) {
+        article = await getArticleById(id)
+    }
     const catesList = await getCategories()
-    let cloudTagList = await getAllCloudTags()
+    let tagList = await getAllTags()
 
+    if (id && id == article.id) {
+        // 此处是通过 id 编辑该文章
+        const data = {
+            pageInfo: {
+                title: '编辑文章'
+            }
+        }
+
+        console.log(article)
+
+        Object.assign(data, { article, catesList, tagList })
+        await ctx.render('manager/writing', data)
+        return
+    }
+
+    // 撰写新文章
     const data = {
         pageInfo: {
             title: '撰写文章'
         }
     }
-    Object.assign(data, { catesList, cloudTagList })
+    Object.assign(data, { article, catesList, tagList })
     await ctx.render('manager/writing', data)
 })
 
@@ -68,8 +92,7 @@ router.get('/upload', noLoginRedirect, async (ctx, next) => {
 router.get('/articles', noLoginRedirect, async (ctx, next) => {
     // controller
     const { pageIndex, orderby, limit } = ctx.query
-
-    const articleList = await getArticles(pageIndex, orderby, limit)
+    const articleList = await getArticleList(pageIndex, orderby, limit)
 
     const data = {
         pageInfo: {

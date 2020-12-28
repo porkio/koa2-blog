@@ -12,7 +12,7 @@ const {
     DECIMAL
 } = require('../dataTypes')
 
-const CloudTag = seq.define('cloud_tags', {
+const Tag = seq.define('cloud_tags', {
     tagName: {
         type: STRING,
         allowNull: false,
@@ -26,4 +26,4 @@ const CloudTag = seq.define('cloud_tags', {
     }
 })
 
-module.exports = CloudTag
+module.exports = Tag

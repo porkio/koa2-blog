@@ -11,7 +11,7 @@ const {
     setPorpOfArticleById,
     destroyArticleById
 } = require('../../controller/ArticleController')
-const { createCloudTag } = require('../../controller/CloudTagController')
+const { createTag } = require('../../controller/TagController')
 const noLoginRedirect = require('../../middleware/noLoginRedirect')
 const upload = require('../../middleware/upload')
 const genValidator = require('../../middleware/validator')
@@ -60,10 +60,10 @@ router.post('/publish', noLoginRedirect, genValidator(articleValidate), async (c
 })
 
 // 新增云标签
-router.post('/addCloudTag', noLoginRedirect, async (ctx, next) => {
+router.post('/addTag', noLoginRedirect, async (ctx, next) => {
     const { tagName, order } = ctx.request.body
     // controller
-    ctx.body = await createCloudTag(tagName, order)
+    ctx.body = await createTag(tagName, order)
 })
 
 // 通过文章 ID 更新文章属性

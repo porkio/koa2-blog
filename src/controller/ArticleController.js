@@ -5,12 +5,14 @@
  */
 
 const { Article } = require('../db/model/index')
+
 const { SuccessModel, FailedModel } = require('../model/ResModel')
 const {
     createArticleFail,
     getArticleListFail,
     updatePropOfArticleFail,
     destroyArticleFail,
+    getSingleArticleFail,
     paramsError
 } = require('../model/ErrorModel')
 
@@ -21,12 +23,15 @@ const {
  */
 const createArticle = async articleData => {
     if (!articleData.title || !articleData.content) {
-        return new FailedModel(createArticleFail)
+        return new FailedModel(paramsError)
     }
+
     try {
-        const result = await Article.create(articleData)
-        if (result.dataValues.id) {
-            // 文章发布成功
+        const article = await Article.create(articleData)
+        if (article.dataValues.id) {
+            // 文章发布成功 创建云标签关联关系
+            const tags = await article.addTags(articleData.tagIds)
+            console.log(tags)
             return new SuccessModel({ message: '文章已发布' })
         }
         return new FailedModel(createArticleFail)
@@ -40,7 +45,7 @@ const createArticle = async articleData => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticles = async (pageIndex, orderby, limit) => {
+const getArticleList = async (pageIndex, orderby, limit) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 6)
 
@@ -80,10 +85,26 @@ const getArticles = async (pageIndex, orderby, limit) => {
 }
 
 /**
+ * @description 通过 id 获取文章数据
+ * @param { Number } id
+ */
+const getArticleById = async id => {
+    if (!id) return new FailedModel(paramsError)
+    try {
+        const article = await Article.findOne({
+            where: { id }
+        })
+        return article.dataValues
+    } catch (error) {
+        return new FailedModel(getSingleArticleFail)
+    }
+}
+
+/**
  * @description 通过 id 设置属性值
- * @param { Number } id 
- * @param { String } prop 
- * @param { String } value 
+ * @param { Number } id
+ * @param { String } prop
+ * @param { String } value
  * @return ResModel
  */
 const setPorpOfArticleById = async (id, prop, value) => {
@@ -107,7 +128,7 @@ const setPorpOfArticleById = async (id, prop, value) => {
 
 /**
  * @description 通过 id 删除文章
- * @param { Number } id 
+ * @param { Number } id
  */
 const destroyArticleById = async id => {
     if (!id) return new FailedModel(paramsError)
@@ -127,7 +148,8 @@ const destroyArticleById = async id => {
 
 module.exports = {
     createArticle,
-    getArticles,
+    getArticleList,
     setPorpOfArticleById,
-    destroyArticleById
+    destroyArticleById,
+    getArticleById
 }

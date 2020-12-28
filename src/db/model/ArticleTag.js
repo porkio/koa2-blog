@@ -5,9 +5,13 @@ const {
     DECIMAL,
     TEXT
 } = require('../dataTypes')
-const Article = require('./Article')
 
 const ArticleTag = seq.define('article_tag', {
+    id: {
+        type: INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     articleId: {
         type: INTEGER,
         allowNull: false,

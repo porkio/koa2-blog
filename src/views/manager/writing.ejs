@@ -17,18 +17,21 @@
         <div class="form-writing">
           <div class="form-group">
             <label for="title">文章标题</label>
-            <input type="text" name="title" id="title" autocomplete="" required>
+            <input type="text" name="title" id="title" value="<%= article.title ? article.title : '' %>" autocomplete=""
+              required>
             <i class="iconfont icon-fail" aria-hidden="true"></i>
           </div>
           <div class="dis-flex justify-space-between">
             <div class="form-group col-6">
               <label for="linkUrl">固定链接</label>
-              <input type="text" name="linkUrl" id="linkURL" autocomplete="" required>
+              <input type="text" name="linkUrl" id="linkURL" value="<%= article.linkUrl ? article.linkUrl : '' %>"
+                autocomplete="" required>
               <span class="input-btn"><i class="iconfont icon-shuaxin"></i></span>
             </div>
             <div class="form-group col-3">
               <label for="order">排序</label>
-              <input type="number" name="order" id="order" value="100" autocomplete="" required>
+              <input type="number" name="order" id="order" value="<%= article.order ? article.order : 100 %>"
+                autocomplete="" required>
             </div>
             <div class="form-group col-3">
               <label for="categoryId">文章分类</label>
@@ -37,7 +40,11 @@
                 <% if (!category.parentId) { %>
                 <option value="<%= category.id %>" disabled><%= category.cateName %></option>
                 <% } else { %>
+                <% if (article.categoryId == category.id) {%>
+                <option value="<%= category.id %>" selected>&nbsp;&nbsp; <%= category.cateName %></option>
+                <% } else { %>
                 <option value="<%= category.id %>">&nbsp;&nbsp; <%= category.cateName %></option>
+                <% } %>
                 <% } %>
                 <% } %>
               </select>
@@ -46,14 +53,19 @@
 
           <div class="form-group">
             <label for="content">正文</label>
-            <textarea id="content" name="name" rows="28" cols="100"></textarea>
+            <textarea id="content" name="name" rows="28"
+              cols="100"><%= article.content ? article.content : '' %></textarea>
           </div>
 
           <div class="form-group">
             <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
             <div class="dis-flex clodu-tag-group flex-wrap">
-              <% for (let tag of cloudTagList) { %>
+              <% for (let tag of tagList) { %>
+              <% if (article.tagIds) { %>
+              <span class="btn btn-tag" selected="true" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
+              <% } else { %>
               <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
+              <% } %>
               <% } %>
             </div>
           </div>
@@ -61,25 +73,32 @@
           <div class="dis-flex">
             <div class="form-group col-4">
               <label for="views">浏览次数</label>
-              <input type="number" name="views" id="views" value="0" autocomplete="">
+              <input type="number" name="views" id="views" value="<%= article.views ? article.views : 0 %>"
+                autocomplete="">
             </div>
             <div class="form-group col-4">
               <label for="likes">获赞次数</label>
-              <input type="number" name="likes" id="likes" value="0" autocomplete="">
+              <input type="number" name="likes" id="likes" value="<%= article.likes ? article.likes : 0 %>"
+                autocomplete="">
             </div>
           </div>
 
           <div class="form-group col-4">
             <label for="likes">文章缩略图</label>
             <div class="form-image">
-              <img src="../images/default-article-img.jpg" id="showImgUrl" alt="">
+              <img src="<%= article.showImgUrl ? article.showImgUrl : '../images/default-article-img.jpg' %>"
+                id="showImgUrl" alt="">
               <span class="btn btn-outline-primary btn-small" id="btnChangeImg">更换</span>
               <input type="file" name="articleImg" id="articleImg" style="display: none;">
             </div>
           </div>
 
           <div class="form-group">
+            <% if (article.id) { %>
+            <input type="button" id="btn-save" value="保存">
+            <% } else { %>
             <input type="button" id="btn-submit" value="发布">
+            <% } %>
           </div>
         </div>
       </div>
@@ -138,6 +157,8 @@
         const imgInput = document.querySelector('#articleImg')
         const showImg = document.querySelector('#showImgUrl')
         const btnSubmit = document.querySelector('#btn-submit')
+        const btnSave = document.querySelector('#btn-save')
+
 
         layerDefault && layerDefault.remove()
 
@@ -175,7 +196,27 @@
         }, false)
 
         // 云标签点击监听
-        cloudTags.forEach(tag => tag.addEventListener('click', cloudTagEvent, false))
+        cloudTags.forEach(tag => {
+          const tagId = tag.getAttribute('data-id')
+          if (tag.getAttribute('selected')) {
+            if (!(tagId in formData.tagIds)) {
+              formData.tagIds.push(tagId)
+              console.log(formData)
+            }
+            const bgColor = utils.getRandomDeepColor()
+            tag.style.backgroundColor = bgColor
+            tag.style.color = '#ffffff'
+            tag.style.border = '1px solid ' + bgColor
+          } else {
+            if (tagId in formData.tagIds) {
+              formData.tagIds.remove(tagId)
+            }
+            tag.style.background = 'none'
+            tag.style.color = '#888888'
+            tag.style.border = '1px solid #888888'
+          }
+          tag.addEventListener('click', cloudTagEvent, false)
+        })
 
         // 注册云标签被点击事件（函数）
         function cloudTagEvent(e) {
@@ -189,12 +230,14 @@
             tagElem.style.backgroundColor = bgColor
             tagElem.style.color = '#ffffff'
             tagElem.style.border = '1px solid ' + bgColor
+            tagElem.setAttribute('selected', 'true')
           } else {
             // 从标签id列表中移除选中标签的id
             formData.tagIds.splice(formData.tagIds.indexOf(tagId), 1)
             tagElem.style.background = 'none'
             tagElem.style.color = '#888888'
             tagElem.style.border = '1px solid #888888'
+            tagElem.setAttribute('selected', 'false')
             console.log(formData)
           }
         }
@@ -226,7 +269,7 @@
         }, false)
 
         // 发布文章
-        btnSubmit.addEventListener('click', e => {
+        btnSubmit && btnSubmit.addEventListener('click', e => {
           const title = titleInput.value
           const linkUrl = linkUrlInput.value
           const order = Number(orderInput.value) || 100
@@ -300,7 +343,7 @@
             })
             return
           }
-          utils.ajax('/api/manager/addCloudTag', {
+          utils.ajax('/api/manager/addTag', {
             method: 'POST',
             body: {
               tagName,

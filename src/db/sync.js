@@ -7,43 +7,12 @@ const {
     User,
     Article,
     SiteConfig,
-    CloudTag,
+    Tag,
     Category,
     ArticleTag
 } = require('./model/index')
 
 const databaseInit = require('./databaseInit')
-
-Article.belongsTo(User, {
-    foreignKey: 'userId'
-})
-
-User.hasMany(Article)
-
-Article.belongsTo(Category, {
-    foreignKey: 'categoryId'
-})
-
-Category.hasMany(Article)
-
-
-Article.belongsToMany(CloudTag, {
-    through: {
-        model: ArticleTag,
-        unique: false
-    },
-    foreignKey: 'articleId',
-    constraints: false
-})
-
-CloudTag.belongsToMany(Article, {
-    through: {
-        model: ArticleTag,
-        unique: false
-    },
-    foreignKey: 'tagId',
-    constraints: false
-})
 
 
 // 测试连接

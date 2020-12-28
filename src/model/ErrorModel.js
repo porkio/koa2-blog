@@ -62,7 +62,7 @@ module.exports = {
         errno: 40013,
         message: '文章发布失败了'
     },
-    createCloudTagFail: {
+    createTagFail: {
         errno: 40014,
         message: '云标签创建失败'
     },
@@ -77,6 +77,10 @@ module.exports = {
     destroyArticleFail: {
         errno: 40017,
         message: '删除文章失败了'
+    },
+    getSingleArticleFail: {
+        errno: 40018,
+        message: '获取文章详情失败'
     },
     repeatAction: {
         errno: 10002,

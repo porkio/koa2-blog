@@ -1,42 +1,42 @@
 /**
 * @author Pork
-* @description 云标签控制器 CloudTag.js
+* @description 云标签控制器 Tag.js
 * @created_at 2020/12/12
 * @updated_at
 */
 
-const { CloudTag } = require('../db/model/index')
+const { Tag } = require('../db/model/index')
 const {
-	SuccessModel,
-	FailedModel
+    SuccessModel,
+    FailedModel
 } = require('../model/ResModel')
-const { createCloudTagFail } = require('../model/ErrorModel')
+const { createTagFail } = require('../model/ErrorModel')
 
 /**
 * @description 获取所有云标签
 * @param {  }
 * @return Object Array
 */
-const getAllCloudTags = async () => {
-	const result = await CloudTag.findAll({
-		order: ['order']
-	})
-	const cloudTagList = []
-	if (result) {
-		result.forEach(tag => cloudTagList.push(tag.dataValues))
-		return cloudTagList
-	}
+const getAllTags = async () => {
+    const result = await Tag.findAll({
+        order: ['order']
+    })
+    const TagList = []
+    if (result) {
+        result.forEach(tag => TagList.push(tag.dataValues))
+        return TagList
+    }
 
-	return null
+    return null
 }
 
 /**
  * @description 创建云标签
  * @param { String } tagName
  */
-const createCloudTag = async (tagName, order) => {
+const createTag = async (tagName, order) => {
     try {
-        const result = await CloudTag.create({
+        const result = await Tag.create({
             tagName,
             order
         })
@@ -50,15 +50,15 @@ const createCloudTag = async (tagName, order) => {
                 }
             })
         }
-        return new FailedModel(createCloudTagFail)
+        return new FailedModel(createTagFail)
 
     } catch (error) {
         console.log(error)
-        return new FailedModel(createCloudTagFail)
+        return new FailedModel(createTagFail)
     }
 }
 
 module.exports = {
-    getAllCloudTags,
-    createCloudTag
+    getAllTags,
+    createTag
 }
