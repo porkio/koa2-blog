@@ -16,7 +16,7 @@
         <h2 class="m-title" title="这是一个Tips"><%= pageInfo.title %></h2>
         <ul class="form-group dis-flex">
           <li id="btnOrder" class="btn btn-lightgray" data-type="order">默认</li>
-          <li id="btnOrder" class="btn btn-lightgray" data-type="createdAt">发布时间</li>
+          <li id="btnOrder" class="btn btn-lightgray" data-type="createdAt">最新</li>
           <li id="btnOrder" class="btn btn-lightgray" data-type="views">人气</li>
           <li id="btnOrder" class="btn btn-lightgray" data-type="likes">点赞</li>
         </ul>
@@ -46,9 +46,11 @@
               <td><%= article.likes %></td>
               <td>
                 <% if (article.hidden == 1) { %>
-                <i class="iconfont icon-toggleoff" id="btnHidden" data-id="<%= article.id %>"></i>
+                <i class="iconfont icon-toggleoff" id="btnHidden" data-v="<%= article.hidden %>"
+                  data-id="<%= article.id %>"></i>
                 <% } else { %>
-                <i class="iconfont icon-toggle-on" id="btnHidden" data-id="<%= article.id %>"></i>
+                <i class="iconfont icon-toggle-on" id="btnHidden" data-v="<%= article.hidden %>"
+                  data-id="<%= article.id %>"></i>
                 <% } %>
               </td>
               <td>
@@ -177,6 +179,18 @@
           }, false)
         })
 
+        // 文章 展示/隐藏 开关监听
+        btnToggleList.forEach(item => {
+          item.addEventListener('click', e => {
+            const id = item.getAttribute('data-id')
+            const value = item.getAttribute('data-v')
+            if (value == 0) {
+              item.className = 'iconfont icon-toggleoff'
+            } else {
+              item.className = 'iconfont icon-toggle-on'
+            }
+          }, false)
+        })
       }
     }, false)
 

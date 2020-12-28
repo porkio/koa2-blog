@@ -216,6 +216,7 @@ button.btn {
 .table td,
 .table th {
     padding: .65rem;
+    text-align: center;
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
 }
@@ -240,6 +241,7 @@ table {
 
 .td-title {
     overflow: hidden;
+    text-align: left !important;
     max-width: 300px;
     white-space: nowrap;
     text-overflow: ellipsis;
