@@ -151,6 +151,32 @@ const getArticleById = async id => {
 }
 
 /**
+ * @description 通过链接获取文章
+ * @param { String } link
+ */
+const getArticleByLinkUrl = async link => {
+    if (!link) {
+        return new FailedModel(paramsError)
+    }
+    try {
+        const article = await Article.findOne({
+            where: { linkUrl: link },
+            include: [{
+                model: Tag,
+                attributes: ['id', 'tagName']
+            }]
+        })
+        if (article) {
+            return article.dataValues
+        }
+        return new FailedModel(getSingleArticleFail)
+    } catch (error) {
+        console.log('err: ... ', error)
+        return new FailedModel(getSingleArticleFail)
+    }
+}
+
+/**
  * @description 通过 id 设置属性值
  * @param { Number } id
  * @param { String } prop
@@ -202,5 +228,6 @@ module.exports = {
     getArticleList,
     setPorpOfArticleById,
     destroyArticleById,
-    getArticleById
+    getArticleById,
+    getArticleByLinkUrl
 }

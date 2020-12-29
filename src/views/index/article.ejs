@@ -1,0 +1,36 @@
+<%- include('layout/_header') %>
+<h1><%= title %></h1>
+<p>EJS Welcome to <%= title %></p>
+<h3>This is a test Home Page.</h3>
+<div id="box">
+  <a href="http://www.baidu.com" id="linkToBD">百度</a>
+</div>
+<form class="" action="api/user/logout" method="post">
+  <button type="sbumit" name="button">登出</button>
+</form>
+<script type="module">
+  import {
+    utils
+  } from "./scripts/utils.js";
+  document.addEventListener('readystatechange', e => {
+    if (document.readyState === 'complete') {
+      const linkToBD = document.querySelector('#linkToBD')
+      linkToBD.addEventListener('click', e => {
+        e.preventDefault()
+        const res = utils.copyText('zhaoxu123')
+        res && utils.showMessage({
+          title: '复制成功',
+          icon: 'Success'
+        })
+        setTimeout(() => {
+          location.href = e.target.href
+        }, 2000)
+      }, false)
+    }
+
+
+
+  }, false)
+
+</script>
+<%- include('layout/_footer') %>
