@@ -61,12 +61,14 @@
             <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
             <div class="dis-flex clodu-tag-group flex-wrap">
               <% for (let tag of tagList) { %>
-              <% if (article.tags.length  > 0) { %>
+              <% if (article.tags) { %>
               <% if (article.tagIds.indexOf(tag.id) > -1) { %>
               <span class="btn btn-tag" selected="true" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
               <% } else { %>
               <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
               <% } %>
+              <% } else { %>
+              <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
               <% } %>
               <% } %>
             </div>
@@ -97,7 +99,7 @@
 
           <div class="form-group">
             <% if (article.id) { %>
-            <input type="button" id="btn-save" value="保存">
+            <input type="button" id="btn-update" value="保存">
             <% } else { %>
             <input type="button" id="btn-submit" value="发布">
             <% } %>
@@ -159,8 +161,7 @@
         const imgInput = document.querySelector('#articleImg')
         const showImg = document.querySelector('#showImgUrl')
         const btnSubmit = document.querySelector('#btn-submit')
-        const btnSave = document.querySelector('#btn-save')
-
+        const btnUpdate = document.querySelector('#btn-update')
 
         layerDefault && layerDefault.remove()
 
@@ -271,8 +272,8 @@
           })
         }, false)
 
-        // 发布文章
-        btnSubmit && btnSubmit.addEventListener('click', e => {
+        // 数据格式化/校验
+        function formatData() {
           const title = titleInput.value
           const linkUrl = linkUrlInput.value
           const order = Number(orderInput.value) || 100
@@ -306,6 +307,11 @@
                 linkUrlInput.value = linkString
               }
             })()
+        }
+
+        // 发布文章
+        btnSubmit && btnSubmit.addEventListener('click', e => {
+          formatData()
 
           utils.ajax('/api/manager/publish', {
             method: 'POST',
@@ -316,6 +322,9 @@
                 title: res.message,
                 icon: 'success'
               })
+              setTimeout(() => {
+                location.href = 'articles'
+              }, 2000)
             } else {
               utils.showMessage({
                 title: res.message,
@@ -341,7 +350,7 @@
           const order = document.querySelector('#tagOrder').value
           if (!tagName || !order) {
             utils.showMessage({
-              title: '标签名和排序均可能为空',
+              title: '标签名和排序均不可为空',
               icon: 'failed'
             })
             return
@@ -377,7 +386,34 @@
           })
         }, false)
 
-        console.log()
+        // 更新文章
+        btnUpdate && btnUpdate.addEventListener('click', e => {
+          const id = utils.queryString(location.href).id
+          formatData()
+          utils.ajax('/api/manager/updateArticle', {
+            method: 'POST',
+            body: {
+              id,
+              article: formData
+            }
+          }).then(res => {
+            if (res.errno === 0) {
+              utils.showMessage({
+                title: res.message,
+                icon: 'success'
+              })
+              setTimeout(() => {
+                location.href = 'articles'
+              }, 2000)
+            } else {
+              utils.showMessage({
+                title: res.message,
+                icon: 'failed'
+              })
+            }
+          })
+        }, false)
+
 
       }
     }, false)

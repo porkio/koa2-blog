@@ -8,6 +8,7 @@ const { updateArticleImg } = require('../../controller/manager')
 const { updateConfig } = require('../../controller/SiteConfigController')
 const {
     createArticle,
+    updateArticle,
     setPorpOfArticleById,
     destroyArticleById
 } = require('../../controller/ArticleController')
@@ -78,6 +79,12 @@ router.post('/delArticle', noLoginRedirect, async (ctx, next) => {
     const { id } = ctx.request.body
     // controller
     ctx.body = await destroyArticleById(id)
+})
+
+router.post('/updateArticle', noLoginRedirect, async (ctx, next) => {
+    const { id, article } = ctx.request.body
+    // controller
+    ctx.body = await updateArticle(id, article)
 })
 
 module.exports = router

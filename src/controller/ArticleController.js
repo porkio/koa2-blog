@@ -13,7 +13,8 @@ const {
     updatePropOfArticleFail,
     destroyArticleFail,
     getSingleArticleFail,
-    paramsError
+    paramsError,
+    updateArticleFail
 } = require('../model/ErrorModel')
 
 /**
@@ -40,6 +41,36 @@ const createArticle = async articleData => {
     } catch (error) {
         console.log(error)
         return new FailedModel(createArticleFail)
+    }
+}
+
+/**
+ * @description 更新文章
+ * @param { Object } articleData
+ * @return ResModel
+ */
+const updateArticle = async (id, articleData) => {
+    if (!id || !articleData.title || !articleData.content) {
+        return new FailedModel(paramsError)
+    }
+
+    try {
+        const result = await Article.update(articleData, {
+            where: { id }
+        })
+        const tags = articleData.tagIds
+        const article = await Article.findOne({
+            where: { id }
+        })
+        const res = await article.setTags(tags)
+        console.log(res)
+        if (result > 0) {
+            return new SuccessModel({ message: '文章已更新' })
+        }
+        return new FailedModel(updateArticleFail)
+    } catch (error) {
+        console.log(error)
+        return new FailedModel(updateArticleFail)
     }
 }
 
@@ -167,6 +198,7 @@ const destroyArticleById = async id => {
 
 module.exports = {
     createArticle,
+    updateArticle,
     getArticleList,
     setPorpOfArticleById,
     destroyArticleById,

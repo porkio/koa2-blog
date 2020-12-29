@@ -82,6 +82,10 @@ module.exports = {
         errno: 40018,
         message: '获取文章详情失败'
     },
+    updateArticleFail: {
+        errno: 40019,
+        message: '更新文章失败了'
+    },
     repeatAction: {
         errno: 10002,
         message: '重复的操作'
