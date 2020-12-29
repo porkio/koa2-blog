@@ -54,6 +54,7 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
     if (id) {
         article = await getArticleById(id)
     }
+
     const catesList = await getCategories()
     let tagList = await getAllTags()
 
@@ -64,8 +65,6 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
                 title: '编辑文章'
             }
         }
-
-        console.log(article)
 
         Object.assign(data, { article, catesList, tagList })
         await ctx.render('manager/writing', data)

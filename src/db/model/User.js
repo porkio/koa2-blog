@@ -20,6 +20,9 @@ const User = seq.define('user', {
     },
     email: {
         type: STRING,
+        validate: {
+            isEmail: true
+        },
         allowNull: false,
         unique: true,
         comment: '邮箱'
@@ -31,6 +34,10 @@ const User = seq.define('user', {
     },
     authLevel: {
         type: DECIMAL,
+        validate: {
+            min: 0,
+            max: 4
+        },
         allowNull: false,
         defaultValue: 4, // 0: 超管， 1: 管理员， 2: 编辑， 3: 投稿者， 4: 普通用户
         comment: '权限等级'
@@ -43,6 +50,10 @@ const User = seq.define('user', {
     gender: {
         type: DECIMAL,
         allowNull: true,
+        validate: {
+            min: 0,
+            max: 2
+        },
         defaultValue: 0, // 0: 保密 1: 男，2: 女
         comment: '性别'
     },

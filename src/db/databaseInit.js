@@ -13,7 +13,8 @@ const {
     SiteConfig,
     Tag,
     Category,
-    FriendLink
+    FriendLink,
+    ArticleTag
 } = require('./model/index')
 
 const databaseInit = async () => {
@@ -91,6 +92,22 @@ const databaseInit = async () => {
         order: 100,
         articleId: article.dataValues.id
     })
+
+    await ArticleTag.create({
+        articleId: 1,
+        tagId: 1
+    })
+
+    await ArticleTag.create({
+        articleId: 1,
+        tagId: 2
+    })
+
+    await ArticleTag.create({
+        articleId: 1,
+        tagId: 3
+    })
+
 
     const friendLink = await FriendLink.create({
         linkTitle: 'Web MDN Docs',

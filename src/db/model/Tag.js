@@ -12,10 +12,11 @@ const {
     DECIMAL
 } = require('../dataTypes')
 
-const Tag = seq.define('cloud_tags', {
+const Tag = seq.define('tags', {
     tagName: {
         type: STRING,
         allowNull: false,
+        unique: true,
         comment: '云标签'
     },
     order: {

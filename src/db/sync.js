@@ -6,14 +6,13 @@ const seq = require('./seq')
 const {
     User,
     Article,
+    ArticleTag,
     SiteConfig,
     Tag,
     Category,
-    ArticleTag
 } = require('./model/index')
 
 const databaseInit = require('./databaseInit')
-
 
 // 测试连接
 seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))

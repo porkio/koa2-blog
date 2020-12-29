@@ -28,8 +28,7 @@ Article.belongsToMany(Tag, {
         model: ArticleTag,
         unique: false
     },
-    foreignKey: 'articleId',
-    constraints: false
+    foreignKey: 'articleId'
 })
 
 Tag.belongsToMany(Article, {
@@ -37,8 +36,7 @@ Tag.belongsToMany(Article, {
         model: ArticleTag,
         unique: false
     },
-    foreignKey: 'tagId',
-    constraints: false
+    foreignKey: 'tagId'
 })
 
 module.exports = {

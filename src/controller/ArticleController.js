@@ -4,7 +4,7 @@
  * @created_at 2020/12/20
  */
 
-const { Article } = require('../db/model/index')
+const { Article, Tag, ArticleTag } = require('../db/model/index')
 
 const { SuccessModel, FailedModel } = require('../model/ResModel')
 const {
@@ -30,9 +30,11 @@ const createArticle = async articleData => {
         const article = await Article.create(articleData)
         if (article.dataValues.id) {
             // 文章发布成功 创建云标签关联关系
-            const tags = await article.addTags(articleData.tagIds)
-            console.log(tags)
-            return new SuccessModel({ message: '文章已发布' })
+            const tags = articleData.tagIds
+            const res = await article.setTags(tags)
+            if (res[0]) {
+                return new SuccessModel({ message: '文章已发布' })
+            }
         }
         return new FailedModel(createArticleFail)
     } catch (error) {
@@ -92,10 +94,27 @@ const getArticleById = async id => {
     if (!id) return new FailedModel(paramsError)
     try {
         const article = await Article.findOne({
-            where: { id }
+            where: { id },
+            include: [{
+                model: Tag,
+                attributes: ['id', 'tagName'],
+                through: {
+                    attributes: [],
+                },
+            }]
         })
-        return article.dataValues
+        const data = article.dataValues
+        const tagIds = []
+
+        data.tags.forEach(tag => {
+            tagIds.push(tag.id)
+        })
+
+        Object.assign(data, { tagIds })
+
+        return data
     } catch (error) {
+        console.log(error)
         return new FailedModel(getSingleArticleFail)
     }
 }

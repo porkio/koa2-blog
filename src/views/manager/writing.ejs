@@ -61,10 +61,12 @@
             <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
             <div class="dis-flex clodu-tag-group flex-wrap">
               <% for (let tag of tagList) { %>
-              <% if (article.tagIds) { %>
+              <% if (article.tags.length  > 0) { %>
+              <% if (article.tagIds.indexOf(tag.id) > -1) { %>
               <span class="btn btn-tag" selected="true" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
               <% } else { %>
               <span class="btn btn-tag" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
+              <% } %>
               <% } %>
               <% } %>
             </div>
@@ -173,8 +175,9 @@
         }, false)
 
         // 自动随机生成短链接
-        linkUrlInput.value = utils.randomStrGenerator(8)
-
+        if (linkUrlInput && (!linkUrlInput.value)) {
+          linkUrlInput.value = utils.randomStrGenerator(8)
+        }
 
         // 重新随机生成短链接按钮点击监听
         btnRefreshLinkString.addEventListener('click', e => {

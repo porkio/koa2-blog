@@ -6,18 +6,18 @@
 */
 
 const {
-	Article,
-	Category
+    Article,
+    Category
 } = require('../db/model/index')
 const {
-	SuccessModel,
-	FailedModel
+    SuccessModel,
+    FailedModel
 } = require('../model/ResModel')
 const {
-	getCategoriesFail,
-	updateCategoryFail,
-	createCategoryFail,
-	destroyCategoryFail
+    getCategoriesFail,
+    updateCategoryFail,
+    createCategoryFail,
+    destroyCategoryFail
 } = require('../model/ErrorModel')
 const { formatCategories } = require('../service/manager')
 
@@ -26,25 +26,23 @@ const { formatCategories } = require('../service/manager')
  * @return {Promise} [description]
  */
 const getCategories = async () => {
-	const result = await Category.findAll({
-		order: ['order'],
-		include: [
-			{
-				association: Category.hasMany(Article, {})
-			}
-		]
-	})
-	if (result) {
-		let categoriesList = []
-		result.forEach((item, index) => {
-			categoriesList.push(item.dataValues)
-		})
+    const result = await Category.findAll({
+        order: ['order'],
+        include: [{
+            association: Category.hasMany(Article, {})
+        }]
+    })
+    if (result) {
+        let categoriesList = []
+        result.forEach((item, index) => {
+            categoriesList.push(item.dataValues)
+        })
 
-		const catesList = await formatCategories(categoriesList)
+        const catesList = await formatCategories(categoriesList)
 
-		return catesList
-	}
-	return new FailedModel(getCategoriesFail)
+        return catesList
+    }
+    return new FailedModel(getCategoriesFail)
 }
 
 /**
@@ -53,19 +51,19 @@ const getCategories = async () => {
 * @return  ResModel
 */
 const updateCategory = async category => {
-	const result = await Category.update({
-		cateName: category.cateName,
-		order: category.order,
-		parentId: category.parentId == 0 ? null : category.parentId
-	}, {
-		where: {
-			id: category.id
-		}
-	})
-	if (result[0] > 0) {
-		return new SuccessModel({ message: '编辑成功' })
-	}
-	return new FailedModel(updateCategoryFail)
+    const result = await Category.update({
+        cateName: category.cateName,
+        order: category.order,
+        parentId: category.parentId == 0 ? null : category.parentId
+    }, {
+        where: {
+            id: category.id
+        }
+    })
+    if (result[0] > 0) {
+        return new SuccessModel({ message: '编辑成功' })
+    }
+    return new FailedModel(updateCategoryFail)
 }
 
 /**
@@ -74,15 +72,15 @@ const updateCategory = async category => {
 * @return
 */
 const createCategory = async category => {
-	const result = await Category.create({
-		cateName: category.cateName,
-		order: category.order,
-		parentId: category.parentId == 0 ? null : category.parentId
-	})
-	if (result.dataValues.id) {
-		return new SuccessModel({ message: '添加成功' })
-	}
-	return new FailedModel(createCategoryFail)
+    const result = await Category.create({
+        cateName: category.cateName,
+        order: category.order,
+        parentId: category.parentId == 0 ? null : category.parentId
+    })
+    if (result.dataValues.id) {
+        return new SuccessModel({ message: '添加成功' })
+    }
+    return new FailedModel(createCategoryFail)
 }
 
 /**
@@ -91,20 +89,20 @@ const createCategory = async category => {
 * @return  ResModel
 */
 const destroyCategory = async id => {
-	const result = await Category.destroy({
-		where: {
-			id: id
-		}
-	})
-	if (result === 1) {
-		return new SuccessModel({ message: '删除成功' })
-	}
-	return new FailedModel(destroyCategoryFail)
+    const result = await Category.destroy({
+        where: {
+            id: id
+        }
+    })
+    if (result === 1) {
+        return new SuccessModel({ message: '删除成功' })
+    }
+    return new FailedModel(destroyCategoryFail)
 }
 
 module.exports = {
-	getCategories,
-	updateCategory,
-	createCategory,
-	destroyCategory
+    getCategories,
+    updateCategory,
+    createCategory,
+    destroyCategory
 }
