@@ -38,10 +38,10 @@
                 <%= category.id %>
               </th>
               <% if (category.parentId) { %>
-              <td style="padding-left: 2rem;"> -- <%= category.cateName %>
+              <td style="padding-left: 2rem;" class="cate-name"> -- <%= category.cateName %>
               </td>
               <% } else { %>
-              <td id="cate-top" data-id="<%= category.id %>">
+              <td id="cate-top" class="cate-name" data-id="<%= category.id %>">
                 <%= category.cateName %>
               </td>
               <% } %>

@@ -250,6 +250,10 @@ table {
     background-color: rgba(0, 0, 0, .06);
 }
 
+.cate-name {
+    text-align: left !important;
+}
+
 .layer-item {
     min-width: 380px;
     position: absolute;
