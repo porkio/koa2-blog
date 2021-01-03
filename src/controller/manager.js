@@ -20,6 +20,7 @@ const updateArticleImg = async (file, oldImg) => {
         oldFile = path.join(__dirname, '../public/uploads/', oldImg)
 
         if (oldImg) {
+            if (oldImg === 'default-article-img.jpg') return
             const delRes = deleteFile(oldFile)
             if (delRes.state === true)
                 return new SuccessModel({ message: '上传成功', data: { filePath } })
