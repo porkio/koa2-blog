@@ -2,7 +2,7 @@
  * @description 图片上传中间件
  * @created_at 2020/12/18
  */
-const multer = require('koa-multer')
+const multer = require('@koa/multer')
 const path = require('path')
 const randomStrGenerator = require('../utils/strRandom')
 

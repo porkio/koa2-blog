@@ -1,220 +1,181 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./stylesheets/style.css" />
-    <link rel="stylesheet" href="./stylesheets/iconfont.css" />
-    <title><%= title %></title>
-  </head>
 
-  <body>
-    <div class="go-back" id="btn-go-back">
-      <i class="iconfont icon-left1" aria-hidden="true"></i>
-    </div>
-    <section id="login" class="wrapper">
-      <div
-        class="container height-100vh dis-flex justify-content-center align-items-center"
-      >
-        <div class="login-form item-radius-10 dis-flex flex-d-column">
-          <div class="user-avatar dis-flex justify-content-center">
-            <img id="user-avatar" src="./images/default-avatar.jpg" alt="" />
-          </div>
-          <form action="#" method="POST">
-            <div class="form-group">
-              <input
-                type="text"
-                id="userName"
-                name="userName"
-                autocomplete
-                autofocus
-                placeholder="USERNAME"
-              />
-              <i class="iconfont icon-fail" aria-hidden="true"></i>
-            </div>
-            <div class="form-group">
-              <input
-                type="text"
-                id="password"
-                name="password"
-                placeholder="PASSWORD"
-              />
-              <i class="iconfont icon-fail" aria-hidden="true"></i>
-            </div>
-            <div class="form-group dis-flex justify-content-center">
-              <p id="btn-submit" class="btn-round">
-                <i class="iconfont icon-right1" aria-hidden="true"></i>
-              </p>
-            </div>
-          </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../stylesheets/manager.css" />
+  <link rel="stylesheet" href="../stylesheets/iconfont.css" />
+  <title><%= title %></title>
+</head>
+
+<body>
+  <div class="go-back" id="btn-go-back">
+    <i class="iconfont icon-left1" aria-hidden="true"></i>
+  </div>
+  <section id="login" class="wrapper">
+    <div class="container height-100vh dis-flex justify-content-center align-items-center">
+      <div class="login-form item-radius-10 dis-flex flex-d-column">
+        <div class="user-avatar dis-flex justify-content-center">
+          <img id="user-avatar" src="../images/default-avatar.jpg" alt="" />
         </div>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <input type="text" id="userName" name="userName" autocomplete autofocus placeholder="USERNAME" />
+            <i class="iconfont icon-fail" aria-hidden="true"></i>
+          </div>
+          <div class="form-group">
+            <input type="text" id="password" name="password" placeholder="PASSWORD" />
+            <i class="iconfont icon-fail" aria-hidden="true"></i>
+          </div>
+          <div class="form-group dis-flex justify-content-center">
+            <p id="btn-submit" class="btn-round">
+              <i class="iconfont icon-right1" aria-hidden="true"></i>
+            </p>
+          </div>
+        </form>
       </div>
-    </section>
-    <script src="./scripts/backgroundGradient.js"></script>
-    <script src="./scripts/app.js" type="module"></script>
-    <script type="module">
-      import { utils } from "./scripts/utils.js";
-      document.addEventListener(
-        "readystatechange",
-        (e) => {
-          if (document.readyState === "complete") {
-            // 页面准备完毕
+    </div>
+  </section>
+  <script src="../scripts/backgroundGradient.js"></script>
+  <script src="../scripts/app.js" type="module"></script>
+  <script type="module">
+    import {
+      utils
+    } from '../scripts/utils.js'
+    document.addEventListener('readystatechange', e => {
+      if (document.readyState === 'complete') {
+        // 页面准备完毕
 
-            // 用户登录相关逻辑
-            const userNameEle = document.querySelector("#userName"),
-              passwordEle = document.querySelector("#password"),
-              userAvatar = document.querySelector("#user-avatar");
-            let tempInputUserName;
-            passwordEle.addEventListener(
-              "focus",
-              (e) => {
-                // 判断是否有该用户，如果有则请求头像，反之给出反馈
-                const userName = userNameEle.value;
-
-                if (!userName) {
-                  userNameEle.parentNode.classList.add("data-error");
-                  userNameEle.placeholder = "PlEASE ENTER USERNAME";
-                  return;
-                }
-                passwordEle.type = "password";
-
-                if (
-                  !tempInputUserName &&
-                  userAvatar.src.match(/default-avatar.jpg/)
-                ) {
-                  // 临时用户没有值，需要请求一次用户是否存在
-                  utils
-                    .ajax("/api/user/isExist", {
-                      method: "POST",
-                      body: {
-                        userName,
-                      },
-                    })
-                    .then((res) => {
-                      if (res.errno === 0) {
-                        userAvatar.src = res.data.userAvatar;
-                        tempInputUserName = userName;
-                      } else {
-                        userNameEle.parentNode.classList.add("data-error");
-                        userNameEle.value = "";
-                        userNameEle.placeholder = `没有 ${userName} 这个用户`;
-                      }
-                    });
-                } else if (
-                  tempInputUserName &&
-                  userName !== tempInputUserName
-                ) {
-                  // 如果已经输入并且获取到了用户，但是又更改输入的用户名，则重新获取用户
-                  utils
-                    .ajax("api/user/isExist", {
-                      method: "POST",
-                      body: {
-                        userName,
-                      },
-                    })
-                    .then((res) => {
-                      if (res.errno === 0) {
-                        userAvatar.src = res.data.userAvatar;
-                        tempInputUserName = userName;
-                      } else {
-                        userAvatar.src = "./images/default-avatar.jpg";
-                        tempInputUserName = "";
-                      }
-                    });
-                }
-              },
-              false
-            );
-
-            userNameEle.addEventListener(
-              "input",
-              (e) => {
-                if (userNameEle.parentNode.classList.contains("data-error")) {
-                  userNameEle.parentNode.classList.remove("data-error");
-                }
-              },
-              false
-            );
-
-            passwordEle.addEventListener(
-              "input",
-              (e) => {
-                if (passwordEle.parentNode.classList.contains("data-error")) {
-                  passwordEle.parentNode.classList.remove("data-error");
-                }
-              },
-              false
-            );
-
-            document.addEventListener("keydown", enterToLogin, false);
-            document
-              .querySelector("#btn-submit")
-              .addEventListener("click", doLogin, false);
-
-            function enterToLogin(e) {
-              if (e.keyCode === 13) {
-                doLogin();
-              }
-            }
-
-            function doLogin() {
-              // 请求登录
-              const userName = userNameEle.value;
-              const password = passwordEle.value;
-              if (!userName) {
-                userNameEle.focus();
-                userNameEle.parentNode.classList.add("data-error");
-                return;
-              }
-              if (!password) {
-                passwordEle.focus();
-                passwordEle.parentNode.classList.add("data-error");
-                return;
-              }
-              utils
-                .ajax("api/user/login", {
-                  method: "POST",
-                  body: {
-                    userName,
-                    password,
-                  },
-                })
-                .then((res) => {
-                  if (res.errno === 0) {
-                    // 登陆成功 移除键盘监听时间 和 按钮登陆事件
-                    document.removeEventListener(
-                      "keydown",
-                      enterToLogin,
-                      false
-                    );
-                    document
-                      .querySelector("#btn-submit")
-                      .removeEventListener("click", doLogin, false);
-                    utils.showMessage({
-                      title: "登录成功",
-                      icon: "success",
-                    });
-                    let url = "/";
-                    // 记录上一个页面的 url 登录成功则跳转回去
-                    if (location.href.indexOf("url") > -1) {
-                      url = utils.queryString(location.href).url;
-                    }
-                    setTimeout(() => {
-                      location.href = url;
-                    }, 2500);
-                  } else {
-                    // 密码错误
-                    passwordEle.parentNode.classList.add("data-error");
-                    passwordEle.value = "";
-                    passwordEle.placeholder = "无效的密码";
-                    passwordEle.focus();
-                  }
-                });
-            }
+        // 用户登录相关逻辑
+        const userNameEle = document.querySelector('#userName'),
+          passwordEle = document.querySelector('#password'),
+          userAvatar = document.querySelector('#user-avatar')
+        let tempInputUserName
+        passwordEle.addEventListener('focus', e => {
+          // 判断是否有该用户，如果有则请求头像，反之给出反馈
+          const userName = userNameEle.value
+          if (!userName) {
+            userNameEle.parentNode.classList.add('data-error')
+            userNameEle.placeholder = 'PlEASE ENTER USERNAME'
+            return
           }
-        },
-        false
-      );
-    </script>
-  </body>
+          passwordEle.type = 'password'
+
+          if (!tempInputUserName && userAvatar.src.match(/default-avatar.jpg/)) {
+            // 临时用户没有值，需要请求一次用户是否存在
+            utils.ajax('/api/user/isExist', {
+              method: 'POST',
+              body: {
+                userName,
+              },
+            }).then((res) => {
+              if (res.errno === 0) {
+                userAvatar.src = res.data.userAvatar
+                tempInputUserName = userName
+              } else {
+                userNameEle.parentNode.classList.add('data-error')
+                userNameEle.value = '';
+                userNameEle.placeholder = `没有 ${userName} 这个用户`
+              }
+            })
+          } else if (
+            tempInputUserName &&
+            userName !== tempInputUserName
+          ) {
+            // 如果已经输入并且获取到了用户，但是又更改输入的用户名，则重新获取用户
+            utils.ajax('api/user/isExist', {
+              method: 'POST',
+              body: {
+                userName,
+              },
+            }).then((res) => {
+              if (res.errno === 0) {
+                userAvatar.src = res.data.userAvatar
+                tempInputUserName = userName
+              } else {
+                userAvatar.src = './images/default-avatar.jpg'
+                tempInputUserName = ''
+              }
+            })
+          }
+        }, false)
+
+        userNameEle.addEventListener('input', e => {
+          if (userNameEle.parentNode.classList.contains('data-error')) {
+            userNameEle.parentNode.classList.remove('data-error')
+          }
+        }, false)
+
+        passwordEle.addEventListener('input', e => {
+          if (passwordEle.parentNode.classList.contains('data-error')) {
+            passwordEle.parentNode.classList.remove('data-error')
+          }
+        }, false)
+
+        document.addEventListener('keydown', enterToLogin, false)
+        document.querySelector('#btn-submit').addEventListener('click', doLogin, false)
+
+        function enterToLogin(e) {
+          if (e.keyCode === 13) {
+            document.querySelector('#btn-submit').style.border = '1px solid #76469F'
+            setTimeout(() => {
+              document.querySelector('#btn-submit').style.border = '1px solid #9bb3b2'
+            }, 200)
+            doLogin()
+          }
+        }
+
+        function doLogin() {
+          // 请求登录
+          const userName = userNameEle.value
+          const password = passwordEle.value
+          if (!userName) {
+            userNameEle.focus()
+            userNameEle.parentNode.classList.add('data-error')
+            return
+          }
+          if (!password) {
+            passwordEle.focus()
+            passwordEle.parentNode.classList.add('data-error')
+            return
+          }
+          utils.ajax('../api/user/login', {
+            method: 'POST',
+            body: {
+              userName,
+              password,
+            }
+          }).then((res) => {
+            if (res.errno === 0) {
+              // 登陆成功 移除键盘监听时间 和 按钮登陆事件
+              document.removeEventListener('keydown', enterToLogin, false)
+              document.querySelector('#btn-submit').removeEventListener('click', doLogin, false)
+              utils.showMessage({
+                title: '登录成功',
+                icon: 'success',
+                cb() {
+                  let url = '/'
+                  // 记录上一个页面的 url 登录成功则跳转回去
+                  if (location.href.indexOf('url') > -1) {
+                    url = location.href.split('url=')[1]
+                  }
+                  location.href = url
+                }
+              })
+            } else {
+              // 密码错误
+              passwordEle.parentNode.classList.add('data-error')
+              passwordEle.value = ''
+              passwordEle.placeholder = '无效的密码'
+              passwordEle.focus()
+            }
+          })
+        }
+      }
+    }, false)
+
+  </script>
+</body>
+
 </html>

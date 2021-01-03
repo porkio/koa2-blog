@@ -161,11 +161,11 @@
               layerDefault && layerDefault.remove()
               utils.showMessage({
                 title: res.message,
-                icon: 'success'
+                icon: 'success',
+                cb() {
+                  location.reload()
+                }
               })
-              setTimeout(() => {
-                location.reload()
-              }, 2500)
             } else {
               utils.showMessage({
                 title: res.message,
@@ -187,11 +187,11 @@
               layerDefault && layerDefault.remove()
               utils.showMessage({
                 title: res.message,
-                icon: 'success'
+                icon: 'success',
+                cb() {
+                  location.reload()
+                }
               })
-              setTimeout(() => {
-                location.reload()
-              }, 2500)
             } else {
               utils.showMessage({
                 title: res.message,
@@ -246,11 +246,11 @@
                   if (res.errno === 0) {
                     utils.showMessage({
                       title: res.message,
-                      icon: 'success'
+                      icon: 'success',
+                      cb() {
+                        location.reload()
+                      }
                     })
-                    setTimeout(() => {
-                      location.reload()
-                    }, 2500)
                   } else {
                     utils.showMessage({
                       title: res.message,

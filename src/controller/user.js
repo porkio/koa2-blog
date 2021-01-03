@@ -85,7 +85,7 @@ const logout = async ctx => {
     ctx.session = null
     return new SuccessModel({
         data: {
-            redirect: '/login'
+            redirect: '/manager/login'
         },
         message: 'Bey!'
     })
@@ -116,7 +116,7 @@ const create = async ({ userName, password, email }) => {
         }
         return new SuccessModel({ message: '创建用户成功' })
     } catch (ex) {
- 		return new FailedModel({
+        return new FailedModel({
             errno: ex.parent.errno,
             message: ex.errors[0].message
         })

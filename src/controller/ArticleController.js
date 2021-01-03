@@ -63,7 +63,6 @@ const updateArticle = async (id, articleData) => {
             where: { id }
         })
         const res = await article.setTags(tags)
-        console.log(res)
         if (result > 0) {
             return new SuccessModel({ message: '文章已更新' })
         }
@@ -212,7 +211,6 @@ const destroyArticleById = async id => {
         const result = await Article.destroy({
             where: { id }
         })
-        console.log(result)
         if (result > 0) {
             return new SuccessModel({ message: '删除成功' })
         }

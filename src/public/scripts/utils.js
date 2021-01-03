@@ -346,10 +346,10 @@ function ajax (url, options) {
 
 /**
  * @description 消息提醒框
- * @param {String, String, Integer} title, icon, duration
+ * @param {String, String, Integer, Function} title, icon, duration, callBack
  * @return
  */
-function showMessage ({ title, icon, duration = 2500 }) {
+function showMessage ({ title, icon, duration = 2500, cb }) {
     if (!title) {
         return
     }
@@ -397,6 +397,7 @@ function showMessage ({ title, icon, duration = 2500 }) {
 
     setTimeout(() => {
         document.body.removeChild(msgBox)
+        cb && cb()
     }, duration)
 }
 
@@ -425,6 +426,9 @@ function promisify (api) {
     }
 }
 
+/**
+ * @description 图片灯箱初始化
+ */
 function imgLightBoxInit () {
     const imgNodeList = document.querySelectorAll('img')
     const lightBoxLayer = document.createElement('div')
@@ -460,13 +464,23 @@ function imgLightBoxInit () {
         }, false)
     })
 
+    lightBoxLayer.addEventListener('click', close, false)
     btnClose.addEventListener('click', e => {
+        cancelBubble()
+        close()
+    }, false)
+
+    image.addEventListener('click', e => {
+        cancelBubble()
+    }, false)
+
+    function close () {
         if (lightBoxLayer && image.src) {
-            lightBoxLayer.removeChild(image)
+            image.remove()
             lightBoxLayer.remove()
         }
         lightBoxLayer && lightBoxLayer.remove()
-    }, false)
+    }
 }
 
 /**

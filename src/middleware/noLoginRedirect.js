@@ -11,7 +11,7 @@ const noLoginRedirect = async (ctx, next) => {
         return
     }
     const url = ctx.request.url
-    ctx.redirect('/login?url=' + url)
+    ctx.redirect('/manager/login?url=' + url)
 }
 
 module.exports = noLoginRedirect

@@ -34,7 +34,7 @@ const checkLoginRedirect = async (ctx, next) => {
     }
     // 记录登录之前访问的url，登录完成后跳转到这个url
     const currentUrl = ctx.url
-    ctx.redirect('/login?url=' + encodeURIComponent(currentUrl))
+    ctx.redirect('/manager/login?url=' + encodeURIComponent(currentUrl))
 }
 
 module.exports = {

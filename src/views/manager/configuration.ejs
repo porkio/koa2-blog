@@ -98,11 +98,6 @@
             body: formData
           }).then(res => {
             if (res.errno === 0) {
-              utils.showMessage({
-                title: res.message,
-                icon: 'success'
-              })
-
               oldConfig = formData
 
               const oldBackgroundColor = utils.getStyle(btnSubmit, 'backgroundColor')
@@ -110,11 +105,16 @@
               btnSubmit.style.background = '#898989'
               btnSubmit.style.cursor = 'not-allowed'
               btnSubmit.disabled = true
-              setTimeout(() => {
-                btnSubmit.style.backgroundColor = oldBackgroundColor
-                btnSubmit.style.cursor = 'pointer'
-                btnSubmit.disabled = false
-              }, 3000)
+              utils.showMessage({
+                title: res.message,
+                icon: 'success',
+                duration: 3000,
+                cb() {
+                  btnSubmit.style.backgroundColor = oldBackgroundColor
+                  btnSubmit.style.cursor = 'pointer'
+                  btnSubmit.disabled = false
+                }
+              })
             }
           })
         }, false)

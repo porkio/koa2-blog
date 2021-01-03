@@ -6,7 +6,7 @@
 const queryString = require('../../../utils/queryString')
 const router = require('koa-router')()
 
-router.get('/login', async (ctx, next) => {
+router.get('/manager/login', async (ctx, next) => {
     if (ctx.session.userInfo) {
         // 如果已登陆则直接返回首页
         ctx.redirect('/')
