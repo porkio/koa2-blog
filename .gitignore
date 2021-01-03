@@ -7,7 +7,7 @@ dump.rdb
 # Application specific files
 node_modules
 .sass-cache
-./src/public/uploads/*
+src/public/uploads/*
 
 # github merge file
 *.orig

@@ -47,7 +47,6 @@ router.post('/delCategory', async (ctx, next) => {
 // 上传文章缩略图
 router.post('/uploadArticleImg', noLoginRedirect, upload.single('article_img'), async (ctx, next) => {
     const { old_img } = ctx.request.body // 获取旧图片，准备删除
-    console.log('oldImg: ', old_img)
     // controller
     ctx.body = await updateArticleImg(ctx.request.file, old_img)
 })

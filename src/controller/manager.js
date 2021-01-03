@@ -8,6 +8,11 @@ const { SuccessModel, FailedModel } = require("../model/ResModel")
 const { uploadFilesFail } = require('../model/ErrorModel')
 const path = require('path'), fs = require('fs')
 
+/**
+ * @description 更新文章图片
+ * @param { File } file 
+ * @param { String } oldImg 
+ */
 const updateArticleImg = async (file, oldImg) => {
     let filePath
     if (file) {
