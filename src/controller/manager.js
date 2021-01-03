@@ -5,15 +5,31 @@
  */
 
 const { SuccessModel, FailedModel } = require("../model/ResModel")
-const { uploadFilesFail } = require('../model/ErrorModel')
+const {
+    uploadFilesFail,
+    fileTypeError,
+    fileSizeError
+} = require('../model/ErrorModel')
 const path = require('path'), fs = require('fs')
 
 /**
  * @description 更新文章图片
- * @param { File } file 
- * @param { String } oldImg 
+ * @param { File } file
+ * @param { String } oldImg
  */
 const updateArticleImg = async (file, oldImg) => {
+    const fileTypes = ['jpg', 'jpeg', 'png', 'gif'] // 文件类型
+    const currentType = file.mimetype.split('/')[1]
+    const MAXSIZE = 2 * 1024 * 1000 // 最大体积 2MB
+    if (fileTypes.indexOf(currentType) < 0) {
+        deleteFile(path.join(__dirname, '../public/uploads/', file.filename))
+        return new FailedModel(fileTypeError)
+    }
+
+    if (file.size > MAXSIZE) {
+        deleteFile(path.join(__dirname, '../public/uploads/', file.filename))
+        return new FailedModel(fileSizeError)
+    }
     let filePath
     if (file) {
         filePath = file.path
@@ -21,7 +37,6 @@ const updateArticleImg = async (file, oldImg) => {
 
     if (filePath) {
         filePath = '/' + filePath.slice(filePath.indexOf('upload'))
-        console.log(filePath)
         oldFile = path.join(__dirname, '../public/uploads/', oldImg)
 
         if (oldImg) {

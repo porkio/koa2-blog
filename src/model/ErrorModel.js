@@ -86,6 +86,14 @@ module.exports = {
         errno: 40019,
         message: '更新文章失败了'
     },
+    fileTypeError: {
+        errno: 40020,
+        message: '文件类型错误'
+    },
+    fileSizeError: {
+        errno: 40020,
+        message: '文件体积不能超过2048kb'
+    },
     repeatAction: {
         errno: 10002,
         message: '重复的操作'
