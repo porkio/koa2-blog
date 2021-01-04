@@ -13,11 +13,13 @@ a {
     text-decoration: none;
     font-size: 1.1rem;
     color: #333;
+
+    &:hover {
+        color: #f72d84;
+    }
 }
 
-a:hover {
-    color: #f72d84;
-}
+
 
 ul,
 li {

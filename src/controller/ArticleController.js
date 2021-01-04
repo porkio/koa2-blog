@@ -79,7 +79,7 @@ const updateArticle = async (id, articleData) => {
  */
 const getArticleList = async (pageIndex, orderby, limit) => {
     !pageIndex && (pageIndex = 1)
-    !limit && (limit = 6)
+    !limit && (limit = 7) // 分页 每页7条数据
 
     let order
     switch (orderby) {
