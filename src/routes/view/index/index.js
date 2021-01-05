@@ -1,11 +1,17 @@
 const router = require('koa-router')()
-const { getArticleByLinkUrl } = require('../../../controller/ArticleController')
-
+const { getArticleByLinkUrl, getArticleList } = require('../../../controller/ArticleController')
 
 router.get('/', async (ctx, next) => {
-    await ctx.render('index/index', {
-        title: '首页'
-    })
+    const { pageIndex, orderby, limit } = ctx.query
+    // controller
+    const articleList = await getArticleList()
+    const data = {
+        pageInfo: {
+            title: '首页'
+        }
+    }
+    Object.assign(data, { articleList })
+    await ctx.render('index/index', data)
 })
 
 // 短链接

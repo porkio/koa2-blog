@@ -9,5 +9,6 @@ module.exports = {
     STRING: Sequelize.STRING, // varchar(255)
     INTEGER: Sequelize.INTEGER, // 整型
     DECIMAL: Sequelize.DECIMAL, // 小数
-    TEXT: Sequelize.TEXT // 文本
+    TEXT: Sequelize.TEXT, // 文本
+    DATE: Sequelize.DATE // 日期
 }

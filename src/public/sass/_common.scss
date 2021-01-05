@@ -84,21 +84,21 @@
     color: #6b6b6b;
     border-radius: 50%;
     cursor: pointer;
-}
 
-.btn-round:hover {
-    border: 1px solid #76469F;
+    &:hover {
+        border: 1px solid #76469F;
+    }
 }
 
 .user-avatar {
     width: 100%;
     margin-bottom: 2rem;
-}
 
-.user-avatar img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
 }
 
 .go-back {
@@ -113,21 +113,18 @@
     position: fixed;
     top: 44px;
     left: 44px;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    i {
+        color: #fff;
+        font-size: 1.1rem;
+        line-height: 2;
+        font-weight: 300;
+    }
 }
-
-.go-back:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-
-.go-back i {
-    color: #fff;
-    font-size: 1.1rem;
-    line-height: 2;
-    font-weight: 300;
-}
-
-
-
 
 /* Form */
 input[type="text"],
@@ -149,25 +146,27 @@ input[type="number"] {
 .form-group {
     position: relative;
     padding: .8rem 0;
+
+    .icon-fail {
+        display: none;
+        color: red;
+        font-size: 1.2rem;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        right: 4px;
+        transform: translateY(-58%);
+    }
 }
 
-.form-group .icon-fail {
-    display: none;
-    color: red;
-    font-size: 1.2rem;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    right: 4px;
-    transform: translateY(-58%);
-}
+.data-error {
+    input {
+        border-bottom: 1px solid red;
+    }
 
-.data-error input {
-    border-bottom: 1px solid red;
-}
-
-.data-error .icon-fail {
-    display: block;
+    .icon-fail {
+        display: block;
+    }
 }
 
 input::placeholder {
@@ -187,8 +186,10 @@ input::placeholder {
         color: #f2f2f0;
     }
 
-    .data-error input {
-        border-bottom: 1px solid red;
+    .data-error {
+        input {
+            border-bottom: 1px solid red;
+        }
     }
 
     .btn-submit {

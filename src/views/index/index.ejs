@@ -1,5 +1,62 @@
 <%- include('layout/_header') %>
 
+<!-- 文章列表 -->
+<section id="article-list">
+  <div class="container">
+    <form action="/api/user/logout" method="post">
+      <button type="submit">登出</button>
+    </form>
+    <div class="article-items">
+      <% for (let article of articleList) { %>
+      <a href="<%= article.linkUrl %>" class="article-item">
+        <div class="box-tag">
+          <div class="tag"><%= article.cateName %></div>
+        </div>
+        <div class="box-img">
+          <img src="<%= article.showImgUrl %>" alt="">
+        </div>
+        <div class="box-info">
+          <p class="publish-time">
+            <i class="iconfont icon-calendar"> <%= article.createdAt %></i>
+          </p>
+          <span class="box-title"><%= article.title %></span>
+          <p class="article-tags">
+            <i class="iconfont icon-tags"> JavaScript 前端</i>
+          </p>
+          <p class="article-comments">
+            <span class="article-hots">
+              <i class="iconfont icon-footprint"> <%= article.views %></i>
+            </span>
+            <span class="comments">
+              <i class="iconfont icon-Heart"> <%= article.likes %></i>
+            </span>
+          </p>
+        </div>
+      </a>
+      <% } %>
+
+      <!-- 分页 -->
+      <% if (articleList.pageTotal) { %>
+      <div id="paginator">
+        <ul class="page-list">
+          <li title="上一页" class="item-disabled" id="btnPrev">
+            <a href="javascript:;"><i class="iconfont icon-left"></i></a>
+          </li>
+          <% for (let i = 1; i <= articleList.pageTotal; i++) { %>
+          <li title="<%= i %>" class="item-active" id="pageSelector">
+            <a href="javascript:;"><%= i %></a>
+          </li>
+          <% } %>
+          <li title="下一页" id="btnNext">
+            <a href="javascript:;"><i class="iconfont icon-right"></i></a>
+          </li>
+        </ul>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
 
 <script type="module">
   import {

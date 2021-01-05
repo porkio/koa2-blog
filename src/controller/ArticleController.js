@@ -4,7 +4,7 @@
  * @created_at 2020/12/20
  */
 
-const { Article, Tag, ArticleTag } = require('../db/model/index')
+const { Article, Tag, ArticleTag, Category } = require('../db/model/index')
 
 const { SuccessModel, FailedModel } = require('../model/ResModel')
 const {
@@ -97,6 +97,10 @@ const getArticleList = async (pageIndex, orderby, limit) => {
     try {
         const result = await Article.findAndCountAll({
             where: {},
+            include: [{
+                model: Category,
+                attributes: ['id', 'cateName']
+            }],
             attributes: ['id', 'title', 'linkUrl', 'showImgUrl', 'categoryId', 'order', 'views', 'likes', 'hidden', 'createdAt'],
             order: order,
             limit: limit,
@@ -106,7 +110,11 @@ const getArticleList = async (pageIndex, orderby, limit) => {
         if (result.count > 0) {
             const pageTotal = Math.ceil(result.count / limit)
             const articleList = []
-            result.rows.forEach(item => articleList.push(item.dataValues))
+            result.rows.forEach(item => {
+                item.dataValues.cateName = item.category.cateName
+                articleList.push(item.dataValues)
+            })
+
             articleList.pageTotal = pageTotal
 
             return articleList
