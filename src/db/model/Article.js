@@ -1,5 +1,4 @@
 const seq = require('../seq')
-const moment = require('moment')
 const {
     INTEGER,
     STRING,
@@ -68,13 +67,6 @@ const Article = seq.define('article', {
         allowNull: false,
         defaultValue: 0,
         comment: '是否隐藏'
-    },
-    createdAt: {
-        type: DATE,
-        allowNull: false,
-        get () {
-            return moment(this.getDataValue('createdAt')).format('YYYY 年 MM 月 DD 日')
-        }
     }
 })
 

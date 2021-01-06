@@ -139,7 +139,7 @@
 
             .article-tags,
             .article-comments {
-                font-size: 13px;
+                font-size: 13.5px;
                 padding: .5rem 0;
 
                 span {
@@ -199,6 +199,30 @@
             &:last-child {
                 border: none;
                 font-weight: 600;
+            }
+        }
+    }
+}
+
+
+/* 媒体查询器 */
+@media screen and (max-width: 750px) {
+    .article-item {
+        width: 100% !important;
+        flex-flow: column;
+        height: auto;
+        min-height: 380px;
+        max-height: 440px;
+
+        .box-info {
+            flex: 0;
+        }
+
+        .box-img {
+            img {
+                max-height: 220px;
+                border-bottom-left-radius: 0;
+                border-top-right-radius: 10px;
             }
         }
     }

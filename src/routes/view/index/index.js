@@ -4,7 +4,7 @@ const { getArticleByLinkUrl, getArticleList } = require('../../../controller/Art
 router.get('/', async (ctx, next) => {
     const { pageIndex, orderby, limit } = ctx.query
     // controller
-    const articleList = await getArticleList()
+    const articleList = await getArticleList(pageIndex, orderby, limit, true)
     const data = {
         pageInfo: {
             title: '首页'
@@ -17,11 +17,16 @@ router.get('/', async (ctx, next) => {
 // 短链接
 router.get('/:link', async (ctx, next) => {
     const { link } = ctx.params
-    console.log(link)
+    const { pageIndex, orderby, limit } = ctx.query
     if (link === 'index') {
-        await ctx.render('index/index', {
-            title: 'Hello Koa 2!'
-        })
+        const articleList = await getArticleList(pageIndex, orderby, limit, true)
+        const data = {
+            pageInfo: {
+                title: '首页'
+            }
+        }
+        Object.assign(data, { articleList })
+        await ctx.render('index/index', data)
         return
     }
     // controller

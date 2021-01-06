@@ -462,3 +462,23 @@ input::placeholder {
       #paginator ul li:first-child, #paginator ul li:last-child {
         border: none;
         font-weight: 600; }
+
+/* 媒体查询器 */
+@media screen and (max-width: 750px) {
+  .article-item {
+    width: 100% !important;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: column;
+            flex-flow: column;
+    height: auto;
+    min-height: 380px;
+    max-height: 440px; }
+    .article-item .box-info {
+      -webkit-box-flex: 0;
+          -ms-flex: 0;
+              flex: 0; }
+    .article-item .box-img img {
+      max-height: 220px;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: 10px; } }

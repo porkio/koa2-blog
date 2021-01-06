@@ -18,7 +18,7 @@ const databaseInit = require('./databaseInit')
 seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))
 
 // 执行同步
-seq.sync({ force: false }).then(async () => {
+seq.sync({ force: true }).then(async () => {
     console.log('Sync Ok.')
     await databaseInit() // 初始化数据库
     process.exit()

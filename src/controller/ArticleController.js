@@ -77,11 +77,12 @@ const updateArticle = async (id, articleData) => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticleList = async (pageIndex, orderby, limit) => {
+const getArticleList = async (pageIndex, orderby, limit, isFront) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 7) // 分页 每页7条数据
 
-    let order
+    let order, whereOpt = {}
+    isFront && Object.assign(whereOpt, { hidden: false })
     switch (orderby) {
         case undefined:
             order = [['order']]
@@ -96,11 +97,15 @@ const getArticleList = async (pageIndex, orderby, limit) => {
     let offset = 0 + (pageIndex - 1) * limit
     try {
         const result = await Article.findAndCountAll({
-            where: {},
+            where: whereOpt,
             include: [{
                 model: Category,
                 attributes: ['id', 'cateName']
+            }, {
+                model: Tag,
+                attributes: ['id', 'tagName']
             }],
+            distinct: true, // 去重，防止数量统计不准确
             attributes: ['id', 'title', 'linkUrl', 'showImgUrl', 'categoryId', 'order', 'views', 'likes', 'hidden', 'createdAt'],
             order: order,
             limit: limit,
@@ -111,7 +116,14 @@ const getArticleList = async (pageIndex, orderby, limit) => {
             const pageTotal = Math.ceil(result.count / limit)
             const articleList = []
             result.rows.forEach(item => {
+                item.tags.forEach((tag, index, tagsArr) => {
+                    // 整理云标签
+                    tagsArr[index] = tag.tagName
+                })
+                // 整理分类名称
                 item.dataValues.cateName = item.category.cateName
+                // 格式化创建日期
+                item.dataValues.createdAt = item.dataValues.createdAt.toISOString().split('T')[0]
                 articleList.push(item.dataValues)
             })
 

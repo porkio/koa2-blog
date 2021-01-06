@@ -112,8 +112,8 @@
             let url = location.href
             const params = utils.queryString(location.href)
             const currentPage = params.pageIndex
+            if (currentPage === item.title) return
             if (currentPage) {
-
               url = url.replace(`=${currentPage}`, `=${item.title}`)
             } else {
               if (url.indexOf('?') > -1) {

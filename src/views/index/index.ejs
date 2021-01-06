@@ -21,7 +21,10 @@
           </p>
           <span class="box-title"><%= article.title %></span>
           <p class="article-tags">
-            <i class="iconfont icon-tags"> JavaScript 前端</i>
+            <i class="iconfont icon-tags"></i>
+            <% for (let tag of article.tags) { %>
+            <span><%= tag %></span>
+            <% } %>
           </p>
           <p class="article-comments">
             <span class="article-hots">
@@ -43,7 +46,7 @@
             <a href="javascript:;"><i class="iconfont icon-left"></i></a>
           </li>
           <% for (let i = 1; i <= articleList.pageTotal; i++) { %>
-          <li title="<%= i %>" class="item-active" id="pageSelector">
+          <li title="<%= i %>" class="" id="pageSelector">
             <a href="javascript:;"><%= i %></a>
           </li>
           <% } %>
@@ -64,6 +67,57 @@
   } from "./scripts/utils.js"
   document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
+      const currentParams = utils.queryString(location.href)
+      const btnPrev = document.querySelector('#btnPrev')
+      const btnNext = document.querySelector('#btnNext')
+      const pageSelectors = document.querySelectorAll('#pageSelector')
+
+      // 分页按钮/选择器 激活逻辑
+      pageSelectors.forEach(item => {
+        if (!currentParams.pageIndex) {
+          pageSelectors[0].classList.add('item-active')
+        }
+        item.addEventListener('click', e => {
+          let url = location.href
+          const params = utils.queryString(location.href)
+          const currentPage = params.pageIndex
+          if (currentPage === item.title) return
+          if (currentPage) {
+            url = url.replace(`=${currentPage}`, `=${item.title}`)
+          } else {
+            if (url.indexOf('?') > -1) {
+              url += '&pageIndex=' + item.title
+            } else {
+              url += '?pageIndex=' + item.title
+            }
+          }
+          location.href = url
+        }, false)
+        // 激活页面选择器中的第 n 页
+        if (item.title == currentParams.pageIndex) {
+          utils.toggleClassName(item, 'item-active')
+        }
+      })
+      // 上一页点击事件
+      btnPrev.addEventListener('click', e => {
+        if (currentParams.pageIndex == 1) return
+        location.href = '?pageIndex=' + --currentParams.pageIndex
+      }, false)
+
+      // 下一页点击事件
+      btnNext.addEventListener('click', e => {
+        if (currentParams.pageIndex == pageSelectors.length) return
+        let url = location.href
+
+        if (url.indexOf('pageIndex') > -1) {
+          url = url.replace(`=${currentParams.pageIndex}`, `=${++currentParams.pageIndex}`)
+        } else {
+          url += '?pageIndex=' + ++currentParams.pageIndex
+        }
+        location.href = url
+      }, false)
+
+
 
     }
   }, false)
