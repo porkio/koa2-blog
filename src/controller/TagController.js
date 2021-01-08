@@ -34,11 +34,12 @@ const getAllTags = async () => {
  * @description 创建云标签
  * @param { String } tagName
  */
-const createTag = async (tagName, order) => {
+const createTag = async (tagName, order, categoryId) => {
     try {
         const result = await Tag.create({
             tagName,
-            order
+            order,
+            categoryId
         })
         if (result.dataValues) {
             console.log(result.dataValues)

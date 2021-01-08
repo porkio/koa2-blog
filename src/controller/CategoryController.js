@@ -56,6 +56,7 @@ const updateCategory = async category => {
     const result = await Category.update({
         cateName: category.cateName,
         order: category.order,
+        cateLink: category.cateLink,
         parentId: category.parentId == 0 ? null : category.parentId
     }, {
         where: {

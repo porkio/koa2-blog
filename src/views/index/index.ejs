@@ -76,6 +76,7 @@
           pageSelectors[0].classList.add('item-active')
         }
         item.addEventListener('click', e => {
+          if (!currentParams.pageIndex && item.title == 1) return
           let url = location.href
           const params = utils.queryString(location.href)
           const currentPage = params.pageIndex
@@ -105,6 +106,7 @@
       // 下一页点击事件
       btnNext.addEventListener('click', e => {
         if (currentParams.pageIndex == pageSelectors.length) return
+        if (pageSelectors.length === 1) return
         if (!currentParams.pageIndex) {
           currentParams.pageIndex = 1
         }

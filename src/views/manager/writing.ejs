@@ -357,6 +357,7 @@
         cardBtnSave.addEventListener('click', e => {
           const tagName = document.querySelector('#tagName').value
           const order = document.querySelector('#tagOrder').value
+          const categoryId = Number(categoryIdSelector.value)
           if (!tagName || !order) {
             utils.showMessage({
               title: '标签名和排序均不可为空',
@@ -368,7 +369,8 @@
             method: 'POST',
             body: {
               tagName,
-              order
+              order,
+              categoryId
             }
           }).then(res => {
             if (res.errno === 0) {

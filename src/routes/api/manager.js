@@ -63,9 +63,9 @@ router.post('/publish', noLoginRedirect, genValidator(articleValidate), async (c
 
 // 新增云标签
 router.post('/addTag', noLoginRedirect, async (ctx, next) => {
-    const { tagName, order } = ctx.request.body
+    const { tagName, order, categoryId } = ctx.request.body
     // controller
-    ctx.body = await createTag(tagName, order)
+    ctx.body = await createTag(tagName, order, categoryId)
 })
 
 // 通过文章 ID 更新文章属性

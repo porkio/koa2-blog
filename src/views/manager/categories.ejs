@@ -54,7 +54,7 @@
               <td>
                 <button class="btn btn-outline-primary btn-small" id="btnEdit" data-id="<%= category.id %>"
                   data-cateName="<%= category.cateName %>" data-order="<%= category.order %>"
-                  data-parent="<%= category.parentId %>">编辑</button>
+                  data-cateLink="<%= category.cateLink %>" data-parent="<%= category.parentId %>">编辑</button>
                 <button class="btn btn-outline-danger btn-small" id="btnDelete" data-id="<%= category.id %>">删除</button>
               </td>
             </tr>
@@ -157,6 +157,8 @@
           const parentId = selectInput.value
           const id = e.target.getAttribute('data-id')
 
+          console.log(cateLink)
+
           // 保存按钮被点击
           whois === 'btnEdit' && utils.ajax('/api/manager/setCategory', {
             method: 'POST',
@@ -232,6 +234,7 @@
               item.addEventListener('click', e => {
                 const btnEdit = e.target
                 const cateName = btnEdit.getAttribute('data-cateName')
+                const cateLink = btnEdit.getAttribute('data-cateLink')
                 const order = btnEdit.getAttribute('data-order')
                 const parentId = btnEdit.getAttribute('data-parent')
                 const id = btnEdit.getAttribute('data-id')
@@ -239,6 +242,7 @@
                 apendCard('编辑分类', e.target)
 
                 cateNameInput.value = cateName
+                cateLinkInput.value = cateLink
                 orderInput.value = order
                 selectInput.value = parentId ? parentId : '0'
               }, false)

@@ -558,7 +558,10 @@ input::placeholder {
       .article-items .article-item .box-info .article-tags,
       .article-items .article-item .box-info .article-comments {
         font-size: 13.5px;
-        padding: .5rem 0; }
+        padding: .5rem 0;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden; }
         .article-items .article-item .box-info .article-tags span,
         .article-items .article-item .box-info .article-comments span {
           margin-right: 1rem; }
