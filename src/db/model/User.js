@@ -33,7 +33,7 @@ const User = seq.define('user', {
         comment: '密码'
     },
     authLevel: {
-        type: DECIMAL,
+        type: INTEGER,
         validate: {
             min: 0,
             max: 4
@@ -48,7 +48,7 @@ const User = seq.define('user', {
         comment: '昵称'
     },
     gender: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         validate: {
             min: 0,
@@ -58,7 +58,7 @@ const User = seq.define('user', {
         comment: '性别'
     },
     age: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         comment: '年龄'
     },

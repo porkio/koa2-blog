@@ -36,34 +36,41 @@ const databaseInit = async () => {
 
     const categoryWeb = await Category.create({
         cateName: 'Web',
+        cateLink: 'web',
         order: 1
     })
     const category = await Category.create({
         cateName: 'JavaScript',
+        cateLink: 'javascript',
         order: 1,
         parentId: categoryWeb.dataValues.id
     })
     const category2 = await Category.create({
         cateName: 'Vue.js',
+        cateLink: 'vuejs',
         order: 2,
         parentId: categoryWeb.dataValues.id
     })
     const category3 = await Category.create({
         cateName: 'React.js',
+        cateLink: 'reactjs',
         order: 3,
         parentId: categoryWeb.dataValues.id
     })
     const categorySuibi = await Category.create({
         cateName: '随笔',
+        cateLink: 'suibi',
         order: 2
     })
     const category5 = await Category.create({
         cateName: '关于生活',
+        cateLink: 'live',
         order: 2,
         parentId: categorySuibi.dataValues.id
     })
     const cate6 = await Category.create({
         cateName: '关于阅读',
+        cateLink: 'read',
         order: 1,
         parentId: categorySuibi.dataValues.id
     })
@@ -78,19 +85,19 @@ const databaseInit = async () => {
     const tag = await Tag.create({
         tagName: 'JavaScript',
         order: 100,
-        articleId: article.dataValues.id
+        categoryId: category.dataValues.id
     })
 
     const tag2 = await Tag.create({
         tagName: 'JS定时器',
         order: 100,
-        articleId: article.dataValues.id
+        categoryId: category.dataValues.id,
     })
 
     const tag3 = await Tag.create({
         tagName: '虚拟DOM',
         order: 100,
-        articleId: article.dataValues.id
+        categoryId: category.dataValues.id,
     })
 
     await ArticleTag.create({
@@ -107,7 +114,6 @@ const databaseInit = async () => {
         articleId: 1,
         tagId: 3
     })
-
 
     const friendLink = await FriendLink.create({
         linkTitle: 'Web MDN Docs',

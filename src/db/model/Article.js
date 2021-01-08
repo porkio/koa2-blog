@@ -45,7 +45,7 @@ const Article = seq.define('article', {
         comment: '所属用户的id'
     },
     order: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         defaultValue: 100,
         comment: '排序'
@@ -63,7 +63,7 @@ const Article = seq.define('article', {
         comment: '获赞次数'
     },
     hidden: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: false,
         defaultValue: 0,
         comment: '是否隐藏'

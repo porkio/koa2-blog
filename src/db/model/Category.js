@@ -18,14 +18,19 @@ const Category = seq.define('category', {
         allowNull: false,
         comment: '分类名称'
     },
+    cateLink: {
+        type: STRING,
+        allowNull: false,
+        comment: '分类链接'
+    },
     order: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         defaultValue: 100,
         comment: '排序'
     },
     parentId: { // 为空则说明是顶级分类
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         comment: '父分类ID'
     }

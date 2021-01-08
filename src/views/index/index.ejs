@@ -3,9 +3,6 @@
 <!-- 文章列表 -->
 <section id="article-list">
   <div class="container">
-    <form action="/api/user/logout" method="post">
-      <button type="submit">登出</button>
-    </form>
     <div class="article-items">
       <% for (let article of articleList) { %>
       <a href="<%= article.linkUrl %>" class="article-item">
@@ -60,6 +57,7 @@
   </div>
 </section>
 
+<%- include('layout/_tags') %>
 
 <script type="module">
   import {
@@ -100,13 +98,16 @@
       })
       // 上一页点击事件
       btnPrev.addEventListener('click', e => {
-        if (currentParams.pageIndex == 1) return
+        if (currentParams.pageIndex == 1 || !currentParams.pageIndex) return
         location.href = '?pageIndex=' + --currentParams.pageIndex
       }, false)
 
       // 下一页点击事件
       btnNext.addEventListener('click', e => {
         if (currentParams.pageIndex == pageSelectors.length) return
+        if (!currentParams.pageIndex) {
+          currentParams.pageIndex = 1
+        }
         let url = location.href
 
         if (url.indexOf('pageIndex') > -1) {
@@ -116,7 +117,6 @@
         }
         location.href = url
       }, false)
-
 
 
     }

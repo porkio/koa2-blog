@@ -15,7 +15,7 @@ const {
 const databaseInit = require('./databaseInit')
 
 // 测试连接
-seq.authenticate().then(() => console.log('Auth Ok.')).catch(e => console.log(e))
+seq.authenticate().then(() => console.log('Auth Ok.')).catch(err => console.log(err))
 
 // 执行同步
 seq.sync({ force: true }).then(async () => {

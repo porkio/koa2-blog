@@ -6,7 +6,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./stylesheets/style.css">
   <link rel="stylesheet" href="./stylesheets/iconfont.css">
-  <title>猪肉王子的博客 - <%= pageInfo.title %></title>
+  <title><%= pageInfo.title %></title>
 </head>
 
 <body>
+
+  <!-- CSS loading -->
+  <div id="loading">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
+    </div>
+  </div>
+
+  <!-- 导航栏 -->
+  <header id="header">
+    <nav id="navbar">
+      <div class="logo">
+        <a href="/">
+          <h3 class="logo-title">PORK's BLOG</h3>
+        </a>
+      </div>
+      <div class="menu">
+        <ul class="menu-list">
+          <li><a href="index.html" class="active">文章</a></li>
+          <li><a href="articles/">随笔</a></li>
+          <li><a href="about.html">关于我</a></li>
+          <li><a href="javascript: alert('维护中...')">实验室</a></li>
+        </ul>
+      </div>
+      <div class="menu-btn" onclick="callMenuBar()">
+        <i class="iconfont icon-menu2"></i>
+      </div>
+    </nav>
+  </header>

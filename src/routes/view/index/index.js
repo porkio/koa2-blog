@@ -30,13 +30,21 @@ router.get('/:link', async (ctx, next) => {
         return
     }
     // controller
-    const data = await getArticleByLinkUrl(link)
-    if (data.errno) {
+    const article = await getArticleByLinkUrl(link)
+
+    if (article.errno) {
+        console.log('迷路了...')
         await ctx.render('404', {
             title: '404 - 你好像迷路了...'
         })
         return
     }
+    const data = {
+        pageInfo: {
+            title: article.title
+        }
+    }
+    Object.assign(data, { article })
     await ctx.render('index/article.ejs', data)
 })
 

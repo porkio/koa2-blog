@@ -23,6 +23,12 @@ Article.belongsTo(Category, {
 
 Category.hasMany(Article)
 
+Tag.belongsTo(Category, {
+    foreignKey: 'categoryId'
+})
+
+Category.hasMany(Tag)
+
 Article.belongsToMany(Tag, {
     through: {
         model: ArticleTag,
@@ -38,6 +44,7 @@ Tag.belongsToMany(Article, {
     },
     foreignKey: 'tagId'
 })
+
 
 module.exports = {
     User,

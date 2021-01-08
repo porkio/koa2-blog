@@ -29,8 +29,10 @@ const getCategories = async () => {
     const result = await Category.findAll({
         order: ['order'],
         include: [{
-            association: Category.hasMany(Article, {})
-        }]
+            model: Article,
+            attributes: ['id']
+        }],
+        distinct: true, // 去重，防止数量统计不准确
     })
     if (result) {
         let categoriesList = []
@@ -39,7 +41,7 @@ const getCategories = async () => {
         })
 
         const catesList = await formatCategories(categoriesList)
-
+        console.log(catesList)
         return catesList
     }
     return new FailedModel(getCategoriesFail)
@@ -72,9 +74,11 @@ const updateCategory = async category => {
 * @return
 */
 const createCategory = async category => {
+    console.log(category)
     const result = await Category.create({
         cateName: category.cateName,
         order: category.order,
+        cateLink: category.cateLink,
         parentId: category.parentId == 0 ? null : category.parentId
     })
     if (result.dataValues.id) {

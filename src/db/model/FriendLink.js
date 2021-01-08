@@ -24,7 +24,7 @@ const FriendLink = seq.define('friend_link', {
         comment: '链接地址'
     },
     order: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         defaultValue: 100,
         comment: '排序'

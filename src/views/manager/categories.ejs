@@ -85,7 +85,11 @@
         </div>
         <div class="form-group">
           <label for="cateName">分类名称</label>
-          <input type="text" name="cateName" id="cateName" value="" placeholder="分类名称">
+          <input type="text" name="cateName" id="cateName" value="" placeholder="">
+        </div>
+        <div class="form-group">
+          <label for="cateName">短链接</label>
+          <input type="text" name="cateLink" id="cateLink" value="" placeholder="">
         </div>
         <div class="form-group">
           <label for="order">排序</label>
@@ -116,8 +120,14 @@
         const cardBtnCancel = document.querySelector('#cardBtnCancel')
         const topCateElements = document.querySelectorAll('#cate-top')
         const cateNameInput = document.querySelector('#cateName')
+        const cateLinkInput = document.querySelector('#cateLink')
         const orderInput = document.querySelector('#order')
         const selectInput = document.querySelector('#parentId')
+
+        // 分类短链接
+        cateNameInput.addEventListener('input', e => {
+          cateLinkInput.value = cateNameInput.value.toLocaleLowerCase()
+        }, false)
 
         // 插入分类编辑卡片
         function apendCard(title, whois) {
@@ -142,6 +152,7 @@
 
           const whois = e.target.getAttribute('data-btn')
           const cateName = cateNameInput.value
+          const cateLink = cateLinkInput.value
           const order = orderInput.value
           const parentId = selectInput.value
           const id = e.target.getAttribute('data-id')
@@ -153,6 +164,7 @@
               id,
               cateName,
               order,
+              cateLink,
               parentId
             }
           }).then(res => {
@@ -179,6 +191,7 @@
             body: {
               cateName,
               order,
+              cateLink,
               parentId
             }
           }).then(res => {

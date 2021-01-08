@@ -20,10 +20,15 @@ const Tag = seq.define('tags', {
         comment: '云标签'
     },
     order: {
-        type: DECIMAL,
+        type: INTEGER,
         allowNull: true,
         defaultValue: 100,
         comment: '排序'
+    },
+    categoryId: {
+        type: INTEGER,
+        allowNull: false,
+        comment: '所属分类ID'
     }
 })
 
