@@ -386,7 +386,8 @@ input::placeholder {
       #header #navbar .logo .logo-title {
         height: 64px;
         line-height: 68px;
-        color: #fcfcfc; }
+        color: #fcfcfc;
+        padding: 0 1rem; }
     #header #navbar .menu-btn {
       display: none;
       position: absolute;
@@ -423,21 +424,60 @@ input::placeholder {
             -ms-flex-align: center;
                 align-items: center; }
         #header #navbar .menu .menu-list li {
-          padding: .4rem; }
+          padding: .4rem;
+          position: relative; }
           #header #navbar .menu .menu-list li a {
             text-align: center;
+            height: 2.4rem;
             line-height: 2.4rem;
-            padding: 0 1rem;
+            padding: 0 1.2rem;
             display: inline-block;
             width: 100%;
-            height: 100%;
             color: #fcfcfc; }
+            #header #navbar .menu .menu-list li a i {
+              font-size: 12px;
+              font-weight: 600;
+              margin-left: 6px; }
             #header #navbar .menu .menu-list li a:hover {
               background-color: rgba(255, 255, 255, 0.2);
               border-radius: 5px; }
             #header #navbar .menu .menu-list li a.active {
               background-color: rgba(255, 255, 255, 0.2);
               border-radius: 5px; }
+          #header #navbar .menu .menu-list li .submenu-list {
+            display: none;
+            position: absolute;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                    flex-direction: column;
+            width: 180px;
+            height: 0;
+            top: 66px;
+            left: 0;
+            padding: 1rem;
+            background-color: #cf4647;
+            -webkit-box-shadow: 1px 1px 1px rgba(41, 41, 41, 0.02);
+                    box-shadow: 1px 1px 1px rgba(41, 41, 41, 0.02);
+            border-radius: 8px;
+            opacity: 0;
+            z-index: 100;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease; }
+            #header #navbar .menu .menu-list li .submenu-list .submenu {
+              -webkit-transition: all .3s ease;
+              transition: all .3s ease; }
+            #header #navbar .menu .menu-list li .submenu-list::before {
+              display: block;
+              content: " ";
+              width: 10px;
+              height: 10px;
+              background-color: #cf4647;
+              position: absolute;
+              top: -5px;
+              left: 44px;
+              -webkit-transform: rotate(45deg);
+                      transform: rotate(45deg); }
 
 /* article-list */
 #article-list {
@@ -769,7 +809,7 @@ input::placeholder {
         transition: .3s;
         -webkit-transform: translateY(-500px);
                 transform: translateY(-500px);
-        background-image: linear-gradient(167deg, #2b274b, #771787 49%, rgba(201, 28, 136, 0.91)); }
+        background-image: linear-gradient(167deg, #cf4647, #ce4242 49%, #cf4647 33%, rgba(177, 31, 67, 0.91)); }
         #header #navbar .menu .menu-list {
           -webkit-box-orient: vertical !important;
           -webkit-box-direction: normal !important;

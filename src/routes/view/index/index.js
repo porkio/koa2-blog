@@ -1,16 +1,18 @@
 const router = require('koa-router')()
 const { getArticleByLinkUrl, getArticleList } = require('../../../controller/ArticleController')
+const { getCategories } = require('../../../controller/CategoryController')
 
 router.get('/', async (ctx, next) => {
     const { pageIndex, orderby, limit } = ctx.query
     // controller
     const articleList = await getArticleList(pageIndex, orderby, limit, true)
+    const categories = await getCategories()
     const data = {
         pageInfo: {
             title: '首页'
         }
     }
-    Object.assign(data, { articleList })
+    Object.assign(data, { articleList, categories })
     await ctx.render('index/index', data)
 })
 
@@ -18,6 +20,7 @@ router.get('/', async (ctx, next) => {
 router.get('/:link', async (ctx, next) => {
     const { link } = ctx.params
     const { pageIndex, orderby, limit } = ctx.query
+    const categories = await getCategories()
     if (link === 'index') {
         const articleList = await getArticleList(pageIndex, orderby, limit, true)
         const data = {
@@ -25,7 +28,7 @@ router.get('/:link', async (ctx, next) => {
                 title: '首页'
             }
         }
-        Object.assign(data, { articleList })
+        Object.assign(data, { articleList, categories })
         await ctx.render('index/index', data)
         return
     }
@@ -44,7 +47,7 @@ router.get('/:link', async (ctx, next) => {
             title: article.title
         }
     }
-    Object.assign(data, { article })
+    Object.assign(data, { article, categories })
     await ctx.render('index/article.ejs', data)
 })
 

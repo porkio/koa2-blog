@@ -29,10 +29,30 @@
       </div>
       <div class="menu">
         <ul class="menu-list">
-          <li><a href="index.html" class="active">文章</a></li>
-          <li><a href="articles/">随笔</a></li>
-          <li><a href="about.html">关于我</a></li>
-          <li><a href="javascript: alert('维护中...')">实验室</a></li>
+          <li><a href="index.html" class="active btn-menu">文章</a></li>
+          <% for (let category of categories) { %>
+          <% if (!category.parentId) { %>
+          <li>
+            <% if (category.childsTotal > 0) { %>
+            <a href="<%= category.cateLink %>" class="btn-menu" data-id="<%= category.id %>"><%= category.cateName %><i
+                class="iconfont icon-down"></i></a>
+            <% } else { %>
+            <a href="<%= category.cateLink %>" class="btn-menu"><%= category.cateName %></a>
+            <% } %>
+            <% if (category.childsTotal > 0) { %>
+            <ul class="submenu-list" data-top="<%= category.id %>">
+              <% for (let cate of categories) { %>
+              <% if (cate.parentId == category.id) { %>
+              <li class="submenu">
+                <a href="<%= cate.cateLink %>"><%= cate.cateName %></a>
+              </li>
+              <% } %>
+              <% } %>
+            </ul>
+            <% } %>
+          </li>
+          <% } %>
+          <% } %>
         </ul>
       </div>
       <div class="menu-btn" onclick="callMenuBar()">
@@ -40,3 +60,52 @@
       </div>
     </nav>
   </header>
+
+  <script>
+    const elLoading = document.querySelector('#loading')
+    const topMenus = Array.from(document.querySelectorAll('.btn-menu')).filter(item => item.getAttribute('data-id'))
+    const subMenuLists = document.querySelectorAll('.submenu-list')
+    // 禁用滚动条
+    elLoading && (document.documentElement.style.overflowY = 'hidden')
+
+    topMenus.forEach(menu => {
+      const id = menu.getAttribute('data-id')
+      const subMenu = Array.from(subMenuLists).find(menu => menu.getAttribute('data-top') == id)
+      menu.addEventListener('mouseenter', e => {
+        subMenu.addEventListener('mouseenter', e => {
+          subMenu.setAttribute('data-in', true)
+        }, false)
+        subMenu.addEventListener('mouseleave', e => {
+          subMenu.setAttribute('data-in', false)
+          setTimeout(() => {
+            subMenu.style.opacity = 0
+            subMenu.style.height = 0
+            setTimeout(() => {
+              subMenu.style.display = 'none'
+            }, 100)
+          }, 150)
+        }, false)
+        subMenu.style.display = 'flex'
+        setTimeout(() => {
+          subMenu.style.opacity = 1
+          subMenu.style.height = subMenu.children.length * 61 + 'px'
+        }, 60)
+      })
+
+      menu.addEventListener('mouseleave', e => {
+        setTimeout(() => {
+          if (!subMenu.getAttribute('data-in') || subMenu.getAttribute('data-in') == 'false') {
+            subMenu.style.opacity = 0
+            subMenu.style.height = 0
+            setTimeout(() => {
+              subMenu.style.display = 'none'
+            }, 100)
+          }
+        }, 150)
+
+      }, false)
+
+
+    })
+
+  </script>

@@ -80,6 +80,7 @@ document.addEventListener('readystatechange', e => {
         // Loading
         const loading = document.querySelector('#loading')
         loading && loading.remove()
+        document.documentElement.style.overflowY = 'scroll' // 解禁滚动条
         // Go Back Button
         !(() => {
             const btnGoBack = document.querySelector('#btn-go-back')

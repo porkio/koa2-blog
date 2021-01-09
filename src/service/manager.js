@@ -10,32 +10,35 @@
  * @return {Promise}           [description]
  */
 const formatCategories = async (catesList) => {
-	if (!catesList) {
-		return
-	}
+    if (!catesList) {
+        return
+    }
 
- 	const list = []
+    const list = []
 
-	const parentList = catesList.filter(item => !item.parentId)
-	const childList = catesList.filter(item => item.parentId)
+    const parentList = catesList.filter(item => !item.parentId)
+    const childList = catesList.filter(item => item.parentId)
 
-	parentList.forEach((item, index) => {
-		item.articlesTotal = 0 // 统计分类下的文章数量
-		list.push(item)
-		childList.forEach(childCate => {
-			if (childCate.parentId == item.id) {
-				if (childCate.articles) {
-					childCate.articlesTotal = childCate.articles.length
-					item.articlesTotal += childCate.articles.length
-				}
-				list.push(childCate)
-			}
-		})
-	})
+    parentList.forEach(item => {
+        item.articlesTotal = 0 // 统计分类下的文章数量
+        let childsTotal = 0
+        list.push(item)
+        childList.forEach(childCate => {
+            if (childCate.parentId == item.id) {
+                childsTotal++
+                if (childCate.articles) {
+                    childCate.articlesTotal = childCate.articles.length
+                    item.articlesTotal += childCate.articles.length
+                }
+                item.childsTotal = childsTotal
+                list.push(childCate)
+            }
+        })
+    })
 
-	return list
+    return list
 }
 
 module.exports = {
-	formatCategories
+    formatCategories
 }

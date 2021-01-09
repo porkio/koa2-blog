@@ -4,7 +4,7 @@ const sass = require('gulp-sass')
 sass.compiler = require('node-sass')
 
 gulp.task('default', () => {
-    return gulp.src('./src/public/sass/**/*.scss')
+    return gulp.src('./src/public/scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: 'last 2 version'
