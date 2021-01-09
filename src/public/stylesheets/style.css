@@ -451,14 +451,13 @@ input::placeholder {
             -webkit-box-direction: normal;
                 -ms-flex-direction: column;
                     flex-direction: column;
-            width: 180px;
+            width: 148px;
             height: 0;
-            top: 66px;
+            top: 68px;
             left: 0;
-            padding: 1rem;
-            background-color: #cf4647;
-            -webkit-box-shadow: 1px 1px 1px rgba(41, 41, 41, 0.02);
-                    box-shadow: 1px 1px 1px rgba(41, 41, 41, 0.02);
+            background-color: #fff;
+            -webkit-box-shadow: 0 1px 2px 0 rgba(41, 41, 41, 0.2);
+                    box-shadow: 0 1px 2px 0 rgba(41, 41, 41, 0.2);
             border-radius: 8px;
             opacity: 0;
             z-index: 100;
@@ -466,16 +465,41 @@ input::placeholder {
             transition: all .3s ease; }
             #header #navbar .menu .menu-list li .submenu-list .submenu {
               -webkit-transition: all .3s ease;
-              transition: all .3s ease; }
+              transition: all .3s ease;
+              padding: 0;
+              border-bottom: 1px solid #cf4647;
+              overflow: hidden;
+              z-index: 1; }
+              #header #navbar .menu .menu-list li .submenu-list .submenu:first-child {
+                border-top: 1px solid rgba(41, 41, 41, 0.04);
+                background-color: #fff;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px; }
+              #header #navbar .menu .menu-list li .submenu-list .submenu:last-child {
+                border-bottom-left-radius: 8px;
+                border-bottom-right-radius: 8px;
+                border-bottom: none; }
+              #header #navbar .menu .menu-list li .submenu-list .submenu a {
+                display: inline-block;
+                width: 100%;
+                height: 44px;
+                color: #444;
+                line-height: 44px;
+                border-radius: 0; }
+                #header #navbar .menu .menu-list li .submenu-list .submenu a:hover {
+                  background-color: #cf4647;
+                  color: #fff; }
             #header #navbar .menu .menu-list li .submenu-list::before {
               display: block;
               content: " ";
-              width: 10px;
-              height: 10px;
-              background-color: #cf4647;
+              width: 12px;
+              height: 12px;
+              background-color: #fff;
               position: absolute;
-              top: -5px;
+              top: -6px;
               left: 44px;
+              z-index: -1;
+              border: 1px solid rgba(41, 41, 41, 0.05);
               -webkit-transform: rotate(45deg);
                       transform: rotate(45deg); }
 
