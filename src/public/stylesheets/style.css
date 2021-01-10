@@ -705,9 +705,9 @@ input::placeholder {
       display: flex; }
       #tag-cloud .box-content .tag-cate .cate {
         cursor: pointer;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 15px;
+        height: 32px;
+        line-height: 32px;
+        border-radius: 16px;
         background-color: #f1f5f8;
         border: 1px solid #f1f5f8;
         color: #606f7b;
@@ -731,9 +731,9 @@ input::placeholder {
           cursor: pointer;
           color: #606f7b;
           padding: 0 .75rem;
-          height: 30px;
-          line-height: 30px;
-          border-radius: 15px;
+          height: 32px;
+          line-height: 32px;
+          border-radius: 16px;
           margin: .3rem .4rem;
           border: 1px solid #dae1e7; }
           #tag-cloud .box-content .tag-cate .tag-list li:hover {
@@ -868,9 +868,7 @@ input::placeholder {
                     -ms-flex-pack: center;
                         justify-content: center;
                 background-color: #cf4647; }
-                #header #navbar .menu .menu-list li .submenu-list .submenu:first-child {
-                  border-radius: 0; }
-                #header #navbar .menu .menu-list li .submenu-list .submenu:last-child {
+                #header #navbar .menu .menu-list li .submenu-list .submenu:first-child, #header #navbar .menu .menu-list li .submenu-list .submenu:last-child {
                   border-radius: 0; }
               #header #navbar .menu .menu-list li .submenu-list::before {
                 display: none; }
@@ -898,8 +896,11 @@ input::placeholder {
     .article-item .box-info {
       -webkit-box-flex: 0;
           -ms-flex: 0;
-              flex: 0; }
-    .article-item .box-img img {
-      max-height: 220px;
-      border-bottom-left-radius: 0 !important;
-      border-top-right-radius: 10px; } }
+              flex: 0;
+      width: 100% !important; }
+    .article-item .box-img {
+      width: 100% !important; }
+      .article-item .box-img img {
+        max-height: 220px;
+        border-bottom-left-radius: 0 !important;
+        border-top-right-radius: 10px; } }

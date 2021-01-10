@@ -490,9 +490,9 @@
 
             .cate {
                 cursor: pointer;
-                height: 30px;
-                line-height: 30px;
-                border-radius: 15px;
+                height: 32px;
+                line-height: 32px;
+                border-radius: 16px;
                 background-color: #f1f5f8;
                 border: 1px solid #f1f5f8;
                 color: #606f7b;
@@ -517,9 +517,9 @@
                     cursor: pointer;
                     color: #606f7b;
                     padding: 0 .75rem;
-                    height: 30px;
-                    line-height: 30px;
-                    border-radius: 15px;
+                    height: 32px;
+                    line-height: 32px;
+                    border-radius: 16px;
                     margin: .3rem .4rem;
                     border: 1px solid #dae1e7;
 
@@ -676,17 +676,10 @@
                                 justify-content: center;
                                 background-color: #cf4647;
 
-                                &:first-child {
+                                &:first-child, &:last-child {
                                     border-radius: 0;
                                 }
 
-                                &:last-child {
-                                    border-radius: 0;
-                                }
-
-                                a {
-                                    &:hover {}
-                                }
                             }
 
                             &::before {
@@ -729,9 +722,11 @@
 
         .box-info {
             flex: 0;
+            width: 100% !important;
         }
 
         .box-img {
+            width: 100% !important;
             img {
                 max-height: 220px;
                 border-bottom-left-radius: 0 !important;
