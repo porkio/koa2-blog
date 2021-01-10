@@ -55,8 +55,8 @@
           <% } %>
         </ul>
       </div>
-      <div class="menu-btn" onclick="callMenuBar()">
-        <i class="iconfont icon-menu2"></i>
+      <div class="menu-btn">
+        <i class="iconfont icon-menu2" id="icon-menu"></i>
       </div>
     </nav>
   </header>
@@ -65,6 +65,14 @@
     const elLoading = document.querySelector('#loading')
     const topMenus = Array.from(document.querySelectorAll('.btn-menu')).filter(item => item.getAttribute('data-id'))
     const subMenuLists = document.querySelectorAll('.submenu-list')
+    const iconMenu = document.querySelector('#icon-menu') // 移动端导航栏按钮
+
+    iconMenu.addEventListener('click', e => {
+      // 阻止导航栏按钮冒泡到 document 上
+      cancelBubble(e)
+      callMenuBar()
+    }, false)
+
     // 禁用滚动条
     elLoading && (document.documentElement.style.overflowY = 'hidden')
 
@@ -105,7 +113,93 @@
 
       }, false)
 
-
     })
+
+    if (getViewPortOffset().clientWidth <= 550 || isMobile()) {
+      // 如果是手机端，则接管导航栏点击事件
+      topMenus.forEach(menu => {
+        menu.addEventListener('click', e => {
+          if (e.target === menu.querySelector('i')) {
+            cancelBubble(e)
+            e.preventDefault() // 阻止下拉按钮产生的跳转效果
+          }
+        }, false)
+      })
+    }
+
+    // call 导航栏
+    function callMenuBar() {
+      const navbar = document.querySelector('.menu')
+
+      if (navbar.getAttribute('data-show') == 1) {
+        closeMenuBar()
+      } else {
+        openMenuBar()
+      }
+
+      document.body.addEventListener('click', e => {
+        if (navbar.getAttribute('data-show') == 1) {
+          closeMenuBar()
+        }
+      }, false)
+    }
+
+    // open 导航栏
+    function openMenuBar() {
+      const navbar = document.querySelector('.menu')
+      const iconMenu = document.querySelector('#icon-menu')
+      navbar.style.transform = 'translateY(0)'
+      setTimeout(() => {
+        navbar.style.opacity = 1
+      }, 100)
+
+      navbar.setAttribute('data-show', 1)
+      iconMenu.parentElement.style.transform = 'rotate(180deg)'
+      iconMenu.className = 'iconfont icon-close'
+      iconMenu.parentElement.style.transform = 'rotate(360deg)'
+    }
+
+    // close 导航栏
+    function closeMenuBar() {
+      const navbar = document.querySelector('.menu')
+      const iconMenu = document.querySelector('#icon-menu')
+      const navbarOffsetHeight = parseInt(getStyle(navbar, 'height'))
+
+      const offset = navbarOffsetHeight + 100 + 'px'
+      navbar.style.transform = `translateY(-${offset})`
+      navbar.style.opacity = 0
+      navbar.setAttribute('data-show', 0)
+      iconMenu.parentElement.style.transform = 'rotate(180deg)'
+      iconMenu.className = 'iconfont icon-menu2'
+      iconMenu.style.transform = 'rotate(360deg)'
+    }
+
+
+    function getStyle(el, prop) {
+      if (!el || !prop) {
+        return false
+      }
+      return window.getComputedStyle(el, null).getPropertyValue(prop) || window.getComputedStyle(el, null)[prop]
+    }
+
+    function getViewPortOffset() {
+      const clientWidth = document.body.clientWidth || document.documentElement.clientWidth
+      const clientHeight = document.body.clientHeight || document.documentElement.clientHeight
+      return {
+        clientWidth,
+        clientHeight
+      }
+    }
+
+    function isMobile() {
+      const ua = navigator.userAgent.toLowerCase()
+      return (/mobi/i.test(ua))
+    }
+
+    function cancelBubble(e) {
+      if (e && e.stopPropagation)
+        e.stopPropagation()
+      else window.event.cancelBubble = true
+    }
 
   </script>

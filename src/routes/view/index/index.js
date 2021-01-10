@@ -1,18 +1,20 @@
 const router = require('koa-router')()
 const { getArticleByLinkUrl, getArticleList } = require('../../../controller/ArticleController')
 const { getCategories } = require('../../../controller/CategoryController')
+const { getAllTags } = require('../../../controller/TagController')
 
 router.get('/', async (ctx, next) => {
     const { pageIndex, orderby, limit } = ctx.query
     // controller
     const articleList = await getArticleList(pageIndex, orderby, limit, true)
     const categories = await getCategories()
+    const tags = await getAllTags()
     const data = {
         pageInfo: {
             title: '首页'
         }
     }
-    Object.assign(data, { articleList, categories })
+    Object.assign(data, { articleList, categories, tags })
     await ctx.render('index/index', data)
 })
 
@@ -23,12 +25,13 @@ router.get('/:link', async (ctx, next) => {
     const categories = await getCategories()
     if (link === 'index') {
         const articleList = await getArticleList(pageIndex, orderby, limit, true)
+        const tags = await getAllTags()
         const data = {
             pageInfo: {
                 title: '首页'
             }
         }
-        Object.assign(data, { articleList, categories })
+        Object.assign(data, { articleList, categories, tags })
         await ctx.render('index/index', data)
         return
     }

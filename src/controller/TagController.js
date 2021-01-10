@@ -5,7 +5,7 @@
 * @updated_at
 */
 
-const { Tag } = require('../db/model/index')
+const { Tag, Category } = require('../db/model/index')
 const {
     SuccessModel,
     FailedModel
@@ -19,14 +19,25 @@ const { createTagFail } = require('../model/ErrorModel')
 */
 const getAllTags = async () => {
     const result = await Tag.findAll({
-        order: ['order']
+        order: ['order'],
+        include: [{
+            model: Category,
+            attributes: ['id', 'cateName']
+        }]
     })
-    const TagList = []
+    const tagList = []
+    const cateMap = new Map()
     if (result) {
-        result.forEach(tag => TagList.push(tag.dataValues))
-        return TagList
-    }
+        result.forEach(tag => {
+            tagList.push(tag.dataValues)
+            cateMap.set(tag.dataValues.category.id, tag.dataValues.category.cateName)
+        })
 
+        return {
+            tagList,
+            cateMap
+        }
+    }
     return null
 }
 

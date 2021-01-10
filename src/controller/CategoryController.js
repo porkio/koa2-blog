@@ -41,7 +41,7 @@ const getCategories = async () => {
         })
 
         const catesList = await formatCategories(categoriesList)
-        console.log(catesList)
+
         return catesList
     }
     return new FailedModel(getCategoriesFail)

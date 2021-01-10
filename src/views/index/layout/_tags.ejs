@@ -10,45 +10,24 @@
       <div class="box-end"></div>
     </div>
     <div class="box-content">
-      <div class="tag-cate">
-        <div class="cate">前端</div>
-        <div class="tags">
-          <ul class="tag-list">
-            <li>CSS</li>
-            <li>JavaScript</li>
-            <li>HTML</li>
-            <li>Vue</li>
-            <li>Canvas</li>
-          </ul>
+      <% for (let key of tags.cateMap.keys()) { %>
+      <div class="">
+        <div class="tag-cate">
+          <div class="cate"><%= tags.cateMap.get(key) %></div>
+          <div class="tags">
+            <ul class="tag-list">
+              <% for (let tag of tags.tagList) { %>
+              <% if (tag.categoryId == key) { %>
+              <li><%= tag.tagName %></li>
+              <% } %>
+              <% } %>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="tag-cate">
-        <div class="cate">后端</div>
-        <div class="tags">
-          <ul class="tag-list">
-            <li>Java</li>
-            <li>PHP</li>
-            <li>算法</li>
-            <li>数据结构</li>
-            <li>Python</li>
-            <li>C++</li>
-            <li>Node.js</li>
-            <li>Laravel</li>
-          </ul>
-        </div>
       </div>
-
-      <div class="tag-cate">
-        <div class="cate">随笔</div>
-        <div class="tags">
-          <ul class="tag-list">
-            <li>鸡汤</li>
-            <li>学历</li>
-            <li>认知</li>
-          </ul>
-        </div>
-      </div>
+      <% } %>
     </div>
+  </div>
   </div>
 </section>
