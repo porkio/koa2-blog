@@ -56,7 +56,7 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
     }
 
     const catesList = await getCategories()
-    let tagList = await getAllTags()
+    let tags = await getAllTags()
 
     if (id && id == article.id) {
         // 此处是通过 id 编辑该文章
@@ -66,7 +66,7 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
             }
         }
 
-        Object.assign(data, { article, catesList, tagList })
+        Object.assign(data, { article, catesList, tags })
         await ctx.render('manager/writing', data)
         return
     }

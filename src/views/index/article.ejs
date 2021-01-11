@@ -1,10 +1,9 @@
 <%- include('layout/_header') %>
-<div id="box">
-  <a href="http://www.baidu.com" id="linkToBD">百度</a>
+<div class="container">
+  <div id="article-detail">
+    <%- article.content %>
+  </div>
 </div>
-<form class="" action="api/user/logout" method="post">
-  <button type="sbumit" name="button">登出</button>
-</form>
 <script type="module">
   import {
     utils

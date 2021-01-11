@@ -16,6 +16,7 @@ const {
     paramsError,
     updateArticleFail
 } = require('../model/ErrorModel')
+const md = require('markdown-it')()
 
 /**
  * @description 文章发布
@@ -186,6 +187,7 @@ const getArticleByLinkUrl = async link => {
             }]
         })
         if (article) {
+            article.content = md.render(article.content)
             return article.dataValues
         }
         return new FailedModel(getSingleArticleFail)

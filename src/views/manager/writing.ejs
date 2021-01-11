@@ -60,7 +60,7 @@
           <div class="form-group">
             <label for="cloudTag">云标签<i class="iconfont icon-Addnewcompose" id="btnAddCloudTag"></i></label>
             <div class="dis-flex clodu-tag-group flex-wrap">
-              <% for (let tag of tagList) { %>
+              <% for (let tag of tags.tagList) { %>
               <% if (article.tags) { %>
               <% if (article.tagIds.indexOf(tag.id) > -1) { %>
               <span class="btn btn-tag" selected="true" id="cloudTag" data-id="<%= tag.id %>"><%= tag.tagName %></span>
