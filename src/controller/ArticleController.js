@@ -16,6 +16,7 @@ const {
     paramsError,
     updateArticleFail
 } = require('../model/ErrorModel')
+const { Op } = require('sequelize')
 const md = require('markdown-it')()
 
 /**
@@ -178,6 +179,7 @@ const getArticleByLinkUrl = async link => {
     if (!link) {
         return new FailedModel(paramsError)
     }
+
     try {
         const article = await Article.findOne({
             where: { linkUrl: link },
@@ -186,7 +188,26 @@ const getArticleByLinkUrl = async link => {
                 attributes: ['id', 'tagName']
             }]
         })
+
         if (article) {
+            const nextArticle = await Article.findOne({
+                where: {
+                    id: {
+                        [Op.gt]: article.dataValues.id
+                    }
+                }
+            })
+            const prevArticle = await Article.findOne({
+                where: {
+                    id: {
+                        [Op.lt]: article.dataValues.id
+                    }
+                },
+                attributes: ['id', 'title', 'linkUrl']
+            })
+
+            Object.assign(article.dataValues, { prevArticle, nextArticle })
+
             article.content = md.render(article.content)
             article.dataValues.createdAt = article.dataValues.createdAt.toISOString().split('T')[0]
 

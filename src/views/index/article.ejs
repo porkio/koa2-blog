@@ -45,9 +45,21 @@
 
       <!-- 上一篇 下一篇文章 -->
       <div class="next-box">
-        <p><a href="9.html"><i class="iconfont icon-handoleft"></i><span>JS异步加载、延时加载、按需加载</span></a></p>
-        <p><a href="../articles/2.html"><span>真实的为我,便是最有益的为人</span><i class="iconfont icon-hand-o-right"></i></a>
+        <% if (article.prevArticle) { %>
+        <p><a href="<%= article.prevArticle.linkUrl %>"><i
+              class="iconfont icon-handoleft"></i><span><%= article.prevArticle.title %></span></a>
         </p>
+        <% } else { %>
+        <p><a href="javascript:;"><i class="iconfont icon-handoleft"></i><span>没有了</span></a>
+        </p>
+        <% } %>
+        <% if (article.nextArticle) { %>
+        <p><a href="<%= article.nextArticle.linkUrl %>"><span><%= article.nextArticle.title %></span><i
+              class="iconfont icon-hand-o-right"></i></a>
+        </p>
+        <% } else { %>
+        <p><a href="javascript:;"><i class="iconfont icon-hand-o-right"></i><span>没有了</span></a>
+          <% } %>
       </div>
     </div>
 
