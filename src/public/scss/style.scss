@@ -1025,8 +1025,14 @@
                 padding: 0;
             }
 
+            .title-box .post-box div i {
+                font-size: 1.1rem;
+            }
+
             .article-content {
-                font-size: 1.5em;
+                p {
+                    font-size: 1.4rem;
+                }
 
                 .next-box {
                     flex-wrap: wrap;

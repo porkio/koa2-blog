@@ -1161,15 +1161,17 @@ input::placeholder {
     display: none; }
   #article .content .article-header .title {
     padding: 0; }
-  #article .content .article-content {
-    font-size: 1.5em; }
-    #article .content .article-content .next-box {
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-      margin-top: 0 !important; }
-      #article .content .article-content .next-box p {
-        margin-bottom: 10px !important;
-        width: 100% !important; }
+  #article .content .title-box .post-box div i {
+    font-size: 1.1rem; }
+  #article .content .article-content p {
+    font-size: 1.4rem; }
+  #article .content .article-content .next-box {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    margin-top: 0 !important; }
+    #article .content .article-content .next-box p {
+      margin-bottom: 10px !important;
+      width: 100% !important; }
   #article .content p {
     margin: 1.1rem 0 !important;
     font-weight: 300;

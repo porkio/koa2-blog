@@ -36,11 +36,10 @@
 
       <!-- 文章地址 转载信息 -->
       <div class="posmition">
-        <p>文章版权所有：<a href="#" target="_blank">PORK's BLOG</a>，采用 <a
+        <p>文章版权所有：<a href="/" target="_blank">PORK's BLOG</a>，采用 <a
             href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">知识共享署名-非商业性使用 4.0
             国际许可协议</a> 进行许可。</p>
-        <p>欢迎分享，转载务必保留出处及原文链接 <a href="https://wlwo.net/articles/1.html"
-            target="_blank">https://wlwo.net/articles/1.html</a></p>
+        <p>欢迎分享，转载务必保留出处及原文链接 <a id="article-link" href="<%= article.linkUrl %>" target="_blank"></a></p>
       </div>
 
       <!-- 上一篇 下一篇文章 -->
@@ -74,10 +73,12 @@
       // Document is ready...
       const articleId = '<%= article.id %>'
       let articleLikes = '<%= article.likes %>'
-      console.log(articleId)
+      const elArticleLink = document.querySelector('#article-link')
       const progress = document.querySelector('.progress')
       const titleLayer = document.querySelector('.article-header')
       const btnLike = document.querySelector('.btn-like')
+
+      elArticleLink.innerText = elArticleLink.href
 
       // 点赞
       btnLike.addEventListener('click', giveLike, false)
