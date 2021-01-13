@@ -77,7 +77,7 @@ router.get('/writing', noLoginRedirect, async (ctx, next) => {
             title: '撰写文章'
         }
     }
-    Object.assign(data, { article, catesList, tagList })
+    Object.assign(data, { article, catesList, tags })
     await ctx.render('manager/writing', data)
 })
 

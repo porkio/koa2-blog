@@ -5,9 +5,11 @@
  * @updated_at
  */
 const router = require('koa-router')()
+const { incSiteViews } = require('../../controller/SiteConfigController')
 
 // 404
 router.get('*', async (ctx, next) => {
+    await incSiteViews()
     await ctx.render('404', {
         title: '404 - 你好像迷路了...'
     })

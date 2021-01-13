@@ -7,8 +7,8 @@
 
 const { SiteConfig } = require('../db/model/index')
 const {
-	SuccessModel,
-	FailedModel
+    SuccessModel,
+    FailedModel
 } = require('../model/ResModel')
 const { siteConfigurationFail } = require('../model/ErrorModel')
 
@@ -26,12 +26,12 @@ const getConfig = async () => {
 /**
  * @description 更新站点配置
  * @param  {[Object]}  config [description]
- * @return {Promise}        [description]
+ * @return {Promise}          [description]
  */
 const updateConfig = async config => {
     const result = await SiteConfig.update(config, {
         where: {
-            id: 1
+            id: config.id
         }
     })
     if (result[0] > 0) {
@@ -40,7 +40,35 @@ const updateConfig = async config => {
     return new FailedModel(siteConfigurationFail)
 }
 
+/**
+ * @description 浏览次数自增 1 次
+ * @returns { Boolean }
+ */
+const incSiteViews = async () => {
+    try {
+        const site = await SiteConfig.findOne({
+            where: {},
+            attributes: ['id', 'views']
+        })
+        if (site) {
+            const views = site.dataValues.views + 1
+            const result = await SiteConfig.update({
+                views: views
+            }, {
+                where: {
+                    id: site.dataValues.id
+                }
+            })
+            return result > 0
+        }
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
 module.exports = {
-	getConfig,
-    updateConfig
+    getConfig,
+    updateConfig,
+    incSiteViews
 }

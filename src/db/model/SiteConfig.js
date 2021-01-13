@@ -4,13 +4,13 @@
  * @created_at 2020/12/02
  */
 
- const seq = require('../seq')
- const {
-     STRING,
-     DECIMAL,
-     TEXT,
-     INTEGER
- } = require('../dataTypes')
+const seq = require('../seq')
+const {
+    STRING,
+    DECIMAL,
+    TEXT,
+    INTEGER
+} = require('../dataTypes')
 
 const SiteConfig = seq.define('site_config', {
     siteTitle: {
@@ -23,6 +23,12 @@ const SiteConfig = seq.define('site_config', {
         type: STRING,
         allowNull: true,
         comment: '副标题'
+    },
+    domain: {
+        type: STRING,
+        allowNull: false,
+        defaultValue: 'i99.work',
+        comment: '域名'
     },
     views: {
         type: INTEGER,

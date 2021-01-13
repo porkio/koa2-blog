@@ -157,8 +157,6 @@
           const parentId = selectInput.value
           const id = e.target.getAttribute('data-id')
 
-          console.log(cateLink)
-
           // 保存按钮被点击
           whois === 'btnEdit' && utils.ajax('/api/manager/setCategory', {
             method: 'POST',

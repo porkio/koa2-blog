@@ -5,11 +5,13 @@
  * @updated_at
  */
 
-
 document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
         // Document is ready
-
+        ajax('/api/index/incAppViews', {
+            method: 'POST',
+            body: {}
+        }).then(res => { }) // 访客自增 +1
         // Back to top
         !((color = '#444444', hover = '#cf4647', easing = true, positionObj = { bottom: '80px', right: '44px' }) => {
             const backToTopBtn = document.createElement('div')
@@ -100,4 +102,47 @@ document.addEventListener('readystatechange', e => {
 
 window.onload = function () {
 
+}
+
+/**
+ * [ajax description]
+ * @param  {[type]} url  [请求地址]
+ * @param  {[type]} data [携带数据（仅post）]
+ * @return {[type]}      [description]
+ */
+function ajax (url, options) {
+    // 如果没有 options 或 options 中没有 method 或 method === GET
+    if (!options || !options.method || /get/i.test(options.method)) {
+        if (options.body) { // 如果 options 中没有 body
+            // options 中有 body 则拼接 url
+            const qs = (data => {
+                let queryString = '?'
+                for (let key in data) {
+                    queryString += (key + '=' + data[key] + '&')
+                }
+                return queryString.slice(0, -1) // 删除最后一个 & 符号
+            })(options.body)
+            url += qs // 拼接 url
+        }
+
+        return fetch(url).then(response => response.json()).then(res => res)
+    }
+
+    if (/^(POST|PUT)$/i.test(options.method)) {
+        // 文件上传 这里(仅我个人)认定只要是特意构造的 new FormData 都是为了文件上传准备的
+        if (options.body.toString() === '[object FormData]') {
+            Object.assign(options, {
+                body: options.body
+            })
+        } else { // 其他方式一律按 json 格式处理解析
+            Object.assign(options, {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(options.body)
+            })
+        }
+
+        return fetch(url, options).then(response => response.json()).then(res => res)
+    }
 }

@@ -7,11 +7,11 @@ const {
     isProd
 } = require('../utils/env')
 
-let REDIS_CONF = {
+const REDIS_CONF = {
     port: 6379,
     host: '127.0.0.1'
 }
-let MYSQL_CONF = {
+const MYSQL_CONF = {
     host: 'localhost',
     port: 3306,
     user: 'root',
@@ -21,17 +21,16 @@ let MYSQL_CONF = {
 }
 
 // 线上环境的 redis 配置
-isProd && (REDIS_CONF = {
+isProd && Object.assign(REDIS_CONF, {
     port: 6379,
     host: '127.0.0.1'
-}) && (MYSQL_CONF = {
+}) && Object.assign(MYSQL_CONF, {
     // 线上 mysql 配置
     host: 'localhost',
     port: 3306,
     user: 'root',
     password: '12345678',
-    database: 'koa2_blog',
-    dialect: 'mysql'
+    database: 'koa2_blog'
 })
 
 module.exports = {

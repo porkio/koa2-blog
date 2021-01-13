@@ -11,27 +11,26 @@ const { SESSION_SECRET_KEY } = require('./conf/secretKeys')
 const { REDIS_CONF } = require('./conf/db')
 
 const index = require('./routes/view/index/index')
+const indexApiRouter = require('./routes/api/index')
 const userApiRouter = require('./routes/api/user')
 const managerApiRouter = require('./routes/api/manager')
 const userViewRouter = require('./routes/view/manager/user')
 const managerViewRouter = require('./routes/view/manager/index')
 const errorViewRouter = require('./routes/view/error')
 
-
-
 // error handler
 onerror(app)
 
 // middlewares
 app.use(bodyparser({
-    enableTypes:['json', 'form', 'text']
+    enableTypes: ['json', 'form', 'text']
 }))
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {
- 	extension: 'ejs'
+    extension: 'ejs'
 }))
 
 // 配置 session
@@ -56,6 +55,7 @@ app.use(userApiRouter.routes(), userApiRouter.allowedMethods())
 app.use(managerApiRouter.routes(), managerApiRouter.allowedMethods())
 app.use(managerViewRouter.routes(), managerViewRouter.allowedMethods())
 app.use(errorViewRouter.routes(), errorViewRouter.allowedMethods())
+app.use(indexApiRouter.routes(), indexApiRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

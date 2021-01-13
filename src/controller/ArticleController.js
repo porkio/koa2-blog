@@ -4,7 +4,7 @@
  * @created_at 2020/12/20
  */
 
-const { Article, Tag, ArticleTag, Category } = require('../db/model/index')
+const { Article, Tag, Category } = require('../db/model/index')
 
 const { SuccessModel, FailedModel } = require('../model/ResModel')
 const {
@@ -188,6 +188,8 @@ const getArticleByLinkUrl = async link => {
         })
         if (article) {
             article.content = md.render(article.content)
+            article.dataValues.createdAt = article.dataValues.createdAt.toISOString().split('T')[0]
+
             return article.dataValues
         }
         return new FailedModel(getSingleArticleFail)
@@ -242,6 +244,67 @@ const destroyArticleById = async id => {
     }
 }
 
+/**
+ * @description 文章浏览次数自增 1 次
+ * @returns { Boolean }
+ */
+const incArticleViews = async linkUrl => {
+    if (!linkUrl) return false
+    try {
+        const article = await Article.findOne({
+            where: {
+                linkUrl: linkUrl
+            },
+            attributes: ['id', 'views']
+        })
+        if (article) {
+            const views = article.dataValues.views + 1
+            const result = await Article.update({
+                views: views
+            }, {
+                where: {
+                    id: article.dataValues.id
+                }
+            })
+            return result > 0
+        }
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
+/**
+ * @description 文章浏览次数自增 1 次
+ * @returns { Boolean }
+ */
+const incArticleLikes = async id => {
+    if (!id) return false
+    console.log(id)
+    try {
+        const article = await Article.findOne({
+            where: {
+                id: id
+            },
+            attributes: ['id', 'likes']
+        })
+        if (article) {
+            const likes = article.dataValues.likes + 1
+            const result = await Article.update({
+                likes: likes
+            }, {
+                where: {
+                    id: id
+                }
+            })
+            return result > 0
+        }
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
 module.exports = {
     createArticle,
     updateArticle,
@@ -249,5 +312,7 @@ module.exports = {
     setPorpOfArticleById,
     destroyArticleById,
     getArticleById,
-    getArticleByLinkUrl
+    getArticleByLinkUrl,
+    incArticleViews,
+    incArticleLikes
 }

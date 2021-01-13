@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./stylesheets/style.css">
-  <link rel="stylesheet" href="./stylesheets/iconfont.css">
-  <title><%= pageInfo.title %></title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/iconfont.css">
+  <title><%= page.title %></title>
 </head>
 
 <body>
@@ -29,7 +29,7 @@
       </div>
       <div class="menu">
         <ul class="menu-list">
-          <li><a href="index.html" class="active btn-menu">文章</a></li>
+          <!-- <li><a href="index.html" class="active btn-menu">文章</a></li> -->
           <% for (let category of categories) { %>
           <% if (!category.parentId) { %>
           <li>

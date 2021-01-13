@@ -1,7 +1,8 @@
 const router = require('koa-router')()
-const { getArticleByLinkUrl, getArticleList } = require('../../../controller/ArticleController')
+const { getArticleByLinkUrl, getArticleList, incArticleViews } = require('../../../controller/ArticleController')
 const { getCategories } = require('../../../controller/CategoryController')
 const { getAllTags } = require('../../../controller/TagController')
+const { incSiteViews } = require('../../../controller/SiteConfigController')
 
 router.get('/', async (ctx, next) => {
     const { pageIndex, orderby, limit } = ctx.query
@@ -9,8 +10,9 @@ router.get('/', async (ctx, next) => {
     const articleList = await getArticleList(pageIndex, orderby, limit, true)
     const categories = await getCategories()
     const tags = await getAllTags()
+
     const data = {
-        pageInfo: {
+        page: {
             title: '首页'
         }
     }
@@ -19,34 +21,22 @@ router.get('/', async (ctx, next) => {
 })
 
 // 短链接
-router.get('/:link', async (ctx, next) => {
+router.get('/p/:link', async (ctx, next) => {
     const { link } = ctx.params
-    const { pageIndex, orderby, limit } = ctx.query
     const categories = await getCategories()
-    if (link === 'index') {
-        const articleList = await getArticleList(pageIndex, orderby, limit, true)
-        const tags = await getAllTags()
-        const data = {
-            pageInfo: {
-                title: '首页'
-            }
-        }
-        Object.assign(data, { articleList, categories, tags })
-        await ctx.render('index/index', data)
-        return
-    }
+
     // controller
     const article = await getArticleByLinkUrl(link)
+    await incArticleViews(link) // 文章浏览次数自增 1 次
 
     if (article.errno) {
-        console.log('迷路了...')
         await ctx.render('404', {
             title: '404 - 你好像迷路了...'
         })
         return
     }
     const data = {
-        pageInfo: {
+        page: {
             title: article.title
         }
     }
