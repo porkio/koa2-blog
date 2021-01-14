@@ -836,7 +836,7 @@ input::placeholder {
           margin-right: 1rem; }
           #article .content .title-box .post-box div i {
             font-size: .9rem; }
-          #article .content .title-box .post-box div i.icon-heart::before {
+          #article .content .title-box .post-box div i.icon-Heart::before {
             color: #cf4647; }
     #article .content .article-content {
       -webkit-box-flex: 1;

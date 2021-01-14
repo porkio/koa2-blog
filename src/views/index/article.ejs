@@ -17,8 +17,8 @@
       <h1><%= article.title %></h1>
       <div class="post-box">
         <div class="publish-time"><i class="iconfont icon-calendar"> <%= article.createdAt %></i></div>
-        <div class="box-like"><i class="iconfont icon-heart"> <%= article.likes %></i></div>
-        <div class="post-hots"><i class="iconfont icon-foot"> <%= article.views %></i></div>
+        <div class="box-like"><i class="iconfont icon-Heart"> <%= article.likes %></i></div>
+        <div class="post-hots"><i class="iconfont icon-footprint"> <%= article.views %></i></div>
       </div>
     </div>
     <div class="article-content">
@@ -57,7 +57,7 @@
               class="iconfont icon-hand-o-right"></i></a>
         </p>
         <% } else { %>
-        <p><a href="javascript:;"><i class="iconfont icon-hand-o-right"></i><span>没有了</span></a>
+        <p><a href="javascript:;"><span>没有了</span><i class="iconfont icon-hand-o-right"></i></a>
           <% } %>
       </div>
     </div>
