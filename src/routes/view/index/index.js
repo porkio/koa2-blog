@@ -40,6 +40,7 @@ router.get('/p/:link', async (ctx, next) => {
             title: article.title
         }
     }
+    console.log(article)
     Object.assign(data, { article, categories })
     await ctx.render('index/article.ejs', data)
 })

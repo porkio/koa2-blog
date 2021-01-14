@@ -942,6 +942,8 @@ input::placeholder {
         padding: 6px 15px;
         border-left: 4px solid #fb4b87;
         margin: 8px 0 20px; }
+        #article .content .article-content blockquote p {
+          margin: .6rem 0; }
       #article .content .article-content pre {
         position: relative;
         margin: 10px 0;
@@ -1013,6 +1015,12 @@ input::placeholder {
           font-size: 2.2rem; }
         #article .content .give-like .btn-like span {
           font-size: .9rem; }
+
+.article-content {
+  word-break: break-all; }
+  .article-content a {
+    color: #2d8cf0;
+    font-size: 1.2rem; }
 
 /* 页脚 */
 #footer {
@@ -1159,6 +1167,8 @@ input::placeholder {
         border-radius: 50%; }
   #tag-cloud .box-header .box-title:hover .left {
     display: none; }
+  .article-content a {
+    font-size: 1.4rem; }
   #article .content .article-header .title {
     padding: 0; }
   #article .content .title-box .post-box div i {
