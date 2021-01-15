@@ -844,6 +844,20 @@
 
 .article-content {
     word-break: break-all;
+    ul {
+        padding-left: 1.2rem;
+        li {
+            list-style: inside;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin: 0 3px;
+            color: #ef4135;
+            word-break: break-all;
+        }
+    }
 
     a {
         color: #2d8cf0;

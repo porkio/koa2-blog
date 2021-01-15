@@ -43,7 +43,7 @@
             <ul class="submenu-list" data-top="<%= category.id %>">
               <% for (let cate of categories) { %>
               <% if (cate.parentId == category.id) { %>
-              <li class="submenu">
+              <li class="submenu" data-id="<%= cate.id %>" data-pid="<%= cate.parentId %>">
                 <a href="<%= cate.cateLink %>"><%= cate.cateName %></a>
               </li>
               <% } %>

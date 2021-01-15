@@ -301,7 +301,7 @@ const incArticleViews = async linkUrl => {
  */
 const incArticleLikes = async id => {
     if (!id) return false
-    console.log(id)
+
     try {
         const article = await Article.findOne({
             where: {

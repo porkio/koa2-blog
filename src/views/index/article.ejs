@@ -72,13 +72,23 @@
     if (document.readyState === 'complete') {
       // Document is ready...
       const articleId = '<%= article.id %>'
+      const categoryId = '<%= article.categoryId %>'
       let articleLikes = '<%= article.likes %>'
+
       const elArticleLink = document.querySelector('#article-link')
       const progress = document.querySelector('.progress')
       const titleLayer = document.querySelector('.article-header')
       const btnLike = document.querySelector('.btn-like')
 
       elArticleLink.innerText = elArticleLink.href
+
+      // 导航激活
+      const menus = document.querySelectorAll('.btn-menu')
+      const submenus = document.querySelectorAll('.submenu')
+      const currentCategory = Array.from(submenus).find(menu => menu.getAttribute('data-id') == categoryId)
+      const topMenu = Array.from(menus).find(menu => menu.getAttribute('data-id') ==
+        currentCategory.getAttribute('data-pid'))
+      topMenu.classList.add('active')
 
       // 点赞
       btnLike.addEventListener('click', giveLike, false)
