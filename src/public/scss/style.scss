@@ -845,9 +845,20 @@
 .article-content {
     word-break: break-all;
     ul {
-        padding-left: 1.2rem;
+        padding-left: 2rem;
         li {
-            list-style: inside;
+            position: relative;
+            &::before {
+                display: block;
+                content: " ";
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                position: absolute;
+                top: .75rem;
+                left: -1.2rem;
+                background-color: #ef4135;
+            }
         }
         code {
             background: #ecf0f1;
