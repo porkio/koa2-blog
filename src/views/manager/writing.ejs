@@ -267,7 +267,7 @@
           chooseBox.style =
             `border-radius: 5px; overflow: hidden; position: fixed; top: ${y}px; left: ${x}px; z-index: 99; box-shadow:
             0 2px 8px 2px rgba(41, 41, 41, .12); min-width: 140px;`
-          const btnStyle = `text-align: center; cursor: pointer; height: 40px; line-height: 40px;`
+          const btnStyle = `text-align: center; cursor: pointer; height: 40px; line-height: 40px; background: #fff;`
           btnRemote.style = btnStyle
           btnUpload.style = btnStyle
           btnRemote.addEventListener('click', e => {
@@ -310,7 +310,7 @@
           const btnOk = document.createElement('button')
 
           remoteBox.style =
-            `display: flex; min-width: 400px; position: fixed; top: ${y}px; left: ${x}px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 8px 2px rgba(41, 41, 41, .12); padding: 1rem; z-index: 100;`
+            `background: #fff; display: flex; min-width: 400px; position: fixed; top: ${y}px; left: ${x}px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 8px 2px rgba(41, 41, 41, .12); padding: 1rem; z-index: 100;`
           remoteInput.type = 'text'
           remoteInput.name = 'showImgUrl'
           remoteInput.placeholder = 'https://oss.aliyun.com/x.png'
