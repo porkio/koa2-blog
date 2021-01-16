@@ -444,6 +444,7 @@ function imgLightBoxInit () {
         width: 100%;
         height: 100%;
         background-color: ${color};
+        z-index: 99999;
     `
     btnClose.innerHTML = `<svg t="1609132947879" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2485" width="36" height="36"><path d="M965.632 936.96c4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336-9.216 6.144-14.336 6.144-10.24-2.048-14.336-6.144L512 540.672 86.016 965.632c-8.192 8.192-20.48 8.192-28.672 0-4.096-4.096-6.144-9.216-6.144-14.336s2.048-10.24 6.144-14.336L482.304 512 57.344 86.016C53.248 81.92 51.2 76.8 51.2 71.68s2.048-10.24 6.144-14.336c8.192-8.192 20.48-8.192 28.672 0L512 482.304 936.96 57.344c8.192-8.192 20.48-8.192 28.672 0 4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336L540.672 512l424.96 424.96z" p-id="2486" fill="#ffffff"></path></svg>`
     btnClose.style = `position: absolute; top: 24px; right: 24px; z-index: 9999; cursor: pointer; width: 68px; height: 68px; display: flex; justify-content: center; align-items: center; border-radius: 50%; background: rgba(41, 41, 41, .13);`
@@ -452,6 +453,7 @@ function imgLightBoxInit () {
     imgNodeList.forEach(img => {
         img.style.cursor = 'zoom-in'
         img.addEventListener('click', e => {
+            document.documentElement.style.overflowY = 'hidden'
             image.src = img.src
             imgInfo.innerHTML = `<p style="color: #fff;">${img.title ? img.title : ''} &nbsp;&nbsp; Size: ${image.width} * ${image.height}</p>`
             lightBoxLayer.appendChild(imgInfo)
@@ -471,6 +473,7 @@ function imgLightBoxInit () {
     }, false)
 
     function close () {
+        document.documentElement.style.overflowY = 'scroll'
         if (lightBoxLayer && image.src) {
             image.remove()
             lightBoxLayer.remove()

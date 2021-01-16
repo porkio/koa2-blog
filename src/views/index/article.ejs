@@ -75,6 +75,8 @@
       const categoryId = '<%= article.categoryId %>'
       let articleLikes = '<%= article.likes %>'
 
+      utils.imgLightBoxInit()
+
       const elArticleLink = document.querySelector('#article-link')
       const progress = document.querySelector('.progress')
       const titleLayer = document.querySelector('.article-header')
