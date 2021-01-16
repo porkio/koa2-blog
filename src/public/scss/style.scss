@@ -844,8 +844,24 @@
 
 .article-content {
     word-break: break-all;
+    ol {
+        padding-left: 2rem;
+        font-size: 1.2rem;
+        li {
+            list-style: decimal;
+        }
+        code {
+            background: #ecf0f1;
+            padding: 1px 6px;
+            border-radius: 3px;
+            margin: 0 3px;
+            color: #ef4135;
+            word-break: break-all;
+        }
+    }
     ul {
         padding-left: 2rem;
+        font-size: 1.2rem;
         li {
             position: relative;
             &::before {

@@ -250,15 +250,102 @@
 
         // 更换文章缩略图
         btnChangeImg.addEventListener('click', e => {
-          imgInput.click()
+          chooseBtn(e)
+
         }, false)
+
+        function chooseBtn(e) {
+          const x = e.clientX,
+            y = e.clientY
+          const chooseBox = document.createElement('div')
+          const btnRemote = document.createElement('p')
+          const btnUpload = document.createElement('p')
+          btnRemote.innerText = '远程地址'
+          btnUpload.innerText = '上传'
+          chooseBox.appendChild(btnRemote)
+          chooseBox.appendChild(btnUpload)
+          chooseBox.style =
+            `border-radius: 5px; overflow: hidden; position: fixed; top: ${y}px; left: ${x}px; z-index: 99; box-shadow:
+            0 2px 8px 2px rgba(41, 41, 41, .12); min-width: 140px;`
+          const btnStyle = `text-align: center; cursor: pointer; height: 40px; line-height: 40px;`
+          btnRemote.style = btnStyle
+          btnUpload.style = btnStyle
+          btnRemote.addEventListener('click', e => {
+            // 远程地址
+            utils.cancelBubble()
+            remoteImage(e)
+          }, false)
+          btnRemote.addEventListener('mouseenter', e => {
+            btnRemote.style.background = '#76469F'
+            btnRemote.style.color = '#fff'
+          }, false)
+          btnRemote.addEventListener('mouseleave', e => {
+            btnRemote.style.background = 'none'
+            btnRemote.style.color = '#444'
+          }, false)
+          btnUpload.addEventListener('click', e => {
+            // 上传图片
+            imgInput.click()
+          }, false)
+          btnUpload.addEventListener('mouseenter', e => {
+            btnUpload.style.background = '#76469F'
+            btnUpload.style.color = '#fff'
+          }, false)
+          btnUpload.addEventListener('mouseleave', e => {
+            btnUpload.style.background = 'none'
+            btnUpload.style.color = '#444'
+          }, false)
+          chooseBox.addEventListener('mouseleave', e => {
+            chooseBox.remove()
+          }, false)
+          document.body.append(chooseBox)
+        }
+
+        // 远程图片地址弹窗
+        function remoteImage(e) {
+          const x = e.clientX,
+            y = e.clientY
+          const remoteBox = document.createElement('div')
+          const remoteInput = document.createElement('input')
+          const btnOk = document.createElement('button')
+
+          remoteBox.style =
+            `display: flex; min-width: 400px; position: fixed; top: ${y}px; left: ${x}px; border-radius: 5px; overflow: hidden; box-shadow: 0 2px 8px 2px rgba(41, 41, 41, .12); padding: 1rem; z-index: 100;`
+          remoteInput.type = 'text'
+          remoteInput.name = 'showImgUrl'
+          remoteInput.placeholder = 'https://oss.aliyun.com/x.png'
+          btnOk.innerText = 'Ok'
+          btnOk.className = 'btn btn-success'
+          btnOk.style = `margin-left: 1rem; max-height: 36px;`
+          remoteBox.appendChild(remoteInput)
+          remoteBox.appendChild(btnOk)
+          document.body.appendChild(remoteBox)
+          document.body.addEventListener('click', e => {
+            remoteBox && remoteBox.remove()
+          }, false)
+
+          remoteInput.addEventListener('click', e => utils.cancelBubble(), false)
+          remoteBox.addEventListener('click', e => utils.cancelBubble(), false)
+          btnOk.addEventListener('click', e => {
+            utils.cancelBubble()
+            const showImgUrl = remoteInput.value
+            if (showImgUrl) {
+              Object.assign(formData, {
+                showImgUrl
+              })
+              showImg.src = showImgUrl
+              remoteBox.remove()
+            }
+            remoteInput.focus()
+          }, false)
+        }
 
         // 监听是否选择了文件/图片
         imgInput.addEventListener('change', e => {
           const file = imgInput.files[0]
           const fd = new FormData()
           const oldImg = showImg.src.split('uploads/')[1]
-          console.log(oldImg)
+
           fd.append('article_img', file)
           fd.append('old_img', oldImg)
 

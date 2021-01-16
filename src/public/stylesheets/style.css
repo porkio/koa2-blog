@@ -1018,8 +1018,21 @@ input::placeholder {
 
 .article-content {
   word-break: break-all; }
+  .article-content ol {
+    padding-left: 2rem;
+    font-size: 1.2rem; }
+    .article-content ol li {
+      list-style: decimal; }
+    .article-content ol code {
+      background: #ecf0f1;
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin: 0 3px;
+      color: #ef4135;
+      word-break: break-all; }
   .article-content ul {
-    padding-left: 2rem; }
+    padding-left: 2rem;
+    font-size: 1.2rem; }
     .article-content ul li {
       position: relative; }
       .article-content ul li::before {
