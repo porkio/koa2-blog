@@ -1019,10 +1019,10 @@ input::placeholder {
 .article-content {
   word-break: break-all; }
   .article-content ol {
-    padding-left: 2rem;
     font-size: 1.2rem; }
     .article-content ol li {
-      list-style: decimal; }
+      list-style: decimal;
+      list-style-position: inside; }
     .article-content ol code {
       background: #ecf0f1;
       padding: 1px 6px;

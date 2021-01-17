@@ -845,10 +845,10 @@
 .article-content {
     word-break: break-all;
     ol {
-        padding-left: 2rem;
         font-size: 1.2rem;
         li {
             list-style: decimal;
+            list-style-position: inside;
         }
         code {
             background: #ecf0f1;
