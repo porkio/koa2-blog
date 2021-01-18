@@ -453,6 +453,8 @@ function imgLightBoxInit () {
     imgNodeList.forEach(img => {
         img.style.cursor = 'zoom-in'
         img.addEventListener('click', e => {
+            const pageOffsetWidth = document.body.offsetWidth || document.documentElement.offsetWidth
+            image.style.maxWidth = pageOffsetWidth + 'px'
             document.documentElement.style.overflowY = 'hidden'
             image.src = img.src
             imgInfo.innerHTML = `<p style="color: #fff;">${img.title ? img.title : ''} &nbsp;&nbsp; Size: ${image.width} * ${image.height}</p>`
