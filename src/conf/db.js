@@ -28,9 +28,9 @@ isProd && Object.assign(REDIS_CONF, {
     // 线上 mysql 配置
     host: 'localhost',
     port: 3306,
-    user: 'wlwo_net',
-    password: 'ZHnALxGdja5B7YDs',
-    database: 'wlwo_net'
+    user: 'root',
+    password: '123456',
+    database: 'test_db'
 })
 
 module.exports = {
