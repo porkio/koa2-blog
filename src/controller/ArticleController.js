@@ -79,12 +79,13 @@ const updateArticle = async (id, articleData) => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticleList = async (pageIndex, orderby, limit, isFront) => {
+const getArticleList = async (category, pageIndex, orderby, limit, isFront) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 7) // 分页 每页7条数据
 
     let order, whereOpt = {}
     isFront && Object.assign(whereOpt, { hidden: false })
+
     switch (orderby) {
         case undefined:
             order = [['order']]
@@ -97,11 +98,17 @@ const getArticleList = async (pageIndex, orderby, limit, isFront) => {
     }
 
     let offset = 0 + (pageIndex - 1) * limit
+
+    const cateOpt = {}
+    if (category) {
+        Object.assign(cateOpt, { cateLink: category })
+    }
     try {
         const result = await Article.findAndCountAll({
             where: whereOpt,
             include: [{
                 model: Category,
+                where: cateOpt,
                 attributes: ['id', 'cateName']
             }, {
                 model: Tag,
@@ -133,7 +140,9 @@ const getArticleList = async (pageIndex, orderby, limit, isFront) => {
 
             return articleList
         }
+        return new FailedModel(getArticleListFail)
     } catch (error) {
+        console.log(error)
         return new FailedModel(getArticleListFail)
     }
 }

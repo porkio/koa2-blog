@@ -5,9 +5,25 @@ const { getAllTags } = require('../../../controller/TagController')
 const { incSiteViews } = require('../../../controller/SiteConfigController')
 
 router.get('/', async (ctx, next) => {
-    const { pageIndex, orderby, limit } = ctx.query
+    const { c, pageIndex, orderby, limit } = ctx.query
     // controller
-    const articleList = await getArticleList(pageIndex, orderby, limit, true)
+    if (c === 'about.me') {
+        await ctx.render('error', {
+            page: {
+                message: '没什么好说的...'
+            }
+        })
+        return
+    }
+    const articleList = await getArticleList(c, pageIndex, orderby, limit, true)
+    if (articleList.errno) {
+        await ctx.render('error', {
+            page: {
+                message: '该分类下还没有发布文章哦！'
+            }
+        })
+        return
+    }
     const categories = await getCategories()
     const tags = await getAllTags()
 
@@ -16,6 +32,7 @@ router.get('/', async (ctx, next) => {
             title: '首页'
         }
     }
+
     Object.assign(data, { articleList, categories, tags })
     await ctx.render('index/index', data)
 })
@@ -40,7 +57,6 @@ router.get('/p/:link', async (ctx, next) => {
             title: article.title
         }
     }
-    console.log(article)
     Object.assign(data, { article, categories })
     await ctx.render('index/article.ejs', data)
 })
