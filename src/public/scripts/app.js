@@ -34,7 +34,8 @@ document.addEventListener('readystatechange', e => {
             } else {
                 backToTopBtn.style.right = positionObj.right
             }
-            backToTopBtn.children[0].style = 'width: 70%; height: 70%;'
+            
+            backToTopBtn.children[0].style = 'width: 60%; height: 60%;'
             backToTopBtn.style.backgroundColor = color
 
             backToTopBtn.addEventListener('mouseenter', () => {
