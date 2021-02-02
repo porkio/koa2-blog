@@ -302,11 +302,14 @@ function getRandomDeepColor () {
  * @param  {[type]} url  [请求地址]
  * @param  {[type]} data [携带数据（仅post）]
  * @return {[type]}      [description]
+ * get方法支持以下写法：
+ * 1. ajax('https://wlwo.net/p', {body: {name: 'Pork'}})
+ * 2. ajax('https://wlwo.net/p', {name: 'Pork', age: 25})
  */
 function ajax (url, options) {
     // 如果没有 options 或 options 中没有 method 或 method === GET
-    if (!options || !options.method || /get/i.test(options.method)) {
-        if (options.body) { // 如果 options 中没有 body
+    if (typeof options.method === 'undefined' || /get/i.test(options.method)) {
+        if (typeof options.body !== 'undefined') { // 如果 options 中有 body
             // options 中有 body 则拼接 url
             const qs = (data => {
                 let queryString = '?'
@@ -315,6 +318,15 @@ function ajax (url, options) {
                 }
                 return queryString.slice(0, -1) // 删除最后一个 & 符号
             })(options.body)
+            url += qs // 拼接 url
+        } else {
+            const qs = (data => {
+                let queryString = '?'
+                for (let key in data) {
+                    queryString += (key + '=' + data[key] + '&')
+                }
+                return queryString.slice(0, -1) // 删除最后一个 & 符号
+            })(options)
             url += qs // 拼接 url
         }
 
