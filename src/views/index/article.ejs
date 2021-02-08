@@ -9,7 +9,7 @@
   <div class="content">
     <div class="article-header">
       <div class="title">
-        <a href="../"><i class="iconfont icon-home1"></i><%= article.title %></a>
+        <a href="/"><i class="iconfont icon-home1"></i><%= article.title %></a>
       </div>
       <div class="progress" style="width: 12%"></div>
     </div>
@@ -95,6 +95,17 @@
       // 点赞
       btnLike.addEventListener('click', giveLike, false)
 
+      // 所有文章内的 a 标签在新窗口中打开
+      const articleContent = document.querySelector('.article-content')
+      const articleLinks = articleContent.querySelectorAll('a')
+      articleLinks.forEach((link, index) => {
+        if (index >= articleLinks.length - 2) return // 最后两个超链接不应用该规则（上一篇/下一篇文章）
+        link.addEventListener('click', e => {
+          e.preventDefault()
+          const url = link.href || link.getAttribute('href')
+          open(url)
+        }, false)
+      })
 
       document.addEventListener('scroll', e => {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop

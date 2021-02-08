@@ -79,12 +79,12 @@ const updateArticle = async (id, articleData) => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticleList = async (category, pageIndex, orderby, limit, isFront) => {
+const getArticleList = async ({ category, pageIndex, orderby, limit, manager }) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 7) // 分页 每页7条数据
 
     let order, whereOpt = {}
-    isFront && Object.assign(whereOpt, { hidden: false })
+    !manager && Object.assign(whereOpt, { hidden: false }) // 如果是管理员，则显示隐藏的文章
 
     switch (orderby) {
         case undefined:
@@ -96,6 +96,8 @@ const getArticleList = async (category, pageIndex, orderby, limit, isFront) => {
         default:
             order = [[orderby, 'desc']]
     }
+
+    console.log(order)
 
     let offset = 0 + (pageIndex - 1) * limit
 
@@ -206,16 +208,18 @@ const getArticleByLinkUrl = async link => {
                     }
                 }
             })
-            const prevArticle = await Article.findOne({
+
+            const prevArticle = await Article.findAll({
                 where: {
                     id: {
                         [Op.lt]: article.dataValues.id
                     }
                 },
+                order: [['id', 'DESC']], limit: 1,
                 attributes: ['id', 'title', 'linkUrl']
             })
 
-            Object.assign(article.dataValues, { prevArticle, nextArticle })
+            Object.assign(article.dataValues, { prevArticle: prevArticle[0], nextArticle })
 
             article.content = md.render(article.content)
             article.dataValues.createdAt = article.dataValues.createdAt.toISOString().split('T')[0]

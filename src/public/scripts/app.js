@@ -11,10 +11,8 @@ document.addEventListener('readystatechange', e => {
 
         // Loading
         const loading = document.querySelector('#loading')
-        setTimeout(() => {
-            loading && loading.remove()
-            document.documentElement.style.overflowY = 'scroll' // 解禁滚动条
-        }, 300)
+        loading && loading.remove()
+        document.documentElement.style.overflowY = 'scroll' // 解禁滚动条
 
         ajax('/api/index/incAppViews', {
             method: 'POST',
@@ -34,7 +32,7 @@ document.addEventListener('readystatechange', e => {
             } else {
                 backToTopBtn.style.right = positionObj.right
             }
-            
+
             backToTopBtn.children[0].style = 'width: 60%; height: 60%;'
             backToTopBtn.style.backgroundColor = color
 

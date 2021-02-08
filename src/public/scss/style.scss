@@ -645,7 +645,7 @@
             font-size: 1.4em;
             color: #3d3d3d;
             padding-bottom: 20px;
-            text-align: justify; //css英文语句的两端对齐：
+            // text-align: justify; //css英文语句的两端对齐：
             overflow: hidden;
 
             h1,
@@ -761,13 +761,13 @@
                 margin: 8px 0 20px;
 
                 p {
-                    margin: .6rem 0;
+                    margin: .6rem 0 !important;
                 }
             }
 
             pre {
                 position: relative;
-                margin: 10px 0;
+                margin: 18px 0;
                 font-size: 15px;
                 color: #f7f7f7;
                 border-top: 34px solid #222329;
@@ -843,11 +843,6 @@
 }
 
 .article-content {
-    word-break: break-all;
-
-    p {
-        display: inline;
-    }
 
     ol {
         font-size: 1.2rem;
@@ -855,6 +850,7 @@
         li {
             list-style: decimal;
             list-style-position: inside;
+            padding: .4rem 0;
         }
 
         code {
@@ -863,7 +859,6 @@
             border-radius: 3px;
             margin: 0 3px;
             color: #ef4135;
-            word-break: break-all;
         }
     }
 
@@ -873,6 +868,7 @@
 
         li {
             position: relative;
+            padding: .2rem 0;
 
             &::before {
                 display: block;
@@ -893,7 +889,6 @@
             border-radius: 3px;
             margin: 0 3px;
             color: #ef4135;
-            word-break: break-all;
         }
     }
 

@@ -5,7 +5,7 @@ const { getAllTags } = require('../../../controller/TagController')
 const { incSiteViews } = require('../../../controller/SiteConfigController')
 
 router.get('/', async (ctx, next) => {
-    const { c, pageIndex, orderby, limit } = ctx.query
+    const { c } = ctx.query
     // controller
     if (c === 'about.me') {
         await ctx.render('error', {
@@ -15,7 +15,7 @@ router.get('/', async (ctx, next) => {
         })
         return
     }
-    const articleList = await getArticleList(c, pageIndex, orderby, limit, true)
+    const articleList = await getArticleList(ctx.query)
     if (articleList.errno) {
         await ctx.render('error', {
             page: {
