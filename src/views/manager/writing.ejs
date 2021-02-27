@@ -136,6 +136,11 @@
       utils
     } from '../scripts/utils.js'
 
+    Array.prototype.remove = function (v) {
+      const index = this.indexOf(v)
+      index > -1 && this.splice(index, 1)
+    }
+
     document.addEventListener('readystatechange', e => {
       if (document.readyState === 'complete') {
         // 页面就绪
