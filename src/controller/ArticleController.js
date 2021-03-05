@@ -88,16 +88,14 @@ const getArticleList = async ({ category, pageIndex, orderby, limit, manager }) 
 
     switch (orderby) {
         case undefined:
-            order = [['order']]
+            order = [['order'], ['createdAt', 'desc']]
             break
         case 'order':
-            order = [['order']]
+            order = [['order'], ['createdAt', 'desc']]
             break
         default:
-            order = [[orderby, 'desc']]
+            order = [[orderby, 'desc'], ['order']]
     }
-
-    console.log(order)
 
     let offset = 0 + (pageIndex - 1) * limit
 

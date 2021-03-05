@@ -15,6 +15,7 @@ router.get('/', async (ctx, next) => {
         })
         return
     }
+
     const articleList = await getArticleList(ctx.query)
     if (articleList.errno) {
         await ctx.render('error', {
