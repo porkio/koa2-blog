@@ -96,7 +96,8 @@ h6 {
 
 .container {
   max-width: 940px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  background-color: #fff; }
 
 .dis-flex {
   display: -webkit-box;
@@ -747,6 +748,7 @@ input::placeholder {
     padding: 50px 15px 70px;
     font-size: 16px;
     color: #383838;
+    background-color: #fff;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -940,7 +942,7 @@ input::placeholder {
           display: block; }
       #article .content .article-content blockquote {
         background-color: #f5f7f9;
-        padding: 6px 15px;
+        padding: 2px 15px;
         border-left: 4px solid #fb4b87;
         margin: 8px 0 20px; }
         #article .content .article-content blockquote p {

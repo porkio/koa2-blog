@@ -541,6 +541,7 @@
         padding: 50px 15px 70px;
         font-size: 16px;
         color: #383838;
+        background-color: #fff;
         display: flex;
         flex-flow: column;
 
@@ -757,7 +758,7 @@
 
             blockquote {
                 background-color: #f5f7f9;
-                padding: 6px 15px;
+                padding: 2px 15px;
                 border-left: 4px solid #fb4b87;
                 margin: 8px 0 20px;
 
@@ -845,12 +846,15 @@
 
 .article-content {
     word-break: break-all;
+
     ol {
         padding-left: 2rem;
         font-size: 1.2rem;
+
         li {
             list-style: decimal;
         }
+
         code {
             background: #ecf0f1;
             padding: 1px 6px;
@@ -860,11 +864,14 @@
             word-break: break-all;
         }
     }
+
     ul {
         padding-left: 2rem;
         font-size: 1.2rem;
+
         li {
             position: relative;
+
             &::before {
                 display: block;
                 content: " ";
@@ -877,6 +884,7 @@
                 background-color: #ef4135;
             }
         }
+
         code {
             background: #ecf0f1;
             padding: 1px 6px;
