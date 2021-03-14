@@ -79,7 +79,7 @@ const updateArticle = async (id, articleData) => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticleList = async ({ category, pageIndex, orderby, limit, manager }) => {
+const getArticleList = async ({ c, pageIndex, orderby, limit, manager }) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 7) // 分页 每页7条数据
 
@@ -100,8 +100,8 @@ const getArticleList = async ({ category, pageIndex, orderby, limit, manager }) 
     let offset = 0 + (pageIndex - 1) * limit
 
     const cateOpt = {}
-    if (category) {
-        Object.assign(cateOpt, { cateLink: category })
+    if (c) {
+        Object.assign(cateOpt, { cateLink: c })
     }
     try {
         const result = await Article.findAndCountAll({
