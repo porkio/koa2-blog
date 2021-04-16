@@ -90,8 +90,7 @@ router.get('/upload', noLoginRedirect, async (ctx, next) => {
 // 后台管理文章
 router.get('/articles', noLoginRedirect, async (ctx, next) => {
     // controller
-    const { pageIndex, orderby, limit } = ctx.query
-    const articleList = await getArticleList(pageIndex, orderby, limit)
+    const articleList = await getArticleList(Object.assign(ctx.query, { manager: true }))
 
     const data = {
         pageInfo: {

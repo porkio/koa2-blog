@@ -6,11 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/iconfont.css">
-  <title><%= page.title %></title>
+  <title><%= page.title %> - 猪肉王子的博客</title>
 </head>
 
 <body>
-
   <!-- CSS loading -->
   <div id="loading">
     <div class="spinner">
@@ -34,17 +33,17 @@
           <% if (!category.parentId) { %>
           <li>
             <% if (category.childsTotal > 0) { %>
-            <a href="<%= category.cateLink %>" class="btn-menu" data-id="<%= category.id %>"><%= category.cateName %><i
+            <a href="javascript:;" class="btn-menu" data-id="<%= category.id %>"><%= category.cateName %><i
                 class="iconfont icon-down"></i></a>
             <% } else { %>
-            <a href="<%= category.cateLink %>" class="btn-menu"><%= category.cateName %></a>
+            <a href="/?c=<%= category.cateLink %>" class="btn-menu"><%= category.cateName %></a>
             <% } %>
             <% if (category.childsTotal > 0) { %>
             <ul class="submenu-list" data-top="<%= category.id %>">
               <% for (let cate of categories) { %>
               <% if (cate.parentId == category.id) { %>
-              <li class="submenu">
-                <a href="<%= cate.cateLink %>"><%= cate.cateName %></a>
+              <li class="submenu" data-id="<%= cate.id %>" data-pid="<%= cate.parentId %>">
+                <a href="/?c=<%= cate.cateLink %>"><%= cate.cateName %></a>
               </li>
               <% } %>
               <% } %>

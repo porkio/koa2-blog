@@ -79,29 +79,36 @@ const updateArticle = async (id, articleData) => {
  * @description 获取文章列表
  * @param { String } orderBy
  */
-const getArticleList = async (pageIndex, orderby, limit, isFront) => {
+const getArticleList = async ({ c, pageIndex, orderby, limit, manager }) => {
     !pageIndex && (pageIndex = 1)
     !limit && (limit = 7) // 分页 每页7条数据
 
     let order, whereOpt = {}
-    isFront && Object.assign(whereOpt, { hidden: false })
+    !manager && Object.assign(whereOpt, { hidden: false }) // 如果是管理员，则显示隐藏的文章
+
     switch (orderby) {
         case undefined:
-            order = [['order']]
+            order = [['order'], ['createdAt', 'desc']]
             break
         case 'order':
-            order = [['order']]
+            order = [['order'], ['createdAt', 'desc']]
             break
         default:
-            order = [[orderby, 'desc']]
+            order = [[orderby, 'desc'], ['order']]
     }
 
     let offset = 0 + (pageIndex - 1) * limit
+
+    const cateOpt = {}
+    if (c) {
+        Object.assign(cateOpt, { cateLink: c })
+    }
     try {
         const result = await Article.findAndCountAll({
             where: whereOpt,
             include: [{
                 model: Category,
+                where: cateOpt,
                 attributes: ['id', 'cateName']
             }, {
                 model: Tag,
@@ -133,7 +140,9 @@ const getArticleList = async (pageIndex, orderby, limit, isFront) => {
 
             return articleList
         }
+        return new FailedModel(getArticleListFail)
     } catch (error) {
+        console.log(error)
         return new FailedModel(getArticleListFail)
     }
 }
@@ -197,16 +206,18 @@ const getArticleByLinkUrl = async link => {
                     }
                 }
             })
-            const prevArticle = await Article.findOne({
+
+            const prevArticle = await Article.findAll({
                 where: {
                     id: {
                         [Op.lt]: article.dataValues.id
                     }
                 },
+                order: [['id', 'DESC']], limit: 1,
                 attributes: ['id', 'title', 'linkUrl']
             })
 
-            Object.assign(article.dataValues, { prevArticle, nextArticle })
+            Object.assign(article.dataValues, { prevArticle: prevArticle[0], nextArticle })
 
             article.content = md.render(article.content)
             article.dataValues.createdAt = article.dataValues.createdAt.toISOString().split('T')[0]
@@ -301,7 +312,7 @@ const incArticleViews = async linkUrl => {
  */
 const incArticleLikes = async id => {
     if (!id) return false
-    console.log(id)
+
     try {
         const article = await Article.findOne({
             where: {

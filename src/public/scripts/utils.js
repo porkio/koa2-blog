@@ -246,7 +246,6 @@ function insertAfter (parent, node, referenceNode) {
     parent.insertBefore(node, referenceNode.nextSibling)
 }
 
-
 /**
  * 防止频发触发
  * @param { Function } fn
@@ -302,11 +301,14 @@ function getRandomDeepColor () {
  * @param  {[type]} url  [请求地址]
  * @param  {[type]} data [携带数据（仅post）]
  * @return {[type]}      [description]
+ * get方法支持以下写法：
+ * 1. ajax('https://wlwo.net/p', {body: {name: 'Pork'}})
+ * 2. ajax('https://wlwo.net/p', {name: 'Pork', age: 25})
  */
 function ajax (url, options) {
     // 如果没有 options 或 options 中没有 method 或 method === GET
-    if (!options || !options.method || /get/i.test(options.method)) {
-        if (options.body) { // 如果 options 中没有 body
+    if (typeof options.method === 'undefined' || /get/i.test(options.method)) {
+        if (typeof options.body !== 'undefined') { // 如果 options 中有 body
             // options 中有 body 则拼接 url
             const qs = (data => {
                 let queryString = '?'
@@ -315,6 +317,15 @@ function ajax (url, options) {
                 }
                 return queryString.slice(0, -1) // 删除最后一个 & 符号
             })(options.body)
+            url += qs // 拼接 url
+        } else {
+            const qs = (data => {
+                let queryString = '?'
+                for (let key in data) {
+                    queryString += (key + '=' + data[key] + '&')
+                }
+                return queryString.slice(0, -1) // 删除最后一个 & 符号
+            })(options)
             url += qs // 拼接 url
         }
 
@@ -444,16 +455,26 @@ function imgLightBoxInit () {
         width: 100%;
         height: 100%;
         background-color: ${color};
+        z-index: 99999;
+        overflow: scroll;
     `
-    btnClose.innerHTML = `<svg t="1609132947879" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2485" width="36" height="36"><path d="M965.632 936.96c4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336-9.216 6.144-14.336 6.144-10.24-2.048-14.336-6.144L512 540.672 86.016 965.632c-8.192 8.192-20.48 8.192-28.672 0-4.096-4.096-6.144-9.216-6.144-14.336s2.048-10.24 6.144-14.336L482.304 512 57.344 86.016C53.248 81.92 51.2 76.8 51.2 71.68s2.048-10.24 6.144-14.336c8.192-8.192 20.48-8.192 28.672 0L512 482.304 936.96 57.344c8.192-8.192 20.48-8.192 28.672 0 4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336L540.672 512l424.96 424.96z" p-id="2486" fill="#ffffff"></path></svg>`
-    btnClose.style = `position: absolute; top: 24px; right: 24px; z-index: 9999; cursor: pointer;`
+    btnClose.innerHTML = `<svg t="1609132947879" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2485" width="24" height="24"><path d="M965.632 936.96c4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336-9.216 6.144-14.336 6.144-10.24-2.048-14.336-6.144L512 540.672 86.016 965.632c-8.192 8.192-20.48 8.192-28.672 0-4.096-4.096-6.144-9.216-6.144-14.336s2.048-10.24 6.144-14.336L482.304 512 57.344 86.016C53.248 81.92 51.2 76.8 51.2 71.68s2.048-10.24 6.144-14.336c8.192-8.192 20.48-8.192 28.672 0L512 482.304 936.96 57.344c8.192-8.192 20.48-8.192 28.672 0 4.096 4.096 6.144 9.216 6.144 14.336s-2.048 10.24-6.144 14.336L540.672 512l424.96 424.96z" p-id="2486" fill="#ffffff"></path></svg>`
+    btnClose.style = `position: absolute; top: 18px; right: 18px; z-index: 9999; cursor: pointer; width: 44px; height: 44px; display: flex; justify-content: center; align-items: center; border-radius: 50%; background: rgba(41, 41, 41, .13);`
     lightBoxLayer.appendChild(btnClose)
 
     imgNodeList.forEach(img => {
         img.style.cursor = 'zoom-in'
         img.addEventListener('click', e => {
+            const pageOffsetWidth = document.body.offsetWidth || document.documentElement.offsetWidth
+            image.style.maxWidth = pageOffsetWidth + 'px'
+            document.documentElement.style.overflowY = 'hidden'
             image.src = img.src
-            imgInfo.innerHTML = `<p style="color: #fff;">${img.title ? img.title : ''} &nbsp;&nbsp; Size: ${image.width} * ${image.height}</p>`
+            if (image.src.search(/\?/) > -1) {
+                image.src = image.src.split('?')[0]
+            }
+            image.onload = function () {
+                imgInfo.innerHTML = `<p style="color: #fff;">${img.title ? img.title : ''} &nbsp;&nbsp; Size: ${image.width} * ${image.height}</p>`
+            }
             lightBoxLayer.appendChild(imgInfo)
             lightBoxLayer.appendChild(image)
             document.body.appendChild(lightBoxLayer)
@@ -471,12 +492,25 @@ function imgLightBoxInit () {
     }, false)
 
     function close () {
+        document.documentElement.style.overflowY = 'scroll'
         if (lightBoxLayer && image.src) {
             image.remove()
             lightBoxLayer.remove()
         }
         lightBoxLayer && lightBoxLayer.remove()
     }
+}
+
+// html 转议
+function htmlEscape (text) {
+    return text.replace(/[<>"&]/g, function (match, pos, originalText) {
+        switch (match) {
+            case '<': return '&lt;'
+            case '>': return '&gt;'
+            case '&': return '&amp;'
+            case '\"': return '&quot;'
+        }
+    })
 }
 
 /**
@@ -540,5 +574,6 @@ export const utils = {
     showMessage,
     promisify,
     imgLightBoxInit,
+    htmlEscape,
     printLog
 }

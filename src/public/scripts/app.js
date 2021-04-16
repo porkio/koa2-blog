@@ -1,13 +1,19 @@
 /**
- * @author Pork
  * @description 应用入口 app.js 主要负责整体业务逻辑（增强用户体验）
+ * @author Pork
+ * @email porksb@163.com
  * @created_at 2020/11/29
- * @updated_at
  */
 
 document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
         // Document is ready
+
+        // Loading
+        const loading = document.querySelector('#loading')
+        loading && loading.remove()
+        document.documentElement.style.overflowY = 'scroll' // 解禁滚动条
+
         ajax('/api/index/incAppViews', {
             method: 'POST',
             body: {}
@@ -26,7 +32,8 @@ document.addEventListener('readystatechange', e => {
             } else {
                 backToTopBtn.style.right = positionObj.right
             }
-            backToTopBtn.children[0].style = 'width: 70%; height: 70%;'
+
+            backToTopBtn.children[0].style = 'width: 60%; height: 60%;'
             backToTopBtn.style.backgroundColor = color
 
             backToTopBtn.addEventListener('mouseenter', () => {
@@ -79,10 +86,6 @@ document.addEventListener('readystatechange', e => {
         })('#444444', '#cf4647')
         //参数： 默认颜色，鼠标移入颜色，是否使用缓动效果easing: true/flase，位置信息{bottom: '80px', right: '44px'}
 
-        // Loading
-        const loading = document.querySelector('#loading')
-        loading && loading.remove()
-        document.documentElement.style.overflowY = 'scroll' // 解禁滚动条
         // Go Back Button
         !(() => {
             const btnGoBack = document.querySelector('#btn-go-back')
