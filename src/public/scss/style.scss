@@ -818,7 +818,6 @@
                 display: flex;
                 justify-content: center;
                 flex-direction: column;
-                flex-wrap: wrap;
                 align-items: center;
                 cursor: pointer;
 
@@ -827,11 +826,12 @@
                 }
 
                 i {
-                    font-size: 2.2rem;
+                    font-size: 2rem;
                 }
 
                 span {
                     font-size: .9rem;
+                    transform: translateY(-8px);
                 }
             }
         }

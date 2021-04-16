@@ -1001,8 +1001,6 @@ input::placeholder {
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
         -webkit-box-align: center;
             -ms-flex-align: center;
                 align-items: center;
@@ -1010,9 +1008,11 @@ input::placeholder {
         #article .content .give-like .btn-like:hover {
           background-color: #ff7b8d; }
         #article .content .give-like .btn-like i {
-          font-size: 2.2rem; }
+          font-size: 2rem; }
         #article .content .give-like .btn-like span {
-          font-size: .9rem; }
+          font-size: .9rem;
+          -webkit-transform: translateY(-8px);
+                  transform: translateY(-8px); }
 
 /* 页脚 */
 #footer {
