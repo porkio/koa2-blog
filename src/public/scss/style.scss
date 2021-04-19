@@ -638,6 +638,7 @@
                     i.icon-Heart::before {
                         color: #cf4647;
                     }
+
                     &:last-child {
                         margin-right: 0;
                     }
@@ -840,7 +841,7 @@
 
                 span {
                     font-size: .9rem;
-                    transform: translateY(-8px);
+                    transform: translateY(-5px);
                 }
             }
         }
@@ -856,6 +857,7 @@
 
         li {
             list-style: decimal;
+            margin: 1rem 0;
         }
 
         code {
@@ -874,6 +876,7 @@
 
         li {
             position: relative;
+            margin: 1rem 0;
 
             &::before {
                 display: block;
@@ -1094,6 +1097,7 @@
     #article {
         .content {
             padding: 50px 20px;
+
             .article-header .title {
                 padding: 0;
             }
