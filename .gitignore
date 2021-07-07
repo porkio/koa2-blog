@@ -3,7 +3,6 @@
 */**/.DS_Store
 dump.rdb
 
-
 # Application specific files
 node_modules
 .sass-cache
