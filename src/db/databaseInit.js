@@ -28,7 +28,7 @@ const databaseInit = async () => {
     const user = await User.create({
         userName: 'Pork',
         email: 'porksb@163.com',
-        password: strCrypto('zhaoxu666'),
+        password: strCrypto('ox&u..666'),
         gender: 1,
         authLevel: 0,
         avatarUrl: '/uploads/pork-avatar.jpg'
