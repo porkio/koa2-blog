@@ -340,7 +340,7 @@ function getRandomDeepColor() {
 function ajax(url, options) {
 	// 如果没有 options 或 options 中没有 method 或 method === GET
 	if (typeof options.method === 'undefined' || /get/i.test(options.method)) {
-		if (options && typeof options.body !== 'undefined') {
+		if (options) {
 			// 如果 options 中有 body
 			// options 中有 body 则拼接 url
 			const qs = ((data) => {
@@ -439,7 +439,7 @@ function showMessage({ title, icon, duration = 2500, cb }) {
     } else {
         msgBox.appendChild(msgTitle)
     }
-    
+
 	if (iconsMap.get(icon)) {
 		msgBox.innerHTML = iconsMap.get(icon)
 		msgBox.appendChild(msgTitle)
