@@ -392,8 +392,6 @@ function showMessage({ title, icon, duration = 2500, cb }) {
 
     typeof icon !== 'undefined' && (icon = icon.toLowerCase())
 
-    console.log(icon)
-
     const msgBox = document.createElement('div')
     const msgTitle = document.createElement('span')
     msgTitle.innerText = title
@@ -439,13 +437,6 @@ function showMessage({ title, icon, duration = 2500, cb }) {
     } else {
         msgBox.appendChild(msgTitle)
     }
-
-	if (iconsMap.get(icon)) {
-		msgBox.innerHTML = iconsMap.get(icon)
-		msgBox.appendChild(msgTitle)
-	} else {
-		msgBox.appendChild(msgTitle)
-	}
 
 	document.body.appendChild(msgBox)
 
