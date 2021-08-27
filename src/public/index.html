@@ -865,6 +865,7 @@
 									// 选项被点击逻辑
 									const icon = el.children[1]
 									cancelOthers(radioGroup) // 取消所有选中状态
+									el.children[0].checked = true
 									icon.classList.remove('icon-radio')
 									icon.classList.add('icon-radioon')
 									icon.style.color = '#0096ff'
