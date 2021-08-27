@@ -4,13 +4,25 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./css/style.css" />
+		<!-- <link rel="stylesheet" href="./css/style.css" /> -->
 		<link
 			rel="stylesheet"
 			href="//at.alicdn.com/t/font_2771419_i6w1ytscwar.css"
 		/>
-		<title>Document</title>
+		<title>超级会员问卷调查</title>
 		<style>
+            html {
+                font-size: 16px;
+            }
+            body {
+                font: 400 1em/1.5 Microsoft Yahei, Avenir, Segoe UI, Hiragino Sans GB, STHeiti, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            .regred {
+                color: red;
+                margin-right: 8px;
+            }
 			.block-radius {
 				background-color: #f0f0f0;
 				padding: 1rem;
@@ -31,14 +43,14 @@
 			}
 			.form-group {
 				display: flex;
-				padding: 0.4rem 0;
+				padding: .5rem 0;
 			}
 			.form-group label {
-				padding: 0.4rem;
+				padding: 0.8rem;
 				color: #555;
 			}
 			.form-group .regred {
-				margin-right: 10px;
+				margin-right: 8px;
 			}
 			.form-group input[type='text'] {
 				outline: none;
@@ -46,35 +58,34 @@
 				border: none;
 				border-radius: 44px;
 				background-color: #f0f0f0;
-				padding: 0.5rem 0.75rem;
+				padding: .8rem 1rem;
+                font-size: 1rem;
 			}
 			.input-radio {
 				position: relative;
-				margin: 0.4rem 0;
+				margin: 0.5rem 0;
 				flex-wrap: wrap;
 			}
 			.input-radio input[type='radio'],
 			.input-radio input[type='checkbox'] {
-				width: 0.8rem;
-				height: 0.8rem;
-				margin: 0.4rem;
+				width: 1rem;
+				height: 1rem;
+				margin: 0.8rem;
 				opacity: 0;
 			}
-			.input-radio:last-of-type {
-				margin-left: 14px;
-			}
 			.input-radio .iconfont {
-				font-size: 0.8rem;
+				font-size: 1.2rem;
 				position: absolute;
-				top: 0.4rem;
-				left: 0.5rem;
+                top: 50%;
+				left: 1rem;
+                transform: translateY(-50%);
 				color: #494949;
 			}
 			.input-radio .icon-radioon {
-				font-size: 0.84rem;
+				font-size: 1.28rem;
 			}
 			.block-with-line {
-				padding: 0.4rem 0;
+				padding: 0.8rem 0;
 				margin: 1rem 0;
 				border-bottom: 0.5px solid #c5c5c5;
 			}
@@ -85,9 +96,10 @@
 			}
 			.line .iconfont {
 				position: absolute;
-				top: 0.4rem;
-				left: 0.5rem;
-				font-size: 0.8rem;
+				top: 50%;
+				left: 1rem;
+                transform: translateY(-50%);
+				font-size: 1.2rem;
 				color: #494949;
 			}
 			#birthday,
@@ -100,33 +112,53 @@
 				-webkit-appearance: none;
 				background-color: transparent;
 				width: 100%;
+                font-size: 1rem;
 				border-radius: 44px;
 				background-color: #f0f0f0;
-				padding: 0.4rem 0.75rem;
+				padding: 0.8rem 1rem;
 			}
+            .lsu-submit {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 2rem;
+            }
+            #btn-submit {
+                outline: none;
+                appearance: none;
+                border: none;
+                -moz-appearance: none;
+				-webkit-appearance: none;
+                background: #c40000;
+                border-radius: 99px;
+                padding: .8rem 0;
+                color: #fff;
+                font-size: 1.1rem;
+                width: 80%;
+                margin: 1rem auto;
+                box-shadow: -2px 4px 2px 0 rgba(29, 29, 29, 0.12);
+            }
 		</style>
 	</head>
 	<body>
-		<div class="loginsingup-input" style="width: 90%; margin: auto">
+		<div class="loginsingup-input" style="width: 92%; max-width: 750px; margin: 0 auto;">
 			<div
 				id="base"
 				class=""
 				align="center"
 				style="padding-top: 5px; padding-bottom: 5px"
 			>
-				<h3>超级会员问卷</h3>
+				<h3 style="margin: 2rem 0 0 0; font-weight: 500;">超级会员问卷</h3>
 			</div>
-			<div>
-				<div class=""></div>
-				<div class="sbu-title block-radius">
-					<p>
-						<span
-							>&nbsp;&nbsp; &nbsp; &nbsp;
-							尊敬的女士先生：您好！非常感谢您抽出宝贵的时间来帮助我们填写这份问卷，您的回答对本研究非常重要，显请您根据您的实际经验来填写，希望能得到您的支持和配合。本次调查仅用作学术研究，您提供的信息我们绝对保密，请放心作答。再次感谢你的热心和对我们学术研究的支持。祝您工作顺利！</span
-						>
-					</p>
-				</div>
-			</div>
+
+            <div class="sbu-title block-radius">
+                <p>
+                    <span
+                        >&nbsp;&nbsp; &nbsp; &nbsp;
+                        尊敬的女士先生：您好！非常感谢您抽出宝贵的时间来帮助我们填写这份问卷，您的回答对本研究非常重要，显请您根据您的实际经验来填写，希望能得到您的支持和配合。本次调查仅用作学术研究，您提供的信息我们绝对保密，请放心作答。再次感谢你的热心和对我们学术研究的支持。祝您工作顺利！</span
+                    >
+                </p>
+            </div>
+
 			<form action="" method="post" id="questionnaireFrom">
 				<input type="hidden" name="qid" value="2" />
 				<div class="form-group f-d-column">
@@ -175,7 +207,7 @@
 					<label for="birthday"
 						><span class="regred">*</span>自己生日</label
 					>
-					<div class="fr" id="birthday_time">
+					<div class="form-group" id="birthday_time">
 						<input
 							type="date"
 							name="birthday"
@@ -189,7 +221,7 @@
 					<label for="birthday"
 						><span class="regred">*</span>宝宝生日</label
 					>
-					<div class="fr" id="baby_birthday_time">
+					<div class="form-group" id="baby_birthday_time">
 						<input
 							type="date"
 							name="baby_birthday"
@@ -461,7 +493,7 @@
 						><span class="regred">*</span
 						>请问您的兴趣爱好是什么类型？</label
 					>
-					<div class="input-radio d-flex f-d-column">
+					<div class="checkbox-list input-radio d-flex f-d-column">
 						<div class="line">
 							<input
 								type="checkbox"
@@ -525,7 +557,7 @@
 						><span class="regred">*</span
 						>请问您最喜欢消费哪种品类的商品？</label
 					>
-					<div class="input-radio d-flex f-d-column">
+					<div class="checkbox-list input-radio d-flex f-d-column">
 						<div class="line">
 							<input
 								type="checkbox"
@@ -590,7 +622,7 @@
 						><span class="regred">*</span
 						>请问您的喜好品牌有哪些？</label
 					>
-					<div class="input-radio d-flex f-d-column">
+					<div class="checkbox-list input-radio d-flex f-d-column">
 						<div class="line">
 							<input
 								type="checkbox"
@@ -654,7 +686,7 @@
 						><span class="regred">*</span
 						>您常使用的购物渠道有哪些？</label
 					>
-					<div class="input-radio d-flex f-d-column">
+					<div class="checkbox-list input-radio d-flex f-d-column">
 						<div class="line">
 							<input
 								type="checkbox"
@@ -718,7 +750,7 @@
 						<span class="regred">*</span
 						>请问您常用社交咨询平台有哪些？
 					</label>
-					<div class="input-radio d-flex f-d-column">
+					<div class="checkbox-list input-radio d-flex f-d-column">
 						<div class="line">
 							<input
 								type="checkbox"
@@ -770,7 +802,7 @@
 					<input
 						type="button"
 						name=""
-						id=""
+						id="btn-submit"
 						onclick="checkSubmit()"
 						value="提交问卷"
 					/>
@@ -826,12 +858,11 @@
 				radioList.length > 0 &&
 					Array.from(radioList).forEach((radioGroup) => {
 						// 拿到每个单选组
-						Array.from(radioGroup.children).forEach((el) => {
+						radioGroup.children.length > 0 && Array.from(radioGroup.children).forEach((el) => {
 							el.addEventListener(
 								'click',
 								(e) => {
 									// 选项被点击逻辑
-
 									const icon = el.children[1]
 									cancelOthers(radioGroup) // 取消所有选中状态
 									icon.classList.remove('icon-radio')
@@ -843,6 +874,39 @@
 						})
 					})
 			})()
+
+            !(function() {
+                // 多选框组逻辑
+                const checkboxList = document.querySelectorAll('.checkbox-list')
+                checkboxList.length > 0 && Array.from(checkboxList).forEach(checkboxGroup => {
+                    checkboxGroup.children.length > 0 && Array.from(checkboxGroup.children).forEach(item => {
+                        item.addEventListener('click', e => {
+                            toggleCheckBox(item)
+                        }, false)
+                    })
+                })
+            })()
+
+            // checkbox 开关状态切换
+            function toggleCheckBox(item) {
+                const checkbox = item.children[0]
+                const icon = item.children[1]
+
+                if (!checkbox.checked) {
+                    checkbox.checked = true
+                } else checkbox.checked = false
+
+                if (icon.classList.contains('icon-checkbox')) {
+                    icon.classList.remove('icon-checkbox')
+                    icon.classList.add('icon-checkbox1')
+                    icon.style.color = '#0096ff'
+                } else {
+                    icon.classList.remove('icon-checkbox1')
+                    icon.classList.add('icon-checkbox')
+                    icon.style.color = '#454545'
+                }
+                
+            }
 
 			// 取消该元素下所有子元素选中状态
 			function cancelOthers(el) {
