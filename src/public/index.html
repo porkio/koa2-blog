@@ -497,7 +497,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="hobby[]"
+								name="hobby"
 								value="1"
 							/>运动
 							<span
@@ -508,7 +508,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="hobby[]"
+								name="hobby"
 								value="2"
 							/>娱乐
 							<span
@@ -519,7 +519,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="hobby[]"
+								name="hobby"
 								value="3"
 							/>智力
 							<span
@@ -530,7 +530,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="hobby[]"
+								name="hobby"
 								value="4"
 							/>文艺
 							<span
@@ -541,7 +541,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="hobby[]"
+								name="hobby"
 								value="5"
 							/>游戏
 							<span
@@ -561,7 +561,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="category[]"
+								name="category"
 								value="1"
 							/>母婴
 							<span
@@ -572,7 +572,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="category[]"
+								name="category"
 								value="2"
 							/>美妆
 							<span
@@ -583,7 +583,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="category[]"
+								name="category"
 								value="3"
 							/>日用百货
 							<span
@@ -595,7 +595,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="category[]"
+								name="category"
 								value="4"
 							/>食品酒水
 							<span
@@ -606,7 +606,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="category[]"
+								name="category"
 								value="5"
 							/>洗护
 							<span
@@ -626,7 +626,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="brand[]"
+								name="brand"
 								value="1"
 							/>SK2
 							<span
@@ -637,7 +637,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="brand[]"
+								name="brand"
 								value="2"
 							/>迪奥
 							<span
@@ -648,7 +648,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="brand[]"
+								name="brand"
 								value="3"
 							/>YSL
 							<span
@@ -659,7 +659,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="brand[]"
+								name="brand"
 								value="4"
 							/>香奈儿
 							<span
@@ -670,7 +670,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="brand[]"
+								name="brand"
 								value="5"
 							/>韩后
 							<span
@@ -690,7 +690,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="shopping_channel[]"
+								name="shopping_channel"
 								value="1"
 							/>实体店
 							<span
@@ -701,7 +701,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="shopping_channel[]"
+								name="shopping_channel"
 								value="2"
 							/>淘宝
 							<span
@@ -712,7 +712,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="shopping_channel[]"
+								name="shopping_channel"
 								value="3"
 							/>拼多多
 							<span
@@ -723,7 +723,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="shopping_channel[]"
+								name="shopping_channel"
 								value="4"
 							/>社区团购
 							<span
@@ -734,7 +734,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="shopping_channel[]"
+								name="shopping_channel"
 								value="5"
 							/>其他
 							<span
@@ -754,7 +754,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="social_contact[]"
+								name="social_contact"
 								value="1"
 							/>微信
 							<span
@@ -765,7 +765,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="social_contact[]"
+								name="social_contact"
 								value="2"
 							/>抖音
 							<span
@@ -776,7 +776,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="social_contact[]"
+								name="social_contact"
 								value="3"
 							/>小红书
 							<span
@@ -787,7 +787,7 @@
 						<div class="line">
 							<input
 								type="checkbox"
-								name="social_contact[]"
+								name="social_contact"
 								value="4"
 							/>快手
 							<span
@@ -865,7 +865,6 @@
 									// 选项被点击逻辑
 									const icon = el.children[1]
 									cancelOthers(radioGroup) // 取消所有选中状态
-									el.children[0].checked = true
 									icon.classList.remove('icon-radio')
 									icon.classList.add('icon-radioon')
 									icon.style.color = '#0096ff'
