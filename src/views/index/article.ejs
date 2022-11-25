@@ -1,6 +1,6 @@
 <%- include('layout/_header') %>
 <link rel="stylesheet" href="../stylesheets/atom-one-light.css">
-<script src="../scripts/highlight.pack.js"></script>
+<script src="../js/highlight.pack.min.js"></script>
 <script>
   hljs.initHighlightingOnLoad()
 
@@ -67,7 +67,7 @@
 <script type="module">
   import {
     utils
-  } from "/scripts/utils.js";
+  } from "/js/utils.min.js";
   document.addEventListener('readystatechange', e => {
     if (document.readyState === 'complete') {
       // Document is ready...
