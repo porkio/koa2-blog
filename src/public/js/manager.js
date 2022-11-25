@@ -1,0 +1,1 @@
+document.addEventListener("readystatechange",(e=>{"complete"===document.readyState&&document.querySelectorAll(".btn-close").forEach((e=>{e.addEventListener("click",(e=>{const t=document.querySelector(".layer-default");t&&t.remove(),t||e.target.parentElement.remove()}),!1)}))}),!1);
