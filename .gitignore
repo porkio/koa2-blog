@@ -2,6 +2,7 @@
 .DS_Store
 */**/.DS_Store
 dump.rdb
+src/conf/db.js
 
 # Application specific files
 node_modules

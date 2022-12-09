@@ -22,31 +22,37 @@ const errorViewRouter = require('./routes/view/error')
 onerror(app)
 
 // middlewares
-app.use(bodyparser({
-    enableTypes: ['json', 'form', 'text']
-}))
+app.use(
+	bodyparser({
+		enableTypes: ['json', 'form', 'text'],
+	})
+)
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
 
-app.use(views(__dirname + '/views', {
-    extension: 'ejs'
-}))
+app.use(
+	views(__dirname + '/views', {
+		extension: 'ejs',
+	})
+)
 
 // 配置 session
 app.keys = [SESSION_SECRET_KEY]
-app.use(session({
-    key: 'i99.work.sid', // cookie name, 默认 koa.sid
-    prefix: 'i99.work.sess:', // redis key 前缀 默认 koa.sess
-    cookie: {
-        path: '/',
-        httpOnly: true,
-        maxAge: 3600000 * 24 * 7, // 一星期过期
-    },
-    store: redisStore({
-        all: `${REDIS_CONF.host}:${REDIS_CONF.port}`
-    })
-}))
+app.use(
+	session({
+		key: 'ppwq.work.sid', // cookie name, 默认 koa.sid
+		prefix: 'ppwq.work.sess:', // redis key 前缀 默认 koa.sess
+		cookie: {
+			path: '/',
+			httpOnly: true,
+			maxAge: 3600000 * 24 * 7, // 一星期过期
+		},
+		store: redisStore({
+			all: `${REDIS_CONF.host}:${REDIS_CONF.port}`,
+		}),
+	})
+)
 
 // routes
 app.use(index.routes(), index.allowedMethods())
@@ -59,7 +65,7 @@ app.use(indexApiRouter.routes(), indexApiRouter.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
-    console.error('server error', err, ctx)
+	console.error('server error', err, ctx)
 })
 
 module.exports = app

@@ -13,8 +13,8 @@ const MYSQL_CONF = {
 	host: 'localhost',
 	port: 3306,
 	user: 'root',
-	password: 'r3eMrdcyJDEMBFLf',
-	database: 'ppwq_work_2023',
+	password: '12345678',
+	database: 'test_2022',
 	dialect: 'mysql',
 }
 
@@ -29,8 +29,8 @@ isProd &&
 		host: 'localhost',
 		port: 3306,
 		user: 'root',
-		password: 'r3eMrdcyJDEMBFLf',
-		database: 'ppwq_work_2023',
+		password: '123456',
+		database: 'test_db',
 	})
 
 module.exports = {
