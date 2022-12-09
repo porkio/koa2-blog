@@ -12,8 +12,67 @@
 
 ### 体验
 
--   [前端](https://wlwo.net)
--   [后端](https://wlwo.net/manager)
+-   [前端](https://ppwq.work)
+-   [后端](https://ppwq.work/manager)
+
+### 使用
+```sh
+mv src/conf/db.bak.js src/conf/db.js
+```
+#### 数据库
+新建数据库，将根目录下的 database_backup 文件夹下的 ppwq_work.sql.gz 导入到自己的数据库中，然后根据自己的数据库信息修改 src/conf/db.js 的配置信息即可
+
+```sh
+vim src/conf/db.js
+```
+
+```js
+/**
+ * @author Pork
+ * @description 存储配置
+ */
+
+const { isProd } = require('../utils/env')
+
+const REDIS_CONF = {
+	port: 6379,
+	host: '127.0.0.1',
+}
+// dev 环境改这里的数据库信息
+const MYSQL_CONF = {
+	host: 'localhost',
+	port: 3306,
+	user: 'root',
+	password: '12345678',
+	database: 'test_2022',
+	dialect: 'mysql',
+}
+
+// 线上环境的 redis 配置和 MySql 配置
+isProd &&
+	Object.assign(REDIS_CONF, {
+		port: 6379,
+		host: '127.0.0.1',
+	}) &&
+	Object.assign(MYSQL_CONF, {
+		// 线上 mysql 配置
+		host: 'localhost',
+		port: 3306,
+		user: 'root',
+		password: '123456',
+		database: 'test_db',
+	})
+
+module.exports = {
+	REDIS_CONF,
+	MYSQL_CONF,
+}
+```
+
+```sh
+npm run dev // 线上 npm run prd 或 使用pm2管理器进行启动
+```
+
 
 ### 功能
 
