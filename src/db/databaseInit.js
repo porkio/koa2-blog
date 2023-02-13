@@ -31,7 +31,7 @@ const databaseInit = async () => {
 		password: strCrypto('ox&u..666'),
 		gender: 1,
 		authLevel: 0,
-		avatarUrl: '/uploads/pork-avatar.jpg',
+		avatarUrl: 'https://wlwo.oss-accelerate.aliyuncs.com/article_images/pork-avatar.jpg',
 	})
 
 	const categoryWeb = await Category.create({

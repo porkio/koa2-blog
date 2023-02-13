@@ -48,7 +48,7 @@ router.get('/categories', noLoginRedirect, async (ctx, next) => {
 })
 
 // 新建文章
-router.get('/writing', noLoginRedirect, async (ctx, next) => {
+router.get('/writting', noLoginRedirect, async (ctx, next) => {
 	const { id } = ctx.query
 	// controller
 	let article = {}
