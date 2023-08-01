@@ -6,10 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="./stylesheets/style.css" />
   <title><%= title %></title>
+  <style>
+    .menu-list .menu-item {
+      padding: 10px 0;
+    }
+  </style>
 </head>
 
 <body>
   <h1 style="padding: 2rem; font-weight: 400"><%= title %></h1>
+  <ul class="menu-list" style="padding: 20px 0;">
+    <li class="menu-item"><a href="writting">发布文章</a></li>
+    <li class="menu-item"><a href="articles">文章管理</a></li>
+    <li class="menu-item"><a href="categories">分类管理</a></li>
+  </ul>
 
   <script type="module">
     import {

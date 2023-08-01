@@ -68,7 +68,7 @@ router.get('/writting', noLoginRedirect, async (ctx, next) => {
 		}
 
 		Object.assign(data, { article, catesList, tags })
-		await ctx.render('manager/writing', data)
+		await ctx.render('manager/writting', data)
 		return
 	}
 
