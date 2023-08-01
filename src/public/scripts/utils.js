@@ -334,8 +334,8 @@ function getRandomDeepColor() {
  * @param  {[type]} data [携带数据（仅post）]
  * @return {[type]}      [description]
  * get方法支持以下写法：
- * 1. ajax('https://wlwo.net/p', {body: {name: 'Pork'}})
- * 2. ajax('https://wlwo.net/p', {name: 'Pork', age: 25})
+ * 1. ajax('https://ppwq.work/p', {body: {name: 'Pork'}})
+ * 2. ajax('https://ppwq.work/p', {name: 'Pork', age: 25})
  */
 function ajax(url, options) {
 	// 如果没有 options 或 options 中没有 method 或 method === GET
