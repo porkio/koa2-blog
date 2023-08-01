@@ -48,7 +48,7 @@ router.get('/categories', noLoginRedirect, async (ctx, next) => {
 })
 
 // 新建文章
-router.get('/writting', noLoginRedirect, async (ctx, next) => {
+router.get('/writing', noLoginRedirect, async (ctx, next) => {
 	const { id } = ctx.query
 	// controller
 	let article = {}
@@ -68,7 +68,7 @@ router.get('/writting', noLoginRedirect, async (ctx, next) => {
 		}
 
 		Object.assign(data, { article, catesList, tags })
-		await ctx.render('manager/writting', data)
+		await ctx.render('manager/writing', data)
 		return
 	}
 
