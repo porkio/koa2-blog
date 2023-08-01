@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="./css/style.css" /> -->
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2771419_i6w1ytscwar.css" />
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="{$tpshop_config.shop_info_store_ico|default='/public/static/images/logo/storeico_default.png'}" media="screen"/>
+    <script src="__STATIC__/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="__STATIC__/js/layer.js"  type="text/javascript" ></script> -->
+    <title>超级会员问卷调查</title>
+    <style>
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font: 400 1em/1.5 Microsoft Yahei, Avenir, Segoe UI, Hiragino Sans GB, STHeiti, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .regred {
+            color: red;
+            margin-right: 8px;
+        }
+
+        .block-radius {
+            background-color: #f0f0f0;
+            padding: .6rem 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+        }
+
+        .sbu-title {
+            color: #333;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .f-d-column {
+            flex-direction: column;
+        }
+
+        .align-items-center {
+            align-items: center;
+        }
+
+        .form-group {
+            display: flex;
+            padding: .5rem 0;
+        }
+
+        .form-group label {
+            padding: 0.8rem;
+            color: #555;
+        }
+
+        .form-group .regred {
+            margin-right: 8px;
+        }
+
+        .form-group input[type='text'] {
+            outline: none;
+            appearance: none;
+            border: none;
+            border-radius: 44px;
+            background-color: #f0f0f0;
+            padding: .8rem 1rem;
+            font-size: 1rem;
+        }
+
+        .input-radio {
+            position: relative;
+            margin: 0.5rem 0;
+            flex-wrap: wrap;
+        }
+
+        .input-radio input[type='radio'],
+        .input-radio input[type='checkbox'] {
+            width: 1rem;
+            height: 1rem;
+            margin: 0.8rem;
+            opacity: 0;
+        }
+
+        .input-radio .iconfont {
+            font-size: 1.2rem;
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            color: #494949;
+        }
+
+        .input-radio .icon-radioon {
+            font-size: 1.28rem;
+        }
+
+        .block-with-line {
+            padding: 0.8rem 0;
+            margin: 1rem 0;
+            border-bottom: 0.5px solid #c5c5c5;
+        }
+
+        .line {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .line .iconfont {
+            position: absolute;
+            top: 50%;
+            left: 1rem;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: #494949;
+        }
+
+        #birthday,
+        #baby_birthday {
+            appearance: none;
+            border: none;
+            outline: none;
+            background: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            width: 100%;
+            font-size: 1rem;
+            border-radius: 44px;
+            background-color: #f0f0f0;
+            padding: 0.8rem 1rem;
+        }
+
+        .lsu-submit {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        #btn-submit {
+            outline: none;
+            appearance: none;
+            border: none;
+            -moz-appearance: none;
+            -webkit-appearance: none;
+            background: #c40000;
+            border-radius: 99px;
+            padding: .8rem 0;
+            color: #fff;
+            font-size: 1.1rem;
+            width: 80%;
+            margin: 1rem auto;
+            box-shadow: -2px 4px 2px 0 rgba(29, 29, 29, 0.12);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loginsingup-input" style="width: 92%; max-width: 750px; margin: 0 auto;">
+        <div id="base" class="" align="center" style="padding-top: 5px; padding-bottom: 5px">
+            <h3 style="margin: 2rem 0 0 0; font-weight: 500;">超级会员问卷</h3>
+        </div>
+
+        <div class="sbu-title block-radius">
+            <p>
+                <span>
+                    尊敬的女士先生：您好！非常感谢您抽出宝贵的时间来帮助我们填写这份问卷，您的回答对本研究非常重要，显请您根据您的实际经验来填写，希望能得到您的支持和配合。本次调查仅用作学术研究，您提供的信息我们绝对保密，请放心作答。再次感谢你的热心和对我们学术研究的支持。祝您工作顺利！</span>
+            </p>
+        </div>
+
+        <form action="" method="post" id="questionnaireFrom">
+            <input type="hidden" name="qid" value="2" />
+            <div class="form-group f-d-column">
+                <label for="name"><span class="regred">*</span>姓名</label>
+                <input type="text" name="name" id="name" value="" placeholder="请输入姓名" class="c-form-txt-normal" />
+                <span id="invite_username"></span>
+            </div>
+            <div class="form-group f-d-column">
+                <label for="mobile"><span class="regred">*</span>联系电话</label>
+                <input type="text" name="mobile" id="mobile" value="" placeholder="请输入手机号" class="c-form-txt-normal" />
+                <span id="mobile_phone_notice"></span>
+            </div>
+            <div class="form-group align-items-center">
+                <label for="sex"><span class="regred">*</span>性别</label>
+                <div class="input-radio d-flex align-items-center">
+                    <input type="radio" name="sex" value="1" />男
+                    <span class="iconfont icon-radio" id="sex-male"></span>
+                </div>
+
+                <div class="input-radio d-flex align-items-center">
+                    <input type="radio" name="sex" value="2" />女
+                    <span class="iconfont icon-radio" id="sex-female"></span>
+                </div>
+                <span id="invite_sex"></span>
+            </div>
+            <div class="form-group f-d-column">
+                <label for="birthday"><span class="regred">*</span>自己生日</label>
+                <div class="form-group" id="birthday_time">
+                    <input type="date" name="birthday" id="birthday" value="1994-01-01" placeholder="请选择您的生日日期" />
+                </div>
+            </div>
+            <div class="form-group f-d-column">
+                <label for="birthday">宝宝生日</label>
+                <div class="form-group" id="baby_birthday_time">
+                    <input type="date" name="baby_birthday" id="baby_birthday" value="2019-01-01"
+                        placeholder="请选择您宝宝的生日日期" />
+                </div>
+                <span id="invite_baby_birthday"></span>
+            </div>
+            <div class="form-group f-d-column">
+                <label for="address"><span class="regred">*</span>居住地址</label>
+                <input type="text" name="address" id="address" value="" placeholder="请输入详细地址(最多32个字)"
+                    class="c-form-txt-normal" />
+            </div>
+            <div class="form-group f-d-column">
+                <label for="email_address">邮寄地址</label>
+                <input type="text" name="email_address" id="email_address" value="" placeholder="请输入地址(最多32个字)"
+                    class="c-form-txt-normal" />
+            </div>
+            <div class="form-group f-d-column block-with-line">
+                <label for="">您的学历是？</label>
+                <div radio-group class="radio-list d-flex align-items-center">
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="education" value="1" />高中
+                        <span class="iconfont icon-radio" id="edu-1"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="education" value="2" />大学
+                        <span class="iconfont icon-radio" id="edu-2"></span>
+                    </div>
+
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="education" value="3" />大学+
+                        <span class="iconfont icon-radio" id="edu-3"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="education" value="4" />基础
+                        <span class="iconfont icon-radio" id="edu-4"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for="">您的职业类型？</label>
+                <div radio-group class="radio-list d-flex align-items-center">
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="occupation" value="1" />创业
+                        <span class="iconfont icon-radio" id="occ-1"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="occupation" value="2" />待业
+                        <span class="iconfont icon-radio" id="occ-2"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="occupation" value="3" />私企
+                        <span class="iconfont icon-radio" id="occ-3"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="occupation" value="4" />国企
+                        <span class="iconfont icon-radio" id="occ-4"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for="">请问您的家庭成员组成是？</label>
+                <div radio-group class="radio-list d-flex align-items-center">
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="member" value="1" />两人
+                        <span class="iconfont icon-radio" id="member-1"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="member" value="2" />三人
+                        <span class="iconfont icon-radio" id="member-2"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="member" value="3" />四人
+                        <span class="iconfont icon-radio" id="member-3"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="member" value="4" />五人
+                        <span class="iconfont icon-radio" id="member-4"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>请问您的日常出行工具有哪些？</label>
+                <div radio-group class="radio-list d-flex align-items-center">
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="travel_tools" value="1" />步行
+
+                        <span class="iconfont icon-radio" id="travel-1"></span>
+                    </div>
+
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="travel_tools" value="2" />非机动车
+                        <span class="iconfont icon-radio" id="travel-2"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="travel_tools" value="3" />公交
+                        <span class="iconfont icon-radio" id="travel-3"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="travel_tools" value="4" />汽车
+                        <span class="iconfont icon-radio" id="travel-4"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>您日常到达门店花费的时间大概是？</label>
+                <div radio-group class="radio-list d-flex align-items-center">
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="distance" value="1" />10min以内
+                        <span class="iconfont icon-radio" id="distance-1"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="distance" value="2" />10-30min
+                        <span class="iconfont icon-radio" id="distance-2"></span>
+                    </div>
+                    <div class="input-radio d-flex align-items-center">
+                        <input type="radio" name="distance" value="3" />30-60min
+                        <span class="iconfont icon-radio" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>请问您的兴趣爱好是什么类型？</label>
+                <div class="checkbox-list input-radio d-flex f-d-column">
+                    <div class="line">
+                        <input type="checkbox" name="hobby" value="1" />运动
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="hobby" value="2" />娱乐
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="hobby" value="3" />智力
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="hobby" value="4" />文艺
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="hobby" value="5" />游戏
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>请问您最喜欢消费哪种品类的商品？</label>
+                <div class="checkbox-list input-radio d-flex f-d-column">
+                    <div class="line">
+                        <input type="checkbox" name="category" value="1" />母婴
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="category" value="2" />美妆
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="category" value="3" />日用百货
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+
+                    <div class="line">
+                        <input type="checkbox" name="category" value="4" />食品酒水
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="category" value="5" />洗护
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>请问您的喜好品牌有哪些？</label>
+                <div class="checkbox-list input-radio d-flex f-d-column">
+                    <div class="line">
+                        <input type="checkbox" name="brand" value="1" />SK2
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="brand" value="2" />迪奥
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="brand" value="3" />YSL
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="brand" value="4" />香奈儿
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="brand" value="5" />韩后
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for=""><span class="regred">*</span>您常使用的购物渠道有哪些？</label>
+                <div class="checkbox-list input-radio d-flex f-d-column">
+                    <div class="line">
+                        <input type="checkbox" name="shopping_channel" value="1" />实体店
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="shopping_channel" value="2" />淘宝
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="shopping_channel" value="3" />拼多多
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="shopping_channel" value="4" />社区团购
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="shopping_channel" value="5" />其他
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group f-d-column block-with-line">
+                <label for="">
+                    <span class="regred">*</span>请问您常用社交咨询平台有哪些？
+                </label>
+                <div class="checkbox-list input-radio d-flex f-d-column">
+                    <div class="line">
+                        <input type="checkbox" name="social_contact" value="1" />微信
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="social_contact" value="2" />抖音
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="social_contact" value="3" />小红书
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                    <div class="line">
+                        <input type="checkbox" name="social_contact" value="4" />快手
+                        <span class="iconfont icon-checkbox" id="distance-3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lsu-submit">
+                <input type="button" name="" id="btn-submit" onclick="checkSubmit()" value="提交问卷" />
+            </div>
+        </form>
+    </div>
+    <script>
+        ; (function () {
+            // 性别选择 UI 交互 + 数据更新逻辑
+            const sexMale = document.querySelector('#sex-male')
+            const sexFemale = document.querySelector('#sex-female')
+
+            // 男 radio 被点击
+            sexMale.addEventListener(
+                'click',
+                (e) => {
+                    ; (sexFemale.classList.contains('icon-radioon') &&
+                        sexFemale.classList.remove('icon-radioon')) ||
+                        sexFemale.classList.add('icon-radio')
+                    if (sexMale.classList.contains('icon-radio')) {
+                        sexMale.classList.remove('icon-radio')
+                        sexMale.classList.add('icon-radioon')
+                        sexMale.style.color = '#0096ff'
+                        // 设置默认表单选中
+                        document.getElementsByName('sex')[0].checked = true
+                    }
+                },
+                false
+            )
+
+            // 女 radio 被点击
+            sexFemale.addEventListener(
+                'click',
+                (e) => {
+                    ; (sexMale.classList.contains('icon-radioon') &&
+                        sexMale.classList.remove('icon-radioon')) ||
+                        sexMale.classList.add('icon-radio')
+                    if (sexFemale.classList.contains('icon-radio')) {
+                        sexFemale.classList.remove('icon-radio')
+                        sexFemale.classList.add('icon-radioon')
+                        sexFemale.style.color = '#ff328e'
+                        // 设置默认表单选中
+                        document.getElementsByName('sex')[1].checked = true
+                        document.getElementsByName('sex')[1].setAttribute('checked', '')
+                    }
+                },
+                false
+            )
+        })()
+
+        !(function () {
+            // radio-group 单选按钮组逻辑封装
+            const radioList = document.querySelectorAll('.radio-list')
+            radioList.length > 0 &&
+                Array.from(radioList).forEach((radioGroup) => {
+                    // 拿到每个单选组
+                    radioGroup.children.length > 0 && Array.from(radioGroup.children).forEach((el) => {
+                        el.addEventListener(
+                            'click',
+                            (e) => {
+                                // 选项被点击逻辑
+                                const icon = el.children[1]
+                                cancelOthers(radioGroup) // 取消所有选中状态
+                                el.children[0].checked = true
+                                el.children[0].setAttribute('checked', '')
+                                icon.classList.remove('icon-radio')
+                                icon.classList.add('icon-radioon')
+                                icon.style.color = '#0096ff'
+                            },
+                            false
+                        )
+                    })
+                })
+        })()
+
+        !(function () {
+            // 多选框组逻辑
+            const checkboxList = document.querySelectorAll('.checkbox-list')
+            checkboxList.length > 0 && Array.from(checkboxList).forEach(checkboxGroup => {
+                checkboxGroup.children.length > 0 && Array.from(checkboxGroup.children).forEach(item => {
+                    item.addEventListener('click', e => {
+                        toggleCheckBox(item)
+                    }, false)
+                })
+            })
+        })()
+
+        // checkbox 开关状态切换
+        function toggleCheckBox(item) {
+            const checkbox = item.children[0]
+            const icon = item.children[1]
+
+            if (!checkbox.checked) {
+                checkbox.checked = true
+                checkbox.setAttribute('checked', '')
+            } else checkbox.checked = false
+
+            if (icon.classList.contains('icon-checkbox')) {
+                icon.classList.remove('icon-checkbox')
+                icon.classList.add('icon-checkbox1')
+                icon.style.color = '#0096ff'
+            } else {
+                icon.classList.remove('icon-checkbox1')
+                icon.classList.add('icon-checkbox')
+                icon.style.color = '#454545'
+            }
+
+        }
+
+        // 取消该元素下所有子元素选中状态
+        function cancelOthers(el) {
+            if (!el || el.children.length <= 0) return
+            Array.from(el.children).forEach((child) => {
+                const icon = child.children[1]
+                icon.className = 'iconfont icon-radio'
+                icon.style.color = '#494949'
+            })
+        }
+    </script>
+
+    <script type="text/javascript">
+        //提交表单
+        var flag = true
+        function checkSubmit() {
+            if (flag == false) {
+                layer.open({ content: '* 请勿重复点击按钮，或60秒之后重新获取短信验证码', time: 4 })
+                return false
+            }
+            var name = $('#name').val()
+            if (name == '') {
+                layer.open({ content: '* 姓名不能为空', time: 4 })
+                return false
+            }
+            var mobile = $('#mobile').val()
+            if (mobile == '') {
+                layer.open({ content: '* 联系不能为空', time: 4 })
+                return false
+            }
+            if (!/^1[3456789]\d{9}$/.test(mobile)) {
+                layer.open({ content: '手机号格式不正确' })
+                return false
+            }
+            var sex = $(':radio[name="sex"]:checked').val()
+            if (sex == undefined) {
+                layer.open({ content: '* 请选择性别', time: 4 })
+                return false
+            }
+
+            var birthday = $('#birthday').val()
+            if (birthday == '') {
+                layer.open({ content: '* 生日不能为空', time: 4 })
+                return false
+            }
+            var address = $('#address').val()
+            if (address == '') {
+                layer.open({ content: '* 居住地址不能为空', time: 4 })
+                return false
+            }
+
+            var travelTool = $("input[name='travel_tools']:checked").val()
+            if (travelTool == undefined) {
+                layer.open({ content: '* 请选择您的日常出行工具', time: 4 })
+                return false
+            }
+
+            var distance = $("input[name='distance']:checked").val()
+            if (distance == undefined) {
+                layer.open({ content: '* 请选择您到达门店所花费的时间', time: 4 })
+                return false
+            }
+
+            var hobbies = []
+            $("input[name='hobby']:checked").each(function () {
+                hobbies.push($(this).val())
+            })
+            if (hobbies.length <= 0) {
+                layer.open({ content: '* 请选择兴趣爱好', time: 4 })
+                return false
+            }
+
+            var cates = []
+            $("input[name='category']:checked").each(function () {
+                cates.push($(this).val())
+            })
+            if (cates.length <= 0) {
+                layer.open({ content: '* 请选择喜欢的商品种类', time: 4 })
+                return false
+            }
+
+            var brands = []
+            $("input[name='brand']:checked").each(function () {
+                brands.push($(this).val())
+            })
+            if (brands.length <= 0) {
+                layer.open({ content: '* 请选择喜好的品牌', time: 4 })
+                return false
+            }
+
+            var channels = []
+            $("input[name='shopping_channel']:checked").each(function () {
+                channels.push($(this).val())
+            })
+            if (channels.length <= 0) {
+                layer.open({ content: '* 请选择常用的购物渠道', time: 4 })
+                return false
+            }
+
+            var chats = []
+            $("input[name='social_contact']:checked").each(function () {
+                chats.push($(this).val())
+            })
+            if (chats.length <= 0) {
+                layer.open({ content: '* 请选择常用的社交平台', time: 4 })
+                return false
+            }
+
+            $.ajax({
+                type: 'POST',
+                url: "/index.php?m=Mobile&c=User_active&a=add_questionnaire",
+                dataType: 'JSON',
+                data: $('#questionnaireFrom').serialize(),
+                success: function (data) {
+                    if (data.status == 1) {
+                        layer.open({ content: data.msg, time: 1 });
+                    } else {
+                        layer.open({ content: data.msg, time: 2 });
+                    }
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>
