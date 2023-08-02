@@ -994,6 +994,11 @@ input::placeholder {
     text-align: center;
     height: 30px;
     line-height: 30px; }
+  #footer .copyright a {
+    color: #ffffff;
+    font-size: .9rem; }
+    #footer .copyright a:hover {
+      color: #f7576c; }
 
 /* 媒体查询器 */
 @media screen and (max-width: 750px) {
