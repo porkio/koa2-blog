@@ -977,6 +977,13 @@
       height: 30px;
       line-height: 30px;
     }
+    a {
+      color: #ffffff;
+      font-size: .9rem;
+      &:hover {
+        color: #f7576c;
+      }
+    }
   }
 }
 
